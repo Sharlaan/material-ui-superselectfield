@@ -1,0 +1,13 @@
+.base {
+  text-decoration: none;
+  color: #222;
+  height: 100%;
+  width: calc(100% + 32px);
+  display: inline-block;
+  margin-left: -16px;
+}
+
+.active {
+  font-weight: bold;
+  color: #00BCD4;
+}

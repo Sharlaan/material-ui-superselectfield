@@ -1,0 +1,24 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.7.0"
+  },
+  "dependencies": {
+    "flag-icon-css": "^2.4.0",
+    "material-ui": "^0.16.1",
+    "material-ui-chip-input": "^0.9.0",
+    "material-ui-password-field": "^1.0.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "^2.8.1",
+    "react-tap-event-plugin": "^1.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
