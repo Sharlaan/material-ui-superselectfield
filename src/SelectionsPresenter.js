@@ -20,7 +20,9 @@ const SelectionsPresenter = ({ value, hintText, displaySelectionsRenderer }) => 
 SelectionsPresenter.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
   ]),
   displaySelectionsRenderer: PropTypes.func,
   hintText: PropTypes.string

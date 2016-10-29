@@ -6,6 +6,7 @@ import MenuItem from 'material-ui/MenuItem/MenuItem'
 import countries from './countries'
 import flagIconCSSCountryCodes from './flagIconCSSCountryCodes'
 import FontIcon from 'material-ui/FontIcon/FontIcon'
+import Avatar from 'material-ui/Avatar/Avatar'
 import './flag-icon.css'
 
 const containerStyle = {
@@ -21,6 +22,14 @@ const menuItemStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   lineHeight: 'normal'
+}
+
+const chipAvatarStyle = {
+  width: '100%',
+  height: '100%',
+  margin: 0,
+  borderRadius: '50%',
+  backgroundSize: 'cover'
 }
 
 class CodeExample extends Component {
@@ -39,8 +48,18 @@ class CodeExample extends Component {
 
   handleCustomDisplaySelections = (values) => {
     if (values.length) {
-      if (typeof values === 'string') return <Chip>{values}</Chip>
-      return <div style={{display: 'flex'}}>{values.map((v, i) => <Chip key={i}>{v}</Chip>)}</div>
+      return (
+        <div style={{display: 'flex', flexWrap: 'wrap'}}>{values.map((country, index) => (
+          <Chip key={index} style={{margin: 5}}>
+            <Avatar icon={(
+              <FontIcon
+                className={`flag-icon flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
+                style={chipAvatarStyle}
+              />)}
+            />
+            {country['English short name']}
+          </Chip>))}
+        </div>)
     } else return 'select some values'
   }
 
@@ -50,8 +69,11 @@ class CodeExample extends Component {
       const countryLabel = c['English short name']
       if (flagIconCSSCountryCodes.includes(countryCode)) {
         return (
-          <div value={countryCode} label={countryLabel} style={menuItemStyle}>
-            <div>{countryLabel}</div>
+          <div key={i} value={c} label={countryLabel} style={menuItemStyle}>
+            <div>
+              <span style={{ fontWeight: 'bold' }}>{countryLabel}</span><br />
+              <span style={{ fontSize: 12 }}>{c.Capital}</span>
+            </div>
             <FontIcon className={`flag-icon flag-icon-${countryCode}`} />
           </div>
         )

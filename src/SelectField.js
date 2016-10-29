@@ -37,13 +37,11 @@ class SelectField extends Component {
 
   focusFirstMenuItem () {
     const firstMenuItem = findDOMNode(this.menu).querySelector('[tabindex="0"]')
-    console.debug('firstMenuItem', firstMenuItem)
     firstMenuItem.focus()
   }
 
   focusLastMenuItem () {
     const menuItems = findDOMNode(this.menu).querySelectorAll('[tabindex]')
-    console.debug('focusLastMenuItem', Array.from(menuItems).lastChild)
     const lastMenuItem = menuItems[menuItems.length - 1]
     lastMenuItem.focus()
   }
@@ -58,13 +56,6 @@ class SelectField extends Component {
   handleKeyDown = (event) => {
     if (/ArrowDown|Enter/.test(event.key)) this.openMenu()
   }
-
-/*
-  handleBlur = (event) => {
-    const hasFocus = document.activeElement === findDOMNode(this)
-    console.debug('hasFocus', hasFocus)
-  }
-*/
 
   /**
    * Popover methods
@@ -138,7 +129,6 @@ class SelectField extends Component {
   render () {
     const { value, hintText, multiple, children, style, menuProps,
             autocompleteFilter, displaySelectionsRenderer } = this.props
-    console.debug('children', children)
     const menuItems = this.state.isOpen && children &&
       children.map((child, index) => {
         if (!autocompleteFilter(this.state.searchText, child.props.label)) return
@@ -230,7 +220,9 @@ SelectField.propTypes = {
   children: PropTypes.any,
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string)
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
   ]),
   autocompleteFilter: PropTypes.func,
   displaySelectionsRenderer: PropTypes.func,

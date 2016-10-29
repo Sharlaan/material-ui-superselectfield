@@ -8,11 +8,11 @@
   "dependencies": {
     "flag-icon-css": "^2.4.0",
     "material-ui": "^0.16.1",
-    "material-ui-chip-input": "^0.9.0",
+    "material-ui-chip-input": "^0.9.1",
     "material-ui-password-field": "^1.0.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-router": "^2.8.1",
+    "react-router": "^3.0.0",
     "react-tap-event-plugin": "^1.0.0"
   },
   "scripts": {

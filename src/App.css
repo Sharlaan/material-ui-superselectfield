@@ -26,3 +26,5 @@
   margin-left: 200px;
   font-size: large;
 }
+
+*:focus { outline: none; }
