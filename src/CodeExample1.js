@@ -42,7 +42,7 @@ class CodeExample extends Component {
     })
   }
 
-  handleSelection = (name, value) => this.setState({ [name]: value })
+  handleSelection = (value, name) => this.setState({ [name]: value })
 
   handleDropDownChange = (event, index, value) => this.setState({ value4: value })
 
@@ -79,7 +79,7 @@ class CodeExample extends Component {
         )
       }
     })
-    
+
     return (
         <section style={containerStyle}>
 
@@ -141,7 +141,7 @@ class CodeExample extends Component {
               <legend>State values</legend>
               <div>State 1: {this.state.value1}</div>
               <div>State 2: {this.state.value2.join(', ')}</div>
-              <div>State 3: {this.state.value3.join(', ')}</div>
+              <div>State 3: {this.state.value3.map(obj => obj['English short name']).join(', ')}</div>
               <div>State 4: {this.state.value4}</div>
             </fieldset>
 

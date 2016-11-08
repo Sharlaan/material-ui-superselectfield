@@ -31,8 +31,10 @@ class SelectField extends Component {
   }
 
   focusTextField () {
-    const input = findDOMNode(this.searchTextField).querySelector('input')
-    input.focus()
+    if (this.props.children.length > 10) {
+      const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
+      input.focus()
+    }
   }
 
   focusFirstMenuItem () {
@@ -89,15 +91,15 @@ class SelectField extends Component {
   /**
    * Menu methods
    */
-  handleMenuEscKeyDown = () => this.closeMenu()
-
   handleMenuSelection = (event, selectedMenuItem) => {
     const { multiple, onSelect, name } = this.props
-    onSelect(name, selectedMenuItem)
+    onSelect(selectedMenuItem, name)
     multiple
       ? this.clearTextField(() => this.focusTextField())
       : this.closeMenu()
   }
+
+  handleMenuEscKeyDown = () => this.closeMenu()
 
   handleMenuKeyDown= (event) => {
     // TODO: this solution propagates and triggers double onKeyDown
@@ -128,10 +130,10 @@ class SelectField extends Component {
 
   render () {
     const { value, hintText, multiple, children, style, menuProps,
-            autocompleteFilter, displaySelectionsRenderer } = this.props
+      autocompleteFilter, displaySelectionsRenderer } = this.props
     const menuItems = this.state.isOpen && children &&
       children.map((child, index) => {
-        if (!autocompleteFilter(this.state.searchText, child.props.label)) return
+        if (!autocompleteFilter(this.state.searchText, child.props.label)) return // eslint-disable-line
         const isSelected = value.includes(child.props.value)
         return (
           <MenuItem
@@ -185,7 +187,9 @@ class SelectField extends Component {
           useLayerForClickAway={false}
           onRequestClose={this.handlePopoverClose}
         >
+          {children.length > 10 &&
           <TextField
+            name='autoComplete'
             ref={ref => (this.searchTextField = ref)}
             value={this.state.searchText}
             hintText={hintText}
@@ -193,6 +197,7 @@ class SelectField extends Component {
             onKeyDown={this.handleTextFieldKeyDown}
             style={{ marginLeft: 16, marginBottom: -8, width: menuWidth - 16 * 2 }}
           />
+          }
           <Menu
             ref={ref => (this.menu = ref)}
             {...menuProps}
@@ -217,6 +222,7 @@ class SelectField extends Component {
 
 SelectField.propTypes = {
   style: PropTypes.object,
+  menuProps: PropTypes.object,
   children: PropTypes.any,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -226,7 +232,7 @@ SelectField.propTypes = {
   ]),
   autocompleteFilter: PropTypes.func,
   displaySelectionsRenderer: PropTypes.func,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   hintText: PropTypes.string,
   multiple: PropTypes.bool,
   disableSearch: PropTypes.bool,
