@@ -105,9 +105,9 @@ class CodeExample extends Component {
                 value={this.state.value2}
                 style={{ minWidth: 150 }}
               >
-                <div value='D' label='D'>Option D</div>
-                <div value='E' label='E'>Option E</div>
-                <div value='F' label='F'>Option F</div>
+                <div value='D'>Option D</div>
+                <div value='E'>Option E</div>
+                <div value='F'>Option F</div>
               </SelectField>
             </div>
 
@@ -115,7 +115,7 @@ class CodeExample extends Component {
             <SelectField
               name='value3'
               multiple
-              hintText='using DisplaySelectionsRenderer'
+              hintText='type some letters ...'
               onSelect={this.handleSelection}
               value={this.state.value3}
               displaySelectionsRenderer={this.handleCustomDisplaySelections}
