@@ -67,17 +67,16 @@ class CodeExample extends Component {
     const countriesNodeList = countries.map((c, i) => {
       const countryCode = c['Alpha-2 code'].toLowerCase()
       const countryLabel = c['English short name']
-      if (flagIconCSSCountryCodes.includes(countryCode)) {
-        return (
-          <div key={i} value={c} label={countryLabel} style={menuItemStyle}>
-            <div>
-              <span style={{ fontWeight: 'bold' }}>{countryLabel}</span><br />
-              <span style={{ fontSize: 12 }}>{c.Capital}</span>
-            </div>
-            <FontIcon className={`flag-icon flag-icon-${countryCode}`} />
+      if (!flagIconCSSCountryCodes.includes(countryCode)) return null
+      return (
+        <div key={i} value={c} label={countryLabel} style={menuItemStyle}>
+          <div>
+            <span style={{ fontWeight: 'bold' }}>{countryLabel}</span><br />
+            <span style={{ fontSize: 12 }}>{c.Capital}</span>
           </div>
-        )
-      }
+          <FontIcon className={`flag-icon flag-icon-${countryCode}`} />
+        </div>
+      )
     })
 
     return (
