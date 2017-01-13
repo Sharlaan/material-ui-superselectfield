@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   user-select: none;
 }
 
@@ -14,6 +13,7 @@
 }
 
 .App-header {
+  text-align: center;
   margin-left: 200px;
   background-color: #222;
   padding: 20px 0;
@@ -21,6 +21,10 @@
   color: white;
 }
 .App-header h2 { margin: 7px 0 0; }
+
+.App-drawer {
+  text-align: center;
+}
 
 .App-content {
   margin-left: 200px;

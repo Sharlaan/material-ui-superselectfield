@@ -8,7 +8,12 @@ import './App.css'
 export default (props) => (
   <div className='App'>
 
-    <Drawer open width={200}>
+    <div className='App-header'>
+      <img src={logo} className='App-logo' alt='logo' />
+      <h2>Welcome to React</h2>
+    </div>
+
+    <Drawer open width={200} className='App-drawer'>
       <h3>
         <Link to='/' activeClassName='' label='Projects' />
       </h3>
@@ -19,11 +24,6 @@ export default (props) => (
         <Link to='/example2' label='Example 2' />
       </MenuItem>
     </Drawer>
-
-    <div className='App-header'>
-      <img src={logo} className='App-logo' alt='logo' />
-      <h2>Welcome to React</h2>
-    </div>
 
     <section className='App-content'>
       {props.children}
