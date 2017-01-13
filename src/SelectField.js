@@ -132,10 +132,10 @@ class SelectField extends Component {
     const { value, hintText, multiple, children, style, menuProps,
       autocompleteFilter, displaySelectionsRenderer } = this.props
     const menuItems = this.state.isOpen && children &&
-      children.map((child, index) => {
-        if (!autocompleteFilter(this.state.searchText, child.props.label)) return // eslint-disable-line
+      children.reduce((nodes, child, index) => {
+        if (!autocompleteFilter(this.state.searchText, child.props.label)) return nodes
         const isSelected = value.includes(child.props.value)
-        return (
+        return [ ...nodes, (
           <MenuItem
             key={index}
             tabIndex={index}
@@ -145,8 +145,8 @@ class SelectField extends Component {
             primaryText={child}
             disableFocusRipple
             innerDivStyle={{ paddingTop: 5, paddingBottom: 5 }}
-          />)
-      })
+          />)]
+      }, [])
 
     // TODO: set autoWidth to false automatically if width prop has a value
     const menuWidth = this.root ? this.root.clientWidth : null
@@ -188,15 +188,15 @@ class SelectField extends Component {
           onRequestClose={this.handlePopoverClose}
         >
           {children.length > 10 &&
-          <TextField
-            name='autoComplete'
-            ref={ref => (this.searchTextField = ref)}
-            value={this.state.searchText}
-            hintText={hintText}
-            onChange={this.handleTextFieldAutocompletionFiltering}
-            onKeyDown={this.handleTextFieldKeyDown}
-            style={{ marginLeft: 16, marginBottom: -8, width: menuWidth - 16 * 2 }}
-          />
+            <TextField
+              name='autoComplete'
+              ref={ref => (this.searchTextField = ref)}
+              value={this.state.searchText}
+              hintText={hintText}
+              onChange={this.handleTextFieldAutocompletionFiltering}
+              onKeyDown={this.handleTextFieldKeyDown}
+              style={{ marginLeft: 16, width: menuWidth - 16 * 2 }}
+            />
           }
           <Menu
             ref={ref => (this.menu = ref)}
@@ -211,7 +211,10 @@ class SelectField extends Component {
             autoWidth={false}
             width={menuWidth}
           >
-            {menuItems}
+            {menuItems.length
+              ? menuItems
+              : <MenuItem primaryText='No match found' disabled />
+            }
           </Menu>
         </Popover>
 
@@ -245,9 +248,7 @@ SelectField.defaultProps = {
   disableSearch: false,
   autoComplete: false,
   // eslint-disable-next-line no-unused-vars
-  autocompleteFilter: (searchText, text) => {
-    return !text || text.toLowerCase().includes(searchText.toLowerCase())
-  }
+  autocompleteFilter: (searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())
 }
 
 export default SelectField
