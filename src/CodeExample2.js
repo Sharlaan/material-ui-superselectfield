@@ -7,9 +7,7 @@ class CodeExample extends Component {
 
   render () {
     return (
-      <section style={style}>
-
-      </section>
+      <section style={style} />
     )
   }
 }

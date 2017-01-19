@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import SelectField from './SelectField'
+import SuperSelectField from './SuperSelectField'
+import MultiAutoCompleteFilter from './MultiAutoCompleteFilter'
+import ChipInput from 'material-ui-chip-input'
 import Chip from 'material-ui/Chip/Chip'
 import DropDown from 'material-ui/DropDownMenu/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem/MenuItem'
@@ -38,6 +40,8 @@ class CodeExample extends Component {
       value1: '',
       value2: [],
       value3: [],
+      value3maf: [],
+      value3mci: [],
       value4: 'K'
     })
   }
@@ -45,6 +49,16 @@ class CodeExample extends Component {
   handleSelection = (value, name) => this.setState({ [name]: value })
 
   handleDropDownChange = (event, index, value) => this.setState({ value4: value })
+
+  onRequestAdd = (chip) => {
+    console.debug('onRequestAdd', chip)
+    this.setState({ value3mci: [...this.state.value3mci, chip.value] })
+  }
+
+  onRequestDelete = (chip) => {
+    console.debug('onRequestDelete', chip)
+    this.setState({ value3mci: this.state.value3mci.filter(v => v === chip.value) })
+  }
 
   handleCustomDisplaySelections = (values) => {
     if (values.length) {
@@ -79,73 +93,101 @@ class CodeExample extends Component {
       )
     })
 
-    return (
-        <section style={containerStyle}>
+    const countriesObject = {
+      results: countries.map((c, i) => {
+        const countryCode = c['Alpha-2 code'].toLowerCase()
+        const countryLabel = c['English short name']
+        if (!flagIconCSSCountryCodes.includes(countryCode)) return null
+        return {label: countryLabel, value: countryCode}
+      }),
+      current: this.state.value3maf
+    }
 
-            <h4>Basic dropdowns</h4>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              <SelectField
-                name='value1'
-                hintText='Single value'
-                onSelect={this.handleSelection}
-                value={this.state.value1}
-                style={{ minWidth: 150, marginRight: 40 }}
-              >
-                <div value='A' label='A'>Option A</div>
-                <div value='B' label='B'>Option B</div>
-                <div value='C' label='C'>Option C</div>
-              </SelectField>
+    return <section style={containerStyle}>
 
-              <SelectField
-                name='value2'
-                multiple
-                hintText='Multiple values'
-                onSelect={this.handleSelection}
-                value={this.state.value2}
-                style={{ minWidth: 150 }}
-              >
-                <div value='D'>Option D</div>
-                <div value='E'>Option E</div>
-                <div value='F'>Option F</div>
-              </SelectField>
-            </div>
+      <h4>Basic dropdowns</h4>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <SuperSelectField
+          name='value1'
+          hintText='Single value'
+          onSelect={this.handleSelection}
+          value={this.state.value1}
+          style={{ minWidth: 150, marginRight: 40 }}
+        >
+          <div value='A' label='A'>Option A</div>
+          <div value='B' label='B'>Option B</div>
+          <div value='C' label='C'>Option C</div>
+        </SuperSelectField>
 
-            <h4 style={{ marginTop: 80 }}>Composability example</h4>
-            <SelectField
-              name='value3'
-              multiple
-              hintText='type some letters ...'
-              onSelect={this.handleSelection}
-              value={this.state.value3}
-              displaySelectionsRenderer={this.handleCustomDisplaySelections}
-              menuProps={{maxHeight: 370}}
-              style={{ width: 300 }}
-            >
-              {countriesNodeList}
-            </SelectField>
+        <SuperSelectField
+          name='value2'
+          multiple
+          hintText='Multiple values'
+          onSelect={this.handleSelection}
+          value={this.state.value2}
+          style={{ minWidth: 150 }}
+        >
+          <div value='D'>Option D</div>
+          <div value='E'>Option E</div>
+          <div value='F'>Option F</div>
+        </SuperSelectField>
+      </div>
 
-            <h4 style={{ marginTop: 80 }}>Original Material-UI DropDown</h4>
-            <DropDown
-              name='value4'
-              onChange={this.handleDropDownChange}
-              value={this.state.value4}
-              style={{ minWidth: 150 }}
-            >
-              <MenuItem value='J' primaryText='Option J' />
-              <MenuItem value='K' primaryText='Option K' />
-              <MenuItem value='L' primaryText='Option L' />
-            </DropDown>
+      <h4 style={{ marginTop: 80 }}>Composability example</h4>
+      <SuperSelectField
+        name='value3'
+        multiple
+        hintText='Type some letters ...'
+        onSelect={this.handleSelection}
+        value={this.state.value3}
+        displaySelectionsRenderer={this.handleCustomDisplaySelections}
+        menuProps={{maxHeight: 370}}
+        style={{ width: 300 }}
+      >
+        {countriesNodeList}
+      </SuperSelectField>
 
-            <fieldset style={{ marginTop: 40 }}>
-              <legend>State values</legend>
-              <div>State 1: {this.state.value1}</div>
-              <div>State 2: {this.state.value2.join(', ')}</div>
-              <div>State 3: {this.state.value3.map(obj => obj['English short name']).join(', ')}</div>
-              <div>State 4: {this.state.value4}</div>
-            </fieldset>
+      <h4 style={{ marginTop: 80 }}>MultiAutoCompleteFilter (state 3maf)</h4>
+      <MultiAutoCompleteFilter
+        name='value3maf'
+        placeholder='Type some letters ...'
+        model={countriesObject}
+        onChange={this.handleSelection}
+      />
 
-        </section>
-    )
+      <h4 style={{ marginTop: 80 }}>Material-UI-Chip-Input (state 3mci)</h4>
+      <ChipInput
+        name='value3mci'
+        openOnFocus
+        dataSource={countriesObject.results}
+        value={this.state.value3mci}
+        onRequestAdd={this.onRequestAdd}
+        onRequestDelete={this.onRequestDelete}
+      />
+
+      <h4 style={{ marginTop: 80 }}>Original Material-UI DropDown</h4>
+      <DropDown
+        name='value4'
+        onChange={this.handleDropDownChange}
+        value={this.state.value4}
+        style={{ minWidth: 150 }}
+      >
+        <MenuItem value='J' primaryText='Option J' />
+        <MenuItem value='K' primaryText='Option K' />
+        <MenuItem value='L' primaryText='Option L' />
+      </DropDown>
+
+      <fieldset style={{ marginTop: 40 }}>
+        <legend>State values</legend>
+        <div>State 1: {this.state.value1}</div>
+        <div>State 2: {this.state.value2.join(', ')}</div>
+        <div>State 3: {this.state.value3.map(obj => obj['English short name']).join(', ')}</div>
+        <div>State 3maf: {this.state.value3maf}</div>
+        <div>State 3mci: {this.state.value3mci}</div>
+        <div>State 4: {this.state.value4}</div>
+      </fieldset>
+
+    </section>
   }
 }
 
