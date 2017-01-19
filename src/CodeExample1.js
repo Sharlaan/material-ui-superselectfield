@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import SuperSelectField from './SuperSelectField'
-import MultiAutoCompleteFilter from './MultiAutoCompleteFilter'
-import ChipInput from 'material-ui-chip-input'
 import Chip from 'material-ui/Chip/Chip'
 import DropDown from 'material-ui/DropDownMenu/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem/MenuItem'
@@ -40,8 +38,6 @@ class CodeExample extends Component {
       value1: '',
       value2: [],
       value3: [],
-      value3maf: [],
-      value3mci: [],
       value4: 'K'
     })
   }
@@ -50,21 +46,10 @@ class CodeExample extends Component {
 
   handleDropDownChange = (event, index, value) => this.setState({ value4: value })
 
-  onRequestAdd = (chip) => {
-    console.debug('onRequestAdd', chip)
-    this.setState({ value3mci: [...this.state.value3mci, chip.value] })
-  }
-
-  onRequestDelete = (chip) => {
-    console.debug('onRequestDelete', chip)
-    this.setState({ value3mci: this.state.value3mci.filter(v => v === chip.value) })
-  }
-
-  handleCustomDisplaySelections = (values) => {
-    if (values.length) {
-      return (
-        <div style={{display: 'flex', flexWrap: 'wrap'}}>{values.map((country, index) => (
-          <Chip key={index} style={{margin: 5}}>
+  handleCustomDisplaySelections = (name) => (values) => {
+    return values.length
+      ? <div style={{display: 'flex', flexWrap: 'wrap'}}>{values.map((country, index) => (
+          <Chip key={index} style={{margin: 5}} onRequestDelete={this.onRequestDelete(index, name)}>
             <Avatar icon={(
               <FontIcon
                 className={`flag-icon flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
@@ -73,8 +58,12 @@ class CodeExample extends Component {
             />
             {country['English short name']}
           </Chip>))}
-        </div>)
-    } else return 'select some values'
+        </div>
+      : 'select some values'
+  }
+
+  onRequestDelete = (key, name) => (event) => {
+    this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
   }
 
   render () {
@@ -92,16 +81,6 @@ class CodeExample extends Component {
         </div>
       )
     })
-
-    const countriesObject = {
-      results: countries.map((c, i) => {
-        const countryCode = c['Alpha-2 code'].toLowerCase()
-        const countryLabel = c['English short name']
-        if (!flagIconCSSCountryCodes.includes(countryCode)) return null
-        return {label: countryLabel, value: countryCode}
-      }),
-      current: this.state.value3maf
-    }
 
     return <section style={containerStyle}>
 
@@ -140,30 +119,12 @@ class CodeExample extends Component {
         hintText='Type some letters ...'
         onSelect={this.handleSelection}
         value={this.state.value3}
-        displaySelectionsRenderer={this.handleCustomDisplaySelections}
+        displaySelectionsRenderer={this.handleCustomDisplaySelections('value3')}
         menuProps={{maxHeight: 370}}
         style={{ width: 300 }}
       >
         {countriesNodeList}
       </SuperSelectField>
-
-      <h4 style={{ marginTop: 80 }}>MultiAutoCompleteFilter (state 3maf)</h4>
-      <MultiAutoCompleteFilter
-        name='value3maf'
-        placeholder='Type some letters ...'
-        model={countriesObject}
-        onChange={this.handleSelection}
-      />
-
-      <h4 style={{ marginTop: 80 }}>Material-UI-Chip-Input (state 3mci)</h4>
-      <ChipInput
-        name='value3mci'
-        openOnFocus
-        dataSource={countriesObject.results}
-        value={this.state.value3mci}
-        onRequestAdd={this.onRequestAdd}
-        onRequestDelete={this.onRequestDelete}
-      />
 
       <h4 style={{ marginTop: 80 }}>Original Material-UI DropDown</h4>
       <DropDown
@@ -182,8 +143,6 @@ class CodeExample extends Component {
         <div>State 1: {this.state.value1}</div>
         <div>State 2: {this.state.value2.join(', ')}</div>
         <div>State 3: {this.state.value3.map(obj => obj['English short name']).join(', ')}</div>
-        <div>State 3maf: {this.state.value3maf}</div>
-        <div>State 3mci: {this.state.value3mci}</div>
         <div>State 4: {this.state.value4}</div>
       </fieldset>
 

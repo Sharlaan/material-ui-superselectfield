@@ -73,7 +73,7 @@ class SelectField extends Component {
     this.setState({ searchText }, () => this.focusTextField())
   }
 
-  handleTextFieldKeyDown= (event) => {
+  handleTextFieldKeyDown = (event) => {
     switch (event.key) {
       case 'ArrowDown':
         this.focusFirstMenuItem()
@@ -87,6 +87,8 @@ class SelectField extends Component {
       default: break
     }
   }
+
+  handleRequestClose
 
   /**
    * Menu methods
