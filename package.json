@@ -1,7 +1,12 @@
 {
   "name": "superSelectField",
   "version": "0.1.2",
+  "description": "original Material-UI's SelectField component enahnced with autocompletion and multiselection",
   "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
   "dependencies": {
     "flag-icon-css": "^2.8.0",
     "material-ui": "^0.16.7",

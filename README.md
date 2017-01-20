@@ -1,7 +1,6 @@
 ##material-ui-superSelectField
 
-enhanced the original SelectField component with autocompletion and multiselection
-
+This project is currently in the process of publication into a npm module.
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ```
@@ -20,7 +19,9 @@ Then choose "Example 1" to check the superSelectField in action
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/caseInsensitive.png)
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/chips.png)
 
+
 ##Installation
+
 
 ##Properties
 | Name | Type | Default | Description |
@@ -36,3 +37,14 @@ Then choose "Example 1" to check the superSelectField in action
 | hintText | string | 'Click me' | Placeholder text |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. |
 | onSelect | function | | signature: (selectedValue, name) with `selectedValue` the value of the selected node's value property, and `name` then value of the superSelectField instance's name property |
+
+
+## Usage
+
+
+## Tests
+
+
+## Contributing
+
+In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
