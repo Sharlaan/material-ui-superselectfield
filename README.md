@@ -31,9 +31,8 @@ Then choose "Example 1" to check the superSelectField in action
 | value | string, string[], object, object[] | | Selected values |
 | autocomplete | bool | false | Turns superSelectField into an AutoComplete, with a search field. The search field will appear only if more than 10 children are displayed. |
 | autocompleteFilter | function | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` | `autocomplete` must be set to true. Provide your own filtering parser. Default: case insensitive. |
-| displaySelectionsRenderer | function | ```(value, hintText) => value.length
-                                             ? typeof value === 'string' ? value : value.join(', ')
-                                             : hintText``` | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
+| displaySelectionsRenderer | function | ```
+(value, hintText) => value.length ? typeof value === 'string' ? value : value.join(', ') : hintText``` | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | hintText | string | 'Click me' | Placeholder text |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. |
