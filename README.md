@@ -30,9 +30,10 @@ Then choose "Example 1" to check the superSelectField in action
 | children | any |  | Datasource is an array of any type of nodes, styled at your convenience. /!\ IMPORTANT: each node must expose a `value` property (required). This value property will be used by default for both option's value and label. A `label` property can be provided to specify a different value than value |
 | value | string, string[], object, object[] | | Selected values |
 | autocomplete | bool | false | Turns superSelectField into an AutoComplete, with a search field. The search field will appear only if more than 10 children are displayed. |
-| autocompleteFilter | function | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` | `autocomplete` must be set to true. Provide your own filtering parser. Default: case insensitive. |
-| displaySelectionsRenderer | function | ```
-(value, hintText) => value.length ? typeof value === 'string' ? value : value.join(', ') : hintText``` | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
+| autocompleteFilter | function | <pre>(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())</pre> | `autocomplete` must be set to true. Provide your own filtering parser. Default: case insensitive. |
+| displaySelectionsRenderer | function | <pre>(value, hintText) => value.length
+                                             ? typeof value === 'string' ? value : value.join(', ')
+                                             : hintText</pre> | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | hintText | string | 'Click me' | Placeholder text |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. |
