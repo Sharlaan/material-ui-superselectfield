@@ -88,8 +88,6 @@ class SelectField extends Component {
     }
   }
 
-  handleRequestClose
-
   /**
    * Menu methods
    */
@@ -240,14 +238,12 @@ SelectField.propTypes = {
   name: PropTypes.string,
   hintText: PropTypes.string,
   multiple: PropTypes.bool,
-  disableSearch: PropTypes.bool,
   onSelect: PropTypes.func
 }
 
 // noinspection JSUnusedGlobalSymbols
 SelectField.defaultProps = {
   multiple: false,
-  disableSearch: false,
   autoComplete: false,
   // eslint-disable-next-line no-unused-vars
   autocompleteFilter: (searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())

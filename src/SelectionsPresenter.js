@@ -31,11 +31,9 @@ SelectionsPresenter.propTypes = {
 SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
   // eslint-disable-next-line no-unused-vars
-  displaySelectionsRenderer: (value, hintText) => {
-    return value.length
-      ? typeof value === 'string' ? value : value.join(', ')
-      : hintText
-  }
+  displaySelectionsRenderer: (value, hintText) => value.length
+    ? typeof value === 'string' ? value : value.join(', ')
+    : hintText
 }
 
 export default SelectionsPresenter
