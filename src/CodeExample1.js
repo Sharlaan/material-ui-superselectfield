@@ -42,7 +42,7 @@ class CodeExample extends Component {
     })
   }
 
-  handleSelection = (value, name) => this.setState({ [name]: value })
+  handleSelection = (values, name) => this.setState({ [name]: values })
 
   handleDropDownChange = (event, index, value) => this.setState({ value4: value })
 

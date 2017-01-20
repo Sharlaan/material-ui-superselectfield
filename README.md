@@ -36,7 +36,7 @@ Then choose "Example 1" to check the superSelectField in action
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | hintText | string | 'Click me' | Placeholder text |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. |
-| onSelect | function | | signature: (selectedValue, name) with `selectedValue` the value of the selected node's value property, and `name` then value of the superSelectField instance's name property |
+| onSelect | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 
 
 ## Usage
