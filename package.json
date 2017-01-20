@@ -1,5 +1,5 @@
 {
-  "name": "superSelectField",
+  "name": "superselectfield",
   "version": "0.1.2",
   "description": "original Material-UI's SelectField component enahnced with autocompletion and multiselection",
   "private": false,
