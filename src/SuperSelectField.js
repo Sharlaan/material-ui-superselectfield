@@ -4,8 +4,52 @@ import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
 import Menu from 'material-ui/Menu/Menu'
 import MenuItem from 'material-ui/MenuItem/MenuItem'
-import SelectionsPresenter from './SelectionsPresenter'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
+
+// ================================================================
+// ====================  SelectionsPresenter  =====================
+// ================================================================
+
+const SelectionsPresenter = ({ value, hintText, selectionsRenderer }) => {
+  // TODO: add floatingLabelText
+  return (
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+        <div style={{ flex: 1 }}>{selectionsRenderer(value, hintText)}</div>
+        <DropDownArrow />
+      </div>
+
+      <hr style={{ width: '100%', margin: 0 }} />
+
+    </div>
+  )
+}
+
+SelectionsPresenter.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
+  ]),
+  selectionsRenderer: PropTypes.func,
+  hintText: PropTypes.string
+}
+
+// noinspection JSUnusedGlobalSymbols
+SelectionsPresenter.defaultProps = {
+  hintText: 'Click me',
+  // eslint-disable-next-line no-unused-vars
+  selectionsRenderer: (value, hintText) => value.length
+    ? typeof value === 'string' ? value : value.join(', ')
+    : hintText
+}
+
+// ================================================================
+// ========================  SelectField  =========================
+// ================================================================
 
 class SelectField extends Component {
   componentWillMount () {

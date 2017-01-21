@@ -7,6 +7,7 @@
   "engines": {
     "node": ">=6"
   },
+  "main": "lib/superSelectField.js",
   "dependencies": {
     "flag-icon-css": "^2.8.0",
     "material-ui": "^0.16.7",
@@ -16,8 +17,16 @@
     "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
+    "babel-preset-stage-2": "^6.22.0",
     "react-scripts": "^0.8.5",
     "standard": "^8.6.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "react"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -28,6 +37,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prepublish": "babel src/superSelectField.js -d lib",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
