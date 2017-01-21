@@ -1,18 +1,8 @@
 ##material-ui-superSelectField
 
-This project is currently in the process of publication into a npm module.
+This project is currently in the process of publication as a npm module.
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-```
-git clone https://github.com/Sharlaan/material-ui-superSelectField.git
-
-npm i
-
-npm start
-```
-
-It should a new page on your default browser @ localhost:3000
-Then choose "Example 1" to check the superSelectField in action
 
 ##Preview
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/dataSource.png)
@@ -21,6 +11,7 @@ Then choose "Example 1" to check the superSelectField in action
 
 
 ##Installation
+Until the packaging process not done, just grab the lib/superSelectField.js and drop it in your project. Then check Usage or Demo below.
 
 
 ##Properties
@@ -48,9 +39,20 @@ Then choose "Example 1" to check the superSelectField in action
 ## Usage
 
 
+##Demo
+```
+git clone https://github.com/Sharlaan/material-ui-superSelectField.git
+
+npm i
+
+npm start
+```
+It should a new page on your default browser @ localhost:3000
+Then choose "Example 1" to check the superSelectField in action
+
+
 ## Tests
 
 
 ## Contributing
-
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
