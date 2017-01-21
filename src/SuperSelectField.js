@@ -130,7 +130,7 @@ class SelectField extends Component {
 
   render () {
     const { value, hintText, multiple, children, style, menuProps,
-      autocompleteFilter, displaySelectionsRenderer } = this.props
+      autocompleteFilter, selectionsRenderer } = this.props
     const menuItems = this.state.isOpen && children &&
       children.reduce((nodes, child, index) => {
         if (!autocompleteFilter(this.state.searchText, child.props.label)) return nodes
@@ -176,7 +176,7 @@ class SelectField extends Component {
         <SelectionsPresenter
           hintText={hintText}
           value={value}
-          displaySelectionsRenderer={displaySelectionsRenderer}
+          selectionsRenderer={selectionsRenderer}
         />
 
         <Popover
@@ -234,7 +234,7 @@ SelectField.propTypes = {
     PropTypes.arrayOf(PropTypes.object)
   ]),
   autocompleteFilter: PropTypes.func,
-  displaySelectionsRenderer: PropTypes.func,
+  selectionsRenderer: PropTypes.func,
   name: PropTypes.string,
   hintText: PropTypes.string,
   multiple: PropTypes.bool,

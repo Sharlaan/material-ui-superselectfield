@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
-const SelectionsPresenter = ({ value, hintText, displaySelectionsRenderer }) => {
+const SelectionsPresenter = ({ value, hintText, selectionsRenderer }) => {
   // TODO: add floatingLabelText
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <div style={{ flex: 1 }}>{displaySelectionsRenderer(value, hintText)}</div>
+        <div style={{ flex: 1 }}>{selectionsRenderer(value, hintText)}</div>
         <DropDownArrow />
       </div>
 
@@ -24,14 +24,14 @@ SelectionsPresenter.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.object)
   ]),
-  displaySelectionsRenderer: PropTypes.func,
+  selectionsRenderer: PropTypes.func,
   hintText: PropTypes.string
 }
 
 SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
   // eslint-disable-next-line no-unused-vars
-  displaySelectionsRenderer: (value, hintText) => value.length
+  selectionsRenderer: (value, hintText) => value.length
     ? typeof value === 'string' ? value : value.join(', ')
     : hintText
 }

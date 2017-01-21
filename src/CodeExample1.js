@@ -119,7 +119,7 @@ class CodeExample extends Component {
         hintText='Type some letters ...'
         onSelect={this.handleSelection}
         value={this.state.value3}
-        displaySelectionsRenderer={this.handleCustomDisplaySelections('value3')}
+        selectionsRenderer={this.handleCustomDisplaySelections('value3')}
         menuProps={{maxHeight: 370}}
         style={{ width: 300 }}
       >
