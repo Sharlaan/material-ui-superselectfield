@@ -37,7 +37,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "prepublish": "babel src/superSelectField.js -d lib",
+    "prepublish": "babel src/superSelectField.js -o lib/superSelectField.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
