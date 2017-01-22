@@ -1,7 +1,7 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "0.1.3",
-  "description": "original Material-UI's SelectField component enahnced with autocompletion and multiselection",
+  "version": "0.1.4",
+  "description": "original Material-UI's SelectField component enhanced with autocompletion and multiselection",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
   "license": "MIT",

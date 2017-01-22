@@ -8,11 +8,13 @@
 
 ##Installation
 `npm i material-ui-superselectfield`  
+
 This component requires 4 dependencies :
 - react
 - react-dom
 - react-tap-event-plugin 
 - material-ui  
+
 ... so make sure they are installed in your project, or install them as well ;)
 
 ##Properties
