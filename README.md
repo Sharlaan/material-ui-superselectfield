@@ -11,8 +11,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ##Installation
-Until the packaging process not done, just grab the lib/superSelectField.js and drop it in your project. Then check Usage or Demo below.
-This component requires React and Material-UI, so don't forget to install them as well ;)
+`npm i material-ui-superselectfield`
+This component requires 4 dependencies :
+- react
+- react-dom
+- react-tap-event-plugin 
+- material-ui
+... so make sure they are installed in your project, or install them as well ;)
 
 ##Properties
 | Name | Type | Default | Description |
