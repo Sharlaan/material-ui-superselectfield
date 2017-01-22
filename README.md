@@ -12,7 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ##Installation
 Until the packaging process not done, just grab the lib/superSelectField.js and drop it in your project. Then check Usage or Demo below.
-
+This component requires Material-UI, so don't forget to install it as well ;)
 
 ##Properties
 | Name | Type | Default | Description |
