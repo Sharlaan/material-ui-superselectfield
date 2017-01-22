@@ -40,7 +40,7 @@ Until the packaging process not done, just grab the lib/superSelectField.js and 
 ```
 handleSelection = (values, name) => this.setState({ [name]: values })
 ```
-#####Bsaic example
+#####Basic example
 ```
 <SuperSelectField
   name='basicExample'
@@ -105,7 +105,7 @@ npm i
 
 npm start
 ```
-It should a new page on your default browser @ localhost:3000
+It should open a new page on your default browser @ localhost:3000
 Then choose "Example 1" to check the superSelectField in action
 
 
