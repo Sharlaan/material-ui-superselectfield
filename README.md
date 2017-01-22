@@ -1,9 +1,5 @@
 ##material-ui-superSelectField
 
-This project is currently in the process of publication as a npm module.
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
-
 ##Preview
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/dataSource.png)
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/caseInsensitive.png)
@@ -11,12 +7,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ##Installation
-`npm i material-ui-superselectfield`
+`npm i material-ui-superselectfield`  
 This component requires 4 dependencies :
 - react
 - react-dom
 - react-tap-event-plugin 
-- material-ui
+- material-ui  
 ... so make sure they are installed in your project, or install them as well ;)
 
 ##Properties
