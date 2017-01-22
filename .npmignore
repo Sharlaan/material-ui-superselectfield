@@ -1,0 +1,15 @@
+# See https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package for more about ignoring files.
+
+# testing
+coverage/
+
+# production
+build/
+public/
+src/
+*.png
+
+# misc
+.idea
+.env
+*.log
