@@ -288,7 +288,6 @@ SelectField.propTypes = {
 // noinspection JSUnusedGlobalSymbols
 SelectField.defaultProps = {
   multiple: false,
-  autoComplete: false,
   // eslint-disable-next-line no-unused-vars
   autocompleteFilter: (searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())
 }

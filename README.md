@@ -21,8 +21,7 @@ Until the packaging process not done, just grab the lib/superSelectField.js and 
 | menuProps | object | {} | Styles to be applied to the inner Menu component |
 | children | any |  | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ IMPORTANT: each node must expose a `value` property (required). This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than value |
 | value | string, string[], object, object[] | | Selected values |
-| autocomplete | bool | false | Turns superSelectField into an AutoComplete, with a search field. The search field will appear only if more than 10 children are displayed. |
-| autocompleteFilter | function | see below | `autocomplete` must be set to true. Provide your own filtering parser. Default: case insensitive. |
+| autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive. The search field will appear only if there are more than 10 children. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | hintText | string | 'Click me' | Placeholder text |
@@ -37,7 +36,66 @@ Until the packaging process not done, just grab the lib/superSelectField.js and 
 
 
 ## Usage
+#####Selection handler
+```
+handleSelection = (values, name) => this.setState({ [name]: values })
+```
+#####Bsaic example
+```
+<SuperSelectField
+  name='basicExample'
+  hintText='Single value'
+  multiple // Add this property if need multiselection
+  value={this.state.basicExample}
+  onSelect={this.handleSelection}
+>
+  <div value='A'>Option A</div>
+  <div value='B'>Option B</div>
+  <div value='C'>Option C</div>
+</SuperSelectField>
+```
+#####Complex example
+```
+handleCustomDisplaySelections = (name) => (values) => {
+  return values.length
+    ? <div style={{display: 'flex', flexWrap: 'wrap'}}>{values.map((obj, index) => (
+        <Chip key={index} style={{margin: 5}} onRequestDelete={this.onRequestDelete(index, name)}>
+          <Avatar icon={(
+            <FontIcon className={`iconURLclass`} style={customStyle} />)}
+          />
+          {obj.text}
+        </Chip>))}
+      </div>
+    : 'select some values'
+}
 
+onRequestDelete = (key, name) => (event) => {
+  this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
+}
+
+render () {
+  const dataSource = yourDataArray.map((obj, index) => (
+    <div key={index} value={obj.value} label={obj.label} style={customStyle}>
+      // use whatever html/css you want
+    </div>
+  ))
+
+  return (
+    <SuperSelectField
+      name='complexExample'
+      multiple
+      hintText='Type some letters ...'
+      onSelect={this.handleSelection}
+      value={this.state.complexExample}
+      selectionsRenderer={this.handleCustomDisplaySelections('complexExample')}
+      menuProps={{maxHeight: 370}}
+      style={{ width: 300 }}
+    >
+      {dataSource}
+    </SuperSelectField>
+  )
+}
+```
 
 ##Demo
 ```
