@@ -46,21 +46,19 @@ class CodeExample extends Component {
 
   handleDropDownChange = (event, index, value) => this.setState({ value4: value })
 
-  handleCustomDisplaySelections = (name) => (values) => {
-    return values.length
-      ? <div style={{display: 'flex', flexWrap: 'wrap'}}>{values.map((country, index) => (
-          <Chip key={index} style={{margin: 5}} onRequestDelete={this.onRequestDelete(index, name)}>
-            <Avatar icon={(
-              <FontIcon
-                className={`flag-icon flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
-                style={chipAvatarStyle}
-              />)}
-            />
-            {country['English short name']}
-          </Chip>))}
-        </div>
-      : <div style={{ minHeight: 42, lineHeight: '42px' }}>Select some values</div> // advice: use one of <option>s' default height as min-height
-  }
+  handleCustomDisplaySelections = (name) => (values) => values.length
+    ? <div style={{display: 'flex', flexWrap: 'wrap'}}>{values.map((country, index) => (
+        <Chip key={index} style={{margin: 5}} onRequestDelete={this.onRequestDelete(index, name)}>
+          <Avatar icon={(
+            <FontIcon
+              className={`flag-icon flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
+              style={chipAvatarStyle}
+            />)}
+          />
+          {country['English short name']}
+        </Chip>))}
+      </div>
+    : <div style={{ minHeight: 42, lineHeight: '42px' }}>Select some values</div> // advice: use one of <option>s' default height as min-height
 
   onRequestDelete = (key, name) => (event) => {
     this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })

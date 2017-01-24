@@ -1,4 +1,13 @@
-##material-ui-superSelectField
+#material-ui-superSelectField
+
+## Table of Contents
+- [Preview](#preview)
+- [Installation](#installation)
+- [Properties](#properties)
+- [Usage examples](#usage)
+- [Demo](#demo)
+- [Tests](#tests)
+- [Contributing](#contributing)
 
 ##Preview
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/dataSource.png)
