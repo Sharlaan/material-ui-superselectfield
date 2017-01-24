@@ -101,8 +101,10 @@ render () {
 ```
 
 ##Demo
+
+Live demo [here](https://sharlaan.github.io/material-ui-superselectfield/#/example1). Or you can build it yourself :
 ```
-git clone https://github.com/Sharlaan/material-ui-superSelectField.git
+git clone https://github.com/Sharlaan/material-ui-superselectfield.git
 
 npm i
 

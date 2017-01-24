@@ -4,7 +4,7 @@ import { blueGrey500, blueGrey700, lightBlue500, deepOrange400 } from 'material-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import Router from 'react-router/lib/Router'
-import browserHistory from 'react-router/lib/browserHistory'
+import hashHistory from 'react-router/lib/hashHistory'
 import './index.css'
 import Routes from './Routes'
 
@@ -29,7 +29,7 @@ const customTheme = getMuiTheme({
 
 render(
   <MuiThemeProvider muiTheme={customTheme}>
-    <Router history={browserHistory} routes={Routes} />
+    <Router history={hashHistory} routes={Routes} />
   </MuiThemeProvider>,
   document.getElementById('root')
 )
