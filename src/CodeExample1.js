@@ -59,7 +59,7 @@ class CodeExample extends Component {
             {country['English short name']}
           </Chip>))}
         </div>
-      : 'select some values'
+      : <div style={{ minHeight: 42, lineHeight: '42px' }}>Select some values</div> // advice: use one of <option>s' default height as min-height
   }
 
   onRequestDelete = (key, name) => (event) => {

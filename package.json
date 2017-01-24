@@ -54,8 +54,5 @@
     "prepublish": "babel src/superSelectField.js -o lib/superSelectField.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "dependencies": {
-    "inline-style-prefixer": "^2.0.5"
   }
 }

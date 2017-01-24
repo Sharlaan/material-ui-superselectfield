@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
-import Prefixer from 'inline-style-prefixer'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
 import Menu from 'material-ui/Menu/Menu'
@@ -12,15 +11,54 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 // ====================  SelectionsPresenter  =====================
 // ================================================================
 
-const prefixer = new Prefixer()
+// noinspection JSDuplicatedDeclaration
 const styles = {
-  div1: prefixer.prefix({
-    height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'
-  }),
-  div2: prefixer.prefix({
-    display: 'flex', justifyContent: 'flex-end', alignItems: 'center'
-  }),
-  div3: prefixer.prefix({ flex: 1 })
+  div1: {
+    height: '100%',
+    display: '-webkit-box',
+    display: '-webkit-flex', // eslint-disable-line no-dupe-keys
+    display: '-moz-box', // eslint-disable-line no-dupe-keys
+    display: '-ms-flexbox', // eslint-disable-line no-dupe-keys
+    display: '-o-flex', // eslint-disable-line no-dupe-keys
+    display: 'flex', // eslint-disable-line no-dupe-keys
+    WebkitBoxOrient: 'vertical',
+    WebkitBoxDirection: 'normal',
+    WebkitFlexDirection: 'column',
+    msFlexDirection: 'column',
+    OFlexDirection: 'column',
+    flexDirection: 'column',
+    WebkitBoxPack: 'end',
+    WebkitJustifyContent: 'flex-end',
+    msFlexPack: 'end',
+    OJustifyContent: 'flex-end',
+    justifyContent: 'flex-end'
+  },
+  div2: {
+    display: '-webkit-box',
+    display: '-webkit-flex', // eslint-disable-line no-dupe-keys
+    display: '-moz-box', // eslint-disable-line no-dupe-keys
+    display: '-ms-flexbox', // eslint-disable-line no-dupe-keys
+    display: '-o-flex', // eslint-disable-line no-dupe-keys
+    display: 'flex', // eslint-disable-line no-dupe-keys
+    WebkitBoxPack: 'end',
+    WebkitJustifyContent: 'flex-end',
+    msFlexPack: 'end',
+    OJustifyContent: 'flex-end',
+    justifyContent: 'flex-end',
+    WebkitAlignItems: 'center',
+    MozAlignItems: 'center',
+    msAlignItems: 'center',
+    OAlignItems: 'center',
+    alignItems: 'center'
+  },
+  div3: {
+    WebkitBoxFlex: 1,
+    MozBoxFlex: 1,
+    WebkitFlex: 1,
+    msFlex: 1,
+    OFlex: 1,
+    flex: 1
+  }
 }
 
 const SelectionsPresenter = ({ value, hintText, selectionsRenderer }) => {
