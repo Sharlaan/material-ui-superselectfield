@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/Sharlaan/material-ui-superselectfield.git"
   },
-  "homepage": "http://sharlaan.github.io/material-ui-superselectfield",
+  "homepage": "https://sharlaan.github.io/material-ui-superselectfield",
   "engines": {
     "node": ">=6"
   },
@@ -50,6 +50,7 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "deploy2": "surge -p build -d https://material-ui-superselectfield.surge.sh",
     "prepublish": "babel src/superSelectField.js -o lib/superSelectField.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
