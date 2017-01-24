@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
+import Prefixer from 'inline-style-prefixer'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
 import Menu from 'material-ui/Menu/Menu'
@@ -11,13 +12,26 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 // ====================  SelectionsPresenter  =====================
 // ================================================================
 
+const prefixer = new Prefixer()
+const styles = {
+  div1: prefixer.prefix({
+    height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end'
+  }),
+  div2: prefixer.prefix({
+    display: 'flex', justifyContent: 'flex-end', alignItems: 'center'
+  }),
+  div3: prefixer.prefix({ flex: 1 })
+}
+
 const SelectionsPresenter = ({ value, hintText, selectionsRenderer }) => {
   // TODO: add floatingLabelText
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+    <div style={styles.div1}>
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <div style={{ flex: 1 }}>{selectionsRenderer(value, hintText)}</div>
+      <div style={styles.div2}>
+        <div style={styles.div3}>
+          {selectionsRenderer(value, hintText)}
+        </div>
         <DropDownArrow />
       </div>
 

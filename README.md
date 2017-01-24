@@ -28,7 +28,7 @@ This component requires 4 dependencies :
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | hintText | string | 'Click me' | Placeholder text |
-| multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. |
+| multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
 | onSelect | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 
 ####Default functions
