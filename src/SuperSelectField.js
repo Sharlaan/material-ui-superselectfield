@@ -197,7 +197,7 @@ class SelectField extends Component {
 
   handleMenuEscKeyDown = () => this.closeMenu()
 
-  handleMenuKeyDown= (event) => {
+  handleMenuKeyDown = (event) => {
     // TODO: this solution propagates and triggers double onKeyDown
     // if event.stopPropagation(), nothing works, so the correct trigger is the 2nd one
     switch (event.key) {
