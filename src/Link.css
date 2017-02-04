@@ -2,9 +2,9 @@
   text-decoration: none;
   color: #222;
   height: 100%;
-  width: calc(100% + 32px);
+  width: 100%;
   display: inline-block;
-  margin-left: -16px;
+  padding-left: 20px;
 }
 
 .active {

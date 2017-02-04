@@ -20,15 +20,16 @@
   margin-bottom: 20px;
   color: white;
 }
-.App-header h2 { margin: 7px 0 0; }
-
-.App-drawer {
-  text-align: center;
-}
+.App-header h2, .App-header h4 { margin: 7px 0 0; }
 
 .App-content {
   margin-left: 200px;
   font-size: large;
 }
+
+.home { padding: 40px }
+.home h2 { margin-top: 0; }
+.home li { margin-bottom: 20px; }
+.home li b { display: block; margin-bottom: 5px; }
 
 *:focus { outline: none; }

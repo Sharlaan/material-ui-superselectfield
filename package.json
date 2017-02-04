@@ -1,7 +1,7 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "0.1.4",
-  "description": "original Material-UI's SelectField component enhanced with autocompletion and multiselection",
+  "version": "1.0.0",
+  "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
   "license": "MIT",
@@ -14,6 +14,9 @@
     "node": ">=6"
   },
   "main": "lib/superSelectField.js",
+  "dependencies": {
+    "react-infinite": "^0.10.0"
+  },
   "devDependencies": {
     "babel-preset-stage-2": "^6.22.0",
     "flag-icon-css": "^2.8.0",
@@ -43,7 +46,13 @@
     "extends": [
       "react-app",
       "standard"
-    ]
+    ],
+    "rules": {
+      "camelcase": "off",
+      "brace-style": "off",
+      "no-trailing-spaces": "off",
+      "no-unused-vars": "warn"
+    }
   },
   "scripts": {
     "start": "react-scripts start",

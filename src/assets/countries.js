@@ -5,7 +5,8 @@ export default [
     'Alpha-2 code': 'AF',
     'Alpha-3 code': 'AFG',
     'Numeric': 4,
-    'Capital': 'Kaboul'
+    'Capital': 'Kaboul',
+    'Continent': 5
   },
   {
     'English short name': 'Åland Islands',
@@ -13,7 +14,8 @@ export default [
     'Alpha-2 code': 'AX',
     'Alpha-3 code': 'ALA',
     'Numeric': 248,
-    'Capital': ''
+    'Capital': 'Mariehamn',
+    'Continent': 4
   },
   {
     'English short name': 'Albania',
@@ -21,7 +23,8 @@ export default [
     'Alpha-2 code': 'AL',
     'Alpha-3 code': 'ALB',
     'Numeric': 8,
-    'Capital': 'Tirana'
+    'Capital': 'Tirana',
+    'Continent': 4
   },
   {
     'English short name': 'Algeria',
@@ -29,7 +32,8 @@ export default [
     'Alpha-2 code': 'DZ',
     'Alpha-3 code': 'DZA',
     'Numeric': 12,
-    'Capital': 'Alger'
+    'Capital': 'Alger',
+    'Continent': 3
   },
   {
     'English short name': 'American Samoa',
@@ -37,7 +41,8 @@ export default [
     'Alpha-2 code': 'AS',
     'Alpha-3 code': 'ASM',
     'Numeric': 16,
-    'Capital': ''
+    'Capital': 'Pago Pago',
+    'Continent': 6
   },
   {
     'English short name': 'Andorra',
@@ -45,7 +50,8 @@ export default [
     'Alpha-2 code': 'AD',
     'Alpha-3 code': 'AND',
     'Numeric': 20,
-    'Capital': 'Andorre-la-Vieille'
+    'Capital': 'Andorre-la-Vieille',
+    'Continent': 4
   },
   {
     'English short name': 'Angola',
@@ -53,7 +59,8 @@ export default [
     'Alpha-2 code': 'AO',
     'Alpha-3 code': 'AGO',
     'Numeric': 24,
-    'Capital': 'Luanda'
+    'Capital': 'Luanda',
+    'Continent': 3
   },
   {
     'English short name': 'Anguilla',
@@ -61,7 +68,8 @@ export default [
     'Alpha-2 code': 'AI',
     'Alpha-3 code': 'AIA',
     'Numeric': 660,
-    'Capital': ''
+    'Capital': 'The Valley',
+    'Continent': 1
   },
   {
     'English short name': 'Antarctica',
@@ -69,7 +77,8 @@ export default [
     'Alpha-2 code': 'AQ',
     'Alpha-3 code': 'ATA',
     'Numeric': 10,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 7
   },
   {
     'English short name': 'Antigua and Barbuda',
@@ -77,7 +86,8 @@ export default [
     'Alpha-2 code': 'AG',
     'Alpha-3 code': 'ATG',
     'Numeric': 28,
-    'Capital': 'Saint John\'s'
+    'Capital': 'Saint John\'s',
+    'Continent': 1
   },
   {
     'English short name': 'Argentina',
@@ -85,7 +95,8 @@ export default [
     'Alpha-2 code': 'AR',
     'Alpha-3 code': 'ARG',
     'Numeric': 32,
-    'Capital': 'Buenos Aires'
+    'Capital': 'Buenos Aires',
+    'Continent': 2
   },
   {
     'English short name': 'Armenia',
@@ -93,7 +104,8 @@ export default [
     'Alpha-2 code': 'AM',
     'Alpha-3 code': 'ARM',
     'Numeric': 51,
-    'Capital': 'Erevan'
+    'Capital': 'Erevan',
+    'Continent': 4
   },
   {
     'English short name': 'Aruba',
@@ -101,7 +113,8 @@ export default [
     'Alpha-2 code': 'AW',
     'Alpha-3 code': 'ABW',
     'Numeric': 533,
-    'Capital': ''
+    'Capital': 'Oranjestad',
+    'Continent': 1
   },
   {
     'English short name': 'Australia',
@@ -109,7 +122,8 @@ export default [
     'Alpha-2 code': 'AU',
     'Alpha-3 code': 'AUS',
     'Numeric': 36,
-    'Capital': 'Canberra'
+    'Capital': 'Canberra',
+    'Continent': 6
   },
   {
     'English short name': 'Austria',
@@ -117,7 +131,8 @@ export default [
     'Alpha-2 code': 'AT',
     'Alpha-3 code': 'AUT',
     'Numeric': 40,
-    'Capital': 'Vienne'
+    'Capital': 'Vienne',
+    'Continent': 4
   },
   {
     'English short name': 'Azerbaijan',
@@ -125,7 +140,8 @@ export default [
     'Alpha-2 code': 'AZ',
     'Alpha-3 code': 'AZE',
     'Numeric': 31,
-    'Capital': 'Bakou'
+    'Capital': 'Bakou',
+    'Continent': 5
   },
   {
     'English short name': 'Bahamas (the)',
@@ -133,7 +149,8 @@ export default [
     'Alpha-2 code': 'BS',
     'Alpha-3 code': 'BHS',
     'Numeric': 44,
-    'Capital': 'Nassau'
+    'Capital': 'Nassau',
+    'Continent': 1
   },
   {
     'English short name': 'Bahrain',
@@ -141,7 +158,8 @@ export default [
     'Alpha-2 code': 'BH',
     'Alpha-3 code': 'BHR',
     'Numeric': 48,
-    'Capital': 'Manama'
+    'Capital': 'Manama',
+    'Continent': 5
   },
   {
     'English short name': 'Bangladesh',
@@ -149,7 +167,8 @@ export default [
     'Alpha-2 code': 'BD',
     'Alpha-3 code': 'BGD',
     'Numeric': 50,
-    'Capital': 'Dacca'
+    'Capital': 'Dacca',
+    'Continent': 5
   },
   {
     'English short name': 'Barbados',
@@ -157,7 +176,8 @@ export default [
     'Alpha-2 code': 'BB',
     'Alpha-3 code': 'BRB',
     'Numeric': 52,
-    'Capital': 'Bridgetown'
+    'Capital': 'Bridgetown',
+    'Continent': 1
   },
   {
     'English short name': 'Belarus',
@@ -165,7 +185,8 @@ export default [
     'Alpha-2 code': 'BY',
     'Alpha-3 code': 'BLR',
     'Numeric': 112,
-    'Capital': 'Minsk'
+    'Capital': 'Minsk',
+    'Continent': 5
   },
   {
     'English short name': 'Belgium',
@@ -173,7 +194,8 @@ export default [
     'Alpha-2 code': 'BE',
     'Alpha-3 code': 'BEL',
     'Numeric': 56,
-    'Capital': 'Bruxelles'
+    'Capital': 'Bruxelles',
+    'Continent': 4
   },
   {
     'English short name': 'Belize',
@@ -181,7 +203,8 @@ export default [
     'Alpha-2 code': 'BZ',
     'Alpha-3 code': 'BLZ',
     'Numeric': 84,
-    'Capital': 'Belmopan'
+    'Capital': 'Belmopan',
+    'Continent': 1
   },
   {
     'English short name': 'Benin',
@@ -189,7 +212,8 @@ export default [
     'Alpha-2 code': 'BJ',
     'Alpha-3 code': 'BEN',
     'Numeric': 204,
-    'Capital': 'Porto-Novo'
+    'Capital': 'Porto-Novo',
+    'Continent': 3
   },
   {
     'English short name': 'Bermuda',
@@ -197,7 +221,8 @@ export default [
     'Alpha-2 code': 'BM',
     'Alpha-3 code': 'BMU',
     'Numeric': 60,
-    'Capital': ''
+    'Capital': 'Hamilton',
+    'Continent': 1
   },
   {
     'English short name': 'Bhutan',
@@ -205,7 +230,8 @@ export default [
     'Alpha-2 code': 'BT',
     'Alpha-3 code': 'BTN',
     'Numeric': 64,
-    'Capital': 'Thimphou'
+    'Capital': 'Thimphou',
+    'Continent': 5
   },
   {
     'English short name': 'Bolivia (Plurinational State of)',
@@ -213,7 +239,8 @@ export default [
     'Alpha-2 code': 'BO',
     'Alpha-3 code': 'BOL',
     'Numeric': 68,
-    'Capital': 'La Paz'
+    'Capital': 'La Paz',
+    'Continent': 2
   },
   {
     'English short name': 'Bonaire, Sint Eustatius and Saba',
@@ -221,7 +248,8 @@ export default [
     'Alpha-2 code': 'BQ',
     'Alpha-3 code': 'BES',
     'Numeric': 535,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 1
   },
   {
     'English short name': 'Bosnia and Herzegovina',
@@ -229,7 +257,8 @@ export default [
     'Alpha-2 code': 'BA',
     'Alpha-3 code': 'BIH',
     'Numeric': 70,
-    'Capital': 'Sarajevo'
+    'Capital': 'Sarajevo',
+    'Continent': 4
   },
   {
     'English short name': 'Botswana',
@@ -237,7 +266,8 @@ export default [
     'Alpha-2 code': 'BW',
     'Alpha-3 code': 'BWA',
     'Numeric': 72,
-    'Capital': 'Gaborone'
+    'Capital': 'Gaborone',
+    'Continent': 3
   },
   {
     'English short name': 'Bouvet Island',
@@ -245,7 +275,8 @@ export default [
     'Alpha-2 code': 'BV',
     'Alpha-3 code': 'BVT',
     'Numeric': 74,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 7
   },
   {
     'English short name': 'Brazil',
@@ -253,7 +284,8 @@ export default [
     'Alpha-2 code': 'BR',
     'Alpha-3 code': 'BRA',
     'Numeric': 76,
-    'Capital': 'Brasilia'
+    'Capital': 'Brasilia',
+    'Continent': 3
   },
   {
     'English short name': 'British Indian Ocean Territory (the)',
@@ -261,7 +293,8 @@ export default [
     'Alpha-2 code': 'IO',
     'Alpha-3 code': 'IOT',
     'Numeric': 86,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 6
   },
   {
     'English short name': 'Brunei Darussalam',
@@ -269,7 +302,8 @@ export default [
     'Alpha-2 code': 'BN',
     'Alpha-3 code': 'BRN',
     'Numeric': 96,
-    'Capital': 'Bandar Seri Begawan'
+    'Capital': 'Bandar Seri Begawan',
+    'Continent': 6
   },
   {
     'English short name': 'Bulgaria',
@@ -277,7 +311,8 @@ export default [
     'Alpha-2 code': 'BG',
     'Alpha-3 code': 'BGR',
     'Numeric': 100,
-    'Capital': 'Sofia'
+    'Capital': 'Sofia',
+    'Continent': 4
   },
   {
     'English short name': 'Burkina Faso',
@@ -285,7 +320,8 @@ export default [
     'Alpha-2 code': 'BF',
     'Alpha-3 code': 'BFA',
     'Numeric': 854,
-    'Capital': 'Ouagadougou'
+    'Capital': 'Ouagadougou',
+    'Continent': 3
   },
   {
     'English short name': 'Burundi',
@@ -293,7 +329,8 @@ export default [
     'Alpha-2 code': 'BI',
     'Alpha-3 code': 'BDI',
     'Numeric': 108,
-    'Capital': 'Bujumbura'
+    'Capital': 'Bujumbura',
+    'Continent': 3
   },
   {
     'English short name': 'Cabo Verde',
@@ -301,7 +338,8 @@ export default [
     'Alpha-2 code': 'CV',
     'Alpha-3 code': 'CPV',
     'Numeric': 132,
-    'Capital': 'Praia'
+    'Capital': 'Praia',
+    'Continent': 3
   },
   {
     'English short name': 'Cambodia',
@@ -309,7 +347,8 @@ export default [
     'Alpha-2 code': 'KH',
     'Alpha-3 code': 'KHM',
     'Numeric': 116,
-    'Capital': 'Phnom Penh'
+    'Capital': 'Phnom Penh',
+    'Continent': 5
   },
   {
     'English short name': 'Cameroon',
@@ -317,7 +356,8 @@ export default [
     'Alpha-2 code': 'CM',
     'Alpha-3 code': 'CMR',
     'Numeric': 120,
-    'Capital': 'Yaoundé'
+    'Capital': 'Yaoundé',
+    'Continent': 3
   },
   {
     'English short name': 'Canada',
@@ -325,7 +365,8 @@ export default [
     'Alpha-2 code': 'CA',
     'Alpha-3 code': 'CAN',
     'Numeric': 124,
-    'Capital': 'Ottawa'
+    'Capital': 'Ottawa',
+    'Continent': 0
   },
   {
     'English short name': 'Cayman Islands (the)',
@@ -333,7 +374,8 @@ export default [
     'Alpha-2 code': 'KY',
     'Alpha-3 code': 'CYM',
     'Numeric': 136,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 1
   },
   {
     'English short name': 'Central African Republic (the)',
@@ -341,7 +383,8 @@ export default [
     'Alpha-2 code': 'CF',
     'Alpha-3 code': 'CAF',
     'Numeric': 140,
-    'Capital': 'Bangui'
+    'Capital': 'Bangui',
+    'Continent': 3
   },
   {
     'English short name': 'Chad',
@@ -349,7 +392,8 @@ export default [
     'Alpha-2 code': 'TD',
     'Alpha-3 code': 'TCD',
     'Numeric': 148,
-    'Capital': 'N\'Djaména'
+    'Capital': 'N\'Djaména',
+    'Continent': 3
   },
   {
     'English short name': 'Chile',
@@ -357,7 +401,8 @@ export default [
     'Alpha-2 code': 'CL',
     'Alpha-3 code': 'CHL',
     'Numeric': 152,
-    'Capital': 'Santiago'
+    'Capital': 'Santiago',
+    'Continent': 2
   },
   {
     'English short name': 'China',
@@ -365,7 +410,8 @@ export default [
     'Alpha-2 code': 'CN',
     'Alpha-3 code': 'CHN',
     'Numeric': 156,
-    'Capital': 'Pékin'
+    'Capital': 'Pékin',
+    'Continent': 5
   },
   {
     'English short name': 'Christmas Island',
@@ -373,7 +419,8 @@ export default [
     'Alpha-2 code': 'CX',
     'Alpha-3 code': 'CXR',
     'Numeric': 162,
-    'Capital': ''
+    'Capital': 'Flying Fish Cove',
+    'Continent': 6
   },
   {
     'English short name': 'Cocos (Keeling) Islands (the)',
@@ -381,7 +428,8 @@ export default [
     'Alpha-2 code': 'CC',
     'Alpha-3 code': 'CCK',
     'Numeric': 166,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 6
   },
   {
     'English short name': 'Colombia',
@@ -389,7 +437,8 @@ export default [
     'Alpha-2 code': 'CO',
     'Alpha-3 code': 'COL',
     'Numeric': 170,
-    'Capital': 'Bogota'
+    'Capital': 'Bogota',
+    'Continent': 2
   },
   {
     'English short name': 'Comoros (the)',
@@ -397,7 +446,8 @@ export default [
     'Alpha-2 code': 'KM',
     'Alpha-3 code': 'COM',
     'Numeric': 174,
-    'Capital': ''
+    'Capital': 'Moroni',
+    'Continent': 3
   },
   {
     'English short name': 'Congo (the Democratic Republic of the)',
@@ -405,7 +455,8 @@ export default [
     'Alpha-2 code': 'CD',
     'Alpha-3 code': 'COD',
     'Numeric': 180,
-    'Capital': 'Kinshasa'
+    'Capital': 'Kinshasa',
+    'Continent': 3
   },
   {
     'English short name': 'Congo (the)',
@@ -413,7 +464,8 @@ export default [
     'Alpha-2 code': 'CG',
     'Alpha-3 code': 'COG',
     'Numeric': 178,
-    'Capital': 'Brazzaville'
+    'Capital': 'Brazzaville',
+    'Continent': 3
   },
   {
     'English short name': 'Cook Islands (the)',
@@ -421,7 +473,8 @@ export default [
     'Alpha-2 code': 'CK',
     'Alpha-3 code': 'COK',
     'Numeric': 184,
-    'Capital': 'Avarua'
+    'Capital': 'Avarua',
+    'Continent': 6
   },
   {
     'English short name': 'Costa Rica',
@@ -429,7 +482,8 @@ export default [
     'Alpha-2 code': 'CR',
     'Alpha-3 code': 'CRI',
     'Numeric': 188,
-    'Capital': 'San José'
+    'Capital': 'San José',
+    'Continent': 1
   },
   {
     'English short name': 'Côte d\'Ivoire',
@@ -437,7 +491,8 @@ export default [
     'Alpha-2 code': 'CI',
     'Alpha-3 code': 'CIV',
     'Numeric': 384,
-    'Capital': 'Yamoussoukro'
+    'Capital': 'Yamoussoukro',
+    'Continent': 3
   },
   {
     'English short name': 'Croatia',
@@ -445,7 +500,8 @@ export default [
     'Alpha-2 code': 'HR',
     'Alpha-3 code': 'HRV',
     'Numeric': 191,
-    'Capital': 'Zagreb'
+    'Capital': 'Zagreb',
+    'Continent': 4
   },
   {
     'English short name': 'Cuba',
@@ -453,7 +509,8 @@ export default [
     'Alpha-2 code': 'CU',
     'Alpha-3 code': 'CUB',
     'Numeric': 192,
-    'Capital': 'La Havane'
+    'Capital': 'La Havane',
+    'Continent': 1
   },
   {
     'English short name': 'Curaçao',
@@ -461,7 +518,8 @@ export default [
     'Alpha-2 code': 'CW',
     'Alpha-3 code': 'CUW',
     'Numeric': 531,
-    'Capital': ''
+    'Capital': 'Willemstad',
+    'Continent': 2
   },
   {
     'English short name': 'Cyprus',
@@ -469,7 +527,8 @@ export default [
     'Alpha-2 code': 'CY',
     'Alpha-3 code': 'CYP',
     'Numeric': 196,
-    'Capital': 'Nicosie'
+    'Capital': 'Nicosie',
+    'Continent': 4
   },
   {
     'English short name': 'Czechia',
@@ -477,7 +536,8 @@ export default [
     'Alpha-2 code': 'CZ',
     'Alpha-3 code': 'CZE',
     'Numeric': 203,
-    'Capital': 'Prague'
+    'Capital': 'Prague',
+    'Continent': 4
   },
   {
     'English short name': 'Denmark',
@@ -485,7 +545,8 @@ export default [
     'Alpha-2 code': 'DK',
     'Alpha-3 code': 'DNK',
     'Numeric': 208,
-    'Capital': 'Copenhague'
+    'Capital': 'Copenhague',
+    'Continent': 4
   },
   {
     'English short name': 'Djibouti',
@@ -493,7 +554,8 @@ export default [
     'Alpha-2 code': 'DJ',
     'Alpha-3 code': 'DJI',
     'Numeric': 262,
-    'Capital': 'Djibouti'
+    'Capital': 'Djibouti',
+    'Continent': 3
   },
   {
     'English short name': 'Dominica',
@@ -501,7 +563,8 @@ export default [
     'Alpha-2 code': 'DM',
     'Alpha-3 code': 'DMA',
     'Numeric': 212,
-    'Capital': 'Roseau'
+    'Capital': 'Roseau',
+    'Continent': 1
   },
   {
     'English short name': 'Dominican Republic (the)',
@@ -509,7 +572,8 @@ export default [
     'Alpha-2 code': 'DO',
     'Alpha-3 code': 'DOM',
     'Numeric': 214,
-    'Capital': 'Saint-Domingue'
+    'Capital': 'Saint-Domingue',
+    'Continent': 1
   },
   {
     'English short name': 'Ecuador',
@@ -517,7 +581,8 @@ export default [
     'Alpha-2 code': 'EC',
     'Alpha-3 code': 'ECU',
     'Numeric': 218,
-    'Capital': 'Quito'
+    'Capital': 'Quito',
+    'Continent': 2
   },
   {
     'English short name': 'Egypt',
@@ -525,7 +590,8 @@ export default [
     'Alpha-2 code': 'EG',
     'Alpha-3 code': 'EGY',
     'Numeric': 818,
-    'Capital': 'Le Caire'
+    'Capital': 'Le Caire',
+    'Continent': 3
   },
   {
     'English short name': 'El Salvador',
@@ -533,7 +599,8 @@ export default [
     'Alpha-2 code': 'SV',
     'Alpha-3 code': 'SLV',
     'Numeric': 222,
-    'Capital': 'San Salvador'
+    'Capital': 'San Salvador',
+    'Continent': 1
   },
   {
     'English short name': 'Equatorial Guinea',
@@ -541,7 +608,8 @@ export default [
     'Alpha-2 code': 'GQ',
     'Alpha-3 code': 'GNQ',
     'Numeric': 226,
-    'Capital': 'Malabo'
+    'Capital': 'Malabo',
+    'Continent': 3
   },
   {
     'English short name': 'Eritrea',
@@ -549,7 +617,8 @@ export default [
     'Alpha-2 code': 'ER',
     'Alpha-3 code': 'ERI',
     'Numeric': 232,
-    'Capital': 'Asmara'
+    'Capital': 'Asmara',
+    'Continent': 3
   },
   {
     'English short name': 'Estonia',
@@ -557,7 +626,8 @@ export default [
     'Alpha-2 code': 'EE',
     'Alpha-3 code': 'EST',
     'Numeric': 233,
-    'Capital': 'Tallinn'
+    'Capital': 'Tallinn',
+    'Continent': 5
   },
   {
     'English short name': 'Ethiopia',
@@ -565,7 +635,8 @@ export default [
     'Alpha-2 code': 'ET',
     'Alpha-3 code': 'ETH',
     'Numeric': 231,
-    'Capital': 'Addis-Abeba'
+    'Capital': 'Addis-Abeba',
+    'Continent': 3
   },
   {
     'English short name': 'Falkland Islands (the) [Malvinas]',
@@ -573,7 +644,8 @@ export default [
     'Alpha-2 code': 'FK',
     'Alpha-3 code': 'FLK',
     'Numeric': 238,
-    'Capital': ''
+    'Capital': 'Stanley',
+    'Continent': 2
   },
   {
     'English short name': 'Faroe Islands (the)',
@@ -581,7 +653,8 @@ export default [
     'Alpha-2 code': 'FO',
     'Alpha-3 code': 'FRO',
     'Numeric': 234,
-    'Capital': ''
+    'Capital': 'Tórshavn',
+    'Continent': 4
   },
   {
     'English short name': 'Fiji',
@@ -589,7 +662,8 @@ export default [
     'Alpha-2 code': 'FJ',
     'Alpha-3 code': 'FJI',
     'Numeric': 242,
-    'Capital': 'Suva'
+    'Capital': 'Suva',
+    'Continent': 6
   },
   {
     'English short name': 'Finland',
@@ -597,7 +671,8 @@ export default [
     'Alpha-2 code': 'FI',
     'Alpha-3 code': 'FIN',
     'Numeric': 246,
-    'Capital': 'Helsinki'
+    'Capital': 'Helsinki',
+    'Continent': 4
   },
   {
     'English short name': 'France',
@@ -605,7 +680,8 @@ export default [
     'Alpha-2 code': 'FR',
     'Alpha-3 code': 'FRA',
     'Numeric': 250,
-    'Capital': 'Paris'
+    'Capital': 'Paris',
+    'Continent': 4
   },
   {
     'English short name': 'French Guiana',
@@ -613,7 +689,8 @@ export default [
     'Alpha-2 code': 'GF',
     'Alpha-3 code': 'GUF',
     'Numeric': 254,
-    'Capital': ''
+    'Capital': 'Cayenne',
+    'Continent': 2
   },
   {
     'English short name': 'French Polynesia',
@@ -621,7 +698,8 @@ export default [
     'Alpha-2 code': 'PF',
     'Alpha-3 code': 'PYF',
     'Numeric': 258,
-    'Capital': ''
+    'Capital': 'Papeete',
+    'Continent': 6
   },
   {
     'English short name': 'French Southern Territories (the)',
@@ -629,7 +707,8 @@ export default [
     'Alpha-2 code': 'TF',
     'Alpha-3 code': 'ATF',
     'Numeric': 260,
-    'Capital': ''
+    'Capital': 'Saint-Pierre',
+    'Continent': 7
   },
   {
     'English short name': 'Gabon',
@@ -637,7 +716,8 @@ export default [
     'Alpha-2 code': 'GA',
     'Alpha-3 code': 'GAB',
     'Numeric': 266,
-    'Capital': 'Libreville'
+    'Capital': 'Libreville',
+    'Continent': 3
   },
   {
     'English short name': 'Gambia (the)',
@@ -645,7 +725,8 @@ export default [
     'Alpha-2 code': 'GM',
     'Alpha-3 code': 'GMB',
     'Numeric': 270,
-    'Capital': 'Banjul'
+    'Capital': 'Banjul',
+    'Continent': 3
   },
   {
     'English short name': 'Georgia',
@@ -653,7 +734,8 @@ export default [
     'Alpha-2 code': 'GE',
     'Alpha-3 code': 'GEO',
     'Numeric': 268,
-    'Capital': 'Tbilissi'
+    'Capital': 'Tbilissi',
+    'Continent': 5
   },
   {
     'English short name': 'Germany',
@@ -661,7 +743,8 @@ export default [
     'Alpha-2 code': 'DE',
     'Alpha-3 code': 'DEU',
     'Numeric': 276,
-    'Capital': 'Berlin'
+    'Capital': 'Berlin',
+    'Continent': 4
   },
   {
     'English short name': 'Ghana',
@@ -669,7 +752,8 @@ export default [
     'Alpha-2 code': 'GH',
     'Alpha-3 code': 'GHA',
     'Numeric': 288,
-    'Capital': 'Accra'
+    'Capital': 'Accra',
+    'Continent': 3
   },
   {
     'English short name': 'Gibraltar',
@@ -677,7 +761,8 @@ export default [
     'Alpha-2 code': 'GI',
     'Alpha-3 code': 'GIB',
     'Numeric': 292,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 4
   },
   {
     'English short name': 'Greece',
@@ -685,7 +770,8 @@ export default [
     'Alpha-2 code': 'GR',
     'Alpha-3 code': 'GRC',
     'Numeric': 300,
-    'Capital': 'Athènes'
+    'Capital': 'Athènes',
+    'Continent': 4
   },
   {
     'English short name': 'Greenland',
@@ -693,7 +779,8 @@ export default [
     'Alpha-2 code': 'GL',
     'Alpha-3 code': 'GRL',
     'Numeric': 304,
-    'Capital': ''
+    'Capital': 'Nuuk',
+    'Continent': 0
   },
   {
     'English short name': 'Grenada',
@@ -701,7 +788,8 @@ export default [
     'Alpha-2 code': 'GD',
     'Alpha-3 code': 'GRD',
     'Numeric': 308,
-    'Capital': 'Saint-Georges'
+    'Capital': 'Saint-Georges',
+    'Continent': 1
   },
   {
     'English short name': 'Guadeloupe',
@@ -709,7 +797,8 @@ export default [
     'Alpha-2 code': 'GP',
     'Alpha-3 code': 'GLP',
     'Numeric': 312,
-    'Capital': ''
+    'Capital': 'Basse-Terre',
+    'Continent': 1
   },
   {
     'English short name': 'Guam',
@@ -717,7 +806,8 @@ export default [
     'Alpha-2 code': 'GU',
     'Alpha-3 code': 'GUM',
     'Numeric': 316,
-    'Capital': ''
+    'Capital': 'Hagåtña',
+    'Continent': 6
   },
   {
     'English short name': 'Guatemala',
@@ -725,7 +815,8 @@ export default [
     'Alpha-2 code': 'GT',
     'Alpha-3 code': 'GTM',
     'Numeric': 320,
-    'Capital': 'Guatemala'
+    'Capital': 'Guatemala',
+    'Continent': 1
   },
   {
     'English short name': 'Guernsey',
@@ -733,7 +824,8 @@ export default [
     'Alpha-2 code': 'GG',
     'Alpha-3 code': 'GGY',
     'Numeric': 831,
-    'Capital': ''
+    'Capital': 'Saint-Pierre-Port',
+    'Continent': 4
   },
   {
     'English short name': 'Guinea',
@@ -741,7 +833,8 @@ export default [
     'Alpha-2 code': 'GN',
     'Alpha-3 code': 'GIN',
     'Numeric': 324,
-    'Capital': ''
+    'Capital': 'Conakry',
+    'Continent': 3
   },
   {
     'English short name': 'Guinea-Bissau',
@@ -749,15 +842,17 @@ export default [
     'Alpha-2 code': 'GW',
     'Alpha-3 code': 'GNB',
     'Numeric': 624,
-    'Capital': 'Bissau'
+    'Capital': 'Bissau',
+    'Continent': 3
   },
   {
     'English short name': 'Guyana',
-    'French short name': 'Guyana (le)',
+    'French short name': 'Guyane (la)',
     'Alpha-2 code': 'GY',
     'Alpha-3 code': 'GUY',
     'Numeric': 328,
-    'Capital': 'Georgetown'
+    'Capital': 'Georgetown',
+    'Continent': 2
   },
   {
     'English short name': 'Haiti',
@@ -765,7 +860,8 @@ export default [
     'Alpha-2 code': 'HT',
     'Alpha-3 code': 'HTI',
     'Numeric': 332,
-    'Capital': 'Port-au-Prince'
+    'Capital': 'Port-au-Prince',
+    'Continent': 1
   },
   {
     'English short name': 'Heard Island and McDonald Islands',
@@ -773,7 +869,8 @@ export default [
     'Alpha-2 code': 'HM',
     'Alpha-3 code': 'HMD',
     'Numeric': 334,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 7
   },
   {
     'English short name': 'Holy See (the)',
@@ -781,7 +878,8 @@ export default [
     'Alpha-2 code': 'VA',
     'Alpha-3 code': 'VAT',
     'Numeric': 336,
-    'Capital': ''
+    'Capital': 'Vatican',
+    'Continent': 4
   },
   {
     'English short name': 'Honduras',
@@ -789,7 +887,8 @@ export default [
     'Alpha-2 code': 'HN',
     'Alpha-3 code': 'HND',
     'Numeric': 340,
-    'Capital': 'Tegucigalpa'
+    'Capital': 'Tegucigalpa',
+    'Continent': 1
   },
   {
     'English short name': 'Hong Kong',
@@ -797,7 +896,8 @@ export default [
     'Alpha-2 code': 'HK',
     'Alpha-3 code': 'HKG',
     'Numeric': 344,
-    'Capital': ''
+    'Capital': 'Hong Kong',
+    'Continent': 5
   },
   {
     'English short name': 'Hungary',
@@ -805,7 +905,8 @@ export default [
     'Alpha-2 code': 'HU',
     'Alpha-3 code': 'HUN',
     'Numeric': 348,
-    'Capital': 'Budapest'
+    'Capital': 'Budapest',
+    'Continent': 4
   },
   {
     'English short name': 'Iceland',
@@ -813,7 +914,8 @@ export default [
     'Alpha-2 code': 'IS',
     'Alpha-3 code': 'ISL',
     'Numeric': 352,
-    'Capital': 'Reykjavik'
+    'Capital': 'Reykjavik',
+    'Continent': 4
   },
   {
     'English short name': 'India',
@@ -821,7 +923,8 @@ export default [
     'Alpha-2 code': 'IN',
     'Alpha-3 code': 'IND',
     'Numeric': 356,
-    'Capital': 'New Delhi'
+    'Capital': 'New Delhi',
+    'Continent': 5
   },
   {
     'English short name': 'Indonesia',
@@ -829,7 +932,8 @@ export default [
     'Alpha-2 code': 'ID',
     'Alpha-3 code': 'IDN',
     'Numeric': 360,
-    'Capital': 'Jakarta'
+    'Capital': 'Jakarta',
+    'Continent': 6
   },
   {
     'English short name': 'Iran (Islamic Republic of)',
@@ -837,7 +941,8 @@ export default [
     'Alpha-2 code': 'IR',
     'Alpha-3 code': 'IRN',
     'Numeric': 364,
-    'Capital': 'Téhéran'
+    'Capital': 'Téhéran',
+    'Continent': 5
   },
   {
     'English short name': 'Iraq',
@@ -845,7 +950,8 @@ export default [
     'Alpha-2 code': 'IQ',
     'Alpha-3 code': 'IRQ',
     'Numeric': 368,
-    'Capital': 'Bagdad'
+    'Capital': 'Bagdad',
+    'Continent': 5
   },
   {
     'English short name': 'Ireland',
@@ -853,7 +959,8 @@ export default [
     'Alpha-2 code': 'IE',
     'Alpha-3 code': 'IRL',
     'Numeric': 372,
-    'Capital': 'Dublin'
+    'Capital': 'Dublin',
+    'Continent': 4
   },
   {
     'English short name': 'Isle of Man',
@@ -861,7 +968,8 @@ export default [
     'Alpha-2 code': 'IM',
     'Alpha-3 code': 'IMN',
     'Numeric': 833,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 4
   },
   {
     'English short name': 'Israel',
@@ -869,7 +977,8 @@ export default [
     'Alpha-2 code': 'IL',
     'Alpha-3 code': 'ISR',
     'Numeric': 376,
-    'Capital': 'Tel Aviv'
+    'Capital': 'Tel Aviv',
+    'Continent': 5
   },
   {
     'English short name': 'Italy',
@@ -877,7 +986,8 @@ export default [
     'Alpha-2 code': 'IT',
     'Alpha-3 code': 'ITA',
     'Numeric': 380,
-    'Capital': 'Rome'
+    'Capital': 'Rome',
+    'Continent': 4
   },
   {
     'English short name': 'Jamaica',
@@ -885,7 +995,8 @@ export default [
     'Alpha-2 code': 'JM',
     'Alpha-3 code': 'JAM',
     'Numeric': 388,
-    'Capital': 'Kingston'
+    'Capital': 'Kingston',
+    'Continent': 1
   },
   {
     'English short name': 'Japan',
@@ -893,7 +1004,8 @@ export default [
     'Alpha-2 code': 'JP',
     'Alpha-3 code': 'JPN',
     'Numeric': 392,
-    'Capital': 'Tokyo'
+    'Capital': 'Tokyo',
+    'Continent': 5
   },
   {
     'English short name': 'Jersey',
@@ -901,7 +1013,8 @@ export default [
     'Alpha-2 code': 'JE',
     'Alpha-3 code': 'JEY',
     'Numeric': 832,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 4
   },
   {
     'English short name': 'Jordan',
@@ -909,7 +1022,8 @@ export default [
     'Alpha-2 code': 'JO',
     'Alpha-3 code': 'JOR',
     'Numeric': 400,
-    'Capital': 'Amman'
+    'Capital': 'Amman',
+    'Continent': 5
   },
   {
     'English short name': 'Kazakhstan',
@@ -917,7 +1031,8 @@ export default [
     'Alpha-2 code': 'KZ',
     'Alpha-3 code': 'KAZ',
     'Numeric': 398,
-    'Capital': 'Astana'
+    'Capital': 'Astana',
+    'Continent': 5
   },
   {
     'English short name': 'Kenya',
@@ -925,7 +1040,8 @@ export default [
     'Alpha-2 code': 'KE',
     'Alpha-3 code': 'KEN',
     'Numeric': 404,
-    'Capital': 'Nairobi'
+    'Capital': 'Nairobi',
+    'Continent': 3
   },
   {
     'English short name': 'Kiribati',
@@ -933,7 +1049,8 @@ export default [
     'Alpha-2 code': 'KI',
     'Alpha-3 code': 'KIR',
     'Numeric': 296,
-    'Capital': 'Tarawa-Sud'
+    'Capital': 'Tarawa-Sud',
+    'Continent': 3
   },
   {
     'English short name': 'North Korea (the Democratic People\'s Republic of)',
@@ -941,7 +1058,8 @@ export default [
     'Alpha-2 code': 'KP',
     'Alpha-3 code': 'PRK',
     'Numeric': 408,
-    'Capital': 'Pyongyang'
+    'Capital': 'Pyongyang',
+    'Continent': 5
   },
   {
     'English short name': 'South Korea (the Republic of)',
@@ -949,7 +1067,8 @@ export default [
     'Alpha-2 code': 'KR',
     'Alpha-3 code': 'KOR',
     'Numeric': 410,
-    'Capital': 'Séoul'
+    'Capital': 'Séoul',
+    'Continent': 5
   },
   {
     'English short name': 'Kuwait',
@@ -957,7 +1076,8 @@ export default [
     'Alpha-2 code': 'KW',
     'Alpha-3 code': 'KWT',
     'Numeric': 414,
-    'Capital': 'Koweït'
+    'Capital': 'Koweït',
+    'Continent': 5
   },
   {
     'English short name': 'Kyrgyzstan',
@@ -965,7 +1085,8 @@ export default [
     'Alpha-2 code': 'KG',
     'Alpha-3 code': 'KGZ',
     'Numeric': 417,
-    'Capital': 'Bichkek'
+    'Capital': 'Bichkek',
+    'Continent': 5
   },
   {
     'English short name': 'Lao People\'s Democratic Republic (the)',
@@ -973,7 +1094,8 @@ export default [
     'Alpha-2 code': 'LA',
     'Alpha-3 code': 'LAO',
     'Numeric': 418,
-    'Capital': 'Vientiane'
+    'Capital': 'Vientiane',
+    'Continent': 5
   },
   {
     'English short name': 'Latvia',
@@ -981,7 +1103,8 @@ export default [
     'Alpha-2 code': 'LV',
     'Alpha-3 code': 'LVA',
     'Numeric': 428,
-    'Capital': 'Riga'
+    'Capital': 'Riga',
+    'Continent': 5
   },
   {
     'English short name': 'Lebanon',
@@ -989,7 +1112,8 @@ export default [
     'Alpha-2 code': 'LB',
     'Alpha-3 code': 'LBN',
     'Numeric': 422,
-    'Capital': 'Beyrouth'
+    'Capital': 'Beyrouth',
+    'Continent': 5
   },
   {
     'English short name': 'Lesotho',
@@ -997,7 +1121,8 @@ export default [
     'Alpha-2 code': 'LS',
     'Alpha-3 code': 'LSO',
     'Numeric': 426,
-    'Capital': 'Maseru'
+    'Capital': 'Maseru',
+    'Continent': 3
   },
   {
     'English short name': 'Liberia',
@@ -1005,7 +1130,8 @@ export default [
     'Alpha-2 code': 'LR',
     'Alpha-3 code': 'LBR',
     'Numeric': 430,
-    'Capital': 'Monrovia'
+    'Capital': 'Monrovia',
+    'Continent': 3
   },
   {
     'English short name': 'Libya',
@@ -1013,7 +1139,8 @@ export default [
     'Alpha-2 code': 'LY',
     'Alpha-3 code': 'LBY',
     'Numeric': 434,
-    'Capital': 'Tripoli'
+    'Capital': 'Tripoli',
+    'Continent': 3
   },
   {
     'English short name': 'Liechtenstein',
@@ -1021,7 +1148,8 @@ export default [
     'Alpha-2 code': 'LI',
     'Alpha-3 code': 'LIE',
     'Numeric': 438,
-    'Capital': 'Vaduz'
+    'Capital': 'Vaduz',
+    'Continent': 4
   },
   {
     'English short name': 'Lithuania',
@@ -1029,7 +1157,8 @@ export default [
     'Alpha-2 code': 'LT',
     'Alpha-3 code': 'LTU',
     'Numeric': 440,
-    'Capital': 'Vilnius'
+    'Capital': 'Vilnius',
+    'Continent': 5
   },
   {
     'English short name': 'Luxembourg',
@@ -1037,7 +1166,8 @@ export default [
     'Alpha-2 code': 'LU',
     'Alpha-3 code': 'LUX',
     'Numeric': 442,
-    'Capital': 'Luxembourg'
+    'Capital': 'Luxembourg',
+    'Continent': 4
   },
   {
     'English short name': 'Macao',
@@ -1045,7 +1175,8 @@ export default [
     'Alpha-2 code': 'MO',
     'Alpha-3 code': 'MAC',
     'Numeric': 446,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 5
   },
   {
     'English short name': 'Macedonia (the former Yugoslav Republic of)',
@@ -1053,7 +1184,8 @@ export default [
     'Alpha-2 code': 'MK',
     'Alpha-3 code': 'MKD',
     'Numeric': 807,
-    'Capital': 'Skopje'
+    'Capital': 'Skopje',
+    'Continent': 4
   },
   {
     'English short name': 'Madagascar',
@@ -1061,7 +1193,8 @@ export default [
     'Alpha-2 code': 'MG',
     'Alpha-3 code': 'MDG',
     'Numeric': 450,
-    'Capital': 'Antananarivo'
+    'Capital': 'Antananarivo',
+    'Continent': 3
   },
   {
     'English short name': 'Malawi',
@@ -1069,7 +1202,8 @@ export default [
     'Alpha-2 code': 'MW',
     'Alpha-3 code': 'MWI',
     'Numeric': 454,
-    'Capital': ''
+    'Capital': 'Lilongwe',
+    'Continent': 3
   },
   {
     'English short name': 'Malaysia',
@@ -1077,7 +1211,8 @@ export default [
     'Alpha-2 code': 'MY',
     'Alpha-3 code': 'MYS',
     'Numeric': 458,
-    'Capital': 'Kuala Lumpur'
+    'Capital': 'Kuala Lumpur',
+    'Continent': 6
   },
   {
     'English short name': 'Maldives',
@@ -1085,7 +1220,8 @@ export default [
     'Alpha-2 code': 'MV',
     'Alpha-3 code': 'MDV',
     'Numeric': 462,
-    'Capital': 'Malé'
+    'Capital': 'Malé',
+    'Continent': 3
   },
   {
     'English short name': 'Mali',
@@ -1093,7 +1229,8 @@ export default [
     'Alpha-2 code': 'ML',
     'Alpha-3 code': 'MLI',
     'Numeric': 466,
-    'Capital': ''
+    'Capital': 'Bamako',
+    'Continent': 3
   },
   {
     'English short name': 'Malta',
@@ -1101,7 +1238,8 @@ export default [
     'Alpha-2 code': 'MT',
     'Alpha-3 code': 'MLT',
     'Numeric': 470,
-    'Capital': 'La Valette'
+    'Capital': 'La Valette',
+    'Continent': 4
   },
   {
     'English short name': 'Marshall Islands (the)',
@@ -1109,7 +1247,8 @@ export default [
     'Alpha-2 code': 'MH',
     'Alpha-3 code': 'MHL',
     'Numeric': 584,
-    'Capital': 'Delap-Uliga-Darrit'
+    'Capital': 'Majuro',
+    'Continent': 6
   },
   {
     'English short name': 'Martinique',
@@ -1117,7 +1256,8 @@ export default [
     'Alpha-2 code': 'MQ',
     'Alpha-3 code': 'MTQ',
     'Numeric': 474,
-    'Capital': ''
+    'Capital': 'Fort-de-France',
+    'Continent': 1
   },
   {
     'English short name': 'Mauritania',
@@ -1125,7 +1265,8 @@ export default [
     'Alpha-2 code': 'MR',
     'Alpha-3 code': 'MRT',
     'Numeric': 478,
-    'Capital': 'Nouakchott'
+    'Capital': 'Nouakchott',
+    'Continent': 3
   },
   {
     'English short name': 'Mauritius',
@@ -1133,7 +1274,8 @@ export default [
     'Alpha-2 code': 'MU',
     'Alpha-3 code': 'MUS',
     'Numeric': 480,
-    'Capital': 'Port-Louis'
+    'Capital': 'Port-Louis',
+    'Continent': 3
   },
   {
     'English short name': 'Mayotte',
@@ -1141,7 +1283,8 @@ export default [
     'Alpha-2 code': 'YT',
     'Alpha-3 code': 'MYT',
     'Numeric': 175,
-    'Capital': ''
+    'Capital': 'Mamoudzou',
+    'Continent': 3
   },
   {
     'English short name': 'Mexico',
@@ -1149,7 +1292,8 @@ export default [
     'Alpha-2 code': 'MX',
     'Alpha-3 code': 'MEX',
     'Numeric': 484,
-    'Capital': 'Mexico'
+    'Capital': 'Mexico',
+    'Continent': 1
   },
   {
     'English short name': 'Micronesia (Federated States of)',
@@ -1157,7 +1301,8 @@ export default [
     'Alpha-2 code': 'FM',
     'Alpha-3 code': 'FSM',
     'Numeric': 583,
-    'Capital': 'Palikir'
+    'Capital': 'Palikir',
+    'Continent': 6
   },
   {
     'English short name': 'Moldova (the Republic of)',
@@ -1165,7 +1310,8 @@ export default [
     'Alpha-2 code': 'MD',
     'Alpha-3 code': 'MDA',
     'Numeric': 498,
-    'Capital': 'Chisinau'
+    'Capital': 'Chișinău',
+    'Continent': 4
   },
   {
     'English short name': 'Monaco',
@@ -1173,7 +1319,8 @@ export default [
     'Alpha-2 code': 'MC',
     'Alpha-3 code': 'MCO',
     'Numeric': 492,
-    'Capital': 'Monaco'
+    'Capital': 'Monaco',
+    'Continent': 4
   },
   {
     'English short name': 'Mongolia',
@@ -1181,7 +1328,8 @@ export default [
     'Alpha-2 code': 'MN',
     'Alpha-3 code': 'MNG',
     'Numeric': 496,
-    'Capital': 'Oulan-Bator'
+    'Capital': 'Oulan-Bator',
+    'Continent': 5
   },
   {
     'English short name': 'Montenegro',
@@ -1189,7 +1337,8 @@ export default [
     'Alpha-2 code': 'ME',
     'Alpha-3 code': 'MNE',
     'Numeric': 499,
-    'Capital': 'Podgorica'
+    'Capital': 'Podgorica',
+    'Continent': 4
   },
   {
     'English short name': 'Montserrat',
@@ -1197,7 +1346,8 @@ export default [
     'Alpha-2 code': 'MS',
     'Alpha-3 code': 'MSR',
     'Numeric': 500,
-    'Capital': ''
+    'Capital': 'Montserrat',
+    'Continent': 1
   },
   {
     'English short name': 'Morocco',
@@ -1205,7 +1355,8 @@ export default [
     'Alpha-2 code': 'MA',
     'Alpha-3 code': 'MAR',
     'Numeric': 504,
-    'Capital': 'Rabat'
+    'Capital': 'Rabat',
+    'Continent': 3
   },
   {
     'English short name': 'Mozambique',
@@ -1213,7 +1364,8 @@ export default [
     'Alpha-2 code': 'MZ',
     'Alpha-3 code': 'MOZ',
     'Numeric': 508,
-    'Capital': 'Maputo'
+    'Capital': 'Maputo',
+    'Continent': 3
   },
   {
     'English short name': 'Myanmar',
@@ -1221,7 +1373,8 @@ export default [
     'Alpha-2 code': 'MM',
     'Alpha-3 code': 'MMR',
     'Numeric': 104,
-    'Capital': ''
+    'Capital': 'Naypyidaw',
+    'Continent': 5
   },
   {
     'English short name': 'Namibia',
@@ -1229,7 +1382,8 @@ export default [
     'Alpha-2 code': 'NA',
     'Alpha-3 code': 'NAM',
     'Numeric': 516,
-    'Capital': 'Windhoek'
+    'Capital': 'Windhoek',
+    'Continent': 3
   },
   {
     'English short name': 'Nauru',
@@ -1237,7 +1391,8 @@ export default [
     'Alpha-2 code': 'NR',
     'Alpha-3 code': 'NRU',
     'Numeric': 520,
-    'Capital': 'Yaren'
+    'Capital': 'Yaren',
+    'Continent': 6
   },
   {
     'English short name': 'Nepal',
@@ -1245,7 +1400,8 @@ export default [
     'Alpha-2 code': 'NP',
     'Alpha-3 code': 'NPL',
     'Numeric': 524,
-    'Capital': 'Katmandou'
+    'Capital': 'Katmandou',
+    'Continent': 5
   },
   {
     'English short name': 'Netherlands (the)',
@@ -1253,7 +1409,8 @@ export default [
     'Alpha-2 code': 'NL',
     'Alpha-3 code': 'NLD',
     'Numeric': 528,
-    'Capital': 'Amsterdam'
+    'Capital': 'Amsterdam',
+    'Continent': 4
   },
   {
     'English short name': 'New Caledonia',
@@ -1261,7 +1418,8 @@ export default [
     'Alpha-2 code': 'NC',
     'Alpha-3 code': 'NCL',
     'Numeric': 540,
-    'Capital': ''
+    'Capital': 'Nouméa',
+    'Continent': 6
   },
   {
     'English short name': 'New Zealand',
@@ -1269,7 +1427,8 @@ export default [
     'Alpha-2 code': 'NZ',
     'Alpha-3 code': 'NZL',
     'Numeric': 554,
-    'Capital': 'Wellington'
+    'Capital': 'Wellington',
+    'Continent': 6
   },
   {
     'English short name': 'Nicaragua',
@@ -1277,7 +1436,8 @@ export default [
     'Alpha-2 code': 'NI',
     'Alpha-3 code': 'NIC',
     'Numeric': 558,
-    'Capital': 'Managua'
+    'Capital': 'Managua',
+    'Continent': 1
   },
   {
     'English short name': 'Niger (the)',
@@ -1285,7 +1445,8 @@ export default [
     'Alpha-2 code': 'NE',
     'Alpha-3 code': 'NER',
     'Numeric': 562,
-    'Capital': 'Niamey'
+    'Capital': 'Niamey',
+    'Continent': 3
   },
   {
     'English short name': 'Nigeria',
@@ -1293,15 +1454,17 @@ export default [
     'Alpha-2 code': 'NG',
     'Alpha-3 code': 'NGA',
     'Numeric': 566,
-    'Capital': 'Abuja'
+    'Capital': 'Abuja',
+    'Continent': 3
   },
   {
     'English short name': 'Niue',
-    'French short name': 'Niue',
+    'French short name': 'Niué',
     'Alpha-2 code': 'NU',
     'Alpha-3 code': 'NIU',
     'Numeric': 570,
-    'Capital': 'Alofi'
+    'Capital': 'Alofi',
+    'Continent': 6
   },
   {
     'English short name': 'Norfolk Island',
@@ -1309,7 +1472,8 @@ export default [
     'Alpha-2 code': 'NF',
     'Alpha-3 code': 'NFK',
     'Numeric': 574,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 6
   },
   {
     'English short name': 'Northern Mariana Islands (the)',
@@ -1317,7 +1481,8 @@ export default [
     'Alpha-2 code': 'MP',
     'Alpha-3 code': 'MNP',
     'Numeric': 580,
-    'Capital': ''
+    'Capital': 'Saipan',
+    'Continent': 6
   },
   {
     'English short name': 'Norway',
@@ -1325,7 +1490,8 @@ export default [
     'Alpha-2 code': 'NO',
     'Alpha-3 code': 'NOR',
     'Numeric': 578,
-    'Capital': 'Oslo'
+    'Capital': 'Oslo',
+    'Continent': 4
   },
   {
     'English short name': 'Oman',
@@ -1333,7 +1499,8 @@ export default [
     'Alpha-2 code': 'OM',
     'Alpha-3 code': 'OMN',
     'Numeric': 512,
-    'Capital': 'Mascate'
+    'Capital': 'Mascate',
+    'Continent': 5
   },
   {
     'English short name': 'Pakistan',
@@ -1341,7 +1508,8 @@ export default [
     'Alpha-2 code': 'PK',
     'Alpha-3 code': 'PAK',
     'Numeric': 586,
-    'Capital': 'Islamabad'
+    'Capital': 'Islamabad',
+    'Continent': 5
   },
   {
     'English short name': 'Palau',
@@ -1349,7 +1517,8 @@ export default [
     'Alpha-2 code': 'PW',
     'Alpha-3 code': 'PLW',
     'Numeric': 585,
-    'Capital': 'Melekeok'
+    'Capital': 'Ngerulmud',
+    'Continent': 6
   },
   {
     'English short name': 'Palestine, State of',
@@ -1357,7 +1526,8 @@ export default [
     'Alpha-2 code': 'PS',
     'Alpha-3 code': 'PSE',
     'Numeric': 275,
-    'Capital': 'Jérusalem'
+    'Capital': 'Jérusalem',
+    'Continent': 5
   },
   {
     'English short name': 'Panama',
@@ -1365,7 +1535,8 @@ export default [
     'Alpha-2 code': 'PA',
     'Alpha-3 code': 'PAN',
     'Numeric': 591,
-    'Capital': 'Panama'
+    'Capital': 'Panama',
+    'Continent': 1
   },
   {
     'English short name': 'Papua New Guinea',
@@ -1373,7 +1544,8 @@ export default [
     'Alpha-2 code': 'PG',
     'Alpha-3 code': 'PNG',
     'Numeric': 598,
-    'Capital': 'Port Moresby'
+    'Capital': 'Port Moresby',
+    'Continent': 6
   },
   {
     'English short name': 'Paraguay',
@@ -1381,7 +1553,8 @@ export default [
     'Alpha-2 code': 'PY',
     'Alpha-3 code': 'PRY',
     'Numeric': 600,
-    'Capital': 'Asuncion'
+    'Capital': 'Asuncion',
+    'Continent': 2
   },
   {
     'English short name': 'Peru',
@@ -1389,7 +1562,8 @@ export default [
     'Alpha-2 code': 'PE',
     'Alpha-3 code': 'PER',
     'Numeric': 604,
-    'Capital': 'Lima'
+    'Capital': 'Lima',
+    'Continent': 2
   },
   {
     'English short name': 'Philippines (the)',
@@ -1397,7 +1571,8 @@ export default [
     'Alpha-2 code': 'PH',
     'Alpha-3 code': 'PHL',
     'Numeric': 608,
-    'Capital': 'Manille'
+    'Capital': 'Manille',
+    'Continent': 6
   },
   {
     'English short name': 'Pitcairn',
@@ -1405,7 +1580,8 @@ export default [
     'Alpha-2 code': 'PN',
     'Alpha-3 code': 'PCN',
     'Numeric': 612,
-    'Capital': ''
+    'Capital': 'Adamstown',
+    'Continent': 6
   },
   {
     'English short name': 'Poland',
@@ -1413,7 +1589,8 @@ export default [
     'Alpha-2 code': 'PL',
     'Alpha-3 code': 'POL',
     'Numeric': 616,
-    'Capital': 'Varsovie'
+    'Capital': 'Varsovie',
+    'Continent': 4
   },
   {
     'English short name': 'Portugal',
@@ -1421,7 +1598,8 @@ export default [
     'Alpha-2 code': 'PT',
     'Alpha-3 code': 'PRT',
     'Numeric': 620,
-    'Capital': 'Lisbonne'
+    'Capital': 'Lisbonne',
+    'Continent': 4
   },
   {
     'English short name': 'Puerto Rico',
@@ -1429,7 +1607,8 @@ export default [
     'Alpha-2 code': 'PR',
     'Alpha-3 code': 'PRI',
     'Numeric': 630,
-    'Capital': ''
+    'Capital': 'San Juan',
+    'Continent': 1
   },
   {
     'English short name': 'Qatar',
@@ -1437,7 +1616,8 @@ export default [
     'Alpha-2 code': 'QA',
     'Alpha-3 code': 'QAT',
     'Numeric': 634,
-    'Capital': 'Doha'
+    'Capital': 'Doha',
+    'Continent': 5
   },
   {
     'English short name': 'Réunion',
@@ -1445,7 +1625,8 @@ export default [
     'Alpha-2 code': 'RE',
     'Alpha-3 code': 'REU',
     'Numeric': 638,
-    'Capital': ''
+    'Capital': 'Saint-Denis',
+    'Continent': 3
   },
   {
     'English short name': 'Romania',
@@ -1453,7 +1634,8 @@ export default [
     'Alpha-2 code': 'RO',
     'Alpha-3 code': 'ROU',
     'Numeric': 642,
-    'Capital': 'Bucarest'
+    'Capital': 'Bucarest',
+    'Continent': 4
   },
   {
     'English short name': 'Russian Federation (the)',
@@ -1461,7 +1643,8 @@ export default [
     'Alpha-2 code': 'RU',
     'Alpha-3 code': 'RUS',
     'Numeric': 643,
-    'Capital': 'Moscou'
+    'Capital': 'Moscou',
+    'Continent': 5
   },
   {
     'English short name': 'Rwanda',
@@ -1469,7 +1652,8 @@ export default [
     'Alpha-2 code': 'RW',
     'Alpha-3 code': 'RWA',
     'Numeric': 646,
-    'Capital': 'Kigali'
+    'Capital': 'Kigali',
+    'Continent': 3
   },
   {
     'English short name': 'Saint Barthélemy',
@@ -1477,7 +1661,8 @@ export default [
     'Alpha-2 code': 'BL',
     'Alpha-3 code': 'BLM',
     'Numeric': 652,
-    'Capital': ''
+    'Capital': 'Gustavia',
+    'Continent': 1
   },
   {
     'English short name': 'Saint Helena, Ascension and Tristan da Cunha',
@@ -1485,7 +1670,8 @@ export default [
     'Alpha-2 code': 'SH',
     'Alpha-3 code': 'SHN',
     'Numeric': 654,
-    'Capital': ''
+    'Capital': 'Jamestown',
+    'Continent': 3
   },
   {
     'English short name': 'Saint Kitts and Nevis',
@@ -1493,7 +1679,8 @@ export default [
     'Alpha-2 code': 'KN',
     'Alpha-3 code': 'KNA',
     'Numeric': 659,
-    'Capital': ''
+    'Capital': 'Basseterre',
+    'Continent': 1
   },
   {
     'English short name': 'Saint Lucia',
@@ -1501,7 +1688,8 @@ export default [
     'Alpha-2 code': 'LC',
     'Alpha-3 code': 'LCA',
     'Numeric': 662,
-    'Capital': 'Castries'
+    'Capital': 'Castries',
+    'Continent': 1
   },
   {
     'English short name': 'Saint Martin (French part)',
@@ -1509,7 +1697,8 @@ export default [
     'Alpha-2 code': 'MF',
     'Alpha-3 code': 'MAF',
     'Numeric': 663,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 1
   },
   {
     'English short name': 'Sint Maarten (Dutch part)',
@@ -1517,7 +1706,8 @@ export default [
     'Alpha-2 code': 'SX',
     'Alpha-3 code': 'SXM',
     'Numeric': 534,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 1
   },
   {
     'English short name': 'Saint Pierre and Miquelon',
@@ -1525,7 +1715,8 @@ export default [
     'Alpha-2 code': 'PM',
     'Alpha-3 code': 'SPM',
     'Numeric': 666,
-    'Capital': ''
+    'Capital': 'Saint-Pierre',
+    'Continent': 0
   },
   {
     'English short name': 'Saint Vincent and the Grenadines',
@@ -1533,7 +1724,8 @@ export default [
     'Alpha-2 code': 'VC',
     'Alpha-3 code': 'VCT',
     'Numeric': 670,
-    'Capital': 'Kingstown'
+    'Capital': 'Kingstown',
+    'Continent': 1
   },
   {
     'English short name': 'Samoa',
@@ -1541,7 +1733,8 @@ export default [
     'Alpha-2 code': 'WS',
     'Alpha-3 code': 'WSM',
     'Numeric': 882,
-    'Capital': 'Apia'
+    'Capital': 'Apia',
+    'Continent': 6
   },
   {
     'English short name': 'San Marino',
@@ -1549,7 +1742,8 @@ export default [
     'Alpha-2 code': 'SM',
     'Alpha-3 code': 'SMR',
     'Numeric': 674,
-    'Capital': 'Saint-Marin'
+    'Capital': 'Saint-Marin',
+    'Continent': 4
   },
   {
     'English short name': 'Sao Tome and Principe',
@@ -1557,7 +1751,8 @@ export default [
     'Alpha-2 code': 'ST',
     'Alpha-3 code': 'STP',
     'Numeric': 678,
-    'Capital': 'São Tomé'
+    'Capital': 'São Tomé',
+    'Continent': 3
   },
   {
     'English short name': 'Saudi Arabia',
@@ -1565,7 +1760,8 @@ export default [
     'Alpha-2 code': 'SA',
     'Alpha-3 code': 'SAU',
     'Numeric': 682,
-    'Capital': 'Riyad'
+    'Capital': 'Riyad',
+    'Continent': 5
   },
   {
     'English short name': 'Senegal',
@@ -1573,7 +1769,8 @@ export default [
     'Alpha-2 code': 'SN',
     'Alpha-3 code': 'SEN',
     'Numeric': 686,
-    'Capital': 'Dakar'
+    'Capital': 'Dakar',
+    'Continent': 3
   },
   {
     'English short name': 'Serbia',
@@ -1581,7 +1778,8 @@ export default [
     'Alpha-2 code': 'RS',
     'Alpha-3 code': 'SRB',
     'Numeric': 688,
-    'Capital': 'Belgrade'
+    'Capital': 'Belgrade',
+    'Continent': 4
   },
   {
     'English short name': 'Seychelles',
@@ -1589,7 +1787,8 @@ export default [
     'Alpha-2 code': 'SC',
     'Alpha-3 code': 'SYC',
     'Numeric': 690,
-    'Capital': 'Vicotria'
+    'Capital': 'Vicotria',
+    'Continent': 3
   },
   {
     'English short name': 'Sierra Leone',
@@ -1597,7 +1796,8 @@ export default [
     'Alpha-2 code': 'SL',
     'Alpha-3 code': 'SLE',
     'Numeric': 694,
-    'Capital': 'Freetown'
+    'Capital': 'Freetown',
+    'Continent': 3
   },
   {
     'English short name': 'Singapore',
@@ -1605,7 +1805,8 @@ export default [
     'Alpha-2 code': 'SG',
     'Alpha-3 code': 'SGP',
     'Numeric': 702,
-    'Capital': 'Singapour'
+    'Capital': 'Singapour',
+    'Continent': 6
   },
   {
     'English short name': 'Slovakia',
@@ -1613,7 +1814,8 @@ export default [
     'Alpha-2 code': 'SK',
     'Alpha-3 code': 'SVK',
     'Numeric': 703,
-    'Capital': 'Bratislava'
+    'Capital': 'Bratislava',
+    'Continent': 4
   },
   {
     'English short name': 'Slovenia',
@@ -1621,7 +1823,8 @@ export default [
     'Alpha-2 code': 'SI',
     'Alpha-3 code': 'SVN',
     'Numeric': 705,
-    'Capital': 'Ljubljana'
+    'Capital': 'Ljubljana',
+    'Continent': 5
   },
   {
     'English short name': 'Solomon Islands',
@@ -1629,7 +1832,8 @@ export default [
     'Alpha-2 code': 'SB',
     'Alpha-3 code': 'SLB',
     'Numeric': 90,
-    'Capital': ''
+    'Capital': 'Honiara',
+    'Continent': 6
   },
   {
     'English short name': 'Somalia',
@@ -1637,7 +1841,8 @@ export default [
     'Alpha-2 code': 'SO',
     'Alpha-3 code': 'SOM',
     'Numeric': 706,
-    'Capital': 'Mogadiscio'
+    'Capital': 'Mogadiscio',
+    'Continent': 3
   },
   {
     'English short name': 'South Africa',
@@ -1645,7 +1850,8 @@ export default [
     'Alpha-2 code': 'ZA',
     'Alpha-3 code': 'ZAF',
     'Numeric': 710,
-    'Capital': 'Pretoria/Le Cap'
+    'Capital': 'Pretoria/Le Cap',
+    'Continent': 3
   },
   {
     'English short name': 'South Georgia and the South Sandwich Islands',
@@ -1653,7 +1859,8 @@ export default [
     'Alpha-2 code': 'GS',
     'Alpha-3 code': 'SGS',
     'Numeric': 239,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 6
   },
   {
     'English short name': 'Sudan (the)',
@@ -1661,7 +1868,8 @@ export default [
     'Alpha-2 code': 'SD',
     'Alpha-3 code': 'SDN',
     'Numeric': 729,
-    'Capital': 'Khartoum'
+    'Capital': 'Khartoum',
+    'Continent': 3
   },
   {
     'English short name': 'South Sudan',
@@ -1669,7 +1877,8 @@ export default [
     'Alpha-2 code': 'SS',
     'Alpha-3 code': 'SSD',
     'Numeric': 728,
-    'Capital': 'Djouba'
+    'Capital': 'Djouba',
+    'Continent': 3
   },
   {
     'English short name': 'Spain',
@@ -1677,7 +1886,8 @@ export default [
     'Alpha-2 code': 'ES',
     'Alpha-3 code': 'ESP',
     'Numeric': 724,
-    'Capital': 'Madrid'
+    'Capital': 'Madrid',
+    'Continent': 4
   },
   {
     'English short name': 'Sri Lanka',
@@ -1685,7 +1895,8 @@ export default [
     'Alpha-2 code': 'LK',
     'Alpha-3 code': 'LKA',
     'Numeric': 144,
-    'Capital': 'Sri Jayawardenapura'
+    'Capital': 'Sri Jayawardenapura',
+    'Continent': 5
   },
   {
     'English short name': 'Suriname',
@@ -1693,7 +1904,8 @@ export default [
     'Alpha-2 code': 'SR',
     'Alpha-3 code': 'SUR',
     'Numeric': 740,
-    'Capital': 'Paramaribo'
+    'Capital': 'Paramaribo',
+    'Continent': 2
   },
   {
     'English short name': 'Svalbard and Jan Mayen',
@@ -1701,7 +1913,8 @@ export default [
     'Alpha-2 code': 'SJ',
     'Alpha-3 code': 'SJM',
     'Numeric': 744,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 0
   },
   {
     'English short name': 'Swaziland',
@@ -1709,7 +1922,8 @@ export default [
     'Alpha-2 code': 'SZ',
     'Alpha-3 code': 'SWZ',
     'Numeric': 748,
-    'Capital': 'Mbabane'
+    'Capital': 'Mbabane',
+    'Continent': 3
   },
   {
     'English short name': 'Sweden',
@@ -1717,7 +1931,8 @@ export default [
     'Alpha-2 code': 'SE',
     'Alpha-3 code': 'SWE',
     'Numeric': 752,
-    'Capital': 'Stockholm'
+    'Capital': 'Stockholm',
+    'Continent': 4
   },
   {
     'English short name': 'Switzerland',
@@ -1725,7 +1940,8 @@ export default [
     'Alpha-2 code': 'CH',
     'Alpha-3 code': 'CHE',
     'Numeric': 756,
-    'Capital': 'Berne'
+    'Capital': 'Berne',
+    'Continent': 4
   },
   {
     'English short name': 'Syrian Arab Republic',
@@ -1733,7 +1949,8 @@ export default [
     'Alpha-2 code': 'SY',
     'Alpha-3 code': 'SYR',
     'Numeric': 760,
-    'Capital': 'Damas'
+    'Capital': 'Damas',
+    'Continent': 5
   },
   {
     'English short name': 'Taiwan (Province of China)',
@@ -1741,7 +1958,8 @@ export default [
     'Alpha-2 code': 'TW',
     'Alpha-3 code': 'TWN',
     'Numeric': 158,
-    'Capital': 'Nankin'
+    'Capital': 'Nankin',
+    'Continent': 5
   },
   {
     'English short name': 'Tajikistan',
@@ -1749,7 +1967,8 @@ export default [
     'Alpha-2 code': 'TJ',
     'Alpha-3 code': 'TJK',
     'Numeric': 762,
-    'Capital': 'Douchambé'
+    'Capital': 'Douchambé',
+    'Continent': 5
   },
   {
     'English short name': 'Tanzania, United Republic of',
@@ -1757,7 +1976,8 @@ export default [
     'Alpha-2 code': 'TZ',
     'Alpha-3 code': 'TZA',
     'Numeric': 834,
-    'Capital': 'Dodoma'
+    'Capital': 'Dodoma',
+    'Continent': 3
   },
   {
     'English short name': 'Thailand',
@@ -1765,7 +1985,8 @@ export default [
     'Alpha-2 code': 'TH',
     'Alpha-3 code': 'THA',
     'Numeric': 764,
-    'Capital': 'Bangkok'
+    'Capital': 'Bangkok',
+    'Continent': 5
   },
   {
     'English short name': 'Timor-Leste',
@@ -1773,7 +1994,8 @@ export default [
     'Alpha-2 code': 'TL',
     'Alpha-3 code': 'TLS',
     'Numeric': 626,
-    'Capital': 'Dili'
+    'Capital': 'Dili',
+    'Continent': 6
   },
   {
     'English short name': 'Togo',
@@ -1781,7 +2003,8 @@ export default [
     'Alpha-2 code': 'TG',
     'Alpha-3 code': 'TGO',
     'Numeric': 768,
-    'Capital': 'Lomé'
+    'Capital': 'Lomé',
+    'Continent': 3
   },
   {
     'English short name': 'Tokelau',
@@ -1789,7 +2012,8 @@ export default [
     'Alpha-2 code': 'TK',
     'Alpha-3 code': 'TKL',
     'Numeric': 772,
-    'Capital': ''
+    'Capital': 'Atafu',
+    'Continent': 6
   },
   {
     'English short name': 'Tonga',
@@ -1797,7 +2021,8 @@ export default [
     'Alpha-2 code': 'TO',
     'Alpha-3 code': 'TON',
     'Numeric': 776,
-    'Capital': 'Nuku\'alofa'
+    'Capital': 'Nuku\'alofa',
+    'Continent': 6
   },
   {
     'English short name': 'Trinidad and Tobago',
@@ -1805,7 +2030,8 @@ export default [
     'Alpha-2 code': 'TT',
     'Alpha-3 code': 'TTO',
     'Numeric': 780,
-    'Capital': 'Port-d\'Espagne'
+    'Capital': 'Port-d\'Espagne',
+    'Continent': 2
   },
   {
     'English short name': 'Tunisia',
@@ -1813,7 +2039,8 @@ export default [
     'Alpha-2 code': 'TN',
     'Alpha-3 code': 'TUN',
     'Numeric': 788,
-    'Capital': 'Tunis'
+    'Capital': 'Tunis',
+    'Continent': 3
   },
   {
     'English short name': 'Turkey',
@@ -1821,7 +2048,8 @@ export default [
     'Alpha-2 code': 'TR',
     'Alpha-3 code': 'TUR',
     'Numeric': 792,
-    'Capital': 'Ankara'
+    'Capital': 'Ankara',
+    'Continent': 5
   },
   {
     'English short name': 'Turkmenistan',
@@ -1829,7 +2057,8 @@ export default [
     'Alpha-2 code': 'TM',
     'Alpha-3 code': 'TKM',
     'Numeric': 795,
-    'Capital': 'Achgabat'
+    'Capital': 'Achgabat',
+    'Continent': 5
   },
   {
     'English short name': 'Turks and Caicos Islands (the)',
@@ -1837,7 +2066,8 @@ export default [
     'Alpha-2 code': 'TC',
     'Alpha-3 code': 'TCA',
     'Numeric': 796,
-    'Capital': ''
+    'Capital': 'Cockburn Town',
+    'Continent': 1
   },
   {
     'English short name': 'Tuvalu',
@@ -1845,7 +2075,8 @@ export default [
     'Alpha-2 code': 'TV',
     'Alpha-3 code': 'TUV',
     'Numeric': 798,
-    'Capital': 'Funafuti'
+    'Capital': 'Funafuti',
+    'Continent': 6
   },
   {
     'English short name': 'Uganda',
@@ -1853,7 +2084,8 @@ export default [
     'Alpha-2 code': 'UG',
     'Alpha-3 code': 'UGA',
     'Numeric': 800,
-    'Capital': 'Kampala'
+    'Capital': 'Kampala',
+    'Continent': 3
   },
   {
     'English short name': 'Ukraine',
@@ -1861,7 +2093,8 @@ export default [
     'Alpha-2 code': 'UA',
     'Alpha-3 code': 'UKR',
     'Numeric': 804,
-    'Capital': 'Kiev'
+    'Capital': 'Kiev',
+    'Continent': 5
   },
   {
     'English short name': 'United Arab Emirates (the)',
@@ -1869,7 +2102,8 @@ export default [
     'Alpha-2 code': 'AE',
     'Alpha-3 code': 'ARE',
     'Numeric': 784,
-    'Capital': 'Abou Dabi'
+    'Capital': 'Abou Dabi',
+    'Continent': 5
   },
   {
     'English short name': 'England',
@@ -1877,7 +2111,8 @@ export default [
     'Alpha-2 code': 'GB',
     'Alpha-3 code': 'GBR',
     'Numeric': 826,
-    'Capital': 'Londres'
+    'Capital': 'Londres',
+    'Continent': 4
   },
   {
     'English short name': 'United States Minor Outlying Islands (the)',
@@ -1885,7 +2120,8 @@ export default [
     'Alpha-2 code': 'UM',
     'Alpha-3 code': 'UMI',
     'Numeric': 581,
-    'Capital': ''
+    'Capital': '',
+    'Continent': 6
   },
   {
     'English short name': 'United States of America (the)',
@@ -1893,7 +2129,8 @@ export default [
     'Alpha-2 code': 'US',
     'Alpha-3 code': 'USA',
     'Numeric': 840,
-    'Capital': 'Washington D.C.'
+    'Capital': 'Washington D.C.',
+    'Continent': 0
   },
   {
     'English short name': 'Uruguay',
@@ -1901,7 +2138,8 @@ export default [
     'Alpha-2 code': 'UY',
     'Alpha-3 code': 'URY',
     'Numeric': 858,
-    'Capital': 'Montevideo'
+    'Capital': 'Montevideo',
+    'Continent': 2
   },
   {
     'English short name': 'Uzbekistan',
@@ -1909,7 +2147,8 @@ export default [
     'Alpha-2 code': 'UZ',
     'Alpha-3 code': 'UZB',
     'Numeric': 860,
-    'Capital': 'Tachkent'
+    'Capital': 'Tachkent',
+    'Continent': 5
   },
   {
     'English short name': 'Vanuatu',
@@ -1917,7 +2156,8 @@ export default [
     'Alpha-2 code': 'VU',
     'Alpha-3 code': 'VUT',
     'Numeric': 548,
-    'Capital': 'Port-Vila'
+    'Capital': 'Port-Vila',
+    'Continent': 6
   },
   {
     'English short name': 'Venezuela (Bolivarian Republic of)',
@@ -1925,7 +2165,8 @@ export default [
     'Alpha-2 code': 'VE',
     'Alpha-3 code': 'VEN',
     'Numeric': 862,
-    'Capital': 'Caracas'
+    'Capital': 'Caracas',
+    'Continent': 2
   },
   {
     'English short name': 'Viet Nam',
@@ -1933,7 +2174,8 @@ export default [
     'Alpha-2 code': 'VN',
     'Alpha-3 code': 'VNM',
     'Numeric': 704,
-    'Capital': 'Hanoï'
+    'Capital': 'Hanoï',
+    'Continent': 5
   },
   {
     'English short name': 'Virgin Islands (British)',
@@ -1941,7 +2183,8 @@ export default [
     'Alpha-2 code': 'VG',
     'Alpha-3 code': 'VGB',
     'Numeric': 92,
-    'Capital': ''
+    'Capital': 'Road Town',
+    'Continent': 1
   },
   {
     'English short name': 'Virgin Islands (U.S.)',
@@ -1949,7 +2192,8 @@ export default [
     'Alpha-2 code': 'VI',
     'Alpha-3 code': 'VIR',
     'Numeric': 850,
-    'Capital': ''
+    'Capital': 'Charlotte Amalie',
+    'Continent': 1
   },
   {
     'English short name': 'Wallis and Futuna',
@@ -1957,15 +2201,17 @@ export default [
     'Alpha-2 code': 'WF',
     'Alpha-3 code': 'WLF',
     'Numeric': 876,
-    'Capital': ''
+    'Capital': 'Mata-Utu',
+    'Continent': 6
   },
   {
-    'English short name': 'Western Sahara*',
-    'French short name': 'Sahara occidental (le)*',
+    'English short name': 'Western Sahara',
+    'French short name': 'Sahara occidental (le)',
     'Alpha-2 code': 'EH',
     'Alpha-3 code': 'ESH',
     'Numeric': 732,
-    'Capital': ''
+    'Capital': 'Laâyoune',
+    'Continent': 3
   },
   {
     'English short name': 'Yemen',
@@ -1973,7 +2219,8 @@ export default [
     'Alpha-2 code': 'YE',
     'Alpha-3 code': 'YEM',
     'Numeric': 887,
-    'Capital': 'Sanaa'
+    'Capital': 'Sanaa',
+    'Continent': 5
   },
   {
     'English short name': 'Zambia',
@@ -1981,7 +2228,8 @@ export default [
     'Alpha-2 code': 'ZM',
     'Alpha-3 code': 'ZMB',
     'Numeric': 894,
-    'Capital': 'Lusaka'
+    'Capital': 'Lusaka',
+    'Continent': 3
   },
   {
     'English short name': 'Zimbabwe',
@@ -1989,6 +2237,7 @@ export default [
     'Alpha-2 code': 'ZW',
     'Alpha-3 code': 'ZWE',
     'Numeric': 716,
-    'Capital': 'Harare'
+    'Capital': 'Harare',
+    'Continent': 3
   }
 ]
