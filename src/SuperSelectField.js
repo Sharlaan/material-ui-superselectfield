@@ -247,7 +247,7 @@ class SelectField extends Component {
   handleMenuSelection = (selectedItem) => (event) => {
     const { value, multiple, onChange, name } = this.props
     if (multiple) {
-      console.debug('value', value)
+      if (!Array.isArray(value)) throw new Error('In multiple mode, props.value must be an Array.')
       const selectedItemExists = value.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
         ? value.filter(obj => !areEqual(obj.value, selectedItem.value))
