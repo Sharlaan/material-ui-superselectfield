@@ -151,7 +151,8 @@ class SelectField extends Component {
     this.state = {
       isOpen: false,
       itemsLength: this.getChildrenLength(props.children),
-      searchText: '' }
+      searchText: ''
+    }
   }
 
   // Counts nodes with non-null value property + optgroups
@@ -246,6 +247,7 @@ class SelectField extends Component {
   handleMenuSelection = (selectedItem) => (event) => {
     const { value, multiple, onChange, name } = this.props
     if (multiple) {
+      console.debug('value', value)
       const selectedItemExists = value.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
         ? value.filter(obj => !areEqual(obj.value, selectedItem.value))
