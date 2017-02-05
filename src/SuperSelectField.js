@@ -9,7 +9,7 @@ import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 // Utilities
 const areEqual = (val1, val2) => {
-  if (typeof val1 !== typeof val2) return false
+  if (!val1 || !val2 || typeof val1 !== typeof val2) return false
   else if (typeof val1 === 'string' || typeof val1 === 'number') return val1 === val2
   else if (typeof val1 === 'object') {
     const props1 = Object.keys(val1)
@@ -113,10 +113,11 @@ SelectionsPresenter.propTypes = {
 // noinspection JSUnusedGlobalSymbols
 SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
-  value: { value: '' },
+  value: null,
   selectionsRenderer: (values, hintText) => {
+    if (!values) return hintText
     const { value, label } = values
-    if (Array.isArray(values)) {
+    if (Array.isArray(values) && values.length) {
       return values.map(({ value, label }) => label || value).join(', ')
     }
     else if (label || value) return label || value
@@ -237,7 +238,8 @@ class SelectField extends Component {
       onChange(updatedValues, name)
       this.clearTextField(() => this.focusTextField())
     } else {
-      onChange(selectedItem, name)
+      const updatedValue = areEqual(value, selectedItem) ? null : selectedItem
+      onChange(updatedValue, name)
       this.closeMenu()
     }
   }
@@ -293,7 +295,7 @@ class SelectField extends Component {
       if (!autocompleteFilter(this.state.searchText, label || childValue)) return nodes
       const isSelected = Array.isArray(value)
         ? value.some(obj => areEqual(obj.value, childValue))
-        : value.value === childValue
+        : value ? value.value === childValue : false
       return [ ...nodes, (
         <MenuItem
           key={groupIndex + index}
@@ -427,7 +429,7 @@ SelectField.propTypes = {
     if (multiple) {
       if (!Array.isArray(value)) {
         return new Error(`
-          When using 'multiple' mode, 'value' of '${componentName}' must be an array of object(s). 
+          When using 'multiple' mode, 'value' of '${componentName}' must be an array. 
           Validation failed.`
         )
       } else if (checkFormat(value) !== -1) {
@@ -437,10 +439,9 @@ SelectField.propTypes = {
           Validation failed.`
         )
       }
-    } else if (checkFormat(value) !== -1) {
-      const index = checkFormat(value)
+    } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
-          'value[${index}]' of '${componentName}' must be an object including a 'value' property. 
+          'value' of '${componentName}' must be an object including a 'value' property. 
           Validation failed.`
       )
     }

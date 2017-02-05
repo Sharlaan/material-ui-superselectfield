@@ -13,21 +13,8 @@ const containerStyle = {
 class CodeExample extends Component {
   componentWillMount () {
     this.state = {
-      state1: { value: '' },
-      state2: { value: 'E', label: 'label E' },
-      state3: [{ value: 'H' }],
-      state4: [{
-        label: 'France',
-        value: {
-          'English short name': 'France',
-          'French short name': 'France (la)',
-          'Alpha-2 code': 'FR',
-          'Alpha-3 code': 'FRA',
-          'Numeric': 250,
-          'Capital': 'Paris',
-          'Continent': 4
-        }
-      }]
+      state1: null,
+      state2: { value: 'E', label: 'label E' }
     }
   }
 
@@ -41,8 +28,8 @@ class CodeExample extends Component {
 
       <fieldset style={{ marginBottom: 40 }}>
         <legend>Selected values</legend>
-        <div>State 1: {state1.value}</div>
-        <div>State 2: {state2.label}</div>
+        <div>State 1: {state1 ? state1.value : 'empty state'}</div>
+        <div>State 2: {state2 ? state2.label : 'empty state'}</div>
       </fieldset>
 
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>

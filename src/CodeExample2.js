@@ -10,12 +10,14 @@ const containerStyle = {
   flex: 1
 }
 
-const displayState = state => [...state].map(({ value, label }) => label || value).join(', ')
+const displayState = state => state.length
+  ? [...state].map(({ value, label }) => label || value).join(', ')
+  : 'empty state'
 
 class CodeExample extends Component {
   componentWillMount () {
     this.state = {
-      state3: [{ value: 'H' }]
+      state3: [{ value: null }]
     }
   }
 
