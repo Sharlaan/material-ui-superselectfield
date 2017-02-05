@@ -17,7 +17,7 @@ const displayState = state => state.length
 class CodeExample extends Component {
   componentWillMount () {
     this.state = {
-      state3: [{ value: null }]
+      state3: [{ value: 'H' }]
     }
   }
 
