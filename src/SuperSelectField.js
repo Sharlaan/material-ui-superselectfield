@@ -7,26 +7,6 @@ import MenuItem from 'material-ui/MenuItem/MenuItem'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
-// TODO: set autoWidth to false automatically if width prop has a value
-
-// TODO: check rendering performance with 200 MenuItems (integrate react-infinite)
-
-// TODO: add props.floatingLabelText
-
-// TODO: implement the error container (absolute position below the focusedLine) + add props.errorStyle
-// TODO: add props.required
-
-// TODO: support of <optgroup/>
-
-// TODO: add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
-
-// TODO: implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
-// TODO: make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
-
-// TODO: make SelectionsPresenter appears only if current numMenuItems > this.maxMenuItems
-
-// TODO: add a css rule for this.root :focus { outline: 'none' }, and :hover { darken }
-
 // Utilities
 const areEqual = (val1, val2) => {
   if (typeof val1 !== typeof val2) return false
@@ -41,6 +21,8 @@ const areEqual = (val1, val2) => {
       values1.every(val => values2.includes(val))
   }
 }
+
+const checkFormat = value => value.findIndex(v => typeof v !== 'object' || !('value' in v))
 
 // ================================================================
 // ====================  SelectionsPresenter  =====================
@@ -132,11 +114,12 @@ SelectionsPresenter.propTypes = {
 SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
   value: { value: '' },
-  selectionsRenderer: (value, hintText) => {
-    if (Array.isArray(value)) {
-      return value.map(({ value, label }) => label || value).join(', ')
+  selectionsRenderer: (values, hintText) => {
+    const { value, label } = values
+    if (Array.isArray(values)) {
+      return values.map(({ value, label }) => label || value).join(', ')
     }
-    else if (value.label || value.value) return value.label || value.value
+    else if (label || value) return label || value
     else return hintText
   }
 }
@@ -247,7 +230,6 @@ class SelectField extends Component {
   handleMenuSelection = (selectedItem) => (event) => {
     const { value, multiple, onChange, name } = this.props
     if (multiple) {
-      if (!Array.isArray(value)) throw new Error('In multiple mode, props.value must be an Array.')
       const selectedItemExists = value.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
         ? value.filter(obj => !areEqual(obj.value, selectedItem.value))
@@ -290,7 +272,7 @@ class SelectField extends Component {
   }
 
   render () {
-    const { value, hintText, multiple, children, nb2show,
+    const { value, hintText, hintTextAutocomplete, multiple, children, nb2show,
       showAutocompleteTreshold, autocompleteFilter, selectionsRenderer,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle } = this.props
 
@@ -376,7 +358,7 @@ class SelectField extends Component {
               name='autoComplete'
               ref={ref => (this.searchTextField = ref)}
               value={this.state.searchText}
-              hintText={hintText}
+              hintText={hintTextAutocomplete}
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
               style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }}
@@ -436,13 +418,33 @@ SelectField.propTypes = {
   selectedMenuItemStyle: PropTypes.object,
   name: PropTypes.string,
   hintText: PropTypes.string,
+  hintTextAutocomplete: PropTypes.string,
   showAutocompleteTreshold: PropTypes.number,
   elementHeight: PropTypes.number,
   nb2show: PropTypes.number,
-  value: PropTypes.oneOfType([
-    objectShape,
-    PropTypes.arrayOf(objectShape)
-  ]),
+  value: (props, propName, componentName, location, propFullName) => {
+    const { multiple, value } = props
+    if (multiple) {
+      if (!Array.isArray(value)) {
+        return new Error(`
+          When using 'multiple' mode, 'value' of '${componentName}' must be an array of object(s). 
+          Validation failed.`
+        )
+      } else if (checkFormat(value) !== -1) {
+        const index = checkFormat(value)
+        return new Error(`
+          'value[${index}]' of '${componentName}' must be an object including a 'value' property. 
+          Validation failed.`
+        )
+      }
+    } else if (checkFormat(value) !== -1) {
+      const index = checkFormat(value)
+      return new Error(`
+          'value[${index}]' of '${componentName}' must be an object including a 'value' property. 
+          Validation failed.`
+      )
+    }
+  },
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
   multiple: PropTypes.bool,
@@ -453,6 +455,8 @@ SelectField.propTypes = {
 SelectField.defaultProps = {
   multiple: false,
   nb2show: 5,
+  hintText: 'Click me',
+  hintTextAutocomplete: 'Type something',
   showAutocompleteTreshold: 10,
   elementHeight: 58,
   autocompleteFilter: (searchText, text) => !text || (text + '').toLowerCase().includes(searchText.toLowerCase())

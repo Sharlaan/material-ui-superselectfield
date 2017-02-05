@@ -8,8 +8,9 @@
 - [Building](#building)
 - [Tests](#tests)
 - [Contributing](#contributing)
+- [TodoList](#todolist)
 
-##Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield)
+##Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/assets/dataSource.png)
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/assets/caseInsensitive.png)
 ![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/assets/chips.png)
@@ -30,7 +31,8 @@ This component requires 4 dependencies :
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
-| hintText | string | 'Click me' | Placeholder text |
+| hintText | string | 'Click me' | Placeholder text for the main selections display. |
+| hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
 | value | object, object[] | | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
@@ -78,3 +80,36 @@ It should open a new page on your default browser @ localhost:3000
 
 ## Contributing
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
+
+
+## TodoList
+
+- [ ] set autoWidth to false automatically if width prop has a value
+
+- [ ] add a css rule for this.root :focus { outline: 'none' }, and :hover { darken }
+
+- [ ] add tests for focus states/styles when tabbing between multiple superSelectFields
+- [ ] add tests for keystrokes
+
+- [x] add proptypes checking for value and children
+
+- [x] support of \<optgroup />
+
+- [x] check rendering performance with 200 MenuItems (integrate react-infinite)
+
+- [ ] implement the container for errors (absolutely positioned below the focusedLine)
+
+  Expose more props :
+  - [ ] floatingLabelText
+  - [ ] canAutoPosition
+  - [ ] anchorOrigin
+  - [ ] popoverStyle
+  - [ ] required
+  - [ ] errorMessage
+  - [ ] errorStyle
+
+- [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
+- [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold
+
+- [ ] implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
+- [ ] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}

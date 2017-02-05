@@ -59,8 +59,7 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "deploy2": "surge -p build -d https://material-ui-superselectfield.surge.sh",
-    "prepublish": "babel src/superSelectField.js -o lib/superSelectField.js",
+    "prepublish": "babel src/SuperSelectField.js -o lib/SuperSelectField.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
