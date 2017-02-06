@@ -40,7 +40,7 @@ This component requires 4 dependencies :
 | nb2show | number | 5 | Number of options displayed from the menu. |
 | elementHeight | number | 58 | Height in pixels of one option element. |
 | showAutocompleteTreshold | number | 10 | Maximum number of options from which to display the autocomplete search field. |
-| autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteTreshold`). |
+| autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteTreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
 #####Note when setting value :
 if multiple is set, value must be at least an empty Array.  
 For single value mode, you can set value to null.  
@@ -55,13 +55,20 @@ PropTypes should raise warnings if implementing otherwise.
 | menuGroupStyle | object | {} | Styles to be applied to the MenuItems hosting your \<optgroup/>. |
 | innerDivStyle | object | {} | Styles to be applied to the inner div of MenuItems hosting each of your children components. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
-| selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
+| selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 
 ####Default functions
 | Name | Default function |
 |:---- |:---- |
-| autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` | By default, the parser will check for `label` props, 'value' otherwise. |
-| selectionsRenderer | <span>(value, hintText) => value.length<br>? typeof value === 'string' ? value : value.join(', ')<br>: hintText</span> | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample1 for a more advanced renderer example. |
+| autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
+| selectionsRenderer |  |
+<pre>(values, hintText) => {
+   if (!values || !values.length) return hintText
+   const { value, label } = values
+   if (Array.isArray(values)) return values.map(({ value, label }) => label || value).join(', ')
+   else if (label || value) return label || value
+   else return hintText
+}</pre>
 
 
 ## Usage

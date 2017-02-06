@@ -115,11 +115,9 @@ SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
   value: null,
   selectionsRenderer: (values, hintText) => {
-    if (!values) return hintText
+    if (!values || !values.length) return hintText
     const { value, label } = values
-    if (Array.isArray(values) && values.length) {
-      return values.map(({ value, label }) => label || value).join(', ')
-    }
+    if (Array.isArray(values)) return values.map(({ value, label }) => label || value).join(', ')
     else if (label || value) return label || value
     else return hintText
   }
