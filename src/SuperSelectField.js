@@ -133,6 +133,7 @@ class SelectField extends Component {
     this.state = {
       isOpen: false,
       itemsLength: this.getChildrenLength(props.children),
+      menuItemsfocusState: [],
       searchText: ''
     }
   }
@@ -166,15 +167,18 @@ class SelectField extends Component {
   }
 
   focusTextField () {
-    if (this.state.itemsLength > 10) {
+    if (this.state.itemsLength > this.props.showAutocompleteTreshold) {
       const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
       input.focus()
     }
   }
 
   focusFirstMenuItem () {
-    const firstMenuItem = findDOMNode(this.menu).querySelector('[tabindex="0"]')
+    const firstMenuItem = findDOMNode(this.menu).querySelector('span')
     firstMenuItem.focus()
+    /* const firstMenuItem = this.menuItems.find(item => item !== null)
+    this.setState({ menuItemsfocusState: [...this.state.menuItemsfocusState] })
+    firstMenuItem.props.focusState = 'keyboard-focused' */
   }
 
   focusLastMenuItem () {
@@ -182,6 +186,8 @@ class SelectField extends Component {
     const lastMenuItem = menuItems[menuItems.length - 1]
     lastMenuItem.focus()
   }
+
+  menuItems = []
 
   /**
    * Main Component Wrapper methods
@@ -272,7 +278,7 @@ class SelectField extends Component {
   }
 
   render () {
-    const { value, hintText, hintTextAutocomplete, multiple, children, nb2show,
+    const { value, hintText, hintTextAutocomplete, noMatchFound, multiple, children, nb2show,
       showAutocompleteTreshold, autocompleteFilter, selectionsRenderer,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle } = this.props
 
@@ -298,6 +304,8 @@ class SelectField extends Component {
         <MenuItem
           key={groupIndex + index}
           tabIndex={index}
+          ref={ref => (this.menuItems[groupIndex + index] = ref)}
+          focusState={this.state.menuItemsfocusState[groupIndex + index]}
           checked={multiple && isSelected}
           leftIcon={(multiple && !isSelected) ? <UnCheckedIcon /> : null}
           primaryText={child}
@@ -376,7 +384,7 @@ class SelectField extends Component {
                 >
                   {menuItems}
                 </InfiniteScroller>
-              : <MenuItem primaryText='No match found' style={{ cursor: 'default' }} disabled />
+              : <MenuItem primaryText={noMatchFound} style={{ cursor: 'default' }} disabled />
             }
           </div>
         </Popover>
@@ -419,6 +427,7 @@ SelectField.propTypes = {
   name: PropTypes.string,
   hintText: PropTypes.string,
   hintTextAutocomplete: PropTypes.string,
+  noMatchFound: PropTypes.string,
   showAutocompleteTreshold: PropTypes.number,
   elementHeight: PropTypes.number,
   nb2show: PropTypes.number,
@@ -439,8 +448,8 @@ SelectField.propTypes = {
       }
     } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
-          'value' of '${componentName}' must be an object including a 'value' property. 
-          Validation failed.`
+        'value' of '${componentName}' must be an object including a 'value' property. 
+        Validation failed.`
       )
     }
   },
@@ -456,9 +465,13 @@ SelectField.defaultProps = {
   nb2show: 5,
   hintText: 'Click me',
   hintTextAutocomplete: 'Type something',
+  noMatchFound: 'No match found',
   showAutocompleteTreshold: 10,
   elementHeight: 58,
-  autocompleteFilter: (searchText, text) => !text || (text + '').toLowerCase().includes(searchText.toLowerCase())
+  autocompleteFilter: (searchText, text) => !text || (text + '').toLowerCase().includes(searchText.toLowerCase()),
+  value: null,
+  onChange: () => {},
+  children: []
 }
 
 export default SelectField

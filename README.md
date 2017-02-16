@@ -33,10 +33,11 @@ This component requires 4 dependencies :
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
+| noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
-| value | null, object, object[] | | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
+| value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
-| children | any |  | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
+| children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
 | nb2show | number | 5 | Number of options displayed from the menu. |
 | elementHeight | number | 58 | Height in pixels of one option element. |
 | showAutocompleteTreshold | number | 10 | Maximum number of options from which to display the autocomplete search field. |
@@ -88,8 +89,9 @@ It should open a new page on your default browser @ localhost:3000
 
 
 ## Tests
-
-
+```
+npm test
+```
 ## Contributing
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
 
@@ -125,3 +127,5 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 
 - [ ] implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
 - [ ] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
+
+- [ ] add an example with GooglePlaces
