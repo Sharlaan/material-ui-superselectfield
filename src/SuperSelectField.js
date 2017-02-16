@@ -136,6 +136,7 @@ class SelectField extends Component {
       menuItemsfocusState: [],
       searchText: ''
     }
+    this.menuItems = []
   }
 
   // Counts nodes with non-null value property + optgroups
@@ -186,8 +187,6 @@ class SelectField extends Component {
     const lastMenuItem = menuItems[menuItems.length - 1]
     lastMenuItem.focus()
   }
-
-  menuItems = []
 
   /**
    * Main Component Wrapper methods

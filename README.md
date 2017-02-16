@@ -11,9 +11,9 @@
 - [TodoList](#todolist)
 
 ##Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
-![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/assets/dataSource.png)
-![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/assets/caseInsensitive.png)
-![](https://github.com/Sharlaan/material-ui-superSelectField/blob/master/assets/chips.png)
+![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
+![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/caseInsensitive.png)
+![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/chips.png)
 
 
 ##Installation
@@ -114,6 +114,7 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 - [ ] implement the container for errors (absolutely positioned below the focusedLine)
 
   Expose more props :
+  - [x] noMatchFound message
   - [ ] floatingLabelText
   - [ ] canAutoPosition
   - [ ] anchorOrigin
