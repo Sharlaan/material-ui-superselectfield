@@ -58,6 +58,18 @@ class CodeExample extends Component {
         </SuperSelectField>
       </div>
 
+      <SuperSelectField
+        name='disabled'
+        disabled
+        hintText='Disabled'
+        value={state1}
+        style={{ minWidth: 150, marginTop: 40 }}
+      >
+        <div value='A'>Option A</div>
+        <div value='B'>Option B</div>
+        <div value='C'>Option C</div>
+      </SuperSelectField>
+
     </section>
   }
 }

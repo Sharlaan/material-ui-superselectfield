@@ -35,6 +35,7 @@ This component requires 4 dependencies :
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
 | noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
+| disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
@@ -57,6 +58,9 @@ PropTypes should raise warnings if implementing otherwise.
 | innerDivStyle | object | {} | Styles to be applied to the inner div of MenuItems hosting each of your children components. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
+| checkedIcon | SVGicon | <CheckedIcon /> | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
+| uncheckedIcon | SVGicon | | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
+| hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Override the hover background color. |
 
 ####Default functions
 | Name | Default function |
@@ -95,6 +99,8 @@ npm test
 ## Contributing
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
 
+## Known bugs
+- keyboard-focus handling
 
 ## TodoList
 
@@ -119,6 +125,8 @@ In lieu of a formal style guide, take care to maintain the existing coding style
   - [ ] canAutoPosition
   - [ ] anchorOrigin
   - [ ] popoverStyle
+  - [ ] hoverColor
+  - [x] disabled
   - [ ] required
   - [ ] errorMessage
   - [ ] errorStyle

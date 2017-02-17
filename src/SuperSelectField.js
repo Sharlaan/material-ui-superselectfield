@@ -115,9 +115,13 @@ SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
   value: null,
   selectionsRenderer: (values, hintText) => {
-    if (!values || !values.length) return hintText
+    if (!values) return hintText
     const { value, label } = values
-    if (Array.isArray(values)) return values.map(({ value, label }) => label || value).join(', ')
+    if (Array.isArray(values)) {
+      return values.length
+        ? values.map(({ value, label }) => label || value).join(', ')
+        : hintText
+    }
     else if (label || value) return label || value
     else return hintText
   }
@@ -176,7 +180,7 @@ class SelectField extends Component {
 
   focusFirstMenuItem () {
     const firstMenuItem = findDOMNode(this.menu).querySelector('span')
-    firstMenuItem.focus()
+    if (firstMenuItem) firstMenuItem.focus()
     /* const firstMenuItem = this.menuItems.find(item => item !== null)
     this.setState({ menuItemsfocusState: [...this.state.menuItemsfocusState] })
     firstMenuItem.props.focusState = 'keyboard-focused' */
@@ -192,11 +196,11 @@ class SelectField extends Component {
    * Main Component Wrapper methods
    */
   handleClick = () => {
-    this.openMenu() // toggle instead of close ? (in case user changes  targetOrigin/anchorOrigin)
+    if (!this.props.disabled) this.openMenu() // toggle instead of close ? (in case user changes  targetOrigin/anchorOrigin)
   }
 
   handleKeyDown = (event) => {
-    if (/ArrowDown|Enter/.test(event.key)) this.openMenu()
+    if (!this.props.disabled && /ArrowDown|Enter/.test(event.key)) this.openMenu()
   }
 
   /**
@@ -277,13 +281,15 @@ class SelectField extends Component {
   }
 
   render () {
-    const { value, hintText, hintTextAutocomplete, noMatchFound, multiple, children, nb2show,
+    const { value, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, children, nb2show,
       showAutocompleteTreshold, autocompleteFilter, selectionsRenderer,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle } = this.props
 
+    const { baseTheme: {palette}, menuItem: {selectedTextColor} } = this.context.muiTheme
+
     // Default style depending on Material-UI context
     const mergedSelectedMenuItemStyle = {
-      color: this.context.muiTheme.menuItem.selectedTextColor, ...selectedMenuItemStyle
+      color: selectedTextColor, ...selectedMenuItemStyle
     }
 
     /**
@@ -303,8 +309,8 @@ class SelectField extends Component {
         <MenuItem
           key={groupIndex + index}
           tabIndex={index}
-          ref={ref => (this.menuItems[groupIndex + index] = ref)}
-          focusState={this.state.menuItemsfocusState[groupIndex + index]}
+          ref={ref => (this.menuItems[index] = ref)}
+          focusState={this.state.menuItemsfocusState[index]}
           checked={multiple && isSelected}
           leftIcon={(multiple && !isSelected) ? <UnCheckedIcon /> : null}
           primaryText={child}
@@ -314,7 +320,8 @@ class SelectField extends Component {
           onTouchTap={this.handleMenuSelection({ value: childValue, label })}
         />)]
     }
-    const menuItems = this.state.isOpen && children &&
+
+    const menuItems = !disabled && this.state.isOpen && children &&
       children.reduce((nodes, child, index) => {
         if (child.type !== 'optgroup') return menuItemBuilder(nodes, child, index)
 
@@ -339,10 +346,14 @@ class SelectField extends Component {
       <div
         ref={ref => (this.root = ref)}
         tabIndex='0'
-        style={{ cursor: 'pointer', ...style }}
         onKeyDown={this.handleKeyDown}
         onClick={this.handleClick}
         onBlur={this.handleBlur}
+        style={{
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          color: disabled ? palette.disabledColor : palette.textColor,
+          ...style
+        }}
       >
 
         <SelectionsPresenter
@@ -455,12 +466,14 @@ SelectField.propTypes = {
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
   multiple: PropTypes.bool,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func
 }
 
 // noinspection JSUnusedGlobalSymbols
 SelectField.defaultProps = {
   multiple: false,
+  disabled: false,
   nb2show: 5,
   hintText: 'Click me',
   hintTextAutocomplete: 'Type something',
