@@ -16,10 +16,12 @@ injectTapEventPlugin()
 
 const muiTheme = getMuiTheme()
 const shallowWithContext = node => shallow(node, {context: {muiTheme}})
+/*
 const mountWithContext = node => mount(node, {
   context: {muiTheme},
   childContextTypes: {muiTheme: PropTypes.object}
 })
+*/
 const testChildren = [
   <div key='0' value='1'>Test Child</div>,
   <div key='1' value='2'>Test Child</div>

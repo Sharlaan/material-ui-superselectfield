@@ -11,33 +11,31 @@ const containerStyle = {
 }
 
 class CodeExample extends Component {
-  componentWillMount () {
-    this.state = {
-      state1: null,
-      state2: { value: 'E', label: 'label E' }
-    }
+  state = {
+    state11: null,
+    state12: { value: 'E', label: 'label E' }
   }
 
   handleSelection = (values, name) => this.setState({ [name]: values })
 
   render () {
-    const { state1, state2 } = this.state
-    console.debug('state1', state1, '\nstate2', state2)
+    const { state11, state12 } = this.state
+    console.debug('state11', state11, '\nstate12', state12)
 
     return <section style={containerStyle}>
 
       <fieldset style={{ marginBottom: 40 }}>
         <legend>Selected values</legend>
-        <div>State 1: {state1 ? state1.value : 'empty state'}</div>
-        <div>State 2: {state2 ? state2.label : 'empty state'}</div>
+        <div>State 11: {state11 ? state11.value : 'empty state'}</div>
+        <div>State 12: {state12 ? state12.label : 'empty state'}</div>
       </fieldset>
 
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         <SuperSelectField
-          name='state1'
+          name='state11'
           hintText='Single value'
           onChange={this.handleSelection}
-          value={state1}
+          value={state11}
           style={{ minWidth: 150, marginRight: 40 }}
         >
           <div value='A'>Option A</div>
@@ -46,10 +44,10 @@ class CodeExample extends Component {
         </SuperSelectField>
 
         <SuperSelectField
-          name='state2'
+          name='state12'
           hintText='With labels'
           onChange={this.handleSelection}
-          value={state2}
+          value={state12}
           style={{ minWidth: 150 }}
         >
           <div value='D' label='label D'>Option D</div>
@@ -59,16 +57,10 @@ class CodeExample extends Component {
       </div>
 
       <SuperSelectField
-        name='disabled'
         disabled
         hintText='Disabled'
-        value={state1}
         style={{ minWidth: 150, marginTop: 40 }}
-      >
-        <div value='A'>Option A</div>
-        <div value='B'>Option B</div>
-        <div value='C'>Option C</div>
-      </SuperSelectField>
+      />
 
     </section>
   }

@@ -30,24 +30,24 @@ const chipAvatarStyle = {
   backgroundSize: 'cover'
 }
 
-const displayState = state => [...state].map(({ value, label }) => label || value).join(', ')
+const displayState = state => state.length
+  ? [...state].map(({ value, label }) => label || value).join(', ')
+  : 'empty state'
 
 class CodeExample extends Component {
-  componentWillMount () {
-    this.state = {
-      state4: [{
-        label: 'France',
-        value: {
-          'English short name': 'France',
-          'French short name': 'France (la)',
-          'Alpha-2 code': 'FR',
-          'Alpha-3 code': 'FRA',
-          'Numeric': 250,
-          'Capital': 'Paris',
-          'Continent': 4
-        }
-      }]
-    }
+  state = {
+    state4: [{
+      label: 'France',
+      value: {
+        'English short name': 'France',
+        'French short name': 'France (la)',
+        'Alpha-2 code': 'FR',
+        'Alpha-3 code': 'FRA',
+        'Numeric': 250,
+        'Capital': 'Paris',
+        'Continent': 4
+      }
+    }]
   }
 
   handleSelection = (values, name) => this.setState({ [name]: values })
@@ -88,7 +88,7 @@ class CodeExample extends Component {
 
             return (
               <div key={index} value={country} label={countryLabel} style={menuItemStyle}>
-                <div>
+                <div style={{ marginRight: 10 }}>
                   <span style={{ fontWeight: 'bold' }}>{countryLabel}</span><br />
                   <span style={{ fontSize: 12 }}>{country.Capital}</span>
                 </div>
@@ -110,6 +110,7 @@ class CodeExample extends Component {
       <SuperSelectField
         name='state4'
         multiple
+        checkPosition='left'
         hintText='Complex example'
         onChange={this.handleSelection}
         value={state4}

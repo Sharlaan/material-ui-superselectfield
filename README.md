@@ -17,7 +17,7 @@
 
 
 ##Installation
-`npm i material-ui-superselectfield`  
+`yarn add material-ui-superselectfield`  
 
 This component requires 4 dependencies :
 - react
@@ -27,6 +27,12 @@ This component requires 4 dependencies :
 
 ... so make sure they are installed in your project, or install them as well ;)
 
+Also don't forget to update your index.js entry file with :   
+```js
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
+```
+
 ##Properties
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
@@ -34,13 +40,15 @@ This component requires 4 dependencies :
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
 | noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
+| anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
+| checkPosition | string |  | Position of the checkmark in multiple mode. Accepted values: `'', left, right` |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
 | disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
 | nb2show | number | 5 | Number of options displayed from the menu. |
-| elementHeight | number | 58 | Height in pixels of one option element. |
+| elementHeight | number | 36 | Height in pixels of one option element. |
 | showAutocompleteTreshold | number | 10 | Maximum number of options from which to display the autocomplete search field. |
 | autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteTreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
 #####Note when setting value :
@@ -53,24 +61,32 @@ PropTypes should raise warnings if implementing otherwise.
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
-| menuStyle | object | {} | Styles to be applied to the comtainer which will receive your children components. |
-| menuGroupStyle | object | {} | Styles to be applied to the MenuItems hosting your \<optgroup/>. |
-| innerDivStyle | object | {} | Styles to be applied to the inner div of MenuItems hosting each of your children components. |
+| menuStyle | object | {} | Styles applied to the comtainer which will receive your children components. |
+| menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
+| innerDivStyle | object | {} | Styles applied to the inner div of MenuItems hosting each of your children components. |
+| menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
+| menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
-| checkedIcon | SVGicon | <CheckedIcon /> | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
-| uncheckedIcon | SVGicon | | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
-| hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Override the hover background color. |
+| checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
+| unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
+| hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
 
 ####Default functions
 | Name | Default function |
 |:---- |:---- |
+| checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
+| unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | selectionsRenderer |  |
 <pre>(values, hintText) => {
-   if (!values || !values.length) return hintText
+   if (!values) return hintText
    const { value, label } = values
-   if (Array.isArray(values)) return values.map(({ value, label }) => label || value).join(', ')
+   if (Array.isArray(values)) {
+      return values.length
+         ? values.map(({ value, label }) => label || value).join(', ')
+         : hintText
+   }
    else if (label || value) return label || value
    else return hintText
 }</pre>
@@ -81,28 +97,30 @@ Check the `CodeExampleX.js` provided in the repository.
 
 ##Building
 
-You can build the project with :
+You can build the project with :   
 ```
 git clone https://github.com/Sharlaan/material-ui-superselectfield.git
-
-npm i
-
-npm start
-```
+yarn && yarn start
+```   
 It should open a new page on your default browser @ localhost:3000
 
 
 ## Tests
-```
-npm test
-```
+`yarn test`
+
+
 ## Contributing
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
 
+
 ## Known bugs
-- keyboard-focus handling
+- keyboard-focus handling combined with optgroups and autocompleted results
+- dynamic heights calculation
+
 
 ## TodoList
+
+- [x] implement onClose handler for multiple mode, to allow registering selected values in oneshot instead of exposing values at each selection (ie one single server request)
 
 - [ ] set autoWidth to false automatically if width prop has a value
 
@@ -123,9 +141,10 @@ In lieu of a formal style guide, take care to maintain the existing coding style
   - [x] noMatchFound message
   - [ ] floatingLabelText
   - [ ] canAutoPosition
-  - [ ] anchorOrigin
+  - [x] checkPosition
+  - [x] anchorOrigin
   - [ ] popoverStyle
-  - [ ] hoverColor
+  - [x] hoverColor
   - [x] disabled
   - [ ] required
   - [ ] errorMessage
@@ -134,7 +153,7 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 - [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
 - [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold
 
-- [ ] implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
-- [ ] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
+- [x] implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
+- [x] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
 
 - [ ] add an example with GooglePlaces

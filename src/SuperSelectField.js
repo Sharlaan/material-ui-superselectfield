@@ -3,22 +3,20 @@ import { findDOMNode } from 'react-dom'
 import InfiniteScroller from 'react-infinite'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
-import MenuItem from 'material-ui/MenuItem/MenuItem'
+import ListItem from 'material-ui/List/ListItem'
+import CheckedIcon from 'material-ui/svg-icons/navigation/check'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 // Utilities
-const areEqual = (val1, val2) => {
+function areEqual (val1, val2) {
   if (!val1 || !val2 || typeof val1 !== typeof val2) return false
-  else if (typeof val1 === 'string' || typeof val1 === 'number') return val1 === val2
+  else if (typeof val1 === 'string' ||
+    typeof val1 === 'number' ||
+    typeof val1 === 'boolean') return val1 === val2
   else if (typeof val1 === 'object') {
-    const props1 = Object.keys(val1)
-    const props2 = Object.keys(val2)
-    const values1 = Object.values(val1)
-    const values2 = Object.values(val2)
-    return props1.length === props2.length &&
-      props1.every(key => props2.includes(key)) &&
-      values1.every(val => values2.includes(val))
+    return Object.keys(val1).length === Object.keys(val2).length &&
+      Object.entries(val2).every(([key2, value2]) => val1[key2] === value2)
   }
 }
 
@@ -78,14 +76,14 @@ const styles = {
   }
 }
 
-const SelectionsPresenter = ({ value, hintText, selectionsRenderer }) => {
+const SelectionsPresenter = ({ selectedValues, hintText, selectionsRenderer }) => {
   // TODO: add floatingLabelText
   return (
     <div style={styles.div1}>
 
       <div style={styles.div2}>
         <div style={styles.div3}>
-          {selectionsRenderer(value, hintText)}
+          {selectionsRenderer(selectedValues, hintText)}
         </div>
         <DropDownArrow />
       </div>
@@ -137,12 +135,17 @@ class SelectField extends Component {
     this.state = {
       isOpen: false,
       itemsLength: this.getChildrenLength(props.children),
-      menuItemsfocusState: [],
+      selectedItems: props.value,
       searchText: ''
     }
     this.menuItems = []
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (!areEqual(nextProps.value, this.state.selectedItems)) {
+      this.setState({ selectedItems: nextProps.value })
+    }
+  }
   // Counts nodes with non-null value property + optgroups
   // noinspection JSMethodCanBeStatic
   getChildrenLength (children) {
@@ -159,7 +162,9 @@ class SelectField extends Component {
     return count
   }
 
-  closeMenu () {
+  closeMenu = () => {
+    const { onChange, name } = this.props
+    onChange(this.state.selectedItems, name)
     this.setState({ isOpen: false, searchText: '' }, () => findDOMNode(this.root).focus())
   }
 
@@ -167,60 +172,56 @@ class SelectField extends Component {
     this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
-  clearTextField (callback) {
-    this.setState({ searchText: '' }, callback)
+  showAutocomplete () {
+    return this.state.itemsLength > this.props.showAutocompleteTreshold
   }
 
   focusTextField () {
-    if (this.state.itemsLength > this.props.showAutocompleteTreshold) {
+    if (this.showAutocomplete()) {
       const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
       input.focus()
-    }
+    } else this.focusMenuItem()
   }
 
-  focusFirstMenuItem () {
-    const firstMenuItem = findDOMNode(this.menu).querySelector('span')
-    if (firstMenuItem) firstMenuItem.focus()
-    /* const firstMenuItem = this.menuItems.find(item => item !== null)
-    this.setState({ menuItemsfocusState: [...this.state.menuItemsfocusState] })
-    firstMenuItem.props.focusState = 'keyboard-focused' */
+  focusMenuItem (index) {
+    const targetMenuItem = this.menuItems.find(item => {
+      return !!item && (index ? item.props.tabIndex === index : true)
+    })
+
+    if (!targetMenuItem) throw Error('targetMenuItem not found.')
+    targetMenuItem.applyFocusState('keyboard-focused')
   }
 
-  focusLastMenuItem () {
-    const menuItems = findDOMNode(this.menu).querySelectorAll('[tabindex]')
-    const lastMenuItem = menuItems[menuItems.length - 1]
-    lastMenuItem.focus()
+  clearTextField (callback) {
+    this.setState({ searchText: '' }, callback)
   }
 
   /**
    * Main Component Wrapper methods
    */
-  handleClick = () => {
-    if (!this.props.disabled) this.openMenu() // toggle instead of close ? (in case user changes  targetOrigin/anchorOrigin)
-  }
+  // toggle instead of close ? (in case user changes  targetOrigin/anchorOrigin)
+  handleClick = (event) => !this.props.disabled && this.openMenu()
 
-  handleKeyDown = (event) => {
-    if (!this.props.disabled && /ArrowDown|Enter/.test(event.key)) this.openMenu()
-  }
+  handleKeyDown = (event) =>
+    !this.props.disabled && /ArrowDown|Enter/.test(event.key) && this.openMenu()
 
   /**
    * Popover methods
    */
-  handlePopoverClose = (reason) => {
-    this.closeMenu() // toggle instead of close ? (in case user changes targetOrigin/anchorOrigin)
-  }
+  // toggle instead of close ? (in case user changes targetOrigin/anchorOrigin)
+  handlePopoverClose = (reason) => this.closeMenu()
 
   /**
-   * SelectionPresenter methods
+   * TextField autocomplete methods
    */
   handleTextFieldAutocompletionFiltering = (event, searchText) => {
     this.setState({ searchText }, () => this.focusTextField())
   }
 
-  handleTextFieldKeyDown = (event) => {
-    switch (event.key) {
+  handleTextFieldKeyDown = ({ key }) => {
+    switch (key) {
       case 'ArrowDown':
-        this.focusFirstMenuItem()
+        this.focusMenuItem()
         break
 
       case 'Escape':
@@ -236,44 +237,70 @@ class SelectField extends Component {
    * Menu methods
    */
   handleMenuSelection = (selectedItem) => (event) => {
-    const { value, multiple, onChange, name } = this.props
-    if (multiple) {
-      const selectedItemExists = value.some(obj => areEqual(obj.value, selectedItem.value))
+    event.preventDefault()
+    const { selectedItems } = this.state
+    if (this.props.multiple) {
+      const selectedItemExists = selectedItems.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
-        ? value.filter(obj => !areEqual(obj.value, selectedItem.value))
-        : value.concat(selectedItem)
-      onChange(updatedValues, name)
+        ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
+        : selectedItems.concat(selectedItem)
+      this.setState({ selectedItems: updatedValues })
       this.clearTextField(() => this.focusTextField())
     } else {
-      const updatedValue = areEqual(value, selectedItem) ? null : selectedItem
-      onChange(updatedValue, name)
-      this.closeMenu()
+      const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
+      this.setState({ selectedItems: updatedValue }, () => this.closeMenu())
     }
   }
 
-  handleMenuEscKeyDown = () => this.closeMenu()
-
-  handleMenuKeyDown = (event) => {
-    // TODO: this solution propagates and triggers double onKeyDown
-    // if event.stopPropagation(), nothing works, so the correct trigger is the 2nd one
-    switch (event.key) {
+  // TODO: add Shift+Tab
+  /**
+   * this.menuItems can contain uncontinuous React elements, because of filtering
+   */
+  handleMenuKeyDown = ({ key, target: {tabIndex} }) => {
+    const cleanMenuItems = this.menuItems.filter(item => !!item)
+    const firstTabIndex = cleanMenuItems[0].props.tabIndex
+    const lastTabIndex = cleanMenuItems[ cleanMenuItems.length - 1 ].props.tabIndex
+    const currentElementIndex = cleanMenuItems.findIndex(item => item.props.tabIndex === tabIndex)
+    switch (key) {
       case 'ArrowUp':
-        // TODO: add Shift+Tab
-        // TODO: add if current MenuItem === firstChild
-        this.focusTextField()
+        if (+tabIndex === firstTabIndex) {
+          this.showAutocomplete()
+            ? this.focusTextField()
+            : this.focusMenuItem(lastTabIndex)
+        }
+        else {
+          const previousTabIndex = cleanMenuItems
+            .slice(0, currentElementIndex)
+            .slice(-1)[0]
+            .props.tabIndex
+          this.focusMenuItem(previousTabIndex)
+        }
         break
 
       case 'ArrowDown':
-        // TODO: if current MenuItem === lastChild, this.focusFirstMenuItem()
+        if (+tabIndex === lastTabIndex) {
+          this.showAutocomplete()
+            ? this.focusTextField()
+            : this.focusMenuItem()
+        }
+        else {
+          const nextTabIndex = cleanMenuItems
+            .slice(currentElementIndex + 1)[0]
+            .props.tabIndex
+          this.focusMenuItem(nextTabIndex)
+        }
         break
 
       case 'PageUp':
-        // TODO: this.focusFirstMenuItem()
+        this.focusMenuItem()
         break
 
       case 'PageDown':
-        // TODO: this.focusLastMenuItem()
-        this.focusLastMenuItem()
+        this.focusMenuItem(lastTabIndex)
+        break
+
+      case 'Escape':
+        this.closeMenu()
         break
 
       default: break
@@ -281,64 +308,94 @@ class SelectField extends Component {
   }
 
   render () {
-    const { value, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, children, nb2show,
-      showAutocompleteTreshold, autocompleteFilter, selectionsRenderer,
-      style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle } = this.props
+    const { hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, children, nb2show,
+      autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
+      style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
+      checkedIcon, unCheckedIcon, hoverColor, checkPosition
+    } = this.props
 
-    const { baseTheme: {palette}, menuItem: {selectedTextColor} } = this.context.muiTheme
+    const { baseTheme: {palette}, menuItem } = this.context.muiTheme
 
     // Default style depending on Material-UI context
     const mergedSelectedMenuItemStyle = {
-      color: selectedTextColor, ...selectedMenuItemStyle
+      color: menuItem.selectedTextColor, ...selectedMenuItemStyle
     }
+    if (checkedIcon) checkedIcon.props.style.fill = mergedSelectedMenuItemStyle.color
+    const mergedHoverColor = hoverColor || menuItem.hoverColor
 
     /**
      * MenuItems building, based on user's children
-     * 1st unction is the base process for producing a MenuItem,
+     * 1st function is the base process for producing a MenuItem,
      * including filtering from the Autocomplete.
      * 2nd function is the main loop over children array,
      * accounting for optgroups.
      */
-    const menuItemBuilder = (nodes, child, index, groupIndex = '') => {
+    const menuItemBuilder = (nodes, child, index) => {
+      const { selectedItems } = this.state
       const { value: childValue, label } = child.props
       if (!autocompleteFilter(this.state.searchText, label || childValue)) return nodes
-      const isSelected = Array.isArray(value)
-        ? value.some(obj => areEqual(obj.value, childValue))
-        : value ? value.value === childValue : false
+      const isSelected = Array.isArray(selectedItems)
+        ? selectedItems.some(obj => areEqual(obj.value, childValue))
+        : selectedItems ? selectedItems.value === childValue : false
+      const leftCheckbox = (multiple && checkPosition === 'left' && (isSelected ? checkedIcon : unCheckedIcon)) || null
+      const rightCheckbox = (multiple && checkPosition === 'right' && (isSelected ? checkedIcon : unCheckedIcon)) || null
+      if (multiple && checkPosition !== '') {
+        if (checkedIcon) checkedIcon.props.style.marginTop = 0
+        if (unCheckedIcon) unCheckedIcon.props.style.marginTop = 0
+      }
       return [ ...nodes, (
-        <MenuItem
-          key={groupIndex + index}
+        <ListItem
+          key={++index}
           tabIndex={index}
-          ref={ref => (this.menuItems[index] = ref)}
-          focusState={this.state.menuItemsfocusState[index]}
-          checked={multiple && isSelected}
-          leftIcon={(multiple && !isSelected) ? <UnCheckedIcon /> : null}
-          primaryText={child}
-          disableFocusRipple
-          innerDivStyle={{ paddingTop: 5, paddingBottom: 5, ...innerDivStyle }}
-          style={isSelected ? mergedSelectedMenuItemStyle : null}
+          ref={ref => (this.menuItems[++index] = ref)}
           onTouchTap={this.handleMenuSelection({ value: childValue, label })}
+          disableFocusRipple
+          leftIcon={leftCheckbox}
+          rightIcon={rightCheckbox}
+          primaryText={child}
+          hoverColor={mergedHoverColor}
+          innerDivStyle={{
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: (multiple && checkPosition === 'left') ? 56 : 16,
+            paddingRight: (multiple && checkPosition === 'right') ? 56 : 16,
+            ...innerDivStyle
+          }}
+          style={isSelected ? mergedSelectedMenuItemStyle : {}}
         />)]
     }
 
     const menuItems = !disabled && this.state.isOpen && children &&
       children.reduce((nodes, child, index) => {
         if (child.type !== 'optgroup') return menuItemBuilder(nodes, child, index)
-
+        const nextIndex = nodes.length ? +nodes[nodes.length - 1].key + 1 : 0
         const menuGroup =
-          <MenuItem
+          <ListItem
             disabled
-            key={`group${index}`}
+            key={nextIndex}
             primaryText={child.props.label}
             style={{ cursor: 'default', ...menuGroupStyle }}
           />
-        const groupedItems = child.props.children.reduce((nodes, child, idx) => menuItemBuilder(nodes, child, idx, `group${index}`), [])
-        return [ ...nodes, menuGroup, ...groupedItems ]
+        const groupedItems = child.props.children.reduce((nodes, child, idx) =>
+                                menuItemBuilder(nodes, child, nextIndex + idx), [])
+        return groupedItems.length
+          ? [ ...nodes, menuGroup, ...groupedItems ]
+          : nodes
       }, [])
 
-    const containerHeight = elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)
-    const showAutocomplete = this.state.itemsLength > showAutocompleteTreshold
-    const popoverHeight = (showAutocomplete ? 53 : 0) + (containerHeight || elementHeight)
+    /*
+    const menuItemsHeights = this.state.isOpen
+      ? this.menuItems.map(item => findDOMNode(item).clientHeight) // can't resolve since items not rendered yet, need componentDiDMount
+      : elementHeight
+    */
+    const autoCompleteHeight = this.showAutocomplete() ? 53 : 0
+    const footerHeight = menuCloseButton ? 36 : 0
+    const noMatchFoundHeight = 36
+    const containerHeight = (Array.isArray(elementHeight)
+      ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
+      : elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)
+    ) || 0
+    const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
     const menuWidth = this.root ? this.root.clientWidth : null
 
@@ -347,8 +404,7 @@ class SelectField extends Component {
         ref={ref => (this.root = ref)}
         tabIndex='0'
         onKeyDown={this.handleKeyDown}
-        onClick={this.handleClick}
-        onBlur={this.handleBlur}
+        onTouchTap={this.handleClick}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
           color: disabled ? palette.disabledColor : palette.textColor,
@@ -358,7 +414,7 @@ class SelectField extends Component {
 
         <SelectionsPresenter
           hintText={hintText}
-          value={value}
+          selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}
         />
 
@@ -366,37 +422,44 @@ class SelectField extends Component {
           open={this.state.isOpen}
           anchorEl={this.root}
           canAutoPosition={false}
-          anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+          anchorOrigin={anchorOrigin}
           useLayerForClickAway={false}
           onRequestClose={this.handlePopoverClose}
-          style={{ height: popoverHeight || 0 }}
+          style={{ height: popoverHeight }}
         >
-          {showAutocomplete &&
+          {this.showAutocomplete() &&
             <TextField
-              name='autoComplete'
               ref={ref => (this.searchTextField = ref)}
               value={this.state.searchText}
               hintText={hintTextAutocomplete}
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
-              style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }}
+              style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - (16 * 2) }}
             />
           }
           <div
             ref={ref => (this.menu = ref)}
+            onKeyDown={this.handleMenuKeyDown}
             style={{ width: menuWidth, ...menuStyle }}
           >
             {menuItems.length
               ? <InfiniteScroller
-                  containerHeight={containerHeight || 0}
                   elementHeight={elementHeight}
+                  containerHeight={containerHeight}
                   styles={{ scrollableStyle }}
                 >
                   {menuItems}
                 </InfiniteScroller>
-              : <MenuItem primaryText={noMatchFound} style={{ cursor: 'default' }} disabled />
+              : <ListItem primaryText={noMatchFound} style={{ cursor: 'default', padding: '10px 16px' }} disabled />
             }
           </div>
+          {multiple &&
+            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+              <div onTouchTap={this.closeMenu} style={menuFooterStyle}>
+                {menuCloseButton}
+              </div>
+            </footer>
+          }
         </Popover>
 
       </div>
@@ -409,9 +472,17 @@ SelectField.contextTypes = {
 }
 
 SelectField.propTypes = {
+  anchorOrigin: PropTypes.shape({
+    vertical: PropTypes.oneOf(['top', 'bottom']),
+    horizontal: PropTypes.oneOf(['left', 'right'])
+  }),
   style: PropTypes.object,
   menuStyle: PropTypes.object,
   menuGroupStyle: PropTypes.object,
+  checkPosition: PropTypes.oneOf([ '', 'left', 'right' ]),
+  checkedIcon: PropTypes.node,
+  unCheckedIcon: PropTypes.node,
+  hoverColor: PropTypes.string,
   // children can be any html element but with a required 'value' property
   children: PropTypes.arrayOf((props, propName, componentName, location, propFullName) => {
     if (props[propName].type !== 'optgroup') {
@@ -434,12 +505,16 @@ SelectField.propTypes = {
   }),
   innerDivStyle: PropTypes.object,
   selectedMenuItemStyle: PropTypes.object,
+  menuFooterStyle: PropTypes.object,
   name: PropTypes.string,
   hintText: PropTypes.string,
   hintTextAutocomplete: PropTypes.string,
   noMatchFound: PropTypes.string,
   showAutocompleteTreshold: PropTypes.number,
-  elementHeight: PropTypes.number,
+  elementHeight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number)
+  ]),
   nb2show: PropTypes.number,
   value: (props, propName, componentName, location, propFullName) => {
     const { multiple, value } = props
@@ -465,6 +540,7 @@ SelectField.propTypes = {
   },
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
+  menuCloseButton: PropTypes.node,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func
@@ -472,6 +548,11 @@ SelectField.propTypes = {
 
 // noinspection JSUnusedGlobalSymbols
 SelectField.defaultProps = {
+  anchorOrigin: { vertical: 'top', horizontal: 'left' },
+  checkPosition: '',
+  checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
+  unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
+  menuCloseButton: null,
   multiple: false,
   disabled: false,
   nb2show: 5,
@@ -479,11 +560,18 @@ SelectField.defaultProps = {
   hintTextAutocomplete: 'Type something',
   noMatchFound: 'No match found',
   showAutocompleteTreshold: 10,
-  elementHeight: 58,
-  autocompleteFilter: (searchText, text) => !text || (text + '').toLowerCase().includes(searchText.toLowerCase()),
+  elementHeight: 36,
+  autocompleteFilter: (searchText, text) => {
+    if (!text || (typeof text !== 'string' && typeof text !== 'number')) return false
+    if (typeof searchText !== 'string' && typeof searchText !== 'number') return false
+    return (text + '').toLowerCase().includes(searchText.toLowerCase())
+  },
   value: null,
   onChange: () => {},
   children: []
 }
 
 export default SelectField
+/**
+ * Created by Raphaël on 17/02/2017.
+ */
