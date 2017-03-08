@@ -19,6 +19,7 @@
     "react-infinite-any-height": "^1.0.4"
   },
   "devDependencies": {
+    "babel-preset-stage-2": "^6.22.0",
     "enzyme": "^2.7.1",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^0.12.0",
@@ -36,6 +37,13 @@
     "react": "^15.x",
     "react-dom": "^15.3.2",
     "react-tap-event-plugin": "^1.x || ^2.x"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2",
+      "react"
+    ]
   },
   "eslintConfig": {
     "extends": [
