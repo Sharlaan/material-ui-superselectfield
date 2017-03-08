@@ -13,7 +13,7 @@
   "engines": {
     "node": ">=6"
   },
-  "main": "lib/superSelectField.js",
+  "main": "lib/SuperSelectField.js",
   "dependencies": {
     "react-infinite": "^0.10.0"
   },
