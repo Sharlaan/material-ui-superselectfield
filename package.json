@@ -28,7 +28,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
-    "react-scripts": "^0.9.4",
+    "react-scripts": "^0.9.5",
     "react-tap-event-plugin": "^2.0.1",
     "standard": "^9.0.1"
   },
@@ -36,7 +36,7 @@
     "material-ui": ">= 0.15 < 1",
     "react": "^15.x",
     "react-dom": "^15.x",
-    "react-tap-event-plugin": "^2.x"
+    "react-tap-event-plugin": "^1.x || ^2.x"
   },
   "babel": {
     "presets": [

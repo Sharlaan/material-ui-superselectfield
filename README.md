@@ -48,7 +48,7 @@ injectTapEventPlugin()
 | onChange | function | | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
 | nb2show | number | 5 | Number of options displayed from the menu. |
-| elementHeight | number | 36 | Height in pixels of one option element. |
+| elementHeight | number, number[] | 36 | Height in pixels of each option element. If elements have different heights, you can provide them in an array. |
 | showAutocompleteTreshold | number | 10 | Maximum number of options from which to display the autocomplete search field. |
 | autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteTreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
 #####Note when setting value :
