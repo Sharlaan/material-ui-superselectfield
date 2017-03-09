@@ -33,10 +33,10 @@
     "standard": "^9.0.1"
   },
   "peerDependencies": {
-    "material-ui": ">= 0.15.0 <= 0.1x",
+    "material-ui": ">= 0.15 < 1",
     "react": "^15.x",
-    "react-dom": "^15.3.2",
-    "react-tap-event-plugin": "^1.x || ^2.x"
+    "react-dom": "^15.x",
+    "react-tap-event-plugin": "^2.x"
   },
   "babel": {
     "presets": [
