@@ -30,13 +30,13 @@ class CodeExample extends Component {
         <div>State 12: {state12 ? state12.label : 'empty state'}</div>
       </fieldset>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
         <SuperSelectField
           name='state11'
           hintText='Single value'
           onChange={this.handleSelection}
           value={state11}
-          style={{ minWidth: 150, marginRight: 40 }}
+          style={{ minWidth: 150, margin: 10 }}
         >
           <div value='A'>Option A</div>
           <div value='B'>Option B</div>
@@ -48,19 +48,27 @@ class CodeExample extends Component {
           hintText='With labels'
           onChange={this.handleSelection}
           value={state12}
-          style={{ minWidth: 150 }}
+          style={{ minWidth: 150, margin: 10 }}
         >
           <div value='D' label='label D'>Option D</div>
           <div value='E' label='label E'>Option E</div>
           <div value='F' label='label F'>Option F</div>
         </SuperSelectField>
-      </div>
 
-      <SuperSelectField
-        disabled
-        hintText='Disabled'
-        style={{ minWidth: 150, marginTop: 40 }}
-      />
+        <SuperSelectField hintText='Single child' style={{ margin: 10 }}>
+          <optgroup label='A'>
+            <span value='A'>Option A</span>
+          </optgroup>
+        </SuperSelectField>
+
+        <SuperSelectField hintText='No child' style={{ margin: 10 }} />
+
+        <SuperSelectField
+          disabled
+          hintText='Disabled'
+          style={{ minWidth: 150, margin: 10 }}
+        />
+      </div>
 
     </section>
   }

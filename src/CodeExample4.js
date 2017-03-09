@@ -114,6 +114,7 @@ class CodeExample extends Component {
         hintText='Complex example'
         onChange={this.handleSelection}
         value={state4}
+        elementHeight={58}
         selectionsRenderer={this.handleCustomDisplaySelections('state4')}
         style={{ width: 300, marginTop: 20 }}
       >

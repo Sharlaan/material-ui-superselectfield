@@ -132,9 +132,11 @@ SelectionsPresenter.defaultProps = {
 class SelectField extends Component {
   constructor (props, context) {
     super(props, context)
+    const itemsLength = this.getChildrenLength(this.props.children)
     this.state = {
       isOpen: false,
-      itemsLength: this.getChildrenLength(props.children),
+      itemsLength,
+      showAutocomplete: itemsLength > this.props.showAutocompleteTreshold,
       selectedItems: props.value,
       searchText: ''
     }
@@ -149,17 +151,22 @@ class SelectField extends Component {
   // Counts nodes with non-null value property + optgroups
   // noinspection JSMethodCanBeStatic
   getChildrenLength (children) {
-    let count = 0
-    for (let child of children) {
-      if (child.type === 'optgroup') {
-        ++count
-        for (let c of child.props.children) {
-          if (c.props.value) ++count
-        }
-      }
-      else if (child.props.value) ++count
+    if (!children) return 0
+    else if (Array.isArray(children)) {
+      return children.reduce((count, child) => {
+        if (child.type === 'optgroup') {
+          ++count
+          for (let c of child.props.children) {
+            if (c.props.value) ++count
+          }
+        } else if (child.props.value) ++count
+        return count
+      }, 0)
+    } else if (typeof children === 'object') {
+      if (children.type === 'optgroup') return this.getChildrenLength(children.props.children)
+      else if (children.props.value) return 1
     }
-    return count
+    return 0
   }
 
   closeMenu = () => {
@@ -169,15 +176,11 @@ class SelectField extends Component {
   }
 
   openMenu () {
-    this.setState({ isOpen: true }, () => this.focusTextField())
-  }
-
-  showAutocomplete () {
-    return this.state.itemsLength > this.props.showAutocompleteTreshold
+    if (this.state.itemsLength) this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
   focusTextField () {
-    if (this.showAutocomplete()) {
+    if (this.state.showAutocomplete) {
       const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
       input.focus()
     } else this.focusMenuItem()
@@ -264,7 +267,7 @@ class SelectField extends Component {
     switch (key) {
       case 'ArrowUp':
         if (+tabIndex === firstTabIndex) {
-          this.showAutocomplete()
+          this.state.showAutocomplete
             ? this.focusTextField()
             : this.focusMenuItem(lastTabIndex)
         }
@@ -279,7 +282,7 @@ class SelectField extends Component {
 
       case 'ArrowDown':
         if (+tabIndex === lastTabIndex) {
-          this.showAutocomplete()
+          this.state.showAutocomplete
             ? this.focusTextField()
             : this.focusMenuItem()
         }
@@ -308,7 +311,7 @@ class SelectField extends Component {
   }
 
   render () {
-    const { hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, children, nb2show,
+    const { children, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
       autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition
@@ -365,8 +368,19 @@ class SelectField extends Component {
         />)]
     }
 
-    const menuItems = !disabled && this.state.isOpen && children &&
-      children.reduce((nodes, child, index) => {
+    let fixedChildren
+    switch (this.state.itemsLength) {
+      case 0:
+        fixedChildren = false
+        break
+      case 1:
+        fixedChildren = [ children ]
+        break
+      default: fixedChildren = children
+    }
+
+    const menuItems = !disabled && fixedChildren && this.state.isOpen &&
+      fixedChildren.reduce((nodes, child, index) => {
         if (child.type !== 'optgroup') return menuItemBuilder(nodes, child, index)
         const nextIndex = nodes.length ? +nodes[nodes.length - 1].key + 1 : 0
         const menuGroup =
@@ -376,8 +390,10 @@ class SelectField extends Component {
             primaryText={child.props.label}
             style={{ cursor: 'default', ...menuGroupStyle }}
           />
-        const groupedItems = child.props.children.reduce((nodes, child, idx) =>
-                                menuItemBuilder(nodes, child, nextIndex + idx), [])
+        const groupedItems = Array.isArray(child.props.children)
+          ? child.props.children.reduce((nodes, child, idx) =>
+              menuItemBuilder(nodes, child, nextIndex + idx), [])
+          : menuItemBuilder(nodes, child, nextIndex)
         return groupedItems.length
           ? [ ...nodes, menuGroup, ...groupedItems ]
           : nodes
@@ -388,7 +404,7 @@ class SelectField extends Component {
       ? this.menuItems.map(item => findDOMNode(item).clientHeight) // can't resolve since items not rendered yet, need componentDiDMount
       : elementHeight
     */
-    const autoCompleteHeight = this.showAutocomplete() ? 53 : 0
+    const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
     const footerHeight = menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
@@ -405,6 +421,7 @@ class SelectField extends Component {
         tabIndex='0'
         onKeyDown={this.handleKeyDown}
         onTouchTap={this.handleClick}
+        title={!this.state.itemsLength ? 'Nothing to show' : ''}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
           color: disabled ? palette.disabledColor : palette.textColor,
@@ -427,7 +444,7 @@ class SelectField extends Component {
           onRequestClose={this.handlePopoverClose}
           style={{ height: popoverHeight }}
         >
-          {this.showAutocomplete() &&
+          {this.state.showAutocomplete &&
             <TextField
               ref={ref => (this.searchTextField = ref)}
               value={this.state.searchText}
