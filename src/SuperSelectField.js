@@ -245,7 +245,6 @@ class SelectField extends Component {
     event.preventDefault()
     const { selectedItems } = this.state
     if (this.props.multiple) {
-      console.debug('selectedItems', selectedItems)
       const selectedItemExists = selectedItems.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
