@@ -163,7 +163,9 @@ class SelectField extends Component {
         return count
       }, 0)
     } else if (typeof children === 'object') {
-      if (children.type === 'optgroup') return this.getChildrenLength(children.props.children)
+      if (children.type === 'optgroup') {
+        return this.getChildrenLength(children.props.children) + 1
+      }
       else if (children.props.value) return 1
     }
     return 0
@@ -243,6 +245,7 @@ class SelectField extends Component {
     event.preventDefault()
     const { selectedItems } = this.state
     if (this.props.multiple) {
+      console.debug('selectedItems', selectedItems)
       const selectedItemExists = selectedItems.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
@@ -376,7 +379,9 @@ class SelectField extends Component {
       case 1:
         fixedChildren = [ children ]
         break
-      default: fixedChildren = children
+      default:
+        // accounts for case with 1 single optgroup hosting many options
+        fixedChildren = Array.isArray(children) ? children : [children]
     }
 
     const menuItems = !disabled && fixedChildren && this.state.isOpen &&
@@ -388,7 +393,7 @@ class SelectField extends Component {
             disabled
             key={nextIndex}
             primaryText={child.props.label}
-            style={{ cursor: 'default', ...menuGroupStyle }}
+            style={{ cursor: 'default', paddingTop: 10, paddingBottom: 10, ...menuGroupStyle }}
           />
         const groupedItems = Array.isArray(child.props.children)
           ? child.props.children.reduce((nodes, child, idx) =>

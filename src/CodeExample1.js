@@ -55,9 +55,9 @@ class CodeExample extends Component {
           <div value='F' label='label F'>Option F</div>
         </SuperSelectField>
 
-        <SuperSelectField hintText='Single child' style={{ margin: 10 }}>
-          <optgroup label='A'>
-            <span value='A'>Option A</span>
+        <SuperSelectField multiple hintText='Single child' style={{ margin: 10 }}>
+          <optgroup label='Group A'>
+            <span value={1} label='Option 1'>Option 1</span>
           </optgroup>
         </SuperSelectField>
 
