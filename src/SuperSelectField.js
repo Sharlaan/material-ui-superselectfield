@@ -148,28 +148,25 @@ class SelectField extends Component {
       this.setState({ selectedItems: nextProps.value })
     }
   }
-  // Counts nodes with non-null value property + optgroups
+  // Counts nodes with non-null value property without optgroups
   // noinspection JSMethodCanBeStatic
   getChildrenLength (children) {
     if (!children) return 0
     else if (Array.isArray(children)) {
-      return children.reduce((count, child) => {
-        if (child.type === 'optgroup') {
-          ++count
-          if (child.props.children) {
-            if (Array.isArray(child.props.children)) {
-              for (let c of child.props.children) {
+      return children.reduce((count, { type, props: {value, children: cpc} }) => {
+        if (type === 'optgroup') {
+          if (cpc) {
+            if (Array.isArray(cpc)) {
+              for (let c of cpc) {
                 if (c.props.value) ++count
               }
-            } else if (typeof child.props.children === 'object' && child.props.children.props.value) ++count
+            } else if (typeof cpc === 'object' && cpc.props.value) ++count
           }
-        } else if (child.props.value) ++count
+        } else if (value) ++count
         return count
       }, 0)
     } else if (typeof children === 'object') {
-      if (children.type === 'optgroup') {
-        return this.getChildrenLength(children.props.children) + 1
-      }
+      if (children.type === 'optgroup') return this.getChildrenLength(children.props.children)
       else if (children.props.value) return 1
     }
     return 0
@@ -374,20 +371,9 @@ class SelectField extends Component {
         />)]
     }
 
-    let fixedChildren
-    switch (this.state.itemsLength) {
-      case 0:
-        fixedChildren = false
-        break
-      case 1:
-        fixedChildren = [ children ]
-        break
-      default:
-        // accounts for case with 1 single optgroup hosting many options
-        fixedChildren = Array.isArray(children) ? children : [children]
-    }
+    const fixedChildren = Array.isArray(children) ? children : [children]
 
-    const menuItems = !disabled && fixedChildren && this.state.isOpen &&
+    const menuItems = !disabled && fixedChildren.length && this.state.isOpen &&
       fixedChildren.reduce((nodes, child, index) => {
         if (child.type !== 'optgroup') return menuItemBuilder(nodes, child, index)
         const nextIndex = nodes.length ? +nodes[nodes.length - 1].key + 1 : 0
@@ -398,10 +384,14 @@ class SelectField extends Component {
             primaryText={child.props.label}
             style={{ cursor: 'default', paddingTop: 10, paddingBottom: 10, ...menuGroupStyle }}
           />
-        const groupedItems = Array.isArray(child.props.children)
-          ? child.props.children.reduce((nodes, child, idx) =>
+        let groupedItems = []
+        const cpc = child.props.children
+        if (cpc) {
+          if (Array.isArray(cpc) && cpc.length) {
+            groupedItems = cpc.reduce((nodes, child, idx) =>
               menuItemBuilder(nodes, child, nextIndex + idx), [])
-          : menuItemBuilder(nodes, child, nextIndex)
+          } else if (typeof cpc === 'object') groupedItems = menuItemBuilder(nodes, cpc, nextIndex)
+        }
         return groupedItems.length
           ? [ ...nodes, menuGroup, ...groupedItems ]
           : nodes

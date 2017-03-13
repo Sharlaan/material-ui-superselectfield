@@ -83,7 +83,7 @@ class CodeExample extends Component {
           </optgroup>
         </SuperSelectField>
 
-        <SuperSelectField name='case 4bis' hintText='Multiple empty groups' style={{ margin: 10 }}>
+        <SuperSelectField name='case 4bis' hintText='One empty group, and one group+child' style={{ margin: 10 }}>
           <optgroup label='Group A'>
           </optgroup>
           <optgroup label='Group B'>
