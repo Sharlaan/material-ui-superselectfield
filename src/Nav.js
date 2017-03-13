@@ -7,8 +7,8 @@ import './Nav.css'
 
 export default () => (
   <Drawer open width={200}>
-    <h3 style={{ textAlign: 'center', height: 68, margin: 0 }}>
-      <Link to='/' className='base' style={{ lineHeight: '68px' }}>Demos</Link>
+    <h3 className='title'>
+      <Link to='/' className='base verticallyCenter'>Demos</Link>
     </h3>
     {[
       { route: '/example1', label: 'Basic' },
@@ -17,7 +17,7 @@ export default () => (
       { route: '/example4', label: 'Options grouping' }
     ].map(({ route, label }) => (
       <MenuItem key={route} innerDivStyle={{ padding: 0 }}>
-        <NavLink to={route} className='base' style={{ paddingLeft: 32 }}>{label}</NavLink>
+        <NavLink to={route} className='base morePadding'>{label}</NavLink>
       </MenuItem>
     ))}
   </Drawer>

@@ -2,15 +2,15 @@ import React from 'react'
 import { Switch } from 'react-router'
 import Route from 'react-router-dom/Route'
 import logo from './assets/logo.svg'
-import './App.css'
 import Nav from './Nav'
 import Home from './Home'
 import CodeExample1 from './CodeExample1'
 import CodeExample2 from './CodeExample2'
 import CodeExample3 from './CodeExample3'
 import CodeExample4 from './CodeExample4'
+import './App.css'
 
-export default ({ children }) => (
+export default () => (
   <div className='App'>
 
     <div className='App-header'>

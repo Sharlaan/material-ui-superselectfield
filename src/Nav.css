@@ -1,8 +1,14 @@
+.title {
+    text-align: center;
+    height: 68px;
+    margin: 0;
+}
+
 .base {
    text-decoration: none;
    color: #222;
    height: 100%;
-   width: 100%;
+   width: calc(100% - 32px);
    display: inline-block;
  }
 
@@ -10,3 +16,7 @@
   font-weight: bold;
   color: #00BCD4;
 }
+
+.verticallyCenter { line-height: 68px; }
+
+.morePadding { padding-left: 32px; }
