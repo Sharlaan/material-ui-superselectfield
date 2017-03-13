@@ -1,0 +1,12 @@
+.base {
+   text-decoration: none;
+   color: #222;
+   height: 100%;
+   width: 100%;
+   display: inline-block;
+ }
+
+.active {
+  font-weight: bold;
+  color: #00BCD4;
+}

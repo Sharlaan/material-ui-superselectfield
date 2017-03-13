@@ -1,9 +1,14 @@
 import React from 'react'
-import Link from './Link'
-import Drawer from 'material-ui/Drawer/Drawer'
-import MenuItem from 'material-ui/MenuItem/MenuItem'
+import { Switch } from 'react-router'
+import Route from 'react-router-dom/Route'
 import logo from './assets/logo.svg'
 import './App.css'
+import Nav from './Nav'
+import Home from './Home'
+import CodeExample1 from './CodeExample1'
+import CodeExample2 from './CodeExample2'
+import CodeExample3 from './CodeExample3'
+import CodeExample4 from './CodeExample4'
 
 export default ({ children }) => (
   <div className='App'>
@@ -14,25 +19,17 @@ export default ({ children }) => (
       <h4>a Material-UI based dropdown component</h4>
     </div>
 
-    <section className='App-content'>{children}</section>
+    <Nav />
 
-    <Drawer open width={200}>
-      <h3 style={{ textAlign: 'center' }}>
-        <Link to='/' activeClassName='' label='Demos' style={{ paddingLeft: 0 }} />
-      </h3>
-      <MenuItem>
-        <Link to='/example1' label='Basic' />
-      </MenuItem>
-      <MenuItem>
-        <Link to='/example2' label='Multiple' />
-      </MenuItem>
-      <MenuItem>
-        <Link to='/example3' label='Autocomplete' />
-      </MenuItem>
-      <MenuItem>
-        <Link to='/example4' label='Options grouping' />
-      </MenuItem>
-    </Drawer>
+    <section className='App-content'>
+      <Switch>
+        <Route exact path='/' render={() => <Home />} />
+        <Route path='/example1' render={() => <CodeExample1 />} />
+        <Route path='/example2' render={() => <CodeExample2 />} />
+        <Route path='/example3' render={() => <CodeExample3 />} />
+        <Route path='/example4' render={() => <CodeExample4 />} />
+      </Switch>
+    </section>
 
   </div>
 )

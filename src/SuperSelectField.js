@@ -156,8 +156,12 @@ class SelectField extends Component {
       return children.reduce((count, child) => {
         if (child.type === 'optgroup') {
           ++count
-          for (let c of child.props.children) {
-            if (c.props.value) ++count
+          if (child.props.children) {
+            if (Array.isArray(child.props.children)) {
+              for (let c of child.props.children) {
+                if (c.props.value) ++count
+              }
+            } else if (typeof child.props.children === 'object' && child.props.children.props.value) ++count
           }
         } else if (child.props.value) ++count
         return count
@@ -504,26 +508,52 @@ SelectField.propTypes = {
   checkedIcon: PropTypes.node,
   unCheckedIcon: PropTypes.node,
   hoverColor: PropTypes.string,
-  // children can be any html element but with a required 'value' property
-  children: PropTypes.arrayOf((props, propName, componentName, location, propFullName) => {
-    if (props[propName].type !== 'optgroup') {
-      if (!props[propName].props.value) {
-        return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName}'. 
-          Validation failed.`
-        )
-      }
-    } else {
-      for (let child of props[propName].props.children) {
-        if (!child.props.value) {
+  // children can be either:
+  // an html element with a required 'value' property, and optional label prop,
+  // an optgroup with valid children (same as bove case),
+  // an array of either valid chidlren, or of optgroups hosting valid children
+  children: PropTypes.oneOfType([
+    objectShape,
+    (props, propName, componentName, location, propFullName) => {
+      const pp = props[propName]
+      if (pp.type === 'optgroup' && pp.props.children) {
+        if (Array.isArray(pp.props.children)) {
+          for (let child of pp.props.children) {
+            if (!child.props.value) {
+              return new Error(`
+              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+              Validation failed.`
+              )
+            }
+          }
+        } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
-            Missing required property 'value' for '${propFullName}' supplied to '${componentName}'. 
-            Validation failed.`
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+          Validation failed.`
           )
         }
       }
-    }
-  }),
+    },
+    PropTypes.arrayOf((props, propName, componentName, location, propFullName) => {
+      if (props[propName].type !== 'optgroup') {
+        if (!props[propName].props.value) {
+          return new Error(`
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+          Validation failed.`
+          )
+        }
+      } else {
+        for (let child of props[propName].props.children) {
+          if (!child.props.value) {
+            return new Error(`
+            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+            Validation failed.`
+            )
+          }
+        }
+      }
+    })
+  ]),
   innerDivStyle: PropTypes.object,
   selectedMenuItemStyle: PropTypes.object,
   menuFooterStyle: PropTypes.object,
@@ -542,19 +572,19 @@ SelectField.propTypes = {
     if (multiple) {
       if (!Array.isArray(value)) {
         return new Error(`
-          When using 'multiple' mode, 'value' of '${componentName}' must be an array. 
+          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array. 
           Validation failed.`
         )
       } else if (checkFormat(value) !== -1) {
         const index = checkFormat(value)
         return new Error(`
-          'value[${index}]' of '${componentName}' must be an object including a 'value' property. 
+          'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property. 
           Validation failed.`
         )
       }
     } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
-        'value' of '${componentName}' must be an object including a 'value' property. 
+        'value' of '${componentName} ${props.name}' must be an object including a 'value' property. 
         Validation failed.`
       )
     }

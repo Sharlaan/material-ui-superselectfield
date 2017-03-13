@@ -55,19 +55,55 @@ class CodeExample extends Component {
           <div value='F' label='label F'>Option F</div>
         </SuperSelectField>
 
-        <SuperSelectField multiple hintText='Single child' style={{ margin: 10 }}>
-          <optgroup label='Group A'>
-            <span value={1} label='Option 1'>Option 1</span>
-          </optgroup>
-        </SuperSelectField>
-
-        <SuperSelectField hintText='No child' style={{ margin: 10 }} />
-
         <SuperSelectField
           disabled
           hintText='Disabled'
           style={{ minWidth: 150, margin: 10 }}
         />
+      </div>
+
+      <h3 style={{ marginTop: 200 }}>Edges cases</h3>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+
+        <SuperSelectField name='case 1' hintText='No child' style={{ margin: 10 }} />
+
+        <SuperSelectField name='case 2' hintText='Single child' style={{ margin: 10 }}>
+          <span value={1} label='Option 1'>Option 1</span>
+        </SuperSelectField>
+
+        <SuperSelectField name='case 3' hintText='Single empty group' style={{ margin: 10 }}>
+          <optgroup label='Group A'>
+          </optgroup>
+        </SuperSelectField>
+
+        <SuperSelectField name='case 4' hintText='Multiple empty groups' style={{ margin: 10 }}>
+          <optgroup label='Group A'>
+          </optgroup>
+          <optgroup label='Group B'>
+          </optgroup>
+        </SuperSelectField>
+
+        <SuperSelectField name='case 4bis' hintText='Multiple empty groups' style={{ margin: 10 }}>
+          <optgroup label='Group A'>
+          </optgroup>
+          <optgroup label='Group B'>
+            <span value={1} label='Option 1'>Option 1</span>
+          </optgroup>
+        </SuperSelectField>
+
+        <SuperSelectField name='case 5' multiple value={[]} hintText='Single child in single group' style={{ margin: 10 }}>
+          <optgroup label='Group A'>
+            <span value={1} label='Option 1'>Option 1</span>
+          </optgroup>
+        </SuperSelectField>
+
+        <SuperSelectField name='case 6' multiple value={[]} hintText='Children in single group' style={{ margin: 10 }}>
+          <optgroup label='Group A'>
+            <span value={1} label='Option 1'>Option 1</span>
+            <span value={2} label='Option 2'>Option 2</span>
+          </optgroup>
+        </SuperSelectField>
+
       </div>
 
     </section>
