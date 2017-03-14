@@ -23,11 +23,11 @@ export default () => (
 
     <section className='App-content'>
       <Switch>
-        <Route exact path='/' render={() => <Home />} />
-        <Route path='/example1' render={() => <CodeExample1 />} />
-        <Route path='/example2' render={() => <CodeExample2 />} />
-        <Route path='/example3' render={() => <CodeExample3 />} />
-        <Route path='/example4' render={() => <CodeExample4 />} />
+        <Route path='/example1' component={CodeExample1} />
+        <Route path='/example2' component={CodeExample2} />
+        <Route path='/example3' component={CodeExample3} />
+        <Route path='/example4' component={CodeExample4} />
+        <Route component={Home} />
       </Switch>
     </section>
 

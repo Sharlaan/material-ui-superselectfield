@@ -34,7 +34,23 @@ const displayState = state => state.length
   ? [...state].map(({ value, label }) => label || value).join(', ')
   : 'empty state'
 
-const dataSource = ['Raphaël', 'Jessica', 'Naomie', 'Oliver', 'Wynona', 'Ben', 'Vincent', 'Clémentine', 'Angélique', 'Julien', 'Steve', 'Yoan', 'Nathalie', 'Marie', 'Renée']
+const dataSource = [
+  {id: 0, name: 'Raphaël'},
+  {id: 1, name: 'Jessica'},
+  {id: 2, name: 'Naomie'},
+  {id: 3, name: 'Oliver'},
+  {id: 4, name: 'Wynona'},
+  {id: 5, name: 'Ben'},
+  {id: 6, name: 'Vincent'},
+  {id: 7, name: 'Clémentine'},
+  {id: 8, name: 'Angélique'},
+  {id: 9, name: 'Julien'},
+  {id: 10, name: 'Steve'},
+  {id: 11, name: 'Yoan'},
+  {id: 12, name: 'Nathalie'},
+  {id: 13, name: 'Marie'},
+  {id: 14, name: 'Renée'}
+]
 
 class CodeExample extends Component {
   state = {
@@ -95,7 +111,9 @@ class CodeExample extends Component {
       )
     })
 
-    const dataSourceNodes = dataSource.map((data, index) => <div key={index} value={data}>{data}</div>)
+    const dataSourceNodes = dataSource.map(({id, name}, index) => (
+      <div key={index} value={id} label={name}>{name}</div>
+    ))
 
     return <section style={containerStyle}>
 
