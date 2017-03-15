@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
