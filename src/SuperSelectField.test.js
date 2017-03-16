@@ -97,7 +97,7 @@ describe('Children composition', () => {
 })
 
 describe('Autocomplete usage', () => {
-  it('should show if more than [showAutocompleteTreshold] items')
+  it('should show if more than [showAutocompleteThreshold] items')
 
   it('should display the default [hintTextAutocomplete]')
 

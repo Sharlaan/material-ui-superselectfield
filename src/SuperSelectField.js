@@ -136,7 +136,7 @@ class SelectField extends Component {
     this.state = {
       isOpen: false,
       itemsLength,
-      showAutocomplete: itemsLength > this.props.showAutocompleteTreshold,
+      showAutocomplete: itemsLength > this.props.showAutocompleteThreshold,
       selectedItems: props.value,
       searchText: ''
     }
@@ -551,7 +551,7 @@ SelectField.propTypes = {
   hintText: PropTypes.string,
   hintTextAutocomplete: PropTypes.string,
   noMatchFound: PropTypes.string,
-  showAutocompleteTreshold: PropTypes.number,
+  showAutocompleteThreshold: PropTypes.number,
   elementHeight: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.number)
@@ -600,7 +600,7 @@ SelectField.defaultProps = {
   hintText: 'Click me',
   hintTextAutocomplete: 'Type something',
   noMatchFound: 'No match found',
-  showAutocompleteTreshold: 10,
+  showAutocompleteThreshold: 10,
   elementHeight: 36,
   autocompleteFilter: (searchText, text) => {
     if (!text || (typeof text !== 'string' && typeof text !== 'number')) return false

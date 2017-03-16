@@ -11,7 +11,7 @@ export default () => (
       </li>
       <li>
         <b>Autocomplete :</b>
-        Past a configurable treshold (<i>showAutocompleteTreshold</i>, default: 10), an Autocomplete input will help you find your selection faster.<br/>
+        Past a configurable treshold (<i>showAutocompleteThreshold</i>, default: 10), an Autocomplete input will help you find your selection faster.<br/>
         SuperSelectField exposes <i>autocompleteFilter</i> property to let you provide your own filtering logic (default: case insensitive).
       </li>
       <li>
