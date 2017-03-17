@@ -1,14 +1,14 @@
 # material-ui-superSelectField
 
 ## Table of Contents
-- [Preview](# preview)
-- [Installation](# installation)
-- [Properties](# properties)
-- [Usage examples](# usage)
-- [Building](# building)
-- [Tests](# tests)
-- [Contributing](# contributing)
-- [TodoList](# todolist)
+- [Preview](#preview)
+- [Installation](#installation)
+- [Properties](#properties)
+- [Usage examples](#usage)
+- [Building](#building)
+- [Tests](#tests)
+- [Contributing](#contributing)
+- [TodoList](#todolist)
 
 ## Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
 ![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
