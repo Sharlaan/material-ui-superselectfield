@@ -1,22 +1,22 @@
-#material-ui-superSelectField
+# material-ui-superSelectField
 
 ## Table of Contents
-- [Preview](#preview)
-- [Installation](#installation)
-- [Properties](#properties)
-- [Usage examples](#usage)
-- [Building](#building)
-- [Tests](#tests)
-- [Contributing](#contributing)
-- [TodoList](#todolist)
+- [Preview](# preview)
+- [Installation](# installation)
+- [Properties](# properties)
+- [Usage examples](# usage)
+- [Building](# building)
+- [Tests](# tests)
+- [Contributing](# contributing)
+- [TodoList](# todolist)
 
-##Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
+## Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
 ![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
 ![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/caseInsensitive.png)
 ![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/chips.png)
 
 
-##Installation
+## Installation
 `yarn add material-ui-superselectfield`  
 
 This component requires 4 dependencies :
@@ -33,7 +33,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 ```
 
-##Properties
+## Properties
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
@@ -51,13 +51,13 @@ injectTapEventPlugin()
 | elementHeight | number, number[] | 36 | Height in pixels of each option element. If elements have different heights, you can provide them in an array. |
 | showAutocompleteThreshold | number | 10 | Maximum number of options from which to display the autocomplete search field. |
 | autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteThreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
-#####Note when setting value :
+##### Note when setting value :
 if multiple is set, value must be at least an empty Array.  
 For single value mode, you can set value to null.  
 When using objects, make sure they expose a non-null value property.  
 PropTypes should raise warnings if implementing otherwise.
 
-####Styling properties
+#### Styling properties
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
@@ -72,7 +72,7 @@ PropTypes should raise warnings if implementing otherwise.
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
 
-####Default functions
+#### Default functions
 | Name | Default function |
 |:---- |:---- |
 | checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
@@ -95,7 +95,7 @@ PropTypes should raise warnings if implementing otherwise.
 ## Usage
 Check the `CodeExampleX.js` provided in the repository.
 
-##Building
+## Building
 
 You can build the project with :   
 ```
