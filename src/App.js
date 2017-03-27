@@ -8,6 +8,7 @@ import CodeExample1 from './CodeExample1'
 import CodeExample2 from './CodeExample2'
 import CodeExample3 from './CodeExample3'
 import CodeExample4 from './CodeExample4'
+import CodeExample5 from './CodeExample5'
 import './App.css'
 
 export default () => (
@@ -27,6 +28,7 @@ export default () => (
         <Route path='/example2' component={CodeExample2} />
         <Route path='/example3' component={CodeExample3} />
         <Route path='/example4' component={CodeExample4} />
+        <Route path='/example5' component={CodeExample5} />
         <Route component={Home} />
       </Switch>
     </section>

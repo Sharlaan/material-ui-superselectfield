@@ -8,9 +8,15 @@
    text-decoration: none;
    color: #222;
    height: 100%;
-   width: calc(100% - 32px);
+   width: calc(100% - 64px);
    display: inline-block;
  }
+
+.multiLine {
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
+}
 
 .active {
   font-weight: bold;
@@ -19,4 +25,4 @@
 
 .verticallyCenter { line-height: 68px; }
 
-.morePadding { padding-left: 32px; }
+.morePadding { padding: 0 32px; }

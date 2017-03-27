@@ -14,9 +14,14 @@ export default () => (
       { route: '/example1', label: 'Basic' },
       { route: '/example2', label: 'Multiple' },
       { route: '/example3', label: 'Autocomplete' },
-      { route: '/example4', label: 'Options grouping' }
+      { route: '/example4', label: 'Options grouping' },
+      { route: '/example5', label: <span className='multiLine'>Asynchronous loading</span> }
     ].map(({ route, label }) => (
-      <MenuItem key={route} innerDivStyle={{ padding: 0 }}>
+      <MenuItem
+        key={route}
+        style={{ whiteSpace: 'normal' }}
+        innerDivStyle={{ padding: 0 }}
+      >
         <NavLink to={route} className='base morePadding'>{label}</NavLink>
       </MenuItem>
     ))}

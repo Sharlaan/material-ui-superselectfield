@@ -9,6 +9,19 @@ import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
 // Utilities
+function entries (obj) {
+  return 'entries' in Object
+    ? Object.entries(obj)
+    : function (obj) {
+      let entries = []
+      const keys = Object.keys(obj)
+      for (let prop of keys) {
+        entries.push([ prop, obj[prop] ])
+      }
+      return entries
+    }
+}
+
 function areEqual (val1, val2) {
   if (!val1 || !val2 || typeof val1 !== typeof val2) return false
   else if (typeof val1 === 'string' ||
@@ -16,11 +29,55 @@ function areEqual (val1, val2) {
     typeof val1 === 'boolean') return val1 === val2
   else if (typeof val1 === 'object') {
     return Object.keys(val1).length === Object.keys(val2).length &&
-      Object.entries(val2).every(([key2, value2]) => val1[key2] === value2)
+      entries(val2).every(([key2, value2]) => val1[key2] === value2)
   }
 }
 
 const checkFormat = value => value.findIndex(v => typeof v !== 'object' || !('value' in v))
+
+const objectShape = PropTypes.shape({
+  value: PropTypes.any.isRequired,
+  label: PropTypes.string
+})
+
+// ================================================================
+// ====================  FloatingLabel  =====================
+// ================================================================
+
+// TODO: implement style lock when disabled = true
+const FloatingLabel = ({ children, shrink, shrinkStyle, disabled }) => {
+  const defaultStyles = {
+    position: 'absolute',
+    lineHeight: '22px',
+    transition: 'cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+    zIndex: 1, // Needed to display label above Chrome's autocomplete field background
+    transform: 'scale(1) translate(0, 0)',
+    transformOrigin: 'left top',
+    pointerEvents: 'auto',
+    userSelect: 'none'
+  }
+
+  const shrinkStyles = shrink
+    ? {
+      transform: 'scale(0.75) translate(0, -28px)',
+      pointerEvents: 'none',
+      ...shrinkStyle
+    }
+    : null
+
+  // console.debug('shrink', shrink)
+
+  return (
+    <label style={{ ...defaultStyles, ...shrinkStyles }}>
+      {children}
+    </label>
+  )
+}
+
+FloatingLabel.defaultProps = {
+  disabled: false,
+  shrink: false
+}
 
 // ================================================================
 // ====================  SelectionsPresenter  =====================
@@ -29,6 +86,7 @@ const checkFormat = value => value.findIndex(v => typeof v !== 'object' || !('va
 // noinspection JSDuplicatedDeclaration
 const styles = {
   div1: {
+    position: 'relative',
     height: '100%',
     display: '-webkit-box',
     display: '-webkit-flex', // eslint-disable-line no-dupe-keys
@@ -76,28 +134,20 @@ const styles = {
   }
 }
 
-const SelectionsPresenter = ({ selectedValues, hintText, selectionsRenderer }) => {
-  // TODO: add floatingLabelText
-  return (
-    <div style={styles.div1}>
+const SelectionsPresenter = ({ selectedValues, hintText, selectionsRenderer }) => (
+  <div style={styles.div1}>
 
-      <div style={styles.div2}>
-        <div style={styles.div3}>
-          {selectionsRenderer(selectedValues, hintText)}
-        </div>
-        <DropDownArrow />
+    <div style={styles.div2}>
+      <div style={styles.div3}>
+        {selectionsRenderer(selectedValues, hintText)}
       </div>
-
-      <hr style={{ width: '100%', margin: 0 }} />
-
+      <DropDownArrow />
     </div>
-  )
-}
 
-const objectShape = PropTypes.shape({
-  value: PropTypes.any.isRequired,
-  label: PropTypes.string
-})
+    <hr style={{ width: '100%', margin: 0 }} />
+
+  </div>
+)
 
 SelectionsPresenter.propTypes = {
   value: PropTypes.oneOfType([
@@ -108,7 +158,6 @@ SelectionsPresenter.propTypes = {
   hintText: PropTypes.string
 }
 
-// noinspection JSUnusedGlobalSymbols
 SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
   value: null,
@@ -132,12 +181,14 @@ SelectionsPresenter.defaultProps = {
 class SelectField extends Component {
   constructor (props, context) {
     super(props, context)
-    const itemsLength = this.getChildrenLength(this.props.children)
+    const { children, value, multiple, showAutocompleteThreshold } = props
+    const itemsLength = this.getChildrenLength(children)
     this.state = {
       isOpen: false,
+      isFocused: false,
       itemsLength,
-      showAutocomplete: itemsLength > this.props.showAutocompleteThreshold,
-      selectedItems: props.value,
+      showAutocomplete: (itemsLength > showAutocompleteThreshold) || false,
+      selectedItems: value || (multiple ? [] : null),
       searchText: ''
     }
     this.menuItems = []
@@ -147,12 +198,20 @@ class SelectField extends Component {
     if (!areEqual(nextProps.value, this.state.selectedItems)) {
       this.setState({ selectedItems: nextProps.value })
     }
+    if (!areEqual(nextProps.children, this.props.children)) {
+      const itemsLength = this.getChildrenLength(nextProps.children)
+      this.setState({
+        itemsLength,
+        showAutocomplete: itemsLength > this.props.showAutocompleteThreshold
+      })
+    }
   }
+
   // Counts nodes with non-null value property without optgroups
   // noinspection JSMethodCanBeStatic
   getChildrenLength (children) {
     if (!children) return 0
-    else if (Array.isArray(children)) {
+    else if (Array.isArray(children) && children.length) {
       return children.reduce((count, { type, props: {value, children: cpc} }) => {
         if (type === 'optgroup') {
           if (cpc) {
@@ -165,11 +224,22 @@ class SelectField extends Component {
         } else if (value) ++count
         return count
       }, 0)
-    } else if (typeof children === 'object') {
+    } else if (!Array.isArray(children) && typeof children === 'object') {
       if (children.type === 'optgroup') return this.getChildrenLength(children.props.children)
       else if (children.props.value) return 1
     }
     return 0
+  }
+
+  onBlur = (event) => {
+    const { isFocused, isOpen } = this.state
+  /*  console.debug('isFocused', isFocused,
+      '\nisOpen', isOpen,
+      '\nevent type', event.type,
+      '\ntarget', event.target,
+      '\nrelatedTarget', event.relatedTarget
+    ) */
+    if (!isOpen) this.setState({ isFocused: false })
   }
 
   closeMenu = () => {
@@ -314,13 +384,17 @@ class SelectField extends Component {
   }
 
   render () {
-    const { children, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
+    const { children, floatingLabelText, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
       autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition
     } = this.props
 
     const { baseTheme: {palette}, menuItem } = this.context.muiTheme
+
+    // Condition for shrinking the floating Label
+    const shrinkCondition = (Array.isArray(this.state.selectedItems) && !!this.state.selectedItems.length) ||
+      typeof selectedValues === 'object' || this.state.isFocused
 
     // Default style depending on Material-UI context
     const mergedSelectedMenuItemStyle = {
@@ -417,6 +491,8 @@ class SelectField extends Component {
       <div
         ref={ref => (this.root = ref)}
         tabIndex='0'
+        onFocus={() => (this.setState({ isFocused: true }))}
+        onBlur={this.onBlur}
         onKeyDown={this.handleKeyDown}
         onTouchTap={this.handleClick}
         title={!this.state.itemsLength ? 'Nothing to show' : ''}
@@ -427,8 +503,20 @@ class SelectField extends Component {
         }}
       >
 
+        {floatingLabelText &&
+          <FloatingLabel
+            shrink={shrinkCondition}
+            disabled={disabled}
+          >
+            {floatingLabelText}
+          </FloatingLabel>
+        }
+
         <SelectionsPresenter
+          isFocused={this.state.isFocused}
+          disabled={disabled}
           hintText={hintText}
+          floatingLabelText={floatingLabelText}
           selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}
         />
@@ -548,6 +636,7 @@ SelectField.propTypes = {
   selectedMenuItemStyle: PropTypes.object,
   menuFooterStyle: PropTypes.object,
   name: PropTypes.string,
+  floatingLabelText: PropTypes.string,
   hintText: PropTypes.string,
   hintTextAutocomplete: PropTypes.string,
   noMatchFound: PropTypes.string,
@@ -559,6 +648,7 @@ SelectField.propTypes = {
   nb2show: PropTypes.number,
   value: (props, propName, componentName, location, propFullName) => {
     const { multiple, value } = props
+    // console.debug(`value ${props.name}`, value)
     if (multiple) {
       if (!Array.isArray(value)) {
         return new Error(`
@@ -587,7 +677,6 @@ SelectField.propTypes = {
   onChange: PropTypes.func
 }
 
-// noinspection JSUnusedGlobalSymbols
 SelectField.defaultProps = {
   anchorOrigin: { vertical: 'top', horizontal: 'left' },
   checkPosition: '',
@@ -597,6 +686,7 @@ SelectField.defaultProps = {
   multiple: false,
   disabled: false,
   nb2show: 5,
+  floatingLabelText: '',
   hintText: 'Click me',
   hintTextAutocomplete: 'Type something',
   noMatchFound: 'No match found',

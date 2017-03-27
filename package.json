@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
@@ -22,8 +22,8 @@
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-object-entries": "^1.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.2.1",
-    "enzyme": "^2.7.1",
+    "babel-preset-env": "^1.2.2",
+    "enzyme": "^2.8.0",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^0.12.0",
     "material-ui": "^0.17.1",
@@ -33,7 +33,7 @@
     "react-router-dom": "^4.0.0",
     "react-scripts": "^0.9.5",
     "react-tap-event-plugin": "^2.0.1",
-    "standard": "^9.0.1"
+    "standard": "^9.0.2"
   },
   "peerDependencies": {
     "material-ui": ">= 0.15 < 1",
@@ -71,6 +71,7 @@
       "camelcase": "off",
       "brace-style": "off",
       "no-trailing-spaces": "off",
+      "no-multiple-empty-lines": "off",
       "no-unused-vars": "warn"
     }
   },

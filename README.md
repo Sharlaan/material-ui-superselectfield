@@ -1,4 +1,11 @@
-# material-ui-superSelectField
+# material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
+                               
+[npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
+[npm-url]: https://npmjs.org/package/material-ui-superselectfield
+[downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg
+[downloads-url]: https://npmjs.org/package/material-ui-superselectfield
+[standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
+[standard-url]: https://standardjs.com
 
 ## Table of Contents
 - [Preview](#preview)
@@ -49,7 +56,7 @@ injectTapEventPlugin()
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
 | nb2show | number | 5 | Number of options displayed from the menu. |
 | elementHeight | number, number[] | 36 | Height in pixels of each option element. If elements have different heights, you can provide them in an array. |
-| showAutocompleteThreshold | number | 10 | Maximum number of options from which to display the autocomplete search field. |
+| showAutocompleteThreshold | number | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield need to be disabled, just set this prop with a value higher than children length. |
 | autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteThreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
 ##### Note when setting value :
 if multiple is set, value must be at least an empty Array.  
