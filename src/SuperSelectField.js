@@ -49,7 +49,7 @@ const FloatingLabel = ({ children, shrink, shrinkStyle, disabled }) => {
   const defaultStyles = {
     position: 'absolute',
     lineHeight: '22px',
-    transition: 'cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
     zIndex: 1, // Needed to display label above Chrome's autocomplete field background
     transform: 'scale(1) translate(0, 0)',
     transformOrigin: 'left top',
@@ -64,8 +64,6 @@ const FloatingLabel = ({ children, shrink, shrinkStyle, disabled }) => {
       ...shrinkStyle
     }
     : null
-
-  // console.debug('shrink', shrink)
 
   return (
     <label style={{ ...defaultStyles, ...shrinkStyles }}>
@@ -291,6 +289,7 @@ class SelectField extends Component {
    * TextField autocomplete methods
    */
   handleTextFieldAutocompletionFiltering = (event, searchText) => {
+    this.props.onAutoCompleteTyping(searchText)
     this.setState({ searchText }, () => this.focusTextField())
   }
 
@@ -674,7 +673,8 @@ SelectField.propTypes = {
   menuCloseButton: PropTypes.node,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onAutoCompleteTyping: PropTypes.func
 }
 
 SelectField.defaultProps = {
@@ -699,6 +699,7 @@ SelectField.defaultProps = {
   },
   value: null,
   onChange: () => {},
+  onAutoCompleteTyping: () => {},
   children: []
 }
 

@@ -83,6 +83,7 @@
     "prepublish": "babel src/SuperSelectField.js -o lib/SuperSelectField.js",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom  --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "release": "yarn deploy  &&  npm publish  &&  git push"
   }
 }

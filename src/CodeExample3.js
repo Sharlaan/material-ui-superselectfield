@@ -91,6 +91,8 @@ class CodeExample extends Component {
     this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
   }
 
+  handleAutoCompleteTyping = searchText => console.debug('You typed in AutoComplete :', searchText)
+
   render () {
     const { state31, state32 } = this.state
     console.debug('state31', state31, '\nstate32', state32)
@@ -127,6 +129,7 @@ class CodeExample extends Component {
         <SuperSelectField
           name='state31'
           multiple
+          floatingLabelText='floatingLabelText state31'
           hintText='Complex example'
           onChange={this.handleSelection}
           value={state31}
@@ -140,8 +143,10 @@ class CodeExample extends Component {
         <SuperSelectField
           name='state32'
           multiple
+          floatingLabelText='floatingLabelText state32'
           hintText='Simple example'
           onChange={this.handleSelection}
+          onAutoCompleteTyping={this.handleAutoCompleteTyping}
           value={state32}
           hoverColor='rgba(3, 169, 244, 0.15)'
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
