@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
+import CircularProgress from 'material-ui/CircularProgress/CircularProgress'
 import SuperSelectField from './SuperSelectField'
 import data from './assets/states'
-import CircularProgress from 'material-ui/CircularProgress';
 
 class CodeExample extends Component {
   state = {
     selectedStates: [],
     stateNodes: [],
-    sateteFetching: true,
+    isFetchingStates: true,
     selectedCounties: [],
     countyNodes: [],
-    countyFetching: false
+    isFetchingCounties: false
   }
 
   componentDidMount = () => {
-
-    this.setState({sateteFetching: true})
+    this.setState({ isFetchingStates: true })
 
     // Ideally should be externalized in a HoC,
     // with stateNodes && countyNodes in props
@@ -23,14 +22,14 @@ class CodeExample extends Component {
       const stateNodes = data.states.map(({code, name, capital}) =>
         <div key={code} value={name}>{name}</div>
       )
-      this.setState({ stateNodes, sateteFetching: false })
+      this.setState({ stateNodes, isFetchingStates: false })
       console.log('States updated')
-    }, 5000)
+    }, 5000) // simulates a 5secs fetch delay
   }
 
   handleStateSelection = (selectedStates, name) => {
     console.debug('selectedStates', selectedStates)
-    this.setState({ selectedStates,  countyFetching: true}, () => {
+    this.setState({ selectedStates, isFetchingCounties: true }, () => {
       const countyNodes = data.counties
         .reduce((nodes, {INCITS, county, state}) => {
           if (!selectedStates.find(({value}) => value === state)) return nodes
@@ -42,35 +41,36 @@ class CodeExample extends Component {
       )
 
       window.setTimeout(() => {
-        this.setState({ countyNodes, selectedCounties , countyFetching:false})
+        this.setState({ countyNodes, selectedCounties, isFetchingCounties: false })
         console.log('Counties updated')
-      }, 3000)
-
+      }, 3000) // simulates a 3secs fetch delay
     })
   }
 
   handleCountySelection = (selectedCounties, name) => this.setState({ selectedCounties })
 
   selectionsRenderer = (values, hintText, name) => {
-    const {sateteFetching, countyFetching } = this.state
+    const { isFetchingStates, isFetchingCounties } = this.state
 
     switch (name) {
       case 'states':
-        if (sateteFetching) return <div>
-          <CircularProgress size={20} style={{marginRight: 10}}/>
-          {hintText}
-        </div>
-        break;
+        if (isFetchingStates) {
+          return <div>
+            <CircularProgress size={20} style={{marginRight: 10}}/>
+            {hintText}
+          </div>
+        }
+        break
       case 'counties':
-        if (countyFetching) return <div>
-          <CircularProgress size={20} style={{marginRight: 10}}/>
-          {hintText}
-        </div>
-        break;
+        if (isFetchingCounties) {
+          return <div>
+            <CircularProgress size={20} style={{marginRight: 10}}/>
+            {hintText}
+          </div>
+        }
+        break
       default:
-
     }
-
 
     if (!values) return hintText
     const { value, label } = values
@@ -96,7 +96,7 @@ class CodeExample extends Component {
             name='states'
             hintText='Select a state...'
             multiple
-            selectionsRenderer={(values, hintText)=>this.selectionsRenderer(values, hintText, 'states')}
+            selectionsRenderer={(values, hintText) => this.selectionsRenderer(values, hintText, 'states')}
             value={selectedStates}
             onChange={this.handleStateSelection}
             checkPosition='left'
@@ -109,7 +109,7 @@ class CodeExample extends Component {
             name='counties'
             hintText='Select a county...'
             multiple
-            selectionsRenderer={(values, hintText)=>this.selectionsRenderer(values, hintText, 'counties')}
+            selectionsRenderer={(values, hintText) => this.selectionsRenderer(values, hintText, 'counties')}
             value={selectedCounties}
             onChange={this.handleCountySelection}
             checkPosition='left'
