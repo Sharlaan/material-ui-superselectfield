@@ -45,7 +45,7 @@ const objectShape = PropTypes.shape({
 // ================================================================
 
 // TODO: implement style lock when disabled = true
-const FloatingLabel = ({ children, shrink, shrinkStyle, disabled }) => {
+const FloatingLabel = ({ children, shrink, shrinkStyle, disabled, isFocused, muiTheme, open }) => {
   const defaultStyles = {
     position: 'absolute',
     lineHeight: '22px',
@@ -54,7 +54,8 @@ const FloatingLabel = ({ children, shrink, shrinkStyle, disabled }) => {
     transform: 'scale(1) translate(0, 0)',
     transformOrigin: 'left top',
     pointerEvents: 'auto',
-    userSelect: 'none'
+    userSelect: 'none',
+    color: isFocused && open?muiTheme.palette.primary1Color:muiTheme.palette.disabledColor
   }
 
   const shrinkStyles = shrink
@@ -132,17 +133,17 @@ const styles = {
   }
 }
 
-const SelectionsPresenter = ({ selectedValues, hintText, selectionsRenderer }) => (
+const SelectionsPresenter = ({ selectedValues, hintText, selectionsRenderer, muiTheme, isFocused, open }) => (
   <div style={styles.div1}>
 
     <div style={styles.div2}>
       <div style={styles.div3}>
         {selectionsRenderer(selectedValues, hintText)}
       </div>
-      <DropDownArrow />
+      <DropDownArrow style={{fill: muiTheme.dropDownMenu.accentColor}}/>
     </div>
 
-    <hr style={{ width: '100%', margin: 0 }} />
+    <hr style={{ width: '100%', margin: 0 , border: '1px solid '+(isFocused && open?muiTheme.palette.primary1Color:muiTheme.palette.disabledColor)}} />
 
   </div>
 )
@@ -506,6 +507,9 @@ class SelectField extends Component {
           <FloatingLabel
             shrink={shrinkCondition}
             disabled={disabled}
+            isFocused={this.state.isFocused}
+            open={this.state.isOpen}
+            muiTheme={this.context.muiTheme}
           >
             {floatingLabelText}
           </FloatingLabel>
@@ -513,8 +517,10 @@ class SelectField extends Component {
 
         <SelectionsPresenter
           isFocused={this.state.isFocused}
+          open={this.state.isOpen}
           disabled={disabled}
           hintText={hintText}
+          muiTheme={this.context.muiTheme}
           floatingLabelText={floatingLabelText}
           selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}
@@ -598,14 +604,14 @@ SelectField.propTypes = {
           for (let child of pp.props.children) {
             if (!child.props.value) {
               return new Error(`
-              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
               Validation failed.`
               )
             }
           }
         } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
           Validation failed.`
           )
         }
@@ -615,7 +621,7 @@ SelectField.propTypes = {
       if (props[propName].type !== 'optgroup') {
         if (!props[propName].props.value) {
           return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
           Validation failed.`
           )
         }
@@ -623,7 +629,7 @@ SelectField.propTypes = {
         for (let child of props[propName].props.children) {
           if (!child.props.value) {
             return new Error(`
-            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'. 
+            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
             Validation failed.`
             )
           }
@@ -651,19 +657,19 @@ SelectField.propTypes = {
     if (multiple) {
       if (!Array.isArray(value)) {
         return new Error(`
-          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array. 
+          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.
           Validation failed.`
         )
       } else if (checkFormat(value) !== -1) {
         const index = checkFormat(value)
         return new Error(`
-          'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property. 
+          'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property.
           Validation failed.`
         )
       }
     } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
-        'value' of '${componentName} ${props.name}' must be an object including a 'value' property. 
+        'value' of '${componentName} ${props.name}' must be an object including a 'value' property.
         Validation failed.`
       )
     }
