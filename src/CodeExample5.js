@@ -5,12 +5,12 @@ import data from './assets/states'
 
 class CodeExample extends Component {
   state = {
+    isFetchingStates: true,
+    isFetchingCounties: false,
     selectedStates: [],
     stateNodes: [],
-    isFetchingStates: true,
     selectedCounties: [],
-    countyNodes: [],
-    isFetchingCounties: false
+    countyNodes: []
   }
 
   componentDidMount = () => {
