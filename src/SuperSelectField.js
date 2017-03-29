@@ -23,7 +23,8 @@ function entries (obj) {
 }
 
 function areEqual (val1, val2) {
-  if (!val1 || !val2 || typeof val1 !== typeof val2) return false
+  if ((val1 === 0 || val2 === 0) && val1 === val2) return true
+  else if (!val1 || !val2 || typeof val1 !== typeof val2) return false
   else if (typeof val1 === 'string' ||
     typeof val1 === 'number' ||
     typeof val1 === 'boolean') return val1 === val2

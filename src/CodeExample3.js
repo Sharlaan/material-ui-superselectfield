@@ -113,8 +113,8 @@ class CodeExample extends Component {
       )
     })
 
-    const dataSourceNodes = dataSource.map(({id, name}, index) => (
-      <div key={index} value={id} label={name}>{name}</div>
+    const dataSourceNodes = dataSource.map(({id, name}) => (
+      <div key={id} value={id} label={name}>{name}</div>
     ))
 
     return <section style={containerStyle}>
