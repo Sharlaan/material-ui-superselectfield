@@ -8,18 +8,14 @@ import CheckedIcon from 'material-ui/svg-icons/navigation/check'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 
-// Utilities
+// ================================================================
+// =========================  Utilities  ==========================
+// ================================================================
+
 function entries (obj) {
   return 'entries' in Object
     ? Object.entries(obj)
-    : function (obj) {
-      let entries = []
-      const keys = Object.keys(obj)
-      for (let prop of keys) {
-        entries.push([ prop, obj[prop] ])
-      }
-      return entries
-    }
+    : Object.keys(obj).map(prop => [ prop, obj[prop] ])
 }
 
 function areEqual (val1, val2) {
@@ -42,36 +38,56 @@ const objectShape = PropTypes.shape({
 })
 
 // ================================================================
-// ====================  FloatingLabel  =====================
+// =======================  FloatingLabel  ========================
 // ================================================================
 
 // TODO: implement style lock when disabled = true
-const FloatingLabel = ({ children, shrink, shrinkStyle, disabled, isFocused, muiTheme, open }) => {
-  const defaultStyles = {
-    position: 'absolute',
-    lineHeight: '22px',
-    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
-    zIndex: 1, // Needed to display label above Chrome's autocomplete field background
-    transform: 'scale(1) translate(0, 0)',
-    transformOrigin: 'left top',
-    pointerEvents: 'auto',
-    userSelect: 'none',
-    color: isFocused && open?muiTheme.palette.primary1Color:muiTheme.palette.disabledColor
+class FloatingLabel extends Component {
+  state = { flabelHeight: 0 }
+
+  componentDidMount () {
+    this.setState({ flabelHeight: this.flabel.offsetHeight })
   }
 
-  const shrinkStyles = shrink
-    ? {
-      transform: 'scale(0.75) translate(0, -28px)',
-      pointerEvents: 'none',
-      ...shrinkStyle
+  render () {
+    const {
+      children, shrink, focusCondition, /* disabled, */
+      defaultColors: {floatingLabelColor, focusColor},
+      floatingLabelStyle, floatingLabelFocusStyle
+    } = this.props
+    const defaultStyles = {
+      position: 'static',
+      top: 0,
+      lineHeight: '22px',
+      zIndex: 1, // Needed to display label above Chrome's autocomplete field background
+      transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+      transform: 'scale(1) translateY(0)',
+      transformOrigin: 'left top',
+      pointerEvents: 'auto',
+      userSelect: 'none',
+      color: floatingLabelColor,
+      ...floatingLabelStyle
     }
-    : null
 
-  return (
-    <label style={{ ...defaultStyles, ...shrinkStyles }}>
-      {children}
-    </label>
-  )
+    const focusStyles = focusCondition &&
+      {
+        color: focusColor,
+        ...floatingLabelFocusStyle
+      }
+
+    const shrinkStyles = shrink &&
+      {
+        position: 'absolute',
+        transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
+        pointerEvents: 'none'
+      }
+
+    return (
+      <label ref={ref => (this.flabel = ref)} style={{ ...defaultStyles, ...shrinkStyles, ...focusStyles }}>
+        {children}
+      </label>
+    )
+  }
 }
 
 FloatingLabel.defaultProps = {
@@ -87,26 +103,6 @@ FloatingLabel.defaultProps = {
 const styles = {
   div1: {
     position: 'relative',
-    height: '100%',
-    display: '-webkit-box',
-    display: '-webkit-flex', // eslint-disable-line no-dupe-keys
-    display: '-moz-box', // eslint-disable-line no-dupe-keys
-    display: '-ms-flexbox', // eslint-disable-line no-dupe-keys
-    display: '-o-flex', // eslint-disable-line no-dupe-keys
-    display: 'flex', // eslint-disable-line no-dupe-keys
-    WebkitBoxOrient: 'vertical',
-    WebkitBoxDirection: 'normal',
-    WebkitFlexDirection: 'column',
-    msFlexDirection: 'column',
-    OFlexDirection: 'column',
-    flexDirection: 'column',
-    WebkitBoxPack: 'end',
-    WebkitJustifyContent: 'flex-end',
-    msFlexPack: 'end',
-    OJustifyContent: 'flex-end',
-    justifyContent: 'flex-end'
-  },
-  div2: {
     display: '-webkit-box',
     display: '-webkit-flex', // eslint-disable-line no-dupe-keys
     display: '-moz-box', // eslint-disable-line no-dupe-keys
@@ -124,7 +120,7 @@ const styles = {
     OAlignItems: 'center',
     alignItems: 'center'
   },
-  div3: {
+  div2: {
     WebkitBoxFlex: 1,
     MozBoxFlex: 1,
     WebkitFlex: 1,
@@ -134,20 +130,69 @@ const styles = {
   }
 }
 
-const SelectionsPresenter = ({ selectedValues, hintText, selectionsRenderer, muiTheme, isFocused, open }) => (
-  <div style={styles.div1}>
+const SelectionsPresenter = ({
+  selectedValues, selectionsRenderer,
+  floatingLabel, hintText,
+  muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
+  underlineStyle, underlineFocusStyle,
+  isFocused, isOpen, disabled
+}) => {
+  const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
 
-    <div style={styles.div2}>
-      <div style={styles.div3}>
-        {selectionsRenderer(selectedValues, hintText)}
+  // Condition for animating floating Label color and underline
+  const focusCondition = isFocused || isOpen
+  // Condition for shrinking the floating Label
+  const shrinkCondition = (Array.isArray(selectedValues) && !!selectedValues.length) ||
+    (!Array.isArray(selectedValues) && typeof selectedValues === 'object') ||
+    focusCondition
+
+  const baseHRstyle = {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    margin: 0,
+    boxSizing: 'content-box',
+    borderTop: 'none',
+    borderLeft: 'none',
+    borderRight: 'none',
+    borderBottom: '1px solid',
+    borderColor,
+    ...underlineStyle
+  }
+
+  const focusedHRstyle = {
+    borderBottom: '2px solid',
+    borderColor: (isFocused || isOpen) ? focusColor : borderColor,
+    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+    transform: `scaleX( ${(isFocused || isOpen) ? 1 : 0} )`,
+    ...underlineFocusStyle
+  }
+
+  return (
+    <div style={styles.div1}>
+      <div style={styles.div2}>
+        {floatingLabel &&
+          <FloatingLabel
+            shrink={shrinkCondition}
+            focusCondition={focusCondition}
+            disabled={disabled}
+            defaultColors={{floatingLabelColor, focusColor}}
+            floatingLabelStyle={floatingLabelStyle}
+            floatingLabelFocusStyle={floatingLabelFocusStyle}
+          >
+            {floatingLabel}
+          </FloatingLabel>
+        }
+        {(shrinkCondition || !floatingLabel) &&
+          selectionsRenderer(selectedValues, hintText)
+        }
       </div>
-      <DropDownArrow style={{fill: muiTheme.dropDownMenu.accentColor}}/>
-    </div>
+      <DropDownArrow style={{fill: borderColor}} />
 
-    <hr style={{ width: '100%', margin: 0 , border: '1px solid '+(isFocused && open?muiTheme.palette.primary1Color:muiTheme.palette.disabledColor)}} />
-
-  </div>
-)
+      <hr style={baseHRstyle} />
+      <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
+    </div>)
+}
 
 SelectionsPresenter.propTypes = {
   value: PropTypes.oneOfType([
@@ -231,21 +276,17 @@ class SelectField extends Component {
     return 0
   }
 
+  onFocus = () => this.setState({ isFocused: true })
+
   onBlur = (event) => {
-    const { isFocused, isOpen } = this.state
-  /*  console.debug('isFocused', isFocused,
-      '\nisOpen', isOpen,
-      '\nevent type', event.type,
-      '\ntarget', event.target,
-      '\nrelatedTarget', event.relatedTarget
-    ) */
-    if (!isOpen) this.setState({ isFocused: false })
+    if (!this.state.isOpen) this.setState({ isFocused: false })
   }
 
-  closeMenu = () => {
+  closeMenu = (reason) => {
     const { onChange, name } = this.props
     onChange(this.state.selectedItems, name)
-    this.setState({ isOpen: false, searchText: '' }, () => findDOMNode(this.root).focus())
+    if (reason) this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
+    this.setState({ isOpen: false, searchText: '' }, () => !reason && this.root.focus())
   }
 
   openMenu () {
@@ -280,12 +321,6 @@ class SelectField extends Component {
 
   handleKeyDown = (event) =>
     !this.props.disabled && /ArrowDown|Enter/.test(event.key) && this.openMenu()
-
-  /**
-   * Popover methods
-   */
-  // toggle instead of close ? (in case user changes targetOrigin/anchorOrigin)
-  handlePopoverClose = (reason) => this.closeMenu()
 
   /**
    * TextField autocomplete methods
@@ -385,19 +420,17 @@ class SelectField extends Component {
   }
 
   render () {
-    const { children, floatingLabelText, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
+    const { children, floatingLabel, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
       autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
+      floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
+      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition
     } = this.props
 
+    // Default style depending on Material-UI context (muiTheme)
     const { baseTheme: {palette}, menuItem } = this.context.muiTheme
 
-    // Condition for shrinking the floating Label
-    const shrinkCondition = (Array.isArray(this.state.selectedItems) && !!this.state.selectedItems.length) ||
-      typeof selectedValues === 'object' || this.state.isFocused
-
-    // Default style depending on Material-UI context
     const mergedSelectedMenuItemStyle = {
       color: menuItem.selectedTextColor, ...selectedMenuItemStyle
     }
@@ -492,7 +525,7 @@ class SelectField extends Component {
       <div
         ref={ref => (this.root = ref)}
         tabIndex='0'
-        onFocus={() => (this.setState({ isFocused: true }))}
+        onFocus={this.onFocus}
         onBlur={this.onBlur}
         onKeyDown={this.handleKeyDown}
         onTouchTap={this.handleClick}
@@ -504,27 +537,19 @@ class SelectField extends Component {
         }}
       >
 
-        {floatingLabelText &&
-          <FloatingLabel
-            shrink={shrinkCondition}
-            disabled={disabled}
-            isFocused={this.state.isFocused}
-            open={this.state.isOpen}
-            muiTheme={this.context.muiTheme}
-          >
-            {floatingLabelText}
-          </FloatingLabel>
-        }
-
         <SelectionsPresenter
           isFocused={this.state.isFocused}
-          open={this.state.isOpen}
+          isOpen={this.state.isOpen}
           disabled={disabled}
           hintText={hintText}
           muiTheme={this.context.muiTheme}
-          floatingLabelText={floatingLabelText}
           selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}
+          floatingLabel={floatingLabel}
+          floatingLabelStyle={floatingLabelStyle}
+          floatingLabelFocusStyle={floatingLabelFocusStyle}
+          underlineStyle={underlineStyle}
+          underlineFocusStyle={underlineFocusStyle}
         />
 
         <Popover
@@ -533,7 +558,7 @@ class SelectField extends Component {
           canAutoPosition={false}
           anchorOrigin={anchorOrigin}
           useLayerForClickAway={false}
-          onRequestClose={this.handlePopoverClose}
+          onRequestClose={this.closeMenu}
           style={{ height: popoverHeight }}
         >
           {this.state.showAutocomplete &&
@@ -544,6 +569,8 @@ class SelectField extends Component {
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
               style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - (16 * 2) }}
+              underlineStyle={autocompleteUnderlineStyle}
+              underlineFocusStyle={autocompleteUnderlineFocusStyle}
             />
           }
           <div
@@ -642,7 +669,12 @@ SelectField.propTypes = {
   selectedMenuItemStyle: PropTypes.object,
   menuFooterStyle: PropTypes.object,
   name: PropTypes.string,
-  floatingLabelText: PropTypes.string,
+  floatingLabel: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]),
+  floatingLabelFocusStyle: PropTypes.object,
+  underlineStyle: PropTypes.object,
+  underlineFocusStyle: PropTypes.object,
+  autocompleteUnderlineStyle: PropTypes.object,
+  autocompleteUnderlineFocusStyle: PropTypes.object,
   hintText: PropTypes.string,
   hintTextAutocomplete: PropTypes.string,
   noMatchFound: PropTypes.string,
@@ -693,7 +725,6 @@ SelectField.defaultProps = {
   multiple: false,
   disabled: false,
   nb2show: 5,
-  floatingLabelText: '',
   hintText: 'Click me',
   hintTextAutocomplete: 'Type something',
   noMatchFound: 'No match found',

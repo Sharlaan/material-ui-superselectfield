@@ -6,6 +6,7 @@ import countries from './assets/countries'
 import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes'
 import FontIcon from 'material-ui/FontIcon/FontIcon'
 import Avatar from 'material-ui/Avatar/Avatar'
+import { teal500, pink500, teal200, pink200, yellow500, yellow200, deepPurple500 } from 'material-ui/styles/colors'
 import './assets/flag-icon.css'
 
 const containerStyle = {
@@ -117,6 +118,14 @@ class CodeExample extends Component {
       <div key={id} value={id} label={name}>{name}</div>
     ))
 
+    const CustomFloatingLabel = (
+      <span>
+        Custom floatingLabel<br/>
+        <span style={{color: deepPurple500, fontWeight: 'bold', fontStyle: 'italic'}}>
+          state32
+        </span>
+      </span>)
+
     return <section style={containerStyle}>
 
       <fieldset style={{ marginBottom: 40 }}>
@@ -125,11 +134,11 @@ class CodeExample extends Component {
         <div>State 32: {displayState(state32)}</div>
       </fieldset>
 
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
         <SuperSelectField
           name='state31'
           multiple
-          floatingLabelText='floatingLabelText state31'
+          floatingLabel='floatingLabelText state31'
           hintText='Complex example'
           onChange={this.handleSelection}
           value={state31}
@@ -143,7 +152,13 @@ class CodeExample extends Component {
         <SuperSelectField
           name='state32'
           multiple
-          floatingLabelText='floatingLabelText state32'
+          floatingLabel={CustomFloatingLabel}
+          floatingLabelStyle={{ color: pink200 }}
+          floatingLabelFocusStyle={{ color: pink500 }}
+          underlineStyle={{ borderColor: teal200 }}
+          underlineFocusStyle={{ borderColor: teal500 }}
+          autocompleteUnderlineStyle={{ borderColor: yellow200 }}
+          autocompleteUnderlineFocusStyle={{ borderColor: yellow500 }}
           hintText='Simple example'
           onChange={this.handleSelection}
           onAutoCompleteTyping={this.handleAutoCompleteTyping}

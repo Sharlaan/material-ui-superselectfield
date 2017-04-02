@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
@@ -22,7 +22,7 @@
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-object-entries": "^1.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.2.2",
+    "babel-preset-env": "^1.3.2",
     "enzyme": "^2.8.0",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^0.12.0",
