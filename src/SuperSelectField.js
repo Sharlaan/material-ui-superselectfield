@@ -38,6 +38,45 @@ const objectShape = PropTypes.shape({
   label: PropTypes.string
 })
 
+// noinspection JSDuplicatedDeclaration
+const flexPolyfill = {
+  displayFlex: {
+    display: '-webkit-box',
+    display: '-webkit-flex', // eslint-disable-line no-dupe-keys
+    display: '-moz-box', // eslint-disable-line no-dupe-keys
+    display: '-ms-flexbox', // eslint-disable-line no-dupe-keys
+    display: '-o-flex', // eslint-disable-line no-dupe-keys
+    display: 'flex' // eslint-disable-line no-dupe-keys
+  },
+  flexDirection: {},
+  justifyContent: {
+    flexEnd: {
+      WebkitBoxPack: 'end',
+      WebkitJustifyContent: 'flex-end',
+      msFlexPack: 'end',
+      OJustifyContent: 'flex-end',
+      justifyContent: 'flex-end'
+    }
+  },
+  alignItems: {
+    center: {
+      WebkitAlignItems: 'center',
+      MozAlignItems: 'center',
+      msAlignItems: 'center',
+      OAlignItems: 'center',
+      alignItems: 'center'
+    }
+  },
+  flex: (proportion = 1) => ({
+    WebkitBoxFlex: proportion,
+    MozBoxFlex: proportion,
+    WebkitFlex: proportion,
+    msFlex: proportion,
+    OFlex: proportion,
+    flex: proportion
+  })
+}
+
 // ================================================================
 // =======================  FloatingLabel  ========================
 // ================================================================
@@ -66,6 +105,7 @@ class FloatingLabel extends Component {
       transformOrigin: 'left top',
       pointerEvents: 'auto',
       userSelect: 'none',
+      cursor: 'pointer',
       color: floatingLabelColor,
       ...floatingLabelStyle
     }
@@ -79,6 +119,7 @@ class FloatingLabel extends Component {
     const shrinkStyles = shrink &&
       {
         position: 'absolute',
+        cursor: 'pointer',
         transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
         pointerEvents: 'none'
       }
@@ -101,34 +142,14 @@ FloatingLabel.defaultProps = {
 // ================================================================
 
 // noinspection JSDuplicatedDeclaration
-const styles = {
-  div1: {
+const selectionsPresenterStyles = {
+  outer: {
     position: 'relative',
-    display: '-webkit-box',
-    display: '-webkit-flex', // eslint-disable-line no-dupe-keys
-    display: '-moz-box', // eslint-disable-line no-dupe-keys
-    display: '-ms-flexbox', // eslint-disable-line no-dupe-keys
-    display: '-o-flex', // eslint-disable-line no-dupe-keys
-    display: 'flex', // eslint-disable-line no-dupe-keys
-    WebkitBoxPack: 'end',
-    WebkitJustifyContent: 'flex-end',
-    msFlexPack: 'end',
-    OJustifyContent: 'flex-end',
-    justifyContent: 'flex-end',
-    WebkitAlignItems: 'center',
-    MozAlignItems: 'center',
-    msAlignItems: 'center',
-    OAlignItems: 'center',
-    alignItems: 'center'
+    ...flexPolyfill.displayFlex,
+    ...flexPolyfill.justifyContent.flexEnd,
+    ...flexPolyfill.alignItems.center
   },
-  div2: {
-    WebkitBoxFlex: 1,
-    MozBoxFlex: 1,
-    WebkitFlex: 1,
-    msFlex: 1,
-    OFlex: 1,
-    flex: 1
-  }
+  inner: { ...flexPolyfill.flex(1) }
 }
 
 const SelectionsPresenter = ({
@@ -161,7 +182,7 @@ const SelectionsPresenter = ({
     ...underlineStyle
   }
 
-  const focusedHRstyle = {
+  const focusedHRstyle = !disabled && {
     borderBottom: '2px solid',
     borderColor: (isFocused || isOpen) ? focusColor : borderColor,
     transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
@@ -170,8 +191,8 @@ const SelectionsPresenter = ({
   }
 
   return (
-    <div style={styles.div1}>
-      <div style={styles.div2}>
+    <div style={selectionsPresenterStyles.outer}>
+      <div style={selectionsPresenterStyles.inner}>
         {floatingLabel &&
           <FloatingLabel
             shrink={shrinkCondition}
@@ -218,6 +239,39 @@ SelectionsPresenter.defaultProps = {
     else if (label || value) return label || value
     else return hintText
   }
+}
+
+// ================================================================
+// ========================  MenuFooter  ==========================
+// ================================================================
+
+// noinspection JSDuplicatedDeclaration
+const menuFooterStyles = {
+  ...flexPolyfill.displayFlex,
+  ...flexPolyfill.justifyContent.flexEnd,
+  ...flexPolyfill.alignItems.center
+}
+
+const MenuFooter = ({ children, closeHandler, menuFooterStyle }) => (
+  <footer style={{ ...menuFooterStyles, ...menuFooterStyle }}>
+    {Array.isArray(children)
+      ? children.map(node => /CLOSE/i.test(node.props['data-action'])
+        ? cloneElement(node, { onTouchTap: closeHandler })
+        : node
+      )
+      : (isValidElement(children) && /CLOSE/i.test(children.props['data-action']))
+        ? cloneElement(children, { onTouchTap: closeHandler })
+        : children
+    }
+  </footer>
+)
+
+MenuFooter.propTypes = {
+  closeHandler: PropTypes.func
+}
+
+MenuFooter.defaultProps = {
+  children: []
 }
 
 // ================================================================
@@ -422,7 +476,7 @@ class SelectField extends Component {
 
   render () {
     const { children, floatingLabel, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
-      autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
+      autocompleteFilter, selectionsRenderer, footerRenderer, anchorOrigin,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
@@ -512,7 +566,7 @@ class SelectField extends Component {
       : elementHeight
     */
     const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
-    const footerHeight = menuCloseButton ? 36 : 0
+    const footerHeight = footerRenderer ? 36 : 0
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
       ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
@@ -560,7 +614,7 @@ class SelectField extends Component {
           anchorOrigin={anchorOrigin}
           useLayerForClickAway={false}
           onRequestClose={this.closeMenu}
-          style={{ height: popoverHeight }}
+          style={{ height: popoverHeight, width: menuWidth }}
         >
           {this.state.showAutocomplete &&
             <TextField
@@ -569,7 +623,7 @@ class SelectField extends Component {
               hintText={hintTextAutocomplete}
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
-              style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - (16 * 2) }}
+              style={{ marginLeft: 16, marginBottom: 5, width: 'calc(100% - 32px)' }}
               underlineStyle={autocompleteUnderlineStyle}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
             />
@@ -577,7 +631,7 @@ class SelectField extends Component {
           <div
             ref={ref => (this.menu = ref)}
             onKeyDown={this.handleMenuKeyDown}
-            style={{ width: menuWidth, ...menuStyle }}
+            style={{ ...menuStyle }}
           >
             {menuItems.length
               ? <InfiniteScroller
@@ -590,13 +644,10 @@ class SelectField extends Component {
               : <ListItem primaryText={noMatchFound} style={{ cursor: 'default', padding: '10px 16px' }} disabled />
             }
           </div>
-          {multiple &&
-            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <div onTouchTap={this.closeMenu} style={menuFooterStyle}>
-                {menuCloseButton}
-              </div>
-            </footer>
-          }
+
+          <MenuFooter closeHandler={this.closeMenu} menuFooterStyle={menuFooterStyle}>
+            {footerRenderer}
+          </MenuFooter>
         </Popover>
 
       </div>
@@ -616,6 +667,7 @@ SelectField.propTypes = {
   style: PropTypes.object,
   menuStyle: PropTypes.object,
   menuGroupStyle: PropTypes.object,
+  menuFooterStyle: PropTypes.object,
   checkPosition: PropTypes.oneOf([ '', 'left', 'right' ]),
   checkedIcon: PropTypes.node,
   unCheckedIcon: PropTypes.node,
@@ -668,7 +720,6 @@ SelectField.propTypes = {
   ]),
   innerDivStyle: PropTypes.object,
   selectedMenuItemStyle: PropTypes.object,
-  menuFooterStyle: PropTypes.object,
   name: PropTypes.string,
   floatingLabel: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]),
   floatingLabelFocusStyle: PropTypes.object,
@@ -710,7 +761,10 @@ SelectField.propTypes = {
   },
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
-  menuCloseButton: PropTypes.node,
+  footerRenderer: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]),
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
@@ -722,7 +776,7 @@ SelectField.defaultProps = {
   checkPosition: '',
   checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
-  menuCloseButton: null,
+  footerRenderer: null,
   multiple: false,
   disabled: false,
   nb2show: 5,

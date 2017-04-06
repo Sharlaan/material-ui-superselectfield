@@ -92,6 +92,7 @@ class CodeExample extends Component {
     this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
   }
 
+
   handleAutoCompleteTyping = searchText => console.debug('You typed in AutoComplete :', searchText)
 
   render () {
@@ -117,6 +118,12 @@ class CodeExample extends Component {
     const dataSourceNodes = dataSource.map(({id, name}) => (
       <div key={id} value={id} label={name}>{name}</div>
     ))
+
+    const footerRenderer = [
+      <FlatButton key='footerButtonAdd' label='add' hoverColor={teal500} />,
+      <FlatButton key='footerButtonReset' label='reset' hoverColor='lightSalmon' />,
+      <FlatButton key='footerButtonClose' label='close' hoverColor={pink500} data-action='CLOSE' />
+    ]
 
     const CustomFloatingLabel = (
       <span>
@@ -166,7 +173,7 @@ class CodeExample extends Component {
           hoverColor='rgba(3, 169, 244, 0.15)'
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
           style={{ width: 200, marginTop: 20 }}
-          menuCloseButton={<FlatButton label='close' hoverColor={'lightSalmon'} />}
+          footerRenderer={footerRenderer}
         >
           {dataSourceNodes}
         </SuperSelectField>
