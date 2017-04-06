@@ -1,11 +1,14 @@
-# material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
-                               
+# material-ui-superSelectField
+[![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url] [![Package Quality][shield-image]][shield-url]
+
 [npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
 [npm-url]: https://npmjs.org/package/material-ui-superselectfield
 [downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg
 [downloads-url]: https://npmjs.org/package/material-ui-superselectfield
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
+[shield-image]: http://npm.packagequality.com/shield/material-ui-superselectfield.svg
+[shield-url]: http://packagequality.com/#?package=material-ui-superselectfield
 
 ## Table of Contents
 - [Preview](#preview)
@@ -32,7 +35,7 @@ This component requires 4 dependencies :
 - react-tap-event-plugin 
 - material-ui  
 
-... so make sure they are installed in your project, or install them as well ;)
+... so make sure they are installed in your project ;)
 
 Also don't forget to update your index.js entry file with :   
 ```js
@@ -70,13 +73,13 @@ PropTypes should raise warnings if implementing otherwise.
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
-| menuStyle | object | {} | Styles applied to the comtainer which will receive your children components. |
+| menuStyle | object | {} | Styles applied to the container hosting your children components. |
 | menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
+| menuFooterStyle | object | { display: 'flex', flexDirection: 'flex-end', alignItems: 'center' } | Styles applied to the container hosting components from footerRenderer. |
 | innerDivStyle | object | {} | Styles applied to the inner div of MenuItems hosting each of your children components. |
-| menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
-| menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
+| footerRenderer | node or ArrayOf(node) | null | Provide your own renderer for buttons inside menu's footer.<br>/!\ IMPORTANT: if you want one of passed node(s) to close the menu on click, you must provide it with the property `data-action='CLOSE'`. |
 | checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
