@@ -532,7 +532,7 @@ class SelectField extends Component {
       autoCompleteElementHeight, checkedIcon, unCheckedIcon, hoverColor,
       checkPosition, innerSelectionsStyle, outerSelectionsStyle, allowSelectAll,
       selectAllRenderer, selectAllItem, selectAllElementHeight,
-      floatingLabelFixed, footerElementHeight, noMatchFoundHeight, autoWidth
+      floatingLabelFixed, footerElementHeight, noMatchFoundHeight
     } = this.props
     const { itemsLength, selectedItems } = this.state
 
@@ -629,7 +629,7 @@ class SelectField extends Component {
     const selectAllHeight = allowSelectAll ? selectAllElementHeight : 0
     const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight + selectAllHeight
     const scrollableStyle = { overflowY: nb2show >= menuItemsLength ? 'hidden' : 'scroll' }
-    const menuWidth = autoWidth ? null : (this.root ? this.root.clientWidth : null)
+    const menuWidth = menuStyle && menuStyle.width ? menuStyle.width : (this.root ? this.root.clientWidth : null)
 
     return (
       <div
@@ -834,8 +834,7 @@ SelectField.propTypes = {
   selectAllRenderer: PropTypes.func,
   selectAllElementHeight: PropTypes.number,
   floatingLabelFixed: PropTypes.bool,
-  noMatchFoundHeight: PropTypes.number,
-  autoWidth: PropTypes.bool
+  noMatchFoundHeight: PropTypes.number
 }
 
 SelectField.defaultProps = {
@@ -877,8 +876,7 @@ SelectField.defaultProps = {
     )
   },
   selectAllElementHeight: 36,
-  floatingLabelFixed: false,
-  autoWidth: true
+  floatingLabelFixed: false
 }
 
 export default SelectField
