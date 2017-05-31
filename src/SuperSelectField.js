@@ -158,7 +158,7 @@ const SelectionsPresenter = ({
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
   isFocused, isOpen, disabled, innerSelectionsStyle,
-  outerSelectionsStyle, alwaysDisplaySelectionsRenderer
+  outerSelectionsStyle, floatingLabelFixed
 }) => {
   const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
 
@@ -206,7 +206,7 @@ const SelectionsPresenter = ({
       <div style={baseInnerSelectionsStyles}>
         {floatingLabel &&
           <FloatingLabel
-            shrink={alwaysDisplaySelectionsRenderer || shrinkCondition}
+            shrink={floatingLabelFixed || shrinkCondition}
             focusCondition={focusCondition}
             disabled={disabled}
             defaultColors={{floatingLabelColor, focusColor}}
@@ -216,7 +216,7 @@ const SelectionsPresenter = ({
             {floatingLabel}
           </FloatingLabel>
         }
-        {(alwaysDisplaySelectionsRenderer || shrinkCondition || !floatingLabel) &&
+        {(floatingLabelFixed || shrinkCondition || !floatingLabel) &&
           selectionsRenderer(selectedValues, hintText)
         }
       </div>
@@ -234,7 +234,7 @@ SelectionsPresenter.propTypes = {
   ]),
   selectionsRenderer: PropTypes.func,
   hintText: PropTypes.string,
-  alwaysDisplaySelectionsRenderer: PropTypes.bool
+  floatingLabelFixed: PropTypes.bool
 }
 
 SelectionsPresenter.defaultProps = {
@@ -251,7 +251,7 @@ SelectionsPresenter.defaultProps = {
     else if (label || value) return label || value
     else return hintText
   },
-  alwaysDisplaySelectionsRenderer: false
+  floatingLabelFixed: false
 }
 
 // ================================================================
@@ -533,7 +533,7 @@ class SelectField extends Component {
       autoCompleteElementHeight, checkedIcon, unCheckedIcon, hoverColor,
       checkPosition, innerSelectionsStyle, outerSelectionsStyle, allowSelectAll,
       selectAllRenderer, selectAllItem, selectAllElementHeight,
-      alwaysDisplaySelectionsRenderer, footerElementHeight, noMatchFoundHeight
+      floatingLabelFixed, footerElementHeight, noMatchFoundHeight, autoWidth
     } = this.props
     const { itemsLength, selectedItems } = this.state
 
@@ -630,7 +630,7 @@ class SelectField extends Component {
     const selectAllHeight = allowSelectAll ? selectAllElementHeight : 0
     const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight + selectAllHeight
     const scrollableStyle = { overflowY: nb2show >= menuItemsLength ? 'hidden' : 'scroll' }
-    const menuWidth = this.root ? this.root.clientWidth : null
+    const menuWidth = autoWidth ? null : (this.root ? this.root.clientWidth : null)
 
     return (
       <div
@@ -663,7 +663,7 @@ class SelectField extends Component {
           underlineFocusStyle={underlineFocusStyle}
           innerSelectionsStyle={innerSelectionsStyle}
           outerSelectionsStyle={outerSelectionsStyle}
-          alwaysDisplaySelectionsRenderer={alwaysDisplaySelectionsRenderer}
+          floatingLabelFixed={floatingLabelFixed}
         />
 
         <Popover
@@ -834,8 +834,9 @@ SelectField.propTypes = {
   allowSelectAll: PropTypes.bool,
   selectAllRenderer: PropTypes.func,
   selectAllElementHeight: PropTypes.number,
-  alwaysDisplaySelectionsRenderer: PropTypes.bool,
-  noMatchFoundHeight: PropTypes.number
+  floatingLabelFixed: PropTypes.bool,
+  noMatchFoundHeight: PropTypes.number,
+  autoWidth: PropTypes.bool
 }
 
 SelectField.defaultProps = {
@@ -877,7 +878,8 @@ SelectField.defaultProps = {
     )
   },
   selectAllElementHeight: 36,
-  alwaysDisplaySelectionsRenderer: false
+  floatingLabelFixed: false,
+  autoWidth: true
 }
 
 export default SelectField
