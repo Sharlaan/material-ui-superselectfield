@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, cloneElement, isValidElement } from 'react'
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom'
 import InfiniteScroller from 'react-infinite'
@@ -8,6 +8,7 @@ import ListItem from 'material-ui/List/ListItem'
 import CheckedIcon from 'material-ui/svg-icons/navigation/check'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
+import classNames from 'classnames';
 
 // ================================================================
 // =========================  Utilities  ==========================
@@ -352,17 +353,12 @@ class SelectField extends Component {
 
   closeMenu = (reason) => {
     const { onChange, name, allowSelectAll, selectAllItem } = this.props
-    let { selectedItems } = this.state
+    const { selectedItems } = this.state
     if (allowSelectAll) {
-      const selectAllItemIndex = selectedItems.findIndex(item => item.value === selectAllItem.value);
-      if (selectAllItemIndex !== -1) {
-        selectedItems = [
-          ...selectedItems.slice(0, selectAllItemIndex),
-          ...selectedItems.slice(selectAllItemIndex + 1)
-        ]
-      }
+      onChange(selectedItems.filter(item => item.value !== selectAllItem.value), name)
+    } else {
+      onChange(selectedItems, name)
     }
-    onChange(selectedItems, name)
     if (reason) this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
     this.setState({ isOpen: false, searchText: '' }, () => !reason && this.root.focus())
   }
@@ -631,6 +627,7 @@ class SelectField extends Component {
     const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight + selectAllHeight
     const scrollableStyle = { overflowY: nb2show >= menuItemsLength ? 'hidden' : 'scroll' }
     const menuWidth = menuStyle && menuStyle.width ? menuStyle.width : (this.root ? this.root.clientWidth : null)
+    const rootClassName = classNames('superSelectField', this.props.className);
 
     return (
       <div
@@ -641,6 +638,7 @@ class SelectField extends Component {
         onKeyDown={this.handleKeyDown}
         onTouchTap={this.handleClick}
         title={!this.state.itemsLength ? 'Nothing to show' : ''}
+        className={rootClassName}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
           color: disabled ? palette.disabledColor : palette.textColor,
