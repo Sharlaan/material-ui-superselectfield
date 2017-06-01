@@ -44,6 +44,7 @@ injectTapEventPlugin()
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
+| floatingLabel | string or node | | The content to use for the floating label element. |
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
 | noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
@@ -79,6 +80,12 @@ PropTypes should raise warnings if implementing otherwise.
 | checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
+| floatingLabelStyle | object | | Allows to change the styles of the floating label. |
+| floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
+| underlineStyle | object | | Allows to change the styles of the underline. |
+| underlineFocusStyle | object | | Allows to change the styles of the underline when focused. |
+| autocompleteUnderlineStyle | object | | Allows to change the styles of the searchTextField's underline. |
+| autocompleteUnderlineFocusStyle | object | | Allows to change the styles of the searchTextField's underline when focused. |
 
 #### Default functions
 | Name | Default function |
