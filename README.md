@@ -1,5 +1,5 @@
 # material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
-                               
+
 [npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
 [npm-url]: https://npmjs.org/package/material-ui-superselectfield
 [downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg
@@ -29,7 +29,7 @@
 This component requires 4 dependencies :
 - react
 - react-dom
-- react-tap-event-plugin 
+- react-tap-event-plugin
 - material-ui  
 
 ... so make sure they are installed in your project, or install them as well ;)
@@ -60,6 +60,7 @@ injectTapEventPlugin()
 | elementHeight | number, number[] | 36 | Height in pixels of each option element. If elements have different heights, you can provide them in an array. |
 | showAutocompleteThreshold | number | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield need to be disabled, just set this prop with a value higher than children length. |
 | autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteThreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
+| useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
 ##### Note when setting value :
 if multiple is set, value must be at least an empty Array.  
 For single value mode, you can set value to null.  
