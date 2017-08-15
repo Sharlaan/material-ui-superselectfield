@@ -352,12 +352,16 @@ class SelectField extends Component {
   handleMenuSelection = (selectedItem) => (event) => {
     event.preventDefault()
     const { selectedItems } = this.state
+    const { onChange, name } = this.props
+
     if (this.props.multiple) {
       const selectedItemExists = selectedItems.some(obj => areEqual(obj.value, selectedItem.value))
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
-      this.setState({ selectedItems: updatedValues })
+      this.setState({ selectedItems: updatedValues }, () => {
+        onChange(updatedValues, name)
+      })
       this.clearTextField(() => this.focusTextField())
     } else {
       const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
@@ -426,7 +430,7 @@ class SelectField extends Component {
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
-      checkedIcon, unCheckedIcon, hoverColor, checkPosition
+      checkedIcon, unCheckedIcon, hoverColor, checkPosition, useLayerForClickAway
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -558,7 +562,7 @@ class SelectField extends Component {
           anchorEl={this.root}
           canAutoPosition={false}
           anchorOrigin={anchorOrigin}
-          useLayerForClickAway={false}
+          useLayerForClickAway={useLayerForClickAway}
           onRequestClose={this.closeMenu}
           style={{ height: popoverHeight }}
         >
@@ -714,7 +718,8 @@ SelectField.propTypes = {
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
-  onAutoCompleteTyping: PropTypes.func
+  onAutoCompleteTyping: PropTypes.func,
+  useLayerForClickAway: PropTypes.bool
 }
 
 SelectField.defaultProps = {
@@ -739,7 +744,8 @@ SelectField.defaultProps = {
   value: null,
   onChange: () => {},
   onAutoCompleteTyping: () => {},
-  children: []
+  children: [],
+  useLayerForClickAway: false
 }
 
 export default SelectField
