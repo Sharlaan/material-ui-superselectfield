@@ -29,16 +29,10 @@
 This component requires 4 dependencies :
 - react
 - react-dom
-- react-tap-event-plugin
 - material-ui  
 
 ... so make sure they are installed in your project, or install them as well ;)
 
-Also don't forget to update your index.js entry file with :   
-```js
-import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin()
-```
 
 ## Properties
 | Name             | Type          | Default    | Description |

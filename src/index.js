@@ -7,9 +7,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import App from './App'
 import './index.css'
 
-import injectTapEventPlugin from 'react-tap-event-plugin'
-injectTapEventPlugin()
-
 const customTheme = getMuiTheme({
   fontFamily: 'Raleway, sans-serif',
   palette: {
