@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
@@ -88,11 +88,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "buildLib": "babel src/SuperSelectField.js -o lib/SuperSelectField.js",
-    "predeploy": "yarn build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom --coverage",
-    "release": "yarn deploy  &&  yarn buildLib  &&  npm publish",
+    "release": "npm run deploy  &&  npm run buildLib  &&  npm publish",
     "eject": "react-scripts eject"
   }
 }

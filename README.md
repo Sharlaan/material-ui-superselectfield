@@ -24,7 +24,7 @@
 
 
 ## Installation
-`yarn add material-ui-superselectfield`  
+`npm i material-ui-superselectfield`  
 
 This component requires 4 dependencies :
 - react
@@ -110,13 +110,13 @@ Check the `CodeExampleX.js` provided in the repository.
 You can build the project with :   
 ```
 git clone https://github.com/Sharlaan/material-ui-superselectfield.git
-yarn && yarn start
+npm i && npm start
 ```   
 It should open a new page on your default browser @ localhost:3000
 
 
 ## Tests
-`yarn test`
+`npm test`
 
 
 ## Contributing
