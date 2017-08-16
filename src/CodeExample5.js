@@ -76,8 +76,8 @@ class CodeExample extends Component {
     const { value, label } = values
     if (Array.isArray(values)) {
       return values.length
-      ? values.map(({ value, label }) => label || value).join(', ')
-      : hintText
+        ? values.map(({ value, label }) => label || value).join(', ')
+        : hintText
     }
     else if (label || value) return label || value
     else return hintText

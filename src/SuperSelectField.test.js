@@ -4,7 +4,7 @@
 // https://medium.freecodecamp.com/the-right-way-to-test-react-components-548a4736ab22#.hqprrvawg
 
 /* eslint-env jest */
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 import { shallow, mount } from 'enzyme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
