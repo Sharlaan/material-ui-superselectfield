@@ -30,20 +30,18 @@
     "enzyme": "^2.8.2",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^1.0.0",
-    "material-ui": "^0.18.1",
+    "material-ui": "^0.19.0",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "react-scripts": "^1.0.7",
-    "react-tap-event-plugin": "^2.0.1",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
-    "material-ui": ">= 0.15 < 1",
+    "material-ui": ">= 0.19 < 1",
     "react": "^15.x",
-    "react-dom": "^15.x",
-    "react-tap-event-plugin": "^1.x || ^2.x"
+    "react-dom": "^15.x"
   },
   "babel": {
     "plugins": [

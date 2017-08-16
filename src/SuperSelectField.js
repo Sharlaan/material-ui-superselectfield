@@ -463,7 +463,7 @@ class SelectField extends Component {
           key={++index}
           tabIndex={index}
           ref={ref => (this.menuItems[++index] = ref)}
-          onTouchTap={this.handleMenuSelection({ value: childValue, label })}
+          onClick={this.handleMenuSelection({ value: childValue, label })}
           disableFocusRipple
           leftIcon={leftCheckbox}
           rightIcon={rightCheckbox}
@@ -529,7 +529,7 @@ class SelectField extends Component {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onKeyDown={this.handleKeyDown}
-        onTouchTap={this.handleClick}
+        onClick={this.handleClick}
         title={!this.state.itemsLength ? 'Nothing to show' : ''}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
@@ -592,7 +592,7 @@ class SelectField extends Component {
           </div>
           {multiple &&
             <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <div onTouchTap={this.closeMenu} style={menuFooterStyle}>
+              <div onClick={this.closeMenu} style={menuFooterStyle}>
                 {menuCloseButton}
               </div>
             </footer>
