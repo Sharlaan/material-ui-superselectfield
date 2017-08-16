@@ -581,12 +581,12 @@ class SelectField extends Component {
           >
             {menuItems.length
               ? <InfiniteScroller
-                  elementHeight={elementHeight}
-                  containerHeight={containerHeight}
-                  styles={{ scrollableStyle }}
-                >
-                  {menuItems}
-                </InfiniteScroller>
+                elementHeight={elementHeight}
+                containerHeight={containerHeight}
+                styles={{ scrollableStyle }}
+              >
+                {menuItems}
+              </InfiniteScroller>
               : <ListItem primaryText={noMatchFound} style={{ cursor: 'default', padding: '10px 16px' }} disabled />
             }
           </div>
