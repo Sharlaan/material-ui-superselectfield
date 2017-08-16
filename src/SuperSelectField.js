@@ -150,6 +150,7 @@ const SelectionsPresenter = ({
   const baseHRstyle = {
     position: 'absolute',
     bottom: 0,
+    left: 0,
     width: '100%',
     margin: 0,
     boxSizing: 'content-box',
@@ -161,7 +162,7 @@ const SelectionsPresenter = ({
     ...underlineStyle
   }
 
-  const focusedHRstyle = {
+  const focusedHRstyle = disabled ? {} : {
     borderBottom: '2px solid',
     borderColor: (isFocused || isOpen) ? focusColor : borderColor,
     transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
