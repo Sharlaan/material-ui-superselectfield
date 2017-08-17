@@ -1,3 +1,8 @@
+
+/**
+ * Created by Raphaël Morineau on 28 Oct 2016.
+ */
+import 'babel-polyfill'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
@@ -744,6 +749,3 @@ SelectField.defaultProps = {
 }
 
 export default SelectField
-/**
- * Created by Raphaël on 17/02/2017.
- */

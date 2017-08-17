@@ -22,7 +22,6 @@
     "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-entries": "^1.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.5.1",
@@ -45,8 +44,7 @@
   "babel": {
     "plugins": [
       "transform-class-properties",
-      "transform-object-rest-spread",
-      "transform-object-entries"
+      "transform-object-rest-spread"
     ],
     "presets": [
       [
@@ -54,9 +52,9 @@
         {
           "targets": {
             "browsers": [
-              "last 2 versions",
               "> 3%",
-              "safari >= 8"
+              "ie 11",
+              "safari 8"
             ]
           },
           "modules": "commonjs",
