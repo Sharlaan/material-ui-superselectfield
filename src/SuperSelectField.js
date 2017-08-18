@@ -428,7 +428,7 @@ class SelectField extends Component {
 
   render () {
     const { children, floatingLabel, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
-      autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
+      autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin, canAutoPosition,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
@@ -562,7 +562,7 @@ class SelectField extends Component {
         <Popover
           open={this.state.isOpen}
           anchorEl={this.root}
-          canAutoPosition={false}
+          canAutoPosition={canAutoPosition}
           anchorOrigin={anchorOrigin}
           useLayerForClickAway={false}
           onRequestClose={this.closeMenu}
@@ -717,6 +717,7 @@ SelectField.propTypes = {
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
   menuCloseButton: PropTypes.node,
+  canAutoPosition: PropTypes.bool,
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
@@ -729,6 +730,7 @@ SelectField.defaultProps = {
   checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   menuCloseButton: null,
+  canAutoPosition: false,
   multiple: false,
   disabled: false,
   nb2show: 5,
