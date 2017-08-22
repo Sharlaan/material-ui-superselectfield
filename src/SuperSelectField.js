@@ -730,7 +730,7 @@ SelectField.defaultProps = {
   checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   menuCloseButton: null,
-  canAutoPosition: false,
+  canAutoPosition: true,
   multiple: false,
   disabled: false,
   nb2show: 5,
