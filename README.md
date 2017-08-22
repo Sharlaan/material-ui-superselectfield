@@ -26,7 +26,7 @@
 ## Installation
 `npm i material-ui-superselectfield`  
 
-This component requires 4 dependencies :
+This component requires 3 dependencies :
 - react
 - react-dom
 - material-ui  
@@ -44,7 +44,7 @@ This component requires 4 dependencies :
 | noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
 | anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
 | checkPosition | string |  | Position of the checkmark in multiple mode. Accepted values: `'', left, right` |
-| canAutoPosition | bool | false | If present, this property allows the inner Popover component to position the menu in such way options are not hidden by the screen edges. |
+| canAutoPosition | bool | true | If present, this property allows the inner Popover component to position the menu in such way options are not hidden by the screen edges. |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
 | disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
