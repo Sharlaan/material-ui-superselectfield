@@ -151,7 +151,7 @@ In lieu of a formal style guide, take care to maintain the existing coding style
   Expose more props :
   - [x] noMatchFound message
   - [ ] floatingLabelText
-  - [ ] canAutoPosition
+  - [x] canAutoPosition
   - [x] checkPosition
   - [x] anchorOrigin
   - [ ] popoverStyle
