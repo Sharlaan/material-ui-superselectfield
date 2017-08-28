@@ -31,6 +31,10 @@ function areEqual (val1, val2) {
   }
 }
 
+function isPresent (value) {
+  return value !== null && value !== undefined
+}
+
 const checkFormat = value => value.findIndex(v => typeof v !== 'object' || !('value' in v))
 
 const objectShape = PropTypes.shape({
@@ -283,6 +287,67 @@ class SelectField extends Component {
     if (!this.state.isOpen) this.setState({ isFocused: false })
   }
 
+  selectAll = () => {
+    function valuesReducer (acc, { type, props: { value, label, children: cpc } }) {
+      if (type === 'optgroup') {
+        if (cpc) {
+          if (Array.isArray(cpc)) {
+            for (let c of cpc) {
+              if (isPresent(c.props.value)) {
+                const { value, label } = c.props
+                acc.push({ value, label })
+              }
+            }
+          } else if (typeof cpc === 'object' && isPresent(cpc.props)) {
+            const { value, label } = cpc.props
+            acc.push({ value, label })
+          }
+        }
+      } else if (isPresent(value)) {
+        acc.push({ value, label })
+      }
+
+      return acc
+    }
+
+    function collectValues (children) {
+      let values = []
+
+      if (Array.isArray(children) && children.length) {
+        values = children.reduce(valuesReducer, [])
+      } else if (!Array.isArray(children) && typeof children === 'object') {
+        if (children.type === 'optgroup') {
+          values = collectValues(children.props.children)
+        }
+        else if (isPresent(children.props.value)) {
+          const { value, label } = children.props
+          values = [{ value, label }]
+        }
+      }
+
+      return values
+    }
+
+    const { children, multiple, onChange, name } = this.props
+
+    if (!multiple) return null
+
+    const updatedValues = collectValues(children)
+
+    this.setState({ selectedItems: updatedValues }, () => {
+      onChange(updatedValues, name)
+    })
+  }
+
+  clearSelection = () => {
+    const { onChange, name, multiple } = this.props
+
+    const updatedValues = multiple ? [] : null
+    this.setState({ selectedItems: updatedValues }, () => {
+      onChange(updatedValues, name)
+    })
+  }
+
   closeMenu = (reason) => {
     const { onChange, name } = this.props
     onChange(this.state.selectedItems, name)
@@ -426,7 +491,7 @@ class SelectField extends Component {
 
   render () {
     const { children, floatingLabel, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
-      autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin,
+      autocompleteFilter, selectionsRenderer, menuCloseButton, showSelectAll, headerStyle, anchorOrigin,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
@@ -516,13 +581,14 @@ class SelectField extends Component {
       : elementHeight
     */
     const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
+    const headerHeight = showSelectAll ? 96 : 0
     const footerHeight = menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
       ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
       : elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)
     ) || 0
-    const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight
+    const popoverHeight = autoCompleteHeight + headerHeight + (containerHeight || noMatchFoundHeight) + footerHeight
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
     const menuWidth = this.root ? this.root.clientWidth : null
 
@@ -577,6 +643,23 @@ class SelectField extends Component {
               underlineStyle={autocompleteUnderlineStyle}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
             />
+          }
+          {multiple && showSelectAll &&
+            <header style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginLeft: 16,
+              marginBottom: 7,
+              width: menuWidth - (16 * 2),
+              borderBottom: '3px solid #999',
+              ...headerStyle
+            }}>
+              <div>
+                <ListItem onTouchTap={this.selectAll}>Select All</ListItem>
+                <ListItem onTouchTap={this.clearSelection}>Clear Filter</ListItem>
+              </div>
+            </header>
           }
           <div
             ref={ref => (this.menu = ref)}
@@ -719,7 +802,9 @@ SelectField.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onAutoCompleteTyping: PropTypes.func,
-  useLayerForClickAway: PropTypes.bool
+  useLayerForClickAway: PropTypes.bool,
+  showSelectAll: PropTypes.bool,
+  headerStyle: PropTypes.object
 }
 
 SelectField.defaultProps = {
@@ -745,7 +830,9 @@ SelectField.defaultProps = {
   onChange: () => {},
   onAutoCompleteTyping: () => {},
   children: [],
-  useLayerForClickAway: false
+  useLayerForClickAway: false,
+  showSelectAll: false,
+  headerStyle: {}
 }
 
 export default SelectField
