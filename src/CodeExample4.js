@@ -116,6 +116,7 @@ class CodeExample extends Component {
         value={state4}
         elementHeight={58}
         selectionsRenderer={this.handleCustomDisplaySelections('state4')}
+        showSelectAll
         style={{ width: 300, marginTop: 20 }}
       >
         {countriesNodeList}

@@ -162,6 +162,7 @@ class CodeExample extends Component {
           hintText='Simple example'
           onChange={this.handleSelection}
           onAutoCompleteTyping={this.handleAutoCompleteTyping}
+          showSelectAll
           value={state32}
           hoverColor='rgba(3, 169, 244, 0.15)'
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
