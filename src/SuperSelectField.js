@@ -141,7 +141,7 @@ const SelectionsPresenter = ({
   floatingLabel, hintText,
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
-  isFocused, isOpen, disabled
+  isFocused, isOpen, disabled, errorText
 }) => {
   const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
 
@@ -151,6 +151,10 @@ const SelectionsPresenter = ({
   const shrinkCondition = (Array.isArray(selectedValues) && !!selectedValues.length) ||
     (!Array.isArray(selectedValues) && typeof selectedValues === 'object') ||
     focusCondition
+
+  if (errorText) {
+    underlineStyle = {borderColor: 'rgb(244,67,54)', borderWidth: 2}
+  }
 
   const baseHRstyle = {
     position: 'absolute',
@@ -167,38 +171,43 @@ const SelectionsPresenter = ({
     ...underlineStyle
   }
 
-  const focusedHRstyle = disabled ? {} : {
+  const focusedHRstyle = disabled ? {} : (errorText ? underlineStyle : {
     borderBottom: '2px solid',
     borderColor: (isFocused || isOpen) ? focusColor : borderColor,
     transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
     transform: `scaleX( ${(isFocused || isOpen) ? 1 : 0} )`,
     ...underlineFocusStyle
-  }
+  })
 
   return (
-    <div style={styles.div1}>
-      <div style={styles.div2}>
-        {floatingLabel &&
-          <FloatingLabel
-            shrink={shrinkCondition}
-            focusCondition={focusCondition}
-            disabled={disabled}
-            defaultColors={{floatingLabelColor, focusColor}}
-            floatingLabelStyle={floatingLabelStyle}
-            floatingLabelFocusStyle={floatingLabelFocusStyle}
-          >
-            {floatingLabel}
-          </FloatingLabel>
-        }
-        {(shrinkCondition || !floatingLabel) &&
-          selectionsRenderer(selectedValues, hintText)
-        }
-      </div>
-      <DropDownArrow style={{fill: borderColor}} />
+    <div>
+      <div style={styles.div1}>
+        <div style={styles.div2}>
+          {floatingLabel &&
+            <FloatingLabel
+              shrink={shrinkCondition}
+              focusCondition={focusCondition}
+              disabled={disabled}
+              defaultColors={{floatingLabelColor, focusColor}}
+              floatingLabelStyle={floatingLabelStyle}
+              floatingLabelFocusStyle={floatingLabelFocusStyle}
+              >
+                {floatingLabel}
+              </FloatingLabel>
+            }
+            {(shrinkCondition || !floatingLabel) &&
+              selectionsRenderer(selectedValues, hintText)
+            }
+          </div>
+          <DropDownArrow style={{fill: borderColor}} />
 
-      <hr style={baseHRstyle} />
-      <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
-    </div>)
+          <hr style={baseHRstyle} />
+          <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
+        </div>
+        <div style={{paddingTop: 5, fontSize: 12, color: 'rgb(244,67,54)'}}>
+          {errorText?errorText:''}
+        </div>
+      </div>)
 }
 
 SelectionsPresenter.propTypes = {
@@ -432,7 +441,7 @@ class SelectField extends Component {
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
-      checkedIcon, unCheckedIcon, hoverColor, checkPosition
+      checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -549,6 +558,7 @@ class SelectField extends Component {
           isOpen={this.state.isOpen}
           disabled={disabled}
           hintText={hintText}
+          errorText={errorText}
           muiTheme={this.context.muiTheme}
           selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}
