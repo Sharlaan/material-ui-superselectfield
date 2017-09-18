@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import InfiniteScroller from 'react-infinite'
 import Popover from 'material-ui/Popover/Popover'
@@ -140,9 +140,9 @@ const SelectionsPresenter = ({
   floatingLabel, hintText,
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
-  isFocused, isOpen, disabled
+  isFocused, isOpen, disabled, errorText
 }) => {
-  const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
+  const { textField: {floatingLabelColor: muiFloatingLabelColor, borderColor: muiBorderColor, focusColor, errorColor} } = muiTheme
 
   // Condition for animating floating Label color and underline
   const focusCondition = isFocused || isOpen
@@ -150,6 +150,8 @@ const SelectionsPresenter = ({
   const shrinkCondition = (Array.isArray(selectedValues) && !!selectedValues.length) ||
     (!Array.isArray(selectedValues) && typeof selectedValues === 'object') ||
     focusCondition
+  const borderColor = errorText ? errorColor : muiBorderColor
+  const floatingLabelColor = errorText ? errorColor : muiFloatingLabelColor
 
   const baseHRstyle = {
     position: 'absolute',
@@ -161,7 +163,7 @@ const SelectionsPresenter = ({
     borderLeft: 'none',
     borderRight: 'none',
     borderBottom: '1px solid',
-    borderColor,
+    borderColor: borderColor,
     ...underlineStyle
   }
 
@@ -495,11 +497,11 @@ class SelectField extends Component {
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
-      checkedIcon, unCheckedIcon, hoverColor, checkPosition, useLayerForClickAway
+      checkedIcon, unCheckedIcon, hoverColor, checkPosition, useLayerForClickAway, errorText
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
-    const { baseTheme: {palette}, menuItem } = this.context.muiTheme
+    const { baseTheme: {palette}, menuItem, textField: {errorColor} } = this.context.muiTheme
 
     const mergedSelectedMenuItemStyle = {
       color: menuItem.selectedTextColor, ...selectedMenuItemStyle
@@ -507,6 +509,14 @@ class SelectField extends Component {
     if (checkedIcon) checkedIcon.props.style.fill = mergedSelectedMenuItemStyle.color
     const mergedHoverColor = hoverColor || menuItem.hoverColor
 
+    const errorStyle = {
+      position: 'relative',
+      bottom: -2,
+      fontSize: 12,
+      lineHeight: '12px',
+      color: errorColor,
+      transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)'
+    }
     /**
      * MenuItems building, based on user's children
      * 1st function is the base process for producing a MenuItem,
@@ -591,6 +601,7 @@ class SelectField extends Component {
     const popoverHeight = autoCompleteHeight + headerHeight + (containerHeight || noMatchFoundHeight) + footerHeight
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
     const menuWidth = this.root ? this.root.clientWidth : null
+    const textColor = errorText ? errorColor : palette.textColor
 
     return (
       <div
@@ -603,7 +614,7 @@ class SelectField extends Component {
         title={!this.state.itemsLength ? 'Nothing to show' : ''}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
-          color: disabled ? palette.disabledColor : palette.textColor,
+          color: disabled ? palette.disabledColor : textColor,
           ...style
         }}
       >
@@ -621,6 +632,7 @@ class SelectField extends Component {
           floatingLabelFocusStyle={floatingLabelFocusStyle}
           underlineStyle={underlineStyle}
           underlineFocusStyle={underlineFocusStyle}
+          errorText={errorText}
         />
 
         <Popover
@@ -685,7 +697,7 @@ class SelectField extends Component {
             </footer>
           }
         </Popover>
-
+        {errorText && <div style={errorStyle}>{errorText}</div>}
       </div>
     )
   }
@@ -804,7 +816,8 @@ SelectField.propTypes = {
   onAutoCompleteTyping: PropTypes.func,
   useLayerForClickAway: PropTypes.bool,
   showSelectAll: PropTypes.bool,
-  headerStyle: PropTypes.object
+  headerStyle: PropTypes.object,
+  errorText: PropTypes.string
 }
 
 SelectField.defaultProps = {
@@ -832,7 +845,8 @@ SelectField.defaultProps = {
   children: [],
   useLayerForClickAway: false,
   showSelectAll: false,
-  headerStyle: {}
+  headerStyle: {},
+  errorText: null
 }
 
 export default SelectField
