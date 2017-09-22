@@ -493,7 +493,7 @@ class SelectField extends Component {
 
   render () {
     const { children, floatingLabel, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
-      autocompleteFilter, selectionsRenderer, menuCloseButton, showSelectAll, headerStyle, anchorOrigin,
+      autocompleteFilter, selectionsRenderer, menuCloseButton, showSelectAll, showClearSelection, headerStyle, anchorOrigin,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
@@ -591,7 +591,7 @@ class SelectField extends Component {
       : elementHeight
     */
     const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
-    const headerHeight = showSelectAll ? 96 : 0
+    const headerHeight = showSelectAll || showClearSelection ? (showSelectAll && showClearSelection) ? 98 : 50 : 0
     const footerHeight = menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
@@ -656,7 +656,7 @@ class SelectField extends Component {
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
             />
           }
-          {multiple && showSelectAll &&
+          {multiple && (showSelectAll || showClearSelection) &&
             <header style={{
               display: 'flex',
               alignItems: 'center',
@@ -664,12 +664,12 @@ class SelectField extends Component {
               marginLeft: 16,
               marginBottom: 7,
               width: menuWidth - (16 * 2),
-              borderBottom: '3px solid #999',
+              borderBottom: '1px solid #999',
               ...headerStyle
             }}>
               <div>
-                <ListItem onTouchTap={this.selectAll}>Select All</ListItem>
-                <ListItem onTouchTap={this.clearSelection}>Clear Filter</ListItem>
+                {showSelectAll && (<ListItem onTouchTap={this.selectAll}>Select All</ListItem>)}
+                {showClearSelection && (<ListItem onTouchTap={this.clearSelection}>Clear Filter</ListItem>)}
               </div>
             </header>
           }
@@ -816,6 +816,7 @@ SelectField.propTypes = {
   onAutoCompleteTyping: PropTypes.func,
   useLayerForClickAway: PropTypes.bool,
   showSelectAll: PropTypes.bool,
+  showClearSelection: PropTypes.bool,
   headerStyle: PropTypes.object,
   errorText: PropTypes.string
 }
@@ -845,6 +846,7 @@ SelectField.defaultProps = {
   children: [],
   useLayerForClickAway: false,
   showSelectAll: false,
+  showClearSelection: false,
   headerStyle: {},
   errorText: null
 }
