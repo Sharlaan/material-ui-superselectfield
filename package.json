@@ -15,31 +15,31 @@
   },
   "main": "lib/SuperSelectField.js",
   "dependencies": {
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.0",
     "react-infinite": "^0.12.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.5.1",
-    "enzyme": "^2.8.2",
+    "enzyme": "^3.1.0",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^1.0.0",
-    "material-ui": "^0.19.0",
-    "react": "^15.5.4",
-    "react-addons-test-utils": "^15.5.1",
-    "react-dom": "^15.5.4",
-    "react-router-dom": "^4.1.1",
-    "react-scripts": "^1.0.7",
+    "material-ui": "^0.19.4",
+    "react": "^16.0.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^1.0.14",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
     "material-ui": ">= 0.19 < 1",
-    "react": "^15.x",
-    "react-dom": "^15.x"
+    "react": "^16.x",
+    "react-dom": "^16.x"
   },
   "babel": {
     "plugins": [
