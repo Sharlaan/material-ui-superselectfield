@@ -109,12 +109,7 @@ FloatingLabel.defaultProps = {
 const styles = {
   div1: {
     position: 'relative',
-    display: '-webkit-box',
-    display: '-webkit-flex', // eslint-disable-line no-dupe-keys
-    display: '-moz-box', // eslint-disable-line no-dupe-keys
-    display: '-ms-flexbox', // eslint-disable-line no-dupe-keys
-    display: '-o-flex', // eslint-disable-line no-dupe-keys
-    display: 'flex', // eslint-disable-line no-dupe-keys
+    display: 'flex',
     WebkitBoxPack: 'end',
     WebkitJustifyContent: 'flex-end',
     msFlexPack: 'end',

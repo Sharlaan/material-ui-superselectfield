@@ -6,7 +6,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { render } from 'react-dom'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import SuperSelectField from './SuperSelectField'
