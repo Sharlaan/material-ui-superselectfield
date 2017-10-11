@@ -41,6 +41,7 @@ This component requires 3 dependencies :
 | floatingLabel | string or node | | The content to use for the floating label element. |
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
+| errorText | string | | Include this property to show an error text. |
 | noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
 | anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
 | checkPosition | string |  | Position of the checkmark in multiple mode. Accepted values: `'', left, right` |
