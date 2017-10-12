@@ -5,7 +5,6 @@
 import 'babel-polyfill'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { findDOMNode } from 'react-dom'
 import InfiniteScroller from 'react-infinite'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
@@ -294,24 +293,18 @@ class SelectField extends Component {
     if (this.state.itemsLength) this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
+  // FIXME: both focusTextField and focusMenuItem don't really focus the targeted element, user must hit another key to trigger the actual focus... need to find a solution for a true direct focus
   focusTextField () {
-    if (this.searchTextField) {
-      if (this.state.showAutocomplete) {
-        const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
-        input.focus()
-      } else this.focusMenuItem()
-    }
+    this.state.showAutocomplete && this.searchTextField
+      ? this.searchTextField.focus()
+      : this.focusMenuItem()
   }
 
   focusMenuItem (index) {
-    if (this.menuItems.length) {
-      const targetMenuItem = this.menuItems.find(item => {
-        return !!item && (index ? item.props.tabIndex === index : true)
-      })
-
-      if (!targetMenuItem) throw Error('targetMenuItem not found.')
-      targetMenuItem.applyFocusState('keyboard-focused')
-    }
+    const targetMenuItem = this.menuItems.find(item => {
+      return !!item && (index ? item.props.tabIndex === index : true)
+    })
+    if (targetMenuItem) targetMenuItem.applyFocusState('keyboard-focused')
   }
 
   clearTextField (callback) {
@@ -321,7 +314,7 @@ class SelectField extends Component {
   /**
    * Main Component Wrapper methods
    */
-  // toggle instead of close ? (in case user changes  targetOrigin/anchorOrigin)
+  // toggle instead of close ? (in case user changes targetOrigin/anchorOrigin)
   handleClick = (event) => !this.props.disabled && this.openMenu()
 
   handleKeyDown = (event) =>
