@@ -186,23 +186,23 @@ const SelectionsPresenter = ({
               defaultColors={{floatingLabelColor, focusColor}}
               floatingLabelStyle={floatingLabelStyle}
               floatingLabelFocusStyle={floatingLabelFocusStyle}
-              >
-                {floatingLabel}
-              </FloatingLabel>
-            }
-            {(shrinkCondition || !floatingLabel) &&
-              selectionsRenderer(selectedValues, hintText)
-            }
-          </div>
-          <DropDownArrow style={{fill: borderColor}} />
+            >
+              {floatingLabel}
+            </FloatingLabel>
+          }
+          {(shrinkCondition || !floatingLabel) &&
+            selectionsRenderer(selectedValues, hintText)
+          }
+        </div>
+        <DropDownArrow style={{fill: borderColor}} />
 
-          <hr style={baseHRstyle} />
-          <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
-        </div>
-        <div style={{paddingTop: 5, fontSize: 12, color: 'rgb(244,67,54)'}}>
-          {errorText?errorText:''}
-        </div>
-      </div>)
+        <hr style={baseHRstyle} />
+        <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
+      </div>
+      <div style={{paddingTop: 5, fontSize: 12, color: 'rgb(244,67,54)'}}>
+        {errorText || ''}
+      </div>
+    </div>)
 }
 
 SelectionsPresenter.propTypes = {
@@ -312,12 +312,14 @@ class SelectField extends Component {
   }
 
   focusMenuItem (index) {
-    const targetMenuItem = this.menuItems.find(item => {
-      return !!item && (index ? item.props.tabIndex === index : true)
-    })
+    if (this.menuItems.length) {
+      const targetMenuItem = this.menuItems.find(item => {
+        return !!item && (index ? item.props.tabIndex === index : true)
+      })
 
-    if (!targetMenuItem) throw Error('targetMenuItem not found.')
-    targetMenuItem.applyFocusState('keyboard-focused')
+      if (!targetMenuItem) throw Error('targetMenuItem not found.')
+      targetMenuItem.applyFocusState('keyboard-focused')
+    }
   }
 
   clearTextField (callback) {

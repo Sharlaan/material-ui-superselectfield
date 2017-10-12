@@ -31,8 +31,9 @@ describe('Default states, styles, and behaviors', () => {
     render(
       <MuiThemeProvider>
         <SuperSelectField />
-      </MuiThemeProvider>
-    , root)
+      </MuiThemeProvider>,
+      root
+    )
   })
 
   it('expects the menu to be closed by default', () => {
