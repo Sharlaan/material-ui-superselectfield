@@ -296,7 +296,7 @@ class SelectField extends Component {
   }
 
   openMenu () {
-    if (!this.satte.isOpen) this.props.onMenuOpen()
+    if (!this.state.isOpen) this.props.onMenuOpen()
     if (this.state.itemsLength) this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
