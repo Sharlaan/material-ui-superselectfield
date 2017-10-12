@@ -252,6 +252,12 @@ class SelectField extends Component {
     }
   }
 
+  componentDidMount () {
+    // Potential problem with Popover ?
+    // https://github.com/callemall/material-ui/blob/master/src/DropDownMenu/DropDownMenu.js#L237
+    if (this.props.openImmediately) this.openMenu()
+  }
+
   // Counts nodes with non-null value property without optgroups
   // noinspection JSMethodCanBeStatic
   getChildrenLength (children) {
@@ -716,6 +722,7 @@ SelectField.propTypes = {
   menuCloseButton: PropTypes.node,
   canAutoPosition: PropTypes.bool,
   multiple: PropTypes.bool,
+  openImmediately: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onMenuOpen: PropTypes.func,
@@ -730,6 +737,7 @@ SelectField.defaultProps = {
   menuCloseButton: null,
   canAutoPosition: true,
   multiple: false,
+  openImmediately: false,
   disabled: false,
   nb2show: 5,
   hintText: 'Click me',
