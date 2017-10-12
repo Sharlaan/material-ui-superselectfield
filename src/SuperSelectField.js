@@ -522,7 +522,7 @@ class SelectField extends Component {
     return (
       <div
         ref={ref => (this.root = ref)}
-        tabIndex='0'
+        tabIndex={disabled ? '-1' : '0'}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onKeyDown={this.handleKeyDown}
