@@ -50,6 +50,7 @@ This component requires 3 dependencies :
 | disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | () => {} | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
+| onMenuOpen | function | () => {} | Triggers when opening the Menu. |
 | onAutoCompleteTyping | function | () => {} | Exposes the word typed in AutoComplete. Useful for triggering onType API requests. |
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
 | nb2show | number | 5 | Number of options displayed from the menu. |

@@ -290,6 +290,7 @@ class SelectField extends Component {
   }
 
   openMenu () {
+    if (!this.satte.isOpen) this.props.onMenuOpen()
     if (this.state.itemsLength) this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
@@ -717,6 +718,7 @@ SelectField.propTypes = {
   multiple: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
+  onMenuOpen: PropTypes.func,
   onAutoCompleteTyping: PropTypes.func
 }
 
@@ -743,6 +745,7 @@ SelectField.defaultProps = {
   },
   value: null,
   onChange: () => {},
+  onMenuOpen: () => {},
   onAutoCompleteTyping: () => {},
   children: []
 }
