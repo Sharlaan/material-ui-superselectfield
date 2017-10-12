@@ -418,11 +418,11 @@ class SelectField extends Component {
   }
 
   render () {
-    const { children, floatingLabel, hintText, hintTextAutocomplete, noMatchFound, multiple, disabled, nb2show,
+    const { children, floatingLabel, hintText, hintTextAutocomplete, multiple, disabled, nb2show,
       autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin, canAutoPosition,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
-      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
+      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
     } = this.props
 
@@ -587,7 +587,8 @@ class SelectField extends Component {
               >
                 {menuItems}
               </InfiniteScroller>
-              : <ListItem primaryText={noMatchFound} style={{ cursor: 'default', padding: '10px 16px' }} disabled />
+              : <ListItem disabled primaryText={noMatchFound}
+                          style={{ cursor: 'default', padding: '10px 16px', ...noMatchFoundStyle }} />
             }
           </div>
           {multiple &&
@@ -679,6 +680,7 @@ SelectField.propTypes = {
   hintText: PropTypes.string,
   hintTextAutocomplete: PropTypes.string,
   noMatchFound: PropTypes.string,
+  noMatchFoundStyle: PropTypes.object,
   showAutocompleteThreshold: PropTypes.number,
   elementHeight: PropTypes.oneOfType([
     PropTypes.number,
@@ -731,6 +733,7 @@ SelectField.defaultProps = {
   hintText: 'Click me',
   hintTextAutocomplete: 'Type something',
   noMatchFound: 'No match found',
+  noMatchFoundStyle: {},
   showAutocompleteThreshold: 10,
   elementHeight: 36,
   autocompleteFilter: (searchText, text) => {

@@ -79,6 +79,7 @@ PropTypes should raise warnings if implementing otherwise.
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
 | floatingLabelStyle | object | | Allows to change the styles of the floating label. |
 | floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
+| noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
 | errorStyle | object | {color: 'red'} | Allows to change the style of error message's container.<br> Will resolve only if errorText is defined. |
 | underlineErrorStyle | object | {borderColor: 'red'} | Allows to change the style of the underline in error state.<br> Will resolve only if errorText is defined. |
 | underlineStyle | object | | Allows to change the styles of the underline. |
