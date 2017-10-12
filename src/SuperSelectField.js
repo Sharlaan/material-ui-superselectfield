@@ -110,25 +110,10 @@ const styles = {
   div1: {
     position: 'relative',
     display: 'flex',
-    WebkitBoxPack: 'end',
-    WebkitJustifyContent: 'flex-end',
-    msFlexPack: 'end',
-    OJustifyContent: 'flex-end',
     justifyContent: 'flex-end',
-    WebkitAlignItems: 'center',
-    MozAlignItems: 'center',
-    msAlignItems: 'center',
-    OAlignItems: 'center',
     alignItems: 'center'
   },
-  div2: {
-    WebkitBoxFlex: 1,
-    MozBoxFlex: 1,
-    WebkitFlex: 1,
-    msFlex: 1,
-    OFlex: 1,
-    flex: 1
-  }
+  div2: { flex: 1 }
 }
 
 const SelectionsPresenter = ({
@@ -305,10 +290,12 @@ class SelectField extends Component {
   }
 
   focusTextField () {
-    if (this.state.showAutocomplete) {
-      const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
-      input.focus()
-    } else this.focusMenuItem()
+    if (this.searchTextField) {
+      if (this.state.showAutocomplete) {
+        const input = findDOMNode(this.searchTextField).getElementsByTagName('input')[0]
+        input.focus()
+      } else this.focusMenuItem()
+    }
   }
 
   focusMenuItem (index) {
