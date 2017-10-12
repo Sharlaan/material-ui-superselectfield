@@ -107,13 +107,15 @@ FloatingLabel.defaultProps = {
 
 // noinspection JSDuplicatedDeclaration
 const styles = {
-  div1: {
+  column: { display: 'flex', flexDirection: 'column' },
+  row: {
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
-  div2: { flex: 1 }
+  selections: { flex: 1 },
+  underline: { position: 'relative' }
 }
 
 const SelectionsPresenter = ({
@@ -121,7 +123,8 @@ const SelectionsPresenter = ({
   floatingLabel, hintText,
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
-  isFocused, isOpen, disabled, errorText
+  isFocused, isOpen, disabled,
+  errorText, errorStyle, underlineErrorStyle
 }) => {
   const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
 
@@ -131,10 +134,6 @@ const SelectionsPresenter = ({
   const shrinkCondition = (Array.isArray(selectedValues) && !!selectedValues.length) ||
     (!Array.isArray(selectedValues) && typeof selectedValues === 'object') ||
     focusCondition
-
-  if (errorText) {
-    underlineStyle = {borderColor: 'rgb(244,67,54)', borderWidth: 2}
-  }
 
   const baseHRstyle = {
     position: 'absolute',
@@ -148,7 +147,8 @@ const SelectionsPresenter = ({
     borderRight: 'none',
     borderBottom: '1px solid',
     borderColor,
-    ...underlineStyle
+    ...underlineStyle,
+    ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {})
   }
 
   const focusedHRstyle = disabled ? {} : (errorText ? underlineStyle : {
@@ -160,9 +160,9 @@ const SelectionsPresenter = ({
   })
 
   return (
-    <div>
-      <div style={styles.div1}>
-        <div style={styles.div2}>
+    <div style={styles.column}>
+      <div style={styles.row}>
+        <div style={styles.selections}>
           {floatingLabel &&
             <FloatingLabel
               shrink={shrinkCondition}
@@ -179,14 +179,13 @@ const SelectionsPresenter = ({
             selectionsRenderer(selectedValues, hintText)
           }
         </div>
-        <DropDownArrow style={{fill: borderColor}} />
-
+        <DropDownArrow style={{ fill: borderColor }} />
+      </div>
+      <div style={styles.underline}>
         <hr style={baseHRstyle} />
         <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
       </div>
-      <div style={{paddingTop: 5, fontSize: 12, color: 'rgb(244,67,54)'}}>
-        {errorText || ''}
-      </div>
+      {errorText && <div style={{ marginTop: 5, color: 'red', fontSize: 12, ...errorStyle }}>{errorText}</div>}
     </div>)
 }
 
@@ -196,11 +195,17 @@ SelectionsPresenter.propTypes = {
     PropTypes.arrayOf(objectShape)
   ]),
   selectionsRenderer: PropTypes.func,
-  hintText: PropTypes.string
+  hintText: PropTypes.string,
+  errorText: PropTypes.string,
+  errorStyle: PropTypes.object,
+  underlineErrorStyle: PropTypes.object
 }
 
 SelectionsPresenter.defaultProps = {
   hintText: 'Click me',
+  errorText: '',
+  errorStyle: {},
+  underlineErrorStyle: {},
   value: null,
   selectionsRenderer: (values, hintText) => {
     if (!values) return hintText
@@ -425,7 +430,7 @@ class SelectField extends Component {
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle,
-      checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText
+      checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -543,6 +548,8 @@ class SelectField extends Component {
           disabled={disabled}
           hintText={hintText}
           errorText={errorText}
+          errorStyle={errorStyle}
+          underlineErrorStyle={underlineErrorStyle}
           muiTheme={this.context.muiTheme}
           selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}

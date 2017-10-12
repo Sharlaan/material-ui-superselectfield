@@ -41,7 +41,7 @@ This component requires 3 dependencies :
 | floatingLabel | string or node | | The content to use for the floating label element. |
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
-| errorText | string | | Include this property to show an error text. |
+| errorText | string or node | '' | Include this property to show an error warning. |
 | noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
 | anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
 | checkPosition | string |  | Position of the checkmark in multiple mode. Accepted values: `'', left, right` |
@@ -79,6 +79,8 @@ PropTypes should raise warnings if implementing otherwise.
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
 | floatingLabelStyle | object | | Allows to change the styles of the floating label. |
 | floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
+| errorStyle | object | {color: 'red'} | Allows to change the style of error message's container.<br> Will resolve only if errorText is defined. |
+| underlineErrorStyle | object | {borderColor: 'red'} | Allows to change the style of the underline in error state.<br> Will resolve only if errorText is defined. |
 | underlineStyle | object | | Allows to change the styles of the underline. |
 | underlineFocusStyle | object | | Allows to change the styles of the underline when focused. |
 | autocompleteUnderlineStyle | object | | Allows to change the styles of the searchTextField's underline. |

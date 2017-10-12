@@ -71,6 +71,10 @@ class CodeExample extends Component {
           <span value={1} label='Option 1'>Option 1</span>
         </SuperSelectField>
 
+        <SuperSelectField name='case 2bis' hintText='Error message' errorText='Error text warning something is wrong!' style={{ margin: 10 }}>
+          <span value={1} label='Option 1'>Option 1</span>
+        </SuperSelectField>
+
         <SuperSelectField name='case 3' hintText='Single empty group' style={{ margin: 10 }}>
           <optgroup label='Group A'>
           </optgroup>
