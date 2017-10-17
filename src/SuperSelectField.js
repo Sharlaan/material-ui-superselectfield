@@ -56,7 +56,7 @@ class FloatingLabel extends Component {
 
   render () {
     const {
-      children, shrink, focusCondition, /* disabled, */
+      children, shrink, isFocused, /* disabled, */
       defaultColors: {floatingLabelColor, focusColor},
       floatingLabelStyle, floatingLabelFocusStyle
     } = this.props
@@ -69,22 +69,20 @@ class FloatingLabel extends Component {
       transform: 'scale(1) translateY(0)',
       transformOrigin: 'left top',
       pointerEvents: 'auto',
+      cursor: 'pointer',
       userSelect: 'none',
       color: floatingLabelColor,
       ...floatingLabelStyle
     }
 
-    const focusStyles = focusCondition &&
-      {
-        color: focusColor,
-        ...floatingLabelFocusStyle
-      }
+    const focusStyles = isFocused && shrink && { color: focusColor, ...floatingLabelFocusStyle }
 
     const shrinkStyles = shrink &&
       {
         position: 'absolute',
         transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
-        pointerEvents: 'none'
+        pointerEvents: 'none',
+        cursor: 'default'
       }
 
     return (
@@ -114,7 +112,7 @@ const styles = {
     alignItems: 'center'
   },
   selections: { flex: 1 },
-  underline: { position: 'relative' }
+  underline: { position: 'relative', marginTop: 4 }
 }
 
 const SelectionsPresenter = ({
@@ -127,12 +125,11 @@ const SelectionsPresenter = ({
 }) => {
   const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
 
-  // Condition for animating floating Label color and underline
-  const focusCondition = isFocused || isOpen
+  const isValidObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
   // Condition for shrinking the floating Label
-  const shrinkCondition = (Array.isArray(selectedValues) && !!selectedValues.length) ||
-    (!Array.isArray(selectedValues) && typeof selectedValues === 'object') ||
-    focusCondition
+  const isShrunk = (Array.isArray(selectedValues) && !!selectedValues.length) ||
+    (!Array.isArray(selectedValues) && isValidObject(selectedValues)) ||
+    isOpen
 
   const baseHRstyle = {
     position: 'absolute',
@@ -164,8 +161,8 @@ const SelectionsPresenter = ({
         <div style={styles.selections}>
           {floatingLabel &&
             <FloatingLabel
-              shrink={shrinkCondition}
-              focusCondition={focusCondition}
+              shrink={isShrunk}
+              isFocused={isFocused}
               disabled={disabled}
               defaultColors={{floatingLabelColor, focusColor}}
               floatingLabelStyle={floatingLabelStyle}
@@ -174,7 +171,7 @@ const SelectionsPresenter = ({
               {floatingLabel}
             </FloatingLabel>
           }
-          {(shrinkCondition || !floatingLabel) &&
+          {(!floatingLabel || isShrunk) &&
             selectionsRenderer(selectedValues, hintText)
           }
         </div>
@@ -696,7 +693,6 @@ SelectField.propTypes = {
   nb2show: PropTypes.number,
   value: (props, propName, componentName, location, propFullName) => {
     const { multiple, value } = props
-    // console.debug(`value ${props.name}`, value)
     if (multiple) {
       if (!Array.isArray(value)) {
         return new Error(`
