@@ -13,14 +13,15 @@ const containerStyle = {
 class CodeExample extends Component {
   state = {
     state11: null,
-    state12: { value: 'E', label: 'label E' }
+    state12: { value: 'E', label: 'label E' },
+    floatingLabelState: null
   }
 
   handleSelection = (values, name) => this.setState({ [name]: values })
 
   render () {
-    const { state11, state12 } = this.state
-    console.debug('state11', state11, '\nstate12', state12)
+    const { state11, state12, floatingLabelState } = this.state
+    console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState)
 
     return <section style={containerStyle}>
 
@@ -28,6 +29,7 @@ class CodeExample extends Component {
         <legend>Selected values</legend>
         <div>State 11: {state11 ? state11.value : 'empty state'}</div>
         <div>State 12: {state12 ? state12.label : 'empty state'}</div>
+        <div>State floatingLabel: {floatingLabelState ? floatingLabelState.value : 'empty state'}</div>
       </fieldset>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
@@ -53,6 +55,20 @@ class CodeExample extends Component {
           <div value='D' label='label D'>Option D</div>
           <div value='E' label='label E'>Option E</div>
           <div value='F' label='label F'>Option F</div>
+        </SuperSelectField>
+      </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 40 }}>
+        <SuperSelectField
+          name='floatingLabelState'
+          floatingLabel='Floating label'
+          onChange={this.handleSelection}
+          value={floatingLabelState}
+          style={{ minWidth: 150, margin: 10 }}
+        >
+          <div value='A'>Option A</div>
+          <div value='B'>Option B</div>
+          <div value='C'>Option C</div>
         </SuperSelectField>
 
         <SuperSelectField
