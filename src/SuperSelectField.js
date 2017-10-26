@@ -517,7 +517,7 @@ class SelectField extends Component {
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
       ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
-      : elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)
+      : (elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)) + 6
     ) || 0
     const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
