@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
@@ -15,7 +15,6 @@
   },
   "main": "lib/SuperSelectField.js",
   "dependencies": {
-    "prop-types": "^15.6.0",
     "react-infinite": "^0.12.1"
   },
   "devDependencies": {
@@ -23,26 +22,29 @@
     "babel-eslint": "^8.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "enzyme": "^3.1.0",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^1.0.0",
     "material-ui": "^0.19.4",
-    "react": "^16.0.0",
-    "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^16.0.0",
+    "prop-types": "^15.6.0",
+    "react": ">= 15 < 17",
+    "react-addons-test-utils": ">= 15 < 17",
+    "react-dom": ">= 15 < 17",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.0.14",
+    "react-scripts": "^1.0.16",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
-    "material-ui": ">= 0.19 < 1",
-    "react": "^16.x",
-    "react-dom": "^16.x"
+    "material-ui": ">= 0.17 < 1",
+    "react": ">= 15 < 17",
+    "react-dom": ">= 15 < 17"
   },
   "babel": {
     "plugins": [
+      "transform-react-remove-prop-types",
       "transform-class-properties",
       "transform-object-rest-spread"
     ],
@@ -62,7 +64,10 @@
         }
       ],
       "react"
-    ]
+    ],
+    "compact": true,
+    "comments": false,
+    "minified": true
   },
   "standard": {
     "parser": "babel-eslint"

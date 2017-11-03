@@ -48,6 +48,7 @@ This component requires 3 dependencies :
 | canAutoPosition | bool | true | If present, this property allows the inner Popover component to position the menu in such way options are not hidden by the screen edges. |
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
 | openImmediately | bool | false | Makes the menu opened on page load.|
+| keepSearchOnSelect | bool | false | Prevents the autocomplete field's value to be reset after each selection.|
 | disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | () => {} | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |

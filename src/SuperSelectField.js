@@ -298,12 +298,6 @@ class SelectField extends Component {
   }
 
   // FIXME: both focusTextField and focusMenuItem don't really focus the targeted element, user must hit another key to trigger the actual focus... need to find a solution for a true direct focus
-  focusTextField () {
-    this.state.showAutocomplete && this.searchTextField
-      ? this.searchTextField.focus()
-      : this.focusMenuItem()
-  }
-
   focusMenuItem (index) {
     const targetMenuItem = this.menuItems.find(item => {
       return !!item && (index ? item.props.tabIndex === index : true)
@@ -311,8 +305,16 @@ class SelectField extends Component {
     if (targetMenuItem) targetMenuItem.applyFocusState('keyboard-focused')
   }
 
+  focusTextField () {
+    this.state.showAutocomplete && this.searchTextField
+      ? this.searchTextField.focus()
+      : this.focusMenuItem()
+  }
+
   clearTextField (callback) {
-    this.setState({ searchText: '' }, callback)
+    this.props.keepSearchOnSelect
+      ? callback() // don't reset the autocomplete
+      : this.setState({ searchText: '' }, callback)
   }
 
   /**
@@ -592,7 +594,7 @@ class SelectField extends Component {
                 {menuItems}
               </InfiniteScroller>
               : <ListItem disabled primaryText={noMatchFound}
-                          style={{ cursor: 'default', padding: '10px 16px', ...noMatchFoundStyle }} />
+                style={{ cursor: 'default', padding: '10px 16px', ...noMatchFoundStyle }} />
             }
           </div>
           {multiple &&
@@ -719,6 +721,7 @@ SelectField.propTypes = {
   canAutoPosition: PropTypes.bool,
   multiple: PropTypes.bool,
   openImmediately: PropTypes.bool,
+  keepSearchOnSelect: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onMenuOpen: PropTypes.func,
@@ -734,6 +737,7 @@ SelectField.defaultProps = {
   canAutoPosition: true,
   multiple: false,
   openImmediately: false,
+  keepSearchOnSelect: false,
   disabled: false,
   nb2show: 5,
   hintText: 'Click me',
