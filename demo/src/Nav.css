@@ -1,0 +1,28 @@
+.title {
+    text-align: center;
+    height: 68px;
+    margin: 0;
+}
+
+.base {
+   text-decoration: none;
+   color: #222;
+   height: 100%;
+   width: calc(100% - 64px);
+   display: inline-block;
+ }
+
+.multiLine {
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+.active {
+  font-weight: bold;
+  color: #00BCD4;
+}
+
+.verticallyCenter { line-height: 68px; }
+
+.morePadding { padding: 0 32px; }

@@ -1,0 +1,30 @@
+.App {
+  user-select: none;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 10s linear;
+  height: 80px;
+}
+
+.App-header {
+  text-align: center;
+  margin-left: 200px;
+  background-color: #222;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  color: white;
+}
+.App-header h2, .App-header h4 { margin: 7px 0 0; }
+
+.App-content {
+  margin-left: 200px;
+  font-size: large;
+}
+
+*:focus { outline: none; }
