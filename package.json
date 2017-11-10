@@ -35,6 +35,7 @@
     "react-dom": ">= 15 < 17",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.16",
+    "react-to-typescript-definitions": "^0.22.0",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
@@ -88,7 +89,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cat ./src/SuperSelectField.js | react2dts --module-name SuperSelectField > lib/SuperSelectField.d.ts",
     "buildLib": "babel src/SuperSelectField.js -o lib/SuperSelectField.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
