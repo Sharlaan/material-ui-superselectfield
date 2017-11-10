@@ -288,12 +288,12 @@ class SelectField extends Component {
 
   closeMenu = (reason) => {
     const { onChange, name } = this.props
-
+    this.setState({ isOpen: false, searchText: '', isFocused: false })
     if (reason === 'clickaway') { // if reason === 'clickaway' or 'offscreen'
-      this.setState({ isOpen: false, searchText: '', isFocused: false, selectedItems: this.state.initialSelectedItems })
+      this.setState({ selectedItems: this.state.initialSelectedItems })
     } else {
       onChange(this.state.selectedItems, name)
-      this.setState({ isOpen: false, searchText: '', isFocused: false, initialSelectedItems: this.state.selectedItems })
+      this.setState({ initialSelectedItems: this.state.selectedItems })
     }
 
     if (!reason && this.root) {
