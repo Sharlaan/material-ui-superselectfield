@@ -24,14 +24,18 @@
 
 
 ## Installation
-`npm i material-ui-superselectfield`  
-
 This component requires 3 dependencies :
 - react
 - react-dom
 - material-ui  
 
 ... so make sure they are installed in your project, or install them as well ;)
+
+#### ES5 version
+`npm i material-ui-superselectfield`
+
+#### ES6+ version
+
 
 
 ## Properties
