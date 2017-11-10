@@ -6,6 +6,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { render } from 'react-dom'
+
 import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
@@ -14,6 +15,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import SuperSelectField from './SuperSelectField'
 
 configure({ adapter: new Adapter() })
+
 const muiTheme = getMuiTheme()
 const shallowWithContext = node => shallow(node, {context: {muiTheme}})
 
