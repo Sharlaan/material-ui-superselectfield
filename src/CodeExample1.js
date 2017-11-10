@@ -39,6 +39,7 @@ class CodeExample extends Component {
           onChange={this.handleSelection}
           value={state11}
           style={{ minWidth: 150, margin: 10 }}
+          onRequestClose={() => console.log('onRequestClose')}
         >
           <div value='A'>Option A</div>
           <div value='B'>Option B</div>
@@ -51,6 +52,7 @@ class CodeExample extends Component {
           onChange={this.handleSelection}
           value={state12}
           style={{ minWidth: 150, margin: 10 }}
+          onRequestClose={() => console.log('onRequestClose')}
         >
           <div value='D' label='label D'>Option D</div>
           <div value='E' label='label E'>Option E</div>
@@ -65,6 +67,7 @@ class CodeExample extends Component {
           onChange={this.handleSelection}
           value={floatingLabelState}
           style={{ minWidth: 150, margin: 10 }}
+          onRequestClose={() => console.log('onRequestClose')}
         >
           <div value='A'>Option A</div>
           <div value='B'>Option B</div>
@@ -75,6 +78,7 @@ class CodeExample extends Component {
           disabled
           hintText='Disabled'
           style={{ minWidth: 150, margin: 10 }}
+          onRequestClose={() => console.log('onRequestClose')}
         />
       </div>
 
