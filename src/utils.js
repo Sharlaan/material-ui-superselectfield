@@ -1,3 +1,6 @@
+/*
+  Utilities functions and polyfills
+ */
 import PropTypes from 'prop-types'
 
 export function entries(obj) {
