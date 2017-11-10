@@ -1,4 +1,4 @@
-# material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
+# material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url] [![DeepScan Grade](https://deepscan.io/api/projects/509/branches/790/badge/grade.svg)][deepscan-url]
 
 [npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
 [npm-url]: https://npmjs.org/package/material-ui-superselectfield
@@ -6,6 +6,7 @@
 [downloads-url]: https://npmjs.org/package/material-ui-superselectfield
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
+[deepscan-url]: https://deepscan.io/dashboard/#view=project&pid=509&bid=790
 
 ## Table of Contents
 - [Preview](#preview)
