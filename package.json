@@ -89,8 +89,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cat ./src/SuperSelectField.js | react2dts --module-name SuperSelectField > lib/SuperSelectField.d.ts",
-    "buildLib": "babel src/SuperSelectField.js -o lib/SuperSelectField.js",
+    "build": "react-scripts build",
+    "buildLib": "babel src/SuperSelectField.js -o lib/SuperSelectField.js && cat ./src/SuperSelectField.js | react2dts --module-name SuperSelectField > lib/SuperSelectField.d.ts",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "eslint src",
