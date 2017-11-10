@@ -6,22 +6,21 @@
 /* eslint-env jest */
 import React from 'react'
 import { render } from 'react-dom'
-import { shallow } from 'enzyme'
+
+import { shallow, configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import SuperSelectField from './SuperSelectField'
 
+configure({ adapter: new Adapter() })
 
 const muiTheme = getMuiTheme()
 const shallowWithContext = node => shallow(node, {context: {muiTheme}})
-/*
-const mountWithContext = node => mount(node, {
-  context: {muiTheme},
-  childContextTypes: {muiTheme: PropTypes.object}
-})
-*/
+
 const testChildren = [
-  <div key='0' value='1'>Test Child</div>,
+  <div key='0' value='1' label='test'>Test Child</div>,
   <div key='1' value='2'>Test Child</div>
 ]
 
@@ -44,15 +43,15 @@ describe('Default states, styles, and behaviors', () => {
   })
 
   it('expects the menu to open when clicked', () => {
-    const wrapper = shallowWithContext(<SuperSelectField />)
+    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
     wrapper.simulate('click')
     expect(wrapper.find('Popover').props().open).toBe(true)
   })
 
   it('expects the menu to render children', () => {
     const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
-    wrapper.simulate('click') // opens menu
-    const firstChild = wrapper.find('MenuItem').first()
+    wrapper.simulate('click', { event: {} })
+    const firstChild = wrapper.find('ListItem').first()
     expect(firstChild.props().primaryText).toBe(testChildren[0])
   })
 
@@ -64,25 +63,38 @@ describe('Default states, styles, and behaviors', () => {
 describe('When selecting an option', () => {
   it('expects the menu to close', () => {
     const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
+    expect(wrapper.find('Popover').props().open).toBe(false)
+
     wrapper.simulate('click') // opens menu
-    const children = wrapper.find('MenuItem')
+    expect(wrapper.find('Popover').props().open).toBe(true)
+    const children = wrapper.find('ListItem')
     expect(children).toHaveLength(2)
-    children.first().simulate('touchTap')
-    console.log('children', children)
-    // expect(wrapper.find('Popover').props().open).toBe(false)
+    wrapper.find('ListItem').first().simulate('click', { preventDefault: () => {} })
+    expect(wrapper.find('Popover').props().open).toBe(false)
   })
 
   it('expects the menu to close when clicking outside')
 
-/*  it('expects the onChange handler to be called', () => {
+  it('expects the onChange handler to be called', () => {
     const callback = jest.fn()
     const wrapper = shallowWithContext(<SuperSelectField onChange={callback}>{testChildren}</SuperSelectField>)
     wrapper.setState({ isOpen: true })
     expect(callback).not.toHaveBeenCalled()
-    wrapper.find('MenuItem').first().simulate('touchTap')
-    expect(callback).toHaveBeenCalledTimes(1)
-    // expect(callback).toHaveBeenCalledWith(arg1, arg2, ...)
-  }) */
+    wrapper.find('ListItem').first().simulate('click', { target: {}, preventDefault: () => {} })
+    wrapper.first().simulate('keyDown', { key: 'Escape' })
+    expect(callback).toBeCalledWith({'label': 'test', 'value': '1'}, undefined)
+  })
+
+  it('expects the onChange handler to not be called', () => {
+    const callback = jest.fn()
+    const onRequestClose = jest.fn()
+    const wrapper = shallowWithContext(<SuperSelectField onChange={callback} multiple value={[]} onRequestClose={onRequestClose}>{testChildren}</SuperSelectField>)
+    wrapper.setState({ isOpen: true })
+    expect(callback).not.toHaveBeenCalled()
+    wrapper.find('ListItem').first().simulate('click', { target: {}, preventDefault: () => {} })
+    wrapper.first().simulate('keyDown', { key: 'Escape' })
+    expect(callback).not.toHaveBeenCalled()
+  })
 })
 
 describe('Children composition', () => {
