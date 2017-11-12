@@ -33,12 +33,15 @@ export function getChildrenLength(children) {
             for (let c of cpc) {
               if (c.props.value)++count
             }
-          } else if (typeof cpc === 'object' && cpc.props.value)++count
+          }
+          else if (typeof cpc === 'object' && cpc.props.value)++count
         }
-      } else if (value)++count
+      }
+      else if (value)++count
       return count
     }, 0)
-  } else if (!Array.isArray(children) && typeof children === 'object') {
+  }
+  else if (!Array.isArray(children) && typeof children === 'object') {
     if (children.type === 'optgroup') return getChildrenLength(children.props.children)
     else if (children.props.value) return 1
   }

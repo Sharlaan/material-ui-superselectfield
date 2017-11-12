@@ -13,7 +13,6 @@ import TextField from 'material-ui/TextField/TextField'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 import { getChildrenLength, areEqual, checkFormat, objectShape } from './utils'
 
-
 class SelectField extends Component {
   constructor(props, context) {
     super(props, context)
@@ -132,7 +131,8 @@ class SelectField extends Component {
         : selectedItems.concat(selectedItem)
       this.setState({ selectedItems: updatedValues })
       this.clearTextField(() => this.focusTextField())
-    } else {
+    }
+    else {
       const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
       this.setState({ selectedItems: updatedValue }, () => this.closeMenu())
     }
@@ -272,7 +272,8 @@ class SelectField extends Component {
           if (Array.isArray(cpc) && cpc.length) {
             groupedItems = cpc.reduce((nodes, child, idx) =>
               menuItemBuilder(nodes, child, nextIndex + idx), [])
-          } else if (typeof cpc === 'object') groupedItems = menuItemBuilder(nodes, cpc, nextIndex)
+          }
+          else if (typeof cpc === 'object') groupedItems = menuItemBuilder(nodes, cpc, nextIndex)
         }
         return groupedItems.length
           ? [...nodes, menuGroup, ...groupedItems]
@@ -415,7 +416,8 @@ SelectField.propTypes = {
               )
             }
           }
-        } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
+        }
+        else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
           Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
           Validation failed.`
@@ -431,7 +433,8 @@ SelectField.propTypes = {
           Validation failed.`
           )
         }
-      } else {
+      }
+      else {
         for (let child of props[propName].props.children) {
           if (!child.props.value) {
             return new Error(`
@@ -471,14 +474,16 @@ SelectField.propTypes = {
           When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.
           Validation failed.`
         )
-      } else if (checkFormat(value) !== -1) {
+      }
+      else if (checkFormat(value) !== -1) {
         const index = checkFormat(value)
         return new Error(`
           'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property.
           Validation failed.`
         )
       }
-    } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
+    }
+    else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
         'value' of '${componentName} ${props.name}' must be an object including a 'value' property.
         Validation failed.`

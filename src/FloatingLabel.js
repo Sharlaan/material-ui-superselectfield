@@ -10,10 +10,10 @@ class FloatingLabel extends Component {
 
   render() {
     const {
-        children, shrink, isFocused, /* disabled, */
+      children, shrink, isFocused, /* disabled, */
       defaultColors: { floatingLabelColor, focusColor },
       floatingLabelStyle, floatingLabelFocusStyle
-      } = this.props
+    } = this.props
     const defaultStyles = {
       position: 'static',
       top: 0,

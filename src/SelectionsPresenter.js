@@ -18,13 +18,13 @@ const styles = {
 }
 
 const SelectionsPresenter = ({
-    selectedValues, selectionsRenderer,
+  selectedValues, selectionsRenderer,
   floatingLabel, hintText,
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
   isFocused, isOpen, disabled,
   errorText, errorStyle, underlineErrorStyle
-  }) => {
+}) => {
   const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme
 
   const isValidObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
