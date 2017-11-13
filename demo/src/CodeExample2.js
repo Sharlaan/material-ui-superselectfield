@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FlatButton from 'material-ui/FlatButton/FlatButton'
-import SuperSelectField from './SuperSelectField'
+import SuperSelectField from '../../src/SuperSelectField'
 
 const containerStyle = {
   padding: 40,
@@ -24,7 +24,7 @@ class CodeExample extends Component {
 
   handleSelection = (values, name) => this.setState({ [name]: values })
 
-  render () {
+  render() {
     const { state21, state22, state23 } = this.state
     console.debug('state21', state21, '\nstate22', state22, '\nstate23', state23)
 

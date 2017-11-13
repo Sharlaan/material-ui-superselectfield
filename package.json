@@ -2,100 +2,67 @@
   "name": "material-ui-superselectfield",
   "version": "1.7.0",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
-  "private": false,
+  "keywords": [
+    "react",
+    "material-ui",
+    "autocomplete",
+    "select",
+    "dropdown",
+    "NWB",
+    "es2017"
+  ],
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
+  "contributors": [
+    "Tarik Huber <huber.tarik@gmail.com>",
+    "Maximilian Pichler <maximilian.pichler97@gmail.com>"
+  ],
+  "homepage": "https://sharlaan.github.io/material-ui-superselectfield",
   "license": "MIT",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/Sharlaan/material-ui-superselectfield.git"
   },
-  "homepage": "https://sharlaan.github.io/material-ui-superselectfield",
   "engines": {
-    "node": ">=6"
+    "node": ">=8.9"
   },
-  "main": "lib/SuperSelectField.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build-react-component",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "lint": "eslint src",
+    "fix": "npm run lint -- --fix",
+    "start": "nwb serve-react-demo",
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server"
+  },
   "dependencies": {
     "react-infinite": "^0.12.1"
   },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "enzyme": "^3.1.0",
-    "flag-icon-css": "^2.8.0",
-    "gh-pages": "^1.0.0",
-    "material-ui": "^0.19.4",
-    "prop-types": "^15.6.0",
-    "react": ">= 15 < 17",
-    "react-addons-test-utils": ">= 15 < 17",
-    "react-dom": ">= 15 < 17",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.0.16",
-    "react-to-typescript-definitions": "^0.22.0",
-    "standard": "^10.0.2"
-  },
   "peerDependencies": {
-    "material-ui": ">= 0.17 < 1",
-    "react": ">= 15 < 17",
-    "react-dom": ">= 15 < 17"
+    "react": "15.x || 16.x",
+    "react-dom": "15.x || 16.x",
+    "material-ui": ">= 0.17 < 1"
   },
-  "babel": {
-    "plugins": [
-      "transform-react-remove-prop-types",
-      "transform-class-properties",
-      "transform-object-rest-spread"
-    ],
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "browsers": [
-              "> 3%",
-              "ie 11",
-              "safari 8"
-            ]
-          },
-          "modules": "commonjs",
-          "debug": false
-        }
-      ],
-      "react"
-    ],
-    "compact": true,
-    "comments": false,
-    "minified": true
-  },
-  "standard": {
-    "parser": "babel-eslint"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "standard"
-    ],
-    "parser": "babel-eslint",
-    "rules": {
-      "camelcase": "off",
-      "brace-style": "off",
-      "no-trailing-spaces": "off",
-      "no-multiple-empty-lines": "off",
-      "no-unused-vars": "warn"
-    }
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "buildLib": "babel src/SuperSelectField.js -o lib/SuperSelectField.js && cat ./src/SuperSelectField.js | react2dts --module-name SuperSelectField > lib/SuperSelectField.d.ts",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "lint": "eslint src",
-    "test": "react-scripts test --env=jsdom --coverage",
-    "release": "npm run deploy  &&  npm run buildLib  &&  npm publish",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4",
+    "eslint": "^4.10.0",
+    "eslint-config-jonnybuchanan": "^5.0.1",
+    "material-ui": "^0.19.4",
+    "nwb": "^0.19.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   }
 }

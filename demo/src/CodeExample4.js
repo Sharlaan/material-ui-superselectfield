@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SuperSelectField from './SuperSelectField'
+import SuperSelectField from '../../src/SuperSelectField'
 import Chip from 'material-ui/Chip/Chip'
 import continents from './assets/continents'
 import countries from './assets/countries'
@@ -72,7 +72,7 @@ class CodeExample extends Component {
     this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
   }
 
-  render () {
+  render() {
     const { state4 } = this.state
     console.debug('state4', state4)
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SuperSelectField from './SuperSelectField'
+import SuperSelectField from '../../src/SuperSelectField'
 import FlatButton from 'material-ui/FlatButton/FlatButton'
 import Chip from 'material-ui/Chip/Chip'
 import countries from './assets/countries'
@@ -36,21 +36,21 @@ const displayState = state => state.length
   : 'empty state'
 
 const dataSource = [
-  {id: 0, name: 'Raphaël'},
-  {id: 1, name: 'Jessica'},
-  {id: 2, name: 'Naomie'},
-  {id: 3, name: 'Oliver'},
-  {id: 4, name: 'Wynona'},
-  {id: 5, name: 'Ben'},
-  {id: 6, name: 'Vincent'},
-  {id: 7, name: 'Clémentine'},
-  {id: 8, name: 'Angélique'},
-  {id: 9, name: 'Julien'},
-  {id: 10, name: 'Steve'},
-  {id: 11, name: 'Yoan'},
-  {id: 12, name: 'Nathalie'},
-  {id: 13, name: 'Marie'},
-  {id: 14, name: 'Renée'}
+  { id: 0, name: 'Raphaël' },
+  { id: 1, name: 'Jessica' },
+  { id: 2, name: 'Naomie' },
+  { id: 3, name: 'Oliver' },
+  { id: 4, name: 'Wynona' },
+  { id: 5, name: 'Ben' },
+  { id: 6, name: 'Vincent' },
+  { id: 7, name: 'Clémentine' },
+  { id: 8, name: 'Angélique' },
+  { id: 9, name: 'Julien' },
+  { id: 10, name: 'Steve' },
+  { id: 11, name: 'Yoan' },
+  { id: 12, name: 'Nathalie' },
+  { id: 13, name: 'Marie' },
+  { id: 14, name: 'Renée' }
 ]
 
 class CodeExample extends Component {
@@ -94,7 +94,7 @@ class CodeExample extends Component {
 
   handleAutoCompleteTyping = searchText => console.debug('You typed in AutoComplete :', searchText)
 
-  render () {
+  render() {
     const { state31, state32 } = this.state
     console.debug('state31', state31, '\nstate32', state32)
 
@@ -114,14 +114,14 @@ class CodeExample extends Component {
       )
     })
 
-    const dataSourceNodes = dataSource.map(({id, name}) => (
+    const dataSourceNodes = dataSource.map(({ id, name }) => (
       <div key={id} value={id} label={name}>{name}</div>
     ))
 
     const CustomFloatingLabel = (
       <span>
-        Custom floatingLabel<br/>
-        <span style={{color: deepPurple500, fontWeight: 'bold', fontStyle: 'italic'}}>
+        Custom floatingLabel<br />
+        <span style={{ color: deepPurple500, fontWeight: 'bold', fontStyle: 'italic' }}>
           state32
         </span>
       </span>)
