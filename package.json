@@ -26,8 +26,8 @@
   "engines": {
     "node": ">=8.9"
   },
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "lib/SuperSelectField.js",
+  "module": "es/SuperSelectField.js",
   "files": [
     "css",
     "es",
@@ -36,6 +36,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
+    "postbuild": "cat ./src/SuperSelectField.js | react2dts --module-name SuperSelectField > lib/SuperSelectField.d.ts",
     "clean": "nwb clean-module && nwb clean-demo",
     "lint": "eslint src",
     "fix": "npm run lint -- --fix",
@@ -63,6 +64,7 @@
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-to-typescript-definitions": "^0.22.0"
   }
 }
