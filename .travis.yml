@@ -37,3 +37,9 @@ deploy:
 branches:
   only:
     - master
+
+notifications:
+  email:
+    - raphael.morineau@gmail.com
+    - maximilian.pichler97@gmail.com
+    - huber.tarik@gmail.com
