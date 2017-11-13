@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CircularProgress from 'material-ui/CircularProgress/CircularProgress'
-import SuperSelectField from './SuperSelectField'
+import SuperSelectField from '../../src/SuperSelectField'
 import data from './assets/states'
 
 class CodeExample extends Component {
@@ -19,7 +19,7 @@ class CodeExample extends Component {
     // Ideally should be externalized in a HoC,
     // with stateNodes && countyNodes in props
     window.setTimeout(() => {
-      const stateNodes = data.states.map(({code, name, capital}) =>
+      const stateNodes = data.states.map(({ code, name, capital }) =>
         <div key={code} value={name}>{name}</div>
       )
       this.setState({ stateNodes, isFetchingStates: false })
@@ -31,12 +31,12 @@ class CodeExample extends Component {
     console.debug('selectedStates', selectedStates)
     this.setState({ selectedStates, isFetchingCounties: true }, () => {
       const countyNodes = data.counties
-        .reduce((nodes, {INCITS, county, state}) => {
-          if (!selectedStates.find(({value}) => value === state)) return nodes
-          return [ ...nodes, <div key={INCITS} value={county}>{county}</div> ]
+        .reduce((nodes, { INCITS, county, state }) => {
+          if (!selectedStates.find(({ value }) => value === state)) return nodes
+          return [...nodes, <div key={INCITS} value={county}>{county}</div>]
         }, [])
       // must also check if previous selections are still consistent with new selectedStates
-      const selectedCounties = this.state.selectedCounties.filter(({value}) =>
+      const selectedCounties = this.state.selectedCounties.filter(({ value }) =>
         countyNodes.find(node => node.props.value === value)
       )
 
@@ -56,7 +56,7 @@ class CodeExample extends Component {
       case 'states':
         if (isFetchingStates) {
           return <div>
-            <CircularProgress size={20} style={{marginRight: 10}}/>
+            <CircularProgress size={20} style={{ marginRight: 10 }} />
             {hintText}
           </div>
         }
@@ -64,7 +64,7 @@ class CodeExample extends Component {
       case 'counties':
         if (isFetchingCounties) {
           return <div>
-            <CircularProgress size={20} style={{marginRight: 10}}/>
+            <CircularProgress size={20} style={{ marginRight: 10 }} />
             {hintText}
           </div>
         }
@@ -83,7 +83,7 @@ class CodeExample extends Component {
     else return hintText
   }
 
-  render () {
+  render() {
     const { selectedStates, stateNodes, selectedCounties, countyNodes } = this.state
 
     console.debug('countyNodes', countyNodes)

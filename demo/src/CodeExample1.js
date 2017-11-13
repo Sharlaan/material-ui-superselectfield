@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SuperSelectField from './SuperSelectField'
+import SuperSelectField from '../../src/SuperSelectField'
 
 const containerStyle = {
   padding: 40,
@@ -19,7 +19,7 @@ class CodeExample extends Component {
 
   handleSelection = (values, name) => this.setState({ [name]: values })
 
-  render () {
+  render() {
     const { state11, state12, floatingLabelState } = this.state
     console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState)
 

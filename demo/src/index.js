@@ -29,5 +29,5 @@ render(
       <App />
     </Router>
   </MuiThemeProvider>,
-  document.getElementById('root')
+  document.getElementById('demo')
 )
