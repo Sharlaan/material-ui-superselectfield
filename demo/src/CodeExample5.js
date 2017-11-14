@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CircularProgress from 'material-ui/CircularProgress/CircularProgress'
-import SuperSelectField from '../../src/SuperSelectField'
+import SuperSelectField from 'material-ui-superselectfield'
 import data from './assets/states'
 
 class CodeExample extends Component {
