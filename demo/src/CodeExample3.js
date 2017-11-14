@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SuperSelectField from '../../src/SuperSelectField'
+import SuperSelectField from 'material-ui-superselectfield'
 import FlatButton from 'material-ui/FlatButton/FlatButton'
 import Chip from 'material-ui/Chip/Chip'
 import countries from './assets/countries'

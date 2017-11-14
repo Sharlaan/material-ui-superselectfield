@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SuperSelectField from '../../src/SuperSelectField'
+import SuperSelectField from 'material-ui-superselectfield'
 
 const containerStyle = {
   padding: 40,
