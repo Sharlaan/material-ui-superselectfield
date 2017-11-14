@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "keywords": [
     "react",
@@ -42,7 +42,9 @@
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "react-infinite": "^0.12.1"
@@ -53,6 +55,9 @@
     "material-ui": ">= 0.17 < 1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.2.15",
+    "@storybook/addon-links": "^3.2.15",
+    "@storybook/react": "^3.2.15",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "eslint": "^4.10.0",
@@ -63,6 +68,7 @@
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "storybook-addon-material-ui": "^0.8.2"
   }
 }
