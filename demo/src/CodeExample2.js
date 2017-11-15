@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FlatButton from 'material-ui/FlatButton/FlatButton'
-import SuperSelectField from '../../src/SuperSelectField'
+import SuperSelectField from 'material-ui-superselectfield'
 
 const containerStyle = {
   padding: 40,
