@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { floatingLabelTypes } from './types'
+import { floatingLabelDefaultProps } from './defaultProps'
 
 // TODO: implement style lock when disabled = true
 class FloatingLabel extends Component {
@@ -47,9 +49,7 @@ class FloatingLabel extends Component {
   }
 }
 
-FloatingLabel.defaultProps = {
-  disabled: false,
-  shrink: false
-}
+FloatingLabel.propTypes = floatingLabelTypes
+FloatingLabel.defaultProps = floatingLabelDefaultProps
 
 export default FloatingLabel

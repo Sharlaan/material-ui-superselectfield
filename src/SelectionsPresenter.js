@@ -1,10 +1,9 @@
+import React from 'react'
 import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import FloatingLabel from './FloatingLabel'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { objectShape } from './utils'
+import { selectionsPresenterTypes } from './types'
+import { selectionsPresenterDefaultProps } from './defaultProps'
 
-// noinspection JSDuplicatedDeclaration
 const styles = {
   column: { display: 'flex', flexDirection: 'column' },
   row: {
@@ -87,35 +86,7 @@ const SelectionsPresenter = ({
     </div>)
 }
 
-SelectionsPresenter.propTypes = {
-  value: PropTypes.oneOfType([
-    objectShape,
-    PropTypes.arrayOf(objectShape)
-  ]),
-  selectionsRenderer: PropTypes.func,
-  hintText: PropTypes.string,
-  errorText: PropTypes.string,
-  errorStyle: PropTypes.object,
-  underlineErrorStyle: PropTypes.object
-}
-
-SelectionsPresenter.defaultProps = {
-  hintText: 'Click me',
-  errorText: '',
-  errorStyle: {},
-  underlineErrorStyle: {},
-  value: null,
-  selectionsRenderer: (values, hintText) => {
-    if (!values) return hintText
-    const { value, label } = values
-    if (Array.isArray(values)) {
-      return values.length
-        ? values.map(({ value, label }) => label || value).join(', ')
-        : hintText
-    }
-    else if (label || value) return label || value
-    else return hintText
-  }
-}
+SelectionsPresenter.propTypes = selectionsPresenterTypes
+SelectionsPresenter.defaultProps = selectionsPresenterDefaultProps
 
 export default SelectionsPresenter

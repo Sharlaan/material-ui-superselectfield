@@ -2,16 +2,16 @@
 /**
  * Created by Raphaël Morineau on 28 Oct 2016.
  */
-import CheckedIcon from 'material-ui/svg-icons/navigation/check'
+import React, { Component } from 'react'
 import InfiniteScroller from 'react-infinite'
 import ListItem from 'material-ui/List/ListItem'
 import Popover from 'material-ui/Popover/Popover'
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import SelectionsPresenter from './SelectionsPresenter'
 import TextField from 'material-ui/TextField/TextField'
-import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
-import { getChildrenLength, areEqual, checkFormat, objectShape } from './utils'
+import SelectionsPresenter from './SelectionsPresenter'
+import { getChildrenLength, areEqual } from './utils'
+import PropTypes from 'prop-types'
+import { selectFieldTypes } from './types'
+import { selectFieldDefaultProps } from './defaultProps'
 
 class SelectField extends Component {
   constructor(props, context) {
@@ -385,152 +385,7 @@ class SelectField extends Component {
 SelectField.contextTypes = {
   muiTheme: PropTypes.object.isRequired
 }
-
-SelectField.propTypes = {
-  anchorOrigin: PropTypes.shape({
-    vertical: PropTypes.oneOf(['top', 'bottom']),
-    horizontal: PropTypes.oneOf(['left', 'right'])
-  }),
-  style: PropTypes.object,
-  menuStyle: PropTypes.object,
-  menuGroupStyle: PropTypes.object,
-  checkPosition: PropTypes.oneOf(['', 'left', 'right']),
-  checkedIcon: PropTypes.node,
-  unCheckedIcon: PropTypes.node,
-  hoverColor: PropTypes.string,
-  // children can be either:
-  // an html element with a required 'value' property, and optional label prop,
-  // an optgroup with valid children (same as bove case),
-  // an array of either valid chidlren, or of optgroups hosting valid children
-  children: PropTypes.oneOfType([
-    objectShape,
-    (props, propName, componentName, location, propFullName) => {
-      const pp = props[propName]
-      if (pp.type === 'optgroup' && pp.props.children) {
-        if (Array.isArray(pp.props.children)) {
-          for (let child of pp.props.children) {
-            if (!child.props.value) {
-              return new Error(`
-              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-              Validation failed.`
-              )
-            }
-          }
-        }
-        else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
-          return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-          Validation failed.`
-          )
-        }
-      }
-    },
-    PropTypes.arrayOf((props, propName, componentName, location, propFullName) => {
-      if (props[propName].type !== 'optgroup') {
-        if (!props[propName].props.value) {
-          return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-          Validation failed.`
-          )
-        }
-      }
-      else {
-        for (let child of props[propName].props.children) {
-          if (!child.props.value) {
-            return new Error(`
-            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-            Validation failed.`
-            )
-          }
-        }
-      }
-    })
-  ]),
-  innerDivStyle: PropTypes.object,
-  selectedMenuItemStyle: PropTypes.object,
-  menuFooterStyle: PropTypes.object,
-  name: PropTypes.string,
-  floatingLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  floatingLabelFocusStyle: PropTypes.object,
-  underlineStyle: PropTypes.object,
-  underlineFocusStyle: PropTypes.object,
-  autocompleteUnderlineStyle: PropTypes.object,
-  autocompleteUnderlineFocusStyle: PropTypes.object,
-  hintText: PropTypes.string,
-  hintTextAutocomplete: PropTypes.string,
-  noMatchFound: PropTypes.string,
-  noMatchFoundStyle: PropTypes.object,
-  showAutocompleteThreshold: PropTypes.number,
-  elementHeight: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number)
-  ]),
-  nb2show: PropTypes.number,
-  value: (props, propName, componentName, location, propFullName) => {
-    const { multiple, value } = props
-    if (multiple) {
-      if (!Array.isArray(value)) {
-        return new Error(`
-          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.
-          Validation failed.`
-        )
-      }
-      else if (checkFormat(value) !== -1) {
-        const index = checkFormat(value)
-        return new Error(`
-          'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property.
-          Validation failed.`
-        )
-      }
-    }
-    else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
-      return new Error(`
-        'value' of '${componentName} ${props.name}' must be an object including a 'value' property.
-        Validation failed.`
-      )
-    }
-  },
-  autocompleteFilter: PropTypes.func,
-  selectionsRenderer: PropTypes.func,
-  menuCloseButton: PropTypes.node,
-  canAutoPosition: PropTypes.bool,
-  multiple: PropTypes.bool,
-  openImmediately: PropTypes.bool,
-  keepSearchOnSelect: PropTypes.bool,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  onMenuOpen: PropTypes.func,
-  onAutoCompleteTyping: PropTypes.func
-}
-
-SelectField.defaultProps = {
-  anchorOrigin: { vertical: 'top', horizontal: 'left' },
-  checkPosition: '',
-  checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
-  unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
-  menuCloseButton: null,
-  canAutoPosition: true,
-  multiple: false,
-  openImmediately: false,
-  keepSearchOnSelect: false,
-  disabled: false,
-  nb2show: 5,
-  hintText: 'Click me',
-  hintTextAutocomplete: 'Type something',
-  noMatchFound: 'No match found',
-  noMatchFoundStyle: {},
-  showAutocompleteThreshold: 10,
-  elementHeight: 36,
-  autocompleteFilter: (searchText, text) => {
-    if (!text || (typeof text !== 'string' && typeof text !== 'number')) return false
-    if (typeof searchText !== 'string' && typeof searchText !== 'number') return false
-    return (text + '').toLowerCase().includes(searchText.toLowerCase())
-  },
-  value: null,
-  onChange: () => { },
-  onMenuOpen: () => { },
-  onAutoCompleteTyping: () => { },
-  children: []
-}
+SelectField.propTypes = selectFieldTypes
+SelectField.defaultProps = selectFieldDefaultProps
 
 export default SelectField

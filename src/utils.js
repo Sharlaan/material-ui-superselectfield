@@ -1,8 +1,6 @@
 /*
   Utilities functions and polyfills
  */
-import PropTypes from 'prop-types'
-
 export function entries(obj) {
   return 'entries' in Object
     ? Object.entries(obj)
@@ -49,8 +47,3 @@ export function getChildrenLength(children) {
 }
 
 export const checkFormat = value => value.findIndex(v => typeof v !== 'object' || !('value' in v))
-
-export const objectShape = PropTypes.shape({
-  value: PropTypes.any.isRequired,
-  label: PropTypes.string
-})
