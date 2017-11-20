@@ -1,6 +1,6 @@
 {
-  "name": "material-ui-superselectfield",
-  "version": "1.7.0",
+  "name": "moebel-material-ui-superselectfield",
+  "version": "0.0.10",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "private": false,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
@@ -25,7 +25,8 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "enzyme": "^3.1.0",
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4",
     "flag-icon-css": "^2.8.0",
     "gh-pages": "^1.0.0",
     "material-ui": "^0.19.4",
@@ -35,6 +36,7 @@
     "react-dom": ">= 15 < 17",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.16",
+    "react-test-renderer": "^16.1.0",
     "standard": "^10.0.2"
   },
   "peerDependencies": {
@@ -94,7 +96,13 @@
     "deploy": "gh-pages -d build",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom --coverage",
-    "release": "npm run deploy  &&  npm run buildLib  &&  npm publish",
+    "release": "npm run buildLib && npm publish",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/App.js",
+      "src/SuperSelectField.js"
+    ]
   }
 }

@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - 8.9
+
+cache:
+  directories:
+  - node_modules
+
+script:
+  - npm test
+
+after_success:
+  - npm run buildLib
+
+deploy:
+  provider: npm
+  skip_cleanup: true
+  email: $NPM_EMAIL
+  api_key: $NPM_TOKEN
+  on:
+    branch: feature/reset
+    tags: true
+

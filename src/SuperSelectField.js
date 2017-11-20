@@ -231,6 +231,7 @@ class SelectField extends Component {
       itemsLength,
       showAutocomplete: (itemsLength > showAutocompleteThreshold) || false,
       selectedItems: value || (multiple ? [] : null),
+      initialSelectedItems: value || (multiple ? [] : null),
       searchText: ''
     }
     this.menuItems = []
@@ -287,9 +288,17 @@ class SelectField extends Component {
 
   closeMenu = (reason) => {
     const { onChange, name } = this.props
-    onChange(this.state.selectedItems, name)
-    if (reason) this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
-    this.setState({ isOpen: false, searchText: '' }, () => !reason && this.root.focus())
+    this.setState({ isOpen: false, searchText: '', isFocused: false })
+    if (reason === 'clickaway') { // if reason === 'clickaway' or 'offscreen'
+      this.setState({ selectedItems: this.state.initialSelectedItems })
+    } else {
+      onChange(this.state.selectedItems, name)
+      this.setState({ initialSelectedItems: this.state.selectedItems })
+    }
+
+    if (!reason && this.root) {
+      this.root.focus()
+    }
   }
 
   openMenu () {
@@ -317,6 +326,14 @@ class SelectField extends Component {
       : this.setState({ searchText: '' }, callback)
   }
 
+  onRequestClose = (...args) => {
+    const { menuCloseButton, menuCancelButton } = this.props
+    if (!menuCloseButton && !menuCancelButton) {
+      this.closeMenu(args)
+    }
+    this.props.onRequestClose(args)
+  }
+
   /**
    * Main Component Wrapper methods
    */
@@ -342,7 +359,7 @@ class SelectField extends Component {
 
       case 'Escape':
         this.clearTextField()
-        this.closeMenu()
+        this.closeMenu('clickaway')
         break
 
       default: break
@@ -383,8 +400,7 @@ class SelectField extends Component {
           this.state.showAutocomplete
             ? this.focusTextField()
             : this.focusMenuItem(lastTabIndex)
-        }
-        else {
+        } else {
           const previousTabIndex = cleanMenuItems
             .slice(0, currentElementIndex)
             .slice(-1)[0]
@@ -416,7 +432,7 @@ class SelectField extends Component {
         break
 
       case 'Escape':
-        this.closeMenu()
+        this.closeMenu('clickaway')
         break
 
       default: break
@@ -427,8 +443,8 @@ class SelectField extends Component {
     const { children, floatingLabel, hintText, hintTextAutocomplete, multiple, disabled, nb2show,
       autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin, canAutoPosition,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
-      floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
-      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle,
+      floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle, useLayerForClickAway,
+      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle, menuCancelButton,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
     } = this.props
 
@@ -450,7 +466,7 @@ class SelectField extends Component {
      */
     const menuItemBuilder = (nodes, child, index) => {
       const { selectedItems } = this.state
-      const { value: childValue, label } = child.props
+      const { value: childValue, label, disabled } = child.props
       if (!autocompleteFilter(this.state.searchText, label || childValue)) return nodes
       const isSelected = Array.isArray(selectedItems)
         ? selectedItems.some(obj => areEqual(obj.value, childValue))
@@ -465,9 +481,10 @@ class SelectField extends Component {
         <ListItem
           key={++index}
           tabIndex={index}
+          disabled={disabled}
           ref={ref => (this.menuItems[++index] = ref)}
           onClick={this.handleMenuSelection({ value: childValue, label })}
-          disableFocusRipple
+          disableFocusRipple={disabled}
           leftIcon={leftCheckbox}
           rightIcon={rightCheckbox}
           primaryText={child}
@@ -515,7 +532,7 @@ class SelectField extends Component {
       : elementHeight
     */
     const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
-    const footerHeight = menuCloseButton ? 36 : 0
+    const footerHeight = (menuCloseButton || menuCancelButton) ? 36 : 0
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
       ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
@@ -564,9 +581,10 @@ class SelectField extends Component {
           anchorEl={this.root}
           canAutoPosition={canAutoPosition}
           anchorOrigin={anchorOrigin}
-          useLayerForClickAway={false}
-          onRequestClose={this.closeMenu}
+          useLayerForClickAway={useLayerForClickAway}
+          onRequestClose={this.onRequestClose}
           style={{ height: popoverHeight }}
+          autoCloseWhenOffScreen={false}
         >
           {this.state.showAutocomplete &&
             <TextField
@@ -598,8 +616,11 @@ class SelectField extends Component {
             }
           </div>
           {multiple &&
-            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <div onClick={this.closeMenu} style={menuFooterStyle}>
+            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', ...menuFooterStyle }}>
+              <div onClick={() => this.closeMenu('clickaway')}>
+                {menuCancelButton}
+              </div>
+              <div onClick={this.closeMenu}>
                 {menuCloseButton}
               </div>
             </footer>
@@ -718,6 +739,7 @@ SelectField.propTypes = {
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
   menuCloseButton: PropTypes.node,
+  menuCancelButton: PropTypes.node,
   canAutoPosition: PropTypes.bool,
   multiple: PropTypes.bool,
   openImmediately: PropTypes.bool,
@@ -725,7 +747,9 @@ SelectField.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onMenuOpen: PropTypes.func,
-  onAutoCompleteTyping: PropTypes.func
+  onAutoCompleteTyping: PropTypes.func,
+  onRequestClose: PropTypes.func,
+  useLayerForClickAway: PropTypes.bool
 }
 
 SelectField.defaultProps = {
@@ -734,6 +758,7 @@ SelectField.defaultProps = {
   checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   menuCloseButton: null,
+  menuCancelButton: null,
   canAutoPosition: true,
   multiple: false,
   openImmediately: false,
@@ -755,7 +780,9 @@ SelectField.defaultProps = {
   onChange: () => {},
   onMenuOpen: () => {},
   onAutoCompleteTyping: () => {},
-  children: []
+  children: [],
+  onRequestClose: () => {},
+  useLayerForClickAway: false
 }
 
 export default SelectField

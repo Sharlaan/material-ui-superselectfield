@@ -1,9 +1,12 @@
 # material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
 
-[npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
-[npm-url]: https://npmjs.org/package/material-ui-superselectfield
-[downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg
-[downloads-url]: https://npmjs.org/package/material-ui-superselectfield
+## This is a fork!!!
+> **PUBLIC NOTE:** Do not use this fork. Instead use [original](https://github.com/Sharlaan/material-ui-superselectfield)
+
+[npm-image]: https://img.shields.io/npm/v/moebel-material-ui-superselectfield.svg
+[npm-url]: https://npmjs.org/package/moebel-material-ui-superselectfield
+[downloads-image]: https://img.shields.io/npm/dm/moebel-material-ui-superselectfield.svg
+[downloads-url]: https://npmjs.org/package/moebel-material-ui-superselectfield
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
 
@@ -52,6 +55,7 @@ This component requires 3 dependencies :
 | disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 | onChange | function | () => {} | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
+| onRequestClose | function | () => {} | If multiple is set triggers when clicking away |
 | onMenuOpen | function | () => {} | Triggers when opening the Menu. |
 | onAutoCompleteTyping | function | () => {} | Exposes the word typed in AutoComplete. Useful for triggering onType API requests. |
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
@@ -74,7 +78,8 @@ PropTypes should raise warnings if implementing otherwise.
 | menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
 | innerDivStyle | object | {} | Styles applied to the inner div of MenuItems hosting each of your children components. |
 | menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
-| menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
+| menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. **Note** If defined click outside will not close the super select field |
+| menuCancelButton | node |  | A button for an explicit closing of the menu and resetting selected values to initial state. Can be used as "reset". **Note** If defined click outside will not close the super select field |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
