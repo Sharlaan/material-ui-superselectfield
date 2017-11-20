@@ -21,6 +21,3 @@ deploy:
     branch: feature/reset
     tags: true
 
-branches:
-  only:
-    - feature/reset
