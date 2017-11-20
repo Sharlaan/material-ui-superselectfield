@@ -92,20 +92,16 @@ class CodeExample extends Component {
         </SuperSelectField>
 
         <SuperSelectField name='case 3' hintText='Single empty group' style={{ margin: 10 }}>
-          <optgroup label='Group A'>
-          </optgroup>
+          <optgroup label='Group A' />
         </SuperSelectField>
 
         <SuperSelectField name='case 4' hintText='Multiple empty groups' style={{ margin: 10 }}>
-          <optgroup label='Group A'>
-          </optgroup>
-          <optgroup label='Group B'>
-          </optgroup>
+          <optgroup label='Group A' />
+          <optgroup label='Group B' />
         </SuperSelectField>
 
         <SuperSelectField name='case 4bis' hintText='One empty group, and one group+child' style={{ margin: 10 }}>
-          <optgroup label='Group A'>
-          </optgroup>
+          <optgroup label='Group A' />
           <optgroup label='Group B'>
             <span value={1} label='Option 1'>Option 1</span>
           </optgroup>

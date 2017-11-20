@@ -6,40 +6,18 @@ cache:
   directories:
   - node_modules
 
-before_install:
-  - npm install codecov.io coveralls
-
 script:
   - npm test
 
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - npm run build
+  - npm run buildLib
 
 deploy:
-  - provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    local_dir: demo/dist
-    on:
-      branch: master
-      condition: $TRAVIS_PULL_REQUEST = false
+  provider: npm
+  skip_cleanup: true
+  email: $NPM_EMAIL
+  api_key: $NPM_TOKEN
+  on:
+    branch: feature/reset
+    tags: true
 
-  - provider: npm
-    skip_cleanup: true
-    email: $NPM_EMAIL
-    api_key: $NPM_TOKEN
-    on:
-      branch: master
-      condition: $TRAVIS_PULL_REQUEST = false
-
-branches:
-  only:
-    - master
-
-notifications:
-  email:
-    - raphael.morineau@gmail.com
-    - maximilian.pichler97@gmail.com
-    - huber.tarik@gmail.com

@@ -2,39 +2,247 @@
 /**
  * Created by Raphaël Morineau on 28 Oct 2016.
  */
-import CheckedIcon from 'material-ui/svg-icons/navigation/check'
-import InfiniteScroller from 'react-infinite'
-import ListItem from 'material-ui/List/ListItem'
-import Popover from 'material-ui/Popover/Popover'
-import PropTypes from 'prop-types'
+import 'babel-polyfill'
 import React, { Component } from 'react'
-import SelectionsPresenter from './SelectionsPresenter'
+import PropTypes from 'prop-types'
+import InfiniteScroller from 'react-infinite'
+import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
+import ListItem from 'material-ui/List/ListItem'
+import CheckedIcon from 'material-ui/svg-icons/navigation/check'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
-import { getChildrenLength, areEqual, checkFormat, objectShape } from './utils'
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
+
+// ================================================================
+// =========================  Utilities  ==========================
+// ================================================================
+
+function entries (obj) {
+  return 'entries' in Object
+    ? Object.entries(obj)
+    : Object.keys(obj).map(prop => [ prop, obj[prop] ])
+}
+
+function areEqual (val1, val2) {
+  if ((val1 === 0 || val2 === 0) && val1 === val2) return true
+  else if (!val1 || !val2 || typeof val1 !== typeof val2) return false
+  else if (typeof val1 === 'string' ||
+    typeof val1 === 'number' ||
+    typeof val1 === 'boolean') return val1 === val2
+  else if (typeof val1 === 'object') {
+    return Object.keys(val1).length === Object.keys(val2).length &&
+      entries(val2).every(([key2, value2]) => val1[key2] === value2)
+  }
+}
+
+const checkFormat = value => value.findIndex(v => typeof v !== 'object' || !('value' in v))
+
+const objectShape = PropTypes.shape({
+  value: PropTypes.any.isRequired,
+  label: PropTypes.string
+})
+
+// ================================================================
+// =======================  FloatingLabel  ========================
+// ================================================================
+
+// TODO: implement style lock when disabled = true
+class FloatingLabel extends Component {
+  state = { flabelHeight: 0 }
+
+  componentDidMount () {
+    this.setState({ flabelHeight: this.flabel.offsetHeight })
+  }
+
+  render () {
+    const {
+      children, shrink, isFocused, /* disabled, */
+      defaultColors: {floatingLabelColor, focusColor},
+      floatingLabelStyle, floatingLabelFocusStyle
+    } = this.props
+    const defaultStyles = {
+      position: 'static',
+      top: 0,
+      lineHeight: '22px',
+      zIndex: 1, // Needed to display label above Chrome's autocomplete field background
+      transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+      transform: 'scale(1) translateY(0)',
+      transformOrigin: 'left top',
+      pointerEvents: 'auto',
+      cursor: 'pointer',
+      userSelect: 'none',
+      color: floatingLabelColor,
+      ...floatingLabelStyle
+    }
+
+    const focusStyles = isFocused && shrink && { color: focusColor, ...floatingLabelFocusStyle }
+
+    const shrinkStyles = shrink &&
+      {
+        position: 'absolute',
+        transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
+        pointerEvents: 'none',
+        cursor: 'default'
+      }
+
+    return (
+      <label ref={ref => (this.flabel = ref)} style={{ ...defaultStyles, ...shrinkStyles, ...focusStyles }}>
+        {children}
+      </label>
+    )
+  }
+}
+
+FloatingLabel.defaultProps = {
+  disabled: false,
+  shrink: false
+}
+
+// ================================================================
+// ====================  SelectionsPresenter  =====================
+// ================================================================
+
+// noinspection JSDuplicatedDeclaration
+const styles = {
+  column: { display: 'flex', flexDirection: 'column' },
+  row: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
+  },
+  selections: { flex: 1 },
+  underline: { position: 'relative', marginTop: 4 }
+}
+
+const SelectionsPresenter = ({
+  selectedValues, selectionsRenderer,
+  floatingLabel, hintText,
+  muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
+  underlineStyle, underlineFocusStyle,
+  isFocused, isOpen, disabled,
+  errorText, errorStyle, underlineErrorStyle
+}) => {
+  const { textField: {floatingLabelColor, borderColor, focusColor} } = muiTheme
+
+  const isValidObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
+  // Condition for shrinking the floating Label
+  const isShrunk = (Array.isArray(selectedValues) && !!selectedValues.length) ||
+    (!Array.isArray(selectedValues) && isValidObject(selectedValues)) ||
+    isOpen
+
+  const baseHRstyle = {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    margin: 0,
+    boxSizing: 'content-box',
+    borderTop: 'none',
+    borderLeft: 'none',
+    borderRight: 'none',
+    borderBottom: '1px solid',
+    borderColor,
+    ...underlineStyle,
+    ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {})
+  }
+
+  const focusedHRstyle = disabled ? {} : (errorText ? underlineStyle : {
+    borderBottom: '2px solid',
+    borderColor: (isFocused || isOpen) ? focusColor : borderColor,
+    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+    transform: `scaleX( ${(isFocused || isOpen) ? 1 : 0} )`,
+    ...underlineFocusStyle
+  })
+
+  return (
+    <div style={styles.column}>
+      <div style={styles.row}>
+        <div style={styles.selections}>
+          {floatingLabel &&
+            <FloatingLabel
+              shrink={isShrunk}
+              isFocused={isFocused}
+              disabled={disabled}
+              defaultColors={{floatingLabelColor, focusColor}}
+              floatingLabelStyle={floatingLabelStyle}
+              floatingLabelFocusStyle={floatingLabelFocusStyle}
+            >
+              {floatingLabel}
+            </FloatingLabel>
+          }
+          {(!floatingLabel || isShrunk) &&
+            selectionsRenderer(selectedValues, hintText)
+          }
+        </div>
+        <DropDownArrow style={{ fill: borderColor }} />
+      </div>
+      <div style={styles.underline}>
+        <hr style={baseHRstyle} />
+        <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
+      </div>
+      {errorText && <div style={{ marginTop: 5, color: 'red', fontSize: 12, ...errorStyle }}>{errorText}</div>}
+    </div>)
+}
+
+SelectionsPresenter.propTypes = {
+  value: PropTypes.oneOfType([
+    objectShape,
+    PropTypes.arrayOf(objectShape)
+  ]),
+  selectionsRenderer: PropTypes.func,
+  hintText: PropTypes.string,
+  errorText: PropTypes.string,
+  errorStyle: PropTypes.object,
+  underlineErrorStyle: PropTypes.object
+}
+
+SelectionsPresenter.defaultProps = {
+  hintText: 'Click me',
+  errorText: '',
+  errorStyle: {},
+  underlineErrorStyle: {},
+  value: null,
+  selectionsRenderer: (values, hintText) => {
+    if (!values) return hintText
+    const { value, label } = values
+    if (Array.isArray(values)) {
+      return values.length
+        ? values.map(({ value, label }) => label || value).join(', ')
+        : hintText
+    }
+    else if (label || value) return label || value
+    else return hintText
+  }
+}
+
+// ================================================================
+// ========================  SelectField  =========================
+// ================================================================
 
 class SelectField extends Component {
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context)
     const { children, value, multiple, showAutocompleteThreshold } = props
-    const itemsLength = getChildrenLength(children)
+    const itemsLength = this.getChildrenLength(children)
     this.state = {
       isOpen: false,
       isFocused: false,
       itemsLength,
       showAutocomplete: (itemsLength > showAutocompleteThreshold) || false,
       selectedItems: value || (multiple ? [] : null),
+      initialSelectedItems: value || (multiple ? [] : null),
       searchText: ''
     }
     this.menuItems = []
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (!areEqual(nextProps.value, this.state.selectedItems)) {
       this.setState({ selectedItems: nextProps.value })
     }
     if (!areEqual(nextProps.children, this.props.children)) {
-      const itemsLength = getChildrenLength(nextProps.children)
+      const itemsLength = this.getChildrenLength(nextProps.children)
       this.setState({
         itemsLength,
         showAutocomplete: itemsLength > this.props.showAutocompleteThreshold
@@ -42,10 +250,34 @@ class SelectField extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // Potential problem with Popover ?
     // https://github.com/callemall/material-ui/blob/master/src/DropDownMenu/DropDownMenu.js#L237
     if (this.props.openImmediately) this.openMenu()
+  }
+
+  // Counts nodes with non-null value property without optgroups
+  // noinspection JSMethodCanBeStatic
+  getChildrenLength (children) {
+    if (!children) return 0
+    else if (Array.isArray(children) && children.length) {
+      return children.reduce((count, { type, props: {value, children: cpc} }) => {
+        if (type === 'optgroup') {
+          if (cpc) {
+            if (Array.isArray(cpc)) {
+              for (let c of cpc) {
+                if (c.props.value) ++count
+              }
+            } else if (typeof cpc === 'object' && cpc.props.value) ++count
+          }
+        } else if (value) ++count
+        return count
+      }, 0)
+    } else if (!Array.isArray(children) && typeof children === 'object') {
+      if (children.type === 'optgroup') return this.getChildrenLength(children.props.children)
+      else if (children.props.value) return 1
+    }
+    return 0
   }
 
   onFocus = () => this.setState({ isFocused: true })
@@ -56,34 +288,50 @@ class SelectField extends Component {
 
   closeMenu = (reason) => {
     const { onChange, name } = this.props
-    onChange(this.state.selectedItems, name)
-    if (reason) this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
-    this.setState({ isOpen: false, searchText: '' }, () => !reason && this.root.focus())
+    this.setState({ isOpen: false, searchText: '', isFocused: false })
+    if (reason === 'clickaway') { // if reason === 'clickaway' or 'offscreen'
+      this.setState({ selectedItems: this.state.initialSelectedItems })
+    } else {
+      onChange(this.state.selectedItems, name)
+      this.setState({ initialSelectedItems: this.state.selectedItems })
+    }
+
+    if (!reason && this.root) {
+      this.root.focus()
+    }
   }
 
-  openMenu() {
+  openMenu () {
     if (!this.state.isOpen) this.props.onMenuOpen()
     if (this.state.itemsLength) this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
   // FIXME: both focusTextField and focusMenuItem don't really focus the targeted element, user must hit another key to trigger the actual focus... need to find a solution for a true direct focus
-  focusMenuItem(index) {
+  focusMenuItem (index) {
     const targetMenuItem = this.menuItems.find(item => {
       return !!item && (index ? item.props.tabIndex === index : true)
     })
     if (targetMenuItem) targetMenuItem.applyFocusState('keyboard-focused')
   }
 
-  focusTextField() {
+  focusTextField () {
     this.state.showAutocomplete && this.searchTextField
       ? this.searchTextField.focus()
       : this.focusMenuItem()
   }
 
-  clearTextField(callback) {
+  clearTextField (callback) {
     this.props.keepSearchOnSelect
       ? callback() // don't reset the autocomplete
       : this.setState({ searchText: '' }, callback)
+  }
+
+  onRequestClose = (...args) => {
+    const { menuCloseButton, menuCancelButton } = this.props
+    if (!menuCloseButton && !menuCancelButton) {
+      this.closeMenu(args)
+    }
+    this.props.onRequestClose(args)
   }
 
   /**
@@ -111,7 +359,7 @@ class SelectField extends Component {
 
       case 'Escape':
         this.clearTextField()
-        this.closeMenu()
+        this.closeMenu('clickaway')
         break
 
       default: break
@@ -131,8 +379,7 @@ class SelectField extends Component {
         : selectedItems.concat(selectedItem)
       this.setState({ selectedItems: updatedValues })
       this.clearTextField(() => this.focusTextField())
-    }
-    else {
+    } else {
       const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
       this.setState({ selectedItems: updatedValue }, () => this.closeMenu())
     }
@@ -142,10 +389,10 @@ class SelectField extends Component {
   /**
    * this.menuItems can contain uncontinuous React elements, because of filtering
    */
-  handleMenuKeyDown = ({ key, target: { tabIndex } }) => {
+  handleMenuKeyDown = ({ key, target: {tabIndex} }) => {
     const cleanMenuItems = this.menuItems.filter(item => !!item)
     const firstTabIndex = cleanMenuItems[0].props.tabIndex
-    const lastTabIndex = cleanMenuItems[cleanMenuItems.length - 1].props.tabIndex
+    const lastTabIndex = cleanMenuItems[ cleanMenuItems.length - 1 ].props.tabIndex
     const currentElementIndex = cleanMenuItems.findIndex(item => item.props.tabIndex === tabIndex)
     switch (key) {
       case 'ArrowUp':
@@ -153,8 +400,7 @@ class SelectField extends Component {
           this.state.showAutocomplete
             ? this.focusTextField()
             : this.focusMenuItem(lastTabIndex)
-        }
-        else {
+        } else {
           const previousTabIndex = cleanMenuItems
             .slice(0, currentElementIndex)
             .slice(-1)[0]
@@ -186,24 +432,24 @@ class SelectField extends Component {
         break
 
       case 'Escape':
-        this.closeMenu()
+        this.closeMenu('clickaway')
         break
 
       default: break
     }
   }
 
-  render() {
+  render () {
     const { children, floatingLabel, hintText, hintTextAutocomplete, multiple, disabled, nb2show,
       autocompleteFilter, selectionsRenderer, menuCloseButton, anchorOrigin, canAutoPosition,
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
-      floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
-      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle,
+      floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle, useLayerForClickAway,
+      autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle, menuCancelButton,
       checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
-    const { baseTheme: { palette }, menuItem } = this.context.muiTheme
+    const { baseTheme: {palette}, menuItem } = this.context.muiTheme
 
     const mergedSelectedMenuItemStyle = {
       color: menuItem.selectedTextColor, ...selectedMenuItemStyle
@@ -220,7 +466,7 @@ class SelectField extends Component {
      */
     const menuItemBuilder = (nodes, child, index) => {
       const { selectedItems } = this.state
-      const { value: childValue, label } = child.props
+      const { value: childValue, label, disabled } = child.props
       if (!autocompleteFilter(this.state.searchText, label || childValue)) return nodes
       const isSelected = Array.isArray(selectedItems)
         ? selectedItems.some(obj => areEqual(obj.value, childValue))
@@ -231,13 +477,14 @@ class SelectField extends Component {
         if (checkedIcon) checkedIcon.props.style.marginTop = 0
         if (unCheckedIcon) unCheckedIcon.props.style.marginTop = 0
       }
-      return [...nodes, (
+      return [ ...nodes, (
         <ListItem
           key={++index}
           tabIndex={index}
+          disabled={disabled}
           ref={ref => (this.menuItems[++index] = ref)}
           onClick={this.handleMenuSelection({ value: childValue, label })}
-          disableFocusRipple
+          disableFocusRipple={disabled}
           leftIcon={leftCheckbox}
           rightIcon={rightCheckbox}
           primaryText={child}
@@ -272,11 +519,10 @@ class SelectField extends Component {
           if (Array.isArray(cpc) && cpc.length) {
             groupedItems = cpc.reduce((nodes, child, idx) =>
               menuItemBuilder(nodes, child, nextIndex + idx), [])
-          }
-          else if (typeof cpc === 'object') groupedItems = menuItemBuilder(nodes, cpc, nextIndex)
+          } else if (typeof cpc === 'object') groupedItems = menuItemBuilder(nodes, cpc, nextIndex)
         }
         return groupedItems.length
-          ? [...nodes, menuGroup, ...groupedItems]
+          ? [ ...nodes, menuGroup, ...groupedItems ]
           : nodes
       }, [])
 
@@ -286,7 +532,7 @@ class SelectField extends Component {
       : elementHeight
     */
     const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
-    const footerHeight = menuCloseButton ? 36 : 0
+    const footerHeight = (menuCloseButton || menuCancelButton) ? 36 : 0
     const noMatchFoundHeight = 36
     const containerHeight = (Array.isArray(elementHeight)
       ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
@@ -335,9 +581,10 @@ class SelectField extends Component {
           anchorEl={this.root}
           canAutoPosition={canAutoPosition}
           anchorOrigin={anchorOrigin}
-          useLayerForClickAway={false}
-          onRequestClose={this.closeMenu}
+          useLayerForClickAway={useLayerForClickAway}
+          onRequestClose={this.onRequestClose}
           style={{ height: popoverHeight }}
+          autoCloseWhenOffScreen={false}
         >
           {this.state.showAutocomplete &&
             <TextField
@@ -369,8 +616,11 @@ class SelectField extends Component {
             }
           </div>
           {multiple &&
-            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-              <div onClick={this.closeMenu} style={menuFooterStyle}>
+            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', ...menuFooterStyle }}>
+              <div onClick={() => this.closeMenu('clickaway')}>
+                {menuCancelButton}
+              </div>
+              <div onClick={this.closeMenu}>
                 {menuCloseButton}
               </div>
             </footer>
@@ -394,7 +644,7 @@ SelectField.propTypes = {
   style: PropTypes.object,
   menuStyle: PropTypes.object,
   menuGroupStyle: PropTypes.object,
-  checkPosition: PropTypes.oneOf(['', 'left', 'right']),
+  checkPosition: PropTypes.oneOf([ '', 'left', 'right' ]),
   checkedIcon: PropTypes.node,
   unCheckedIcon: PropTypes.node,
   hoverColor: PropTypes.string,
@@ -416,8 +666,7 @@ SelectField.propTypes = {
               )
             }
           }
-        }
-        else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
+        } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
           Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
           Validation failed.`
@@ -433,8 +682,7 @@ SelectField.propTypes = {
           Validation failed.`
           )
         }
-      }
-      else {
+      } else {
         for (let child of props[propName].props.children) {
           if (!child.props.value) {
             return new Error(`
@@ -450,7 +698,7 @@ SelectField.propTypes = {
   selectedMenuItemStyle: PropTypes.object,
   menuFooterStyle: PropTypes.object,
   name: PropTypes.string,
-  floatingLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  floatingLabel: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]),
   floatingLabelFocusStyle: PropTypes.object,
   underlineStyle: PropTypes.object,
   underlineFocusStyle: PropTypes.object,
@@ -474,16 +722,14 @@ SelectField.propTypes = {
           When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.
           Validation failed.`
         )
-      }
-      else if (checkFormat(value) !== -1) {
+      } else if (checkFormat(value) !== -1) {
         const index = checkFormat(value)
         return new Error(`
           'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property.
           Validation failed.`
         )
       }
-    }
-    else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
+    } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
         'value' of '${componentName} ${props.name}' must be an object including a 'value' property.
         Validation failed.`
@@ -493,6 +739,7 @@ SelectField.propTypes = {
   autocompleteFilter: PropTypes.func,
   selectionsRenderer: PropTypes.func,
   menuCloseButton: PropTypes.node,
+  menuCancelButton: PropTypes.node,
   canAutoPosition: PropTypes.bool,
   multiple: PropTypes.bool,
   openImmediately: PropTypes.bool,
@@ -500,7 +747,9 @@ SelectField.propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onMenuOpen: PropTypes.func,
-  onAutoCompleteTyping: PropTypes.func
+  onAutoCompleteTyping: PropTypes.func,
+  onRequestClose: PropTypes.func,
+  useLayerForClickAway: PropTypes.bool
 }
 
 SelectField.defaultProps = {
@@ -509,6 +758,7 @@ SelectField.defaultProps = {
   checkedIcon: <CheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   menuCloseButton: null,
+  menuCancelButton: null,
   canAutoPosition: true,
   multiple: false,
   openImmediately: false,
@@ -527,10 +777,12 @@ SelectField.defaultProps = {
     return (text + '').toLowerCase().includes(searchText.toLowerCase())
   },
   value: null,
-  onChange: () => { },
-  onMenuOpen: () => { },
-  onAutoCompleteTyping: () => { },
-  children: []
+  onChange: () => {},
+  onMenuOpen: () => {},
+  onAutoCompleteTyping: () => {},
+  children: [],
+  onRequestClose: () => {},
+  useLayerForClickAway: false
 }
 
 export default SelectField
