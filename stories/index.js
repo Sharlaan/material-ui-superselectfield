@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
+// import { action } from '@storybook/addon-actions'
 import { muiTheme } from 'storybook-addon-material-ui'
 import SuperSelectField from '../src'
 import welcome from './welcome'
