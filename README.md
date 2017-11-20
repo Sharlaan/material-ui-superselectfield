@@ -1,9 +1,12 @@
 # material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url]
 
-[npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
-[npm-url]: https://npmjs.org/package/material-ui-superselectfield
-[downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg
-[downloads-url]: https://npmjs.org/package/material-ui-superselectfield
+## This is a fork!!!
+> **PUBLIC NOTE:** Do not use this fork. Instead use [original](https://github.com/Sharlaan/material-ui-superselectfield)
+
+[npm-image]: https://img.shields.io/npm/v/moebel-material-ui-superselectfield.svg
+[npm-url]: https://npmjs.org/package/moebel-material-ui-superselectfield
+[downloads-image]: https://img.shields.io/npm/dm/moebel-material-ui-superselectfield.svg
+[downloads-url]: https://npmjs.org/package/moebel-material-ui-superselectfield
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
 
