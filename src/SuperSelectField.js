@@ -602,16 +602,13 @@ class SelectField extends Component {
             onKeyDown={this.handleMenuKeyDown}
             style={{ width: menuWidth, ...menuStyle }}
           >
-            {menuItems.length
-              ? <InfiniteScroller
+              <InfiniteScroller
                 elementHeight={elementHeight}
                 containerHeight={containerHeight}
                 styles={{ scrollableStyle }}
               >
                 {menuItems}
               </InfiniteScroller>
-              : <ListItem disabled primaryText={noMatchFound}
-                style={{ cursor: 'default', padding: '10px 16px', ...noMatchFoundStyle }} />
             }
           </div>
           {multiple &&
