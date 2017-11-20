@@ -466,7 +466,7 @@ class SelectField extends Component {
      */
     const menuItemBuilder = (nodes, child, index) => {
       const { selectedItems } = this.state
-      const { value: childValue, label } = child.props
+      const { value: childValue, label, disabled } = child.props
       if (!autocompleteFilter(this.state.searchText, label || childValue)) return nodes
       const isSelected = Array.isArray(selectedItems)
         ? selectedItems.some(obj => areEqual(obj.value, childValue))
@@ -481,11 +481,12 @@ class SelectField extends Component {
         <ListItem
           key={++index}
           tabIndex={index}
+          disabled={disabled}
           ref={ref => (this.menuItems[++index] = ref)}
           onClick={this.handleMenuSelection({ value: childValue, label })}
           disableFocusRipple
-          leftIcon={leftCheckbox}
-          rightIcon={rightCheckbox}
+          leftIcon={!disabled && leftCheckbox}
+          rightIcon={!disabled && rightCheckbox}
           primaryText={child}
           hoverColor={mergedHoverColor}
           innerDivStyle={{
@@ -602,13 +603,16 @@ class SelectField extends Component {
             onKeyDown={this.handleMenuKeyDown}
             style={{ width: menuWidth, ...menuStyle }}
           >
-              <InfiniteScroller
+            {menuItems.length
+              ? <InfiniteScroller
                 elementHeight={elementHeight}
                 containerHeight={containerHeight}
                 styles={{ scrollableStyle }}
               >
                 {menuItems}
               </InfiniteScroller>
+              : <ListItem disabled primaryText={noMatchFound}
+                style={{ cursor: 'default', padding: '10px 16px', ...noMatchFoundStyle }} />
             }
           </div>
           {multiple &&
