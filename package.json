@@ -55,7 +55,9 @@
     "material-ui": ">= 0.17 < 1"
   },
   "devDependencies": {
+    "@sambego/storybook-state": "^1.0.3",
     "@storybook/addon-actions": "^3.2.16",
+    "@storybook/addon-knobs": "^3.2.16",
     "@storybook/addon-links": "^3.2.16",
     "@storybook/react": "^3.2.16",
     "enzyme": "^3.2.0",
