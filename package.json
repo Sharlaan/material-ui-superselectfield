@@ -96,7 +96,7 @@
     "deploy": "gh-pages -d build",
     "lint": "eslint src",
     "test": "react-scripts test --env=jsdom --coverage",
-    "release": "npm run buildLib  &&  npm publish",
+    "release": "npm run buildLib && npm publish",
     "eject": "react-scripts eject"
   },
   "jest": {
