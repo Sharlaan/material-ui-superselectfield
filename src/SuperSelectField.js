@@ -327,10 +327,7 @@ class SelectField extends Component {
   }
 
   onRequestClose = (...args) => {
-    const { menuCloseButton, menuCancelButton } = this.props
-    if (!menuCloseButton && !menuCancelButton) {
-      this.closeMenu(args)
-    }
+    this.closeMenu(args)
     this.props.onRequestClose(args)
   }
 
