@@ -289,7 +289,7 @@ class SelectField extends Component {
   closeMenu = (reason) => {
     const { onChange, name } = this.props
     this.setState({ isOpen: false, searchText: '', isFocused: false })
-    if (reason === 'clickaway') { // if reason === 'clickaway' or 'offscreen'
+    if (reason === 'clickAway') { // if reason === 'clickAway' or 'offscreen'
       this.setState({ selectedItems: this.state.initialSelectedItems })
     } else {
       onChange(this.state.selectedItems, name)
@@ -326,9 +326,9 @@ class SelectField extends Component {
       : this.setState({ searchText: '' }, callback)
   }
 
-  onRequestClose = (...args) => {
-    this.closeMenu(args)
-    this.props.onRequestClose(args)
+  onRequestClose = (reason) => {
+    this.closeMenu(reason)
+    this.props.onRequestClose(reason)
   }
 
   /**
@@ -356,7 +356,7 @@ class SelectField extends Component {
 
       case 'Escape':
         this.clearTextField()
-        this.closeMenu('clickaway')
+        this.closeMenu('clickAway')
         break
 
       default: break
@@ -429,7 +429,7 @@ class SelectField extends Component {
         break
 
       case 'Escape':
-        this.closeMenu('clickaway')
+        this.closeMenu('clickAway')
         break
 
       default: break
@@ -614,7 +614,7 @@ class SelectField extends Component {
           </div>
           {multiple &&
             <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', ...menuFooterStyle }}>
-              <div onClick={() => this.closeMenu('clickaway')}>
+              <div onClick={() => this.closeMenu('clickAway')}>
                 {menuCancelButton}
               </div>
               <div onClick={this.closeMenu}>
