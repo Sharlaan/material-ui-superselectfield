@@ -353,6 +353,7 @@ class SelectField extends Component {
               style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - (16 * 2) }}
               underlineStyle={autocompleteUnderlineStyle}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
+              autoFocus
             />
           }
           <div
