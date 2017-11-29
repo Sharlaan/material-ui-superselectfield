@@ -115,11 +115,54 @@ describe('Children composition', () => {
 })
 
 describe('Autocomplete usage', () => {
-  it('should show if more than [showAutocompleteThreshold] items')
-
-  it('should display the default [hintTextAutocomplete]')
-
-  it('should display the custom [hintTextAutocomplete]')
+  it('should show if [showAutocompleteThreshold] is less than children', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold={1}>{testChildren}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('TextField')
+    expect(firstChild.exists()).toBe(true)
+  })
+  it('should NOT show if [showAutocompleteThreshold] is greater than children', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold={4}>{testChildren}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('TextField')
+    expect(firstChild.exists()).toBe(false)
+  })
+  it('should show regardless of children with [showAutocompleteThreshold="always"]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always">{testChildren}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('TextField')
+    expect(firstChild.exists()).toBe(true)
+  })
+  it('should open Menu and Autocomplete even if no children with [showAutocompleteThreshold="always"]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always">{[]}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('Popover')
+    expect(firstChild.props().open).toBe(true)
+  })
+  it('should NOT open Menu if no children and [showAutocompleteThreshold={0}]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold={0}>{[]}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('Popover')
+    expect(firstChild.props().open).toBe(false)
+  })
+  it('should NOT show if [showAutocompleteThreshold="never"] regardless of children', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="never">{testChildren}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('TextField')
+    expect(firstChild.exists()).toBe(false)
+  })
+  it('should display the default [hintTextAutocomplete]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always">{testChildren}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('TextField')
+    expect(firstChild.props().hintText).toMatch('Type something')
+  })
+  it('should display the custom [hintTextAutocomplete]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always" hintTextAutocomplete="Custom">{testChildren}</SuperSelectField>)
+    wrapper.simulate('click')
+    const firstChild = wrapper.find('TextField')
+    expect(firstChild.props().hintText).toMatch('Custom')
+  })
 
   it('use the default case insensitive filter properly')
 
