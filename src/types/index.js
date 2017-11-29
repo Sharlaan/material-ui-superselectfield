@@ -92,7 +92,10 @@ export const selectFieldTypes = {
   hintTextAutocomplete: string,
   noMatchFound: string,
   noMatchFoundStyle: object,
-  showAutocompleteThreshold: number,
+  showAutocompleteThreshold: oneOfType([
+    number,
+    string
+  ]),
   elementHeight: oneOfType([
     number,
     arrayOf(number)

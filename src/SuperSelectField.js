@@ -22,7 +22,7 @@ class SelectField extends Component {
       isOpen: false,
       isFocused: false,
       itemsLength,
-      showAutocomplete: (itemsLength >= showAutocompleteThreshold) || false,
+      showAutocomplete:  showAutocompleteThreshold === 'always' || itemsLength >= showAutocompleteThreshold || false,
       selectedItems: value || (multiple ? [] : null),
       searchText: ''
     }
@@ -37,7 +37,7 @@ class SelectField extends Component {
       const itemsLength = getChildrenLength(nextProps.children)
       this.setState({
         itemsLength,
-        showAutocomplete: itemsLength > this.props.showAutocompleteThreshold
+        showAutocomplete: this.props.showAutocompleteThreshold === 'always' || itemsLength >= this.props.showAutocompleteThreshold
       })
     }
   }
@@ -67,7 +67,7 @@ class SelectField extends Component {
 
   openMenu() {
     if (!this.state.isOpen) this.props.onMenuOpen()
-    if (this.state.itemsLength || this.props.showAutocompleteThreshold === 0) this.setState({ isOpen: true }, () => this.focusTextField())
+    if (this.state.itemsLength || this.props.showAutocompleteThreshold === 'always') this.setState({ isOpen: true }, () => this.focusTextField())
   }
 
   // FIXME: both focusTextField and focusMenuItem don't really focus the targeted element, user must hit another key to trigger the actual focus... need to find a solution for a true direct focus
