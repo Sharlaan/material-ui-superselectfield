@@ -22,7 +22,7 @@ class SelectField extends Component {
       isOpen: false,
       isFocused: false,
       itemsLength,
-      showAutocomplete:  showAutocompleteThreshold === 'always' || itemsLength >= showAutocompleteThreshold || false,
+      showAutocomplete: this.showAutocomplete(showAutocompleteThreshold, itemsLength),
       selectedItems: value || (multiple ? [] : null),
       searchText: ''
     }
@@ -37,8 +37,21 @@ class SelectField extends Component {
       const itemsLength = getChildrenLength(nextProps.children)
       this.setState({
         itemsLength,
-        showAutocomplete: this.props.showAutocompleteThreshold === 'always' || itemsLength >= this.props.showAutocompleteThreshold
+        showAutocomplete: this.showAutocomplete(this.props.showAutocompleteThreshold, itemsLength)
       })
+    }
+  }
+
+  showAutocomplete(threshold = 0, itemsLength = 0) {
+    if (typeof threshold === 'number') {
+      return itemsLength >= threshold
+    }
+    switch (threshold) {
+      case 'always':
+        return true
+      case 'never':
+      default:
+        return false
     }
   }
 

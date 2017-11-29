@@ -94,7 +94,7 @@ export const selectFieldTypes = {
   noMatchFoundStyle: object,
   showAutocompleteThreshold: oneOfType([
     number,
-    string
+    oneOf(['always', 'never'])
   ]),
   elementHeight: oneOfType([
     number,
