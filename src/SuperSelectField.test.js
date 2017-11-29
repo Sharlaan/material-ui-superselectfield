@@ -30,6 +30,10 @@ const testChildren = [
   <div key='1' value='2'>Test Child</div>
 ]
 
+const testChild = [
+  <div key='0' value='1'>Test Child</div>
+]
+
 describe('Default states, styles, and behaviors', () => {
   it('renders without crashing', () => {
     const root = document.createElement('div')
@@ -54,11 +58,24 @@ describe('Default states, styles, and behaviors', () => {
     expect(wrapper.find('Popover').props().open).toBe(true)
   })
 
+  it('expects the menu to open when clicked even with one child', () => {
+    const wrapper = shallowWithContext(<SuperSelectField>{testChild}</SuperSelectField>)
+    wrapper.simulate('click')
+    expect(wrapper.find('Popover').props().open).toBe(true)
+  })
+
   it('expects the menu to render children', () => {
     const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
     wrapper.simulate('click') // opens menu
     const firstChild = wrapper.find('ListItem').first()
     expect(firstChild.props().primaryText).toBe(testChildren[0])
+  })
+
+  it('expects the menu to render even with one child', () => {
+    const wrapper = shallowWithContext(<SuperSelectField>{testChild}</SuperSelectField>)
+    wrapper.simulate('click') // opens menu
+    const firstChild = wrapper.find('ListItem').first()
+    expect(firstChild.props().primaryText).toBe(testChild[0])
   })
 
   it('should display [hintText] when nothing selected')
