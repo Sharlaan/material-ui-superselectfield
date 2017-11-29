@@ -35,7 +35,7 @@ export function getChildrenLength(children) {
           else if (typeof cpc === 'object' && cpc.props.value)++count
         }
       }
-      else if (value)++count
+      else if (value || value === 0) ++count
       return count
     }, 0)
   }
