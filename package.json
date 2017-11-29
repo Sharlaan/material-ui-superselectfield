@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "keywords": [
     "react",
