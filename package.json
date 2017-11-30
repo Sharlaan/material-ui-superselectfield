@@ -24,7 +24,7 @@
     "url": "https://github.com/Sharlaan/material-ui-superselectfield.git"
   },
   "engines": {
-    "node": ">=8.9"
+    "node": ">=7"
   },
   "main": "lib/index.js",
   "module": "es/index.js",
