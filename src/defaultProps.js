@@ -50,5 +50,6 @@ export const selectFieldDefaultProps = {
   onChange: () => {},
   onMenuOpen: () => {},
   onAutoCompleteTyping: () => {},
+  menuSelectionCallback: (updatedValues) => {},
   children: []
 }

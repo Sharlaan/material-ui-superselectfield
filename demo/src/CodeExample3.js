@@ -145,6 +145,11 @@ class CodeExample extends Component {
           elementHeight={58}
           selectionsRenderer={this.handleCustomDisplaySelections('state31')}
           style={{ width: 300, marginTop: 20, marginRight: 40 }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          menuSelectionCallback={ ( updatedValues ) => {
+            console.log( 'menuSelectionCallback() updatedValues:', updatedValues );
+            this.setState({ 'state31': updatedValues })
+          }}
         >
           {countriesNodeList}
         </SuperSelectField>
@@ -167,6 +172,7 @@ class CodeExample extends Component {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
           style={{ width: 200, marginTop: 20 }}
           menuCloseButton={<FlatButton label='close' hoverColor={'lightSalmon'} />}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
           {dataSourceNodes}
         </SuperSelectField>
