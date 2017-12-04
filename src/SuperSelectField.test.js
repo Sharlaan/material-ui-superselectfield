@@ -172,9 +172,26 @@ describe('Autocomplete usage', () => {
 })
 
 describe('Selections presenter', () => {
-  it('should display the default [hintText]')
-
-  it('should display custom [hintText] properly')
+  it('should display the default [hintText]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always">{testChildren}</SuperSelectField>)
+    const selectionsPresenter = wrapper.find('SelectionsPresenter')
+    expect(selectionsPresenter.props().hintText).toMatch('Click me')
+  })
+  it('should display custom [hintText] properly', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always" hintText="Hello There..">{testChildren}</SuperSelectField>)
+    const selectionsPresenter = wrapper.find('SelectionsPresenter')
+    expect(selectionsPresenter.props().hintText).toMatch('Hello There..')
+  })
+  it('should display the default [DropDownIcon]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always">{testChildren}</SuperSelectField>)
+    const selectionsPresenter = wrapper.find('SelectionsPresenter')
+    expect(selectionsPresenter.dive().find('NavigationArrowDropDown').length).toEqual(1)
+  })
+  it('should display the custom [DropDownIcon]', () => {
+    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold="always" dropDownIcon={<span id="customDropDown">></span>}>{testChildren}</SuperSelectField>)
+    const selectionsPresenter = wrapper.find('SelectionsPresenter')
+    expect(selectionsPresenter.dive().find('#customDropDown').length).toEqual(1)
+  })
 
   it('use the default selection renderer properly')
 
