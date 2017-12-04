@@ -1,5 +1,4 @@
 import React from 'react'
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import FloatingLabel from './FloatingLabel'
 import { selectionsPresenterTypes } from './types'
 import { selectionsPresenterDefaultProps } from './defaultProps'
@@ -22,7 +21,8 @@ const SelectionsPresenter = ({
   muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
   underlineStyle, underlineFocusStyle,
   isFocused, isOpen, disabled,
-  errorText, errorStyle, underlineErrorStyle
+  errorText, errorStyle, underlineErrorStyle,
+  dropDownIcon
 }) => {
   const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme
 
@@ -76,7 +76,7 @@ const SelectionsPresenter = ({
             selectionsRenderer(selectedValues, hintText)
           }
         </div>
-        <DropDownArrow style={{ fill: borderColor }} />
+        {dropDownIcon}
       </div>
       <div style={styles.underline}>
         <hr style={baseHRstyle} />
