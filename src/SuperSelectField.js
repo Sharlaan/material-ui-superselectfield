@@ -210,8 +210,7 @@ SelectionsPresenter.defaultProps = {
       return values.length
         ? values.map(({ value, label }) => label || value).join(', ')
         : hintText
-    }
-    else if (label || value) return label || value
+    } else if (label || value) return label || value
     else return hintText
   }
 }
@@ -411,8 +410,7 @@ class SelectField extends Component {
           this.state.showAutocomplete
             ? this.focusTextField()
             : this.focusMenuItem()
-        }
-        else {
+        } else {
           const nextTabIndex = cleanMenuItems
             .slice(currentElementIndex + 1)[0]
             .props.tabIndex
@@ -585,6 +583,7 @@ class SelectField extends Component {
         >
           {this.state.showAutocomplete &&
             <TextField
+              data-test={this.props.dataTest}
               ref={ref => (this.searchTextField = ref)}
               value={this.state.searchText}
               hintText={hintTextAutocomplete}
@@ -746,7 +745,8 @@ SelectField.propTypes = {
   onMenuOpen: PropTypes.func,
   onAutoCompleteTyping: PropTypes.func,
   onRequestClose: PropTypes.func,
-  useLayerForClickAway: PropTypes.bool
+  useLayerForClickAway: PropTypes.bool,
+  dataTest: PropTypes.string
 }
 
 SelectField.defaultProps = {
