@@ -539,7 +539,7 @@ class SelectField extends Component {
 
     return (
       <div
-        data-test={this.props.dataTestContainer}
+        data-test={this.props.dataTestAttributes.container}
         ref={ref => (this.root = ref)}
         tabIndex={disabled ? '-1' : '0'}
         onFocus={this.onFocus}
@@ -584,7 +584,7 @@ class SelectField extends Component {
         >
           {this.state.showAutocomplete &&
             <TextField
-              data-test={this.props.dataTestTextField}
+              data-test={this.props.dataTestAttributes.textField}
               ref={ref => (this.searchTextField = ref)}
               value={this.state.searchText}
               hintText={hintTextAutocomplete}
@@ -747,8 +747,7 @@ SelectField.propTypes = {
   onAutoCompleteTyping: PropTypes.func,
   onRequestClose: PropTypes.func,
   useLayerForClickAway: PropTypes.bool,
-  dataTestTextField: PropTypes.string,
-  dataTestContainer: PropTypes.string
+  dataTestAttributes: PropTypes.object
 }
 
 SelectField.defaultProps = {
