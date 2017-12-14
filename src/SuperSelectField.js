@@ -747,7 +747,10 @@ SelectField.propTypes = {
   onAutoCompleteTyping: PropTypes.func,
   onRequestClose: PropTypes.func,
   useLayerForClickAway: PropTypes.bool,
-  dataTestAttributes: PropTypes.object
+  dataTestAttributes: PropTypes.shape({
+    container: PropTypes.string,
+    textField: PropTypes.string,
+  })
 }
 
 SelectField.defaultProps = {
@@ -780,7 +783,11 @@ SelectField.defaultProps = {
   onAutoCompleteTyping: () => {},
   children: [],
   onRequestClose: () => {},
-  useLayerForClickAway: false
+  useLayerForClickAway: false,
+  dataTestAttributes: {
+    container: '',
+    textField: ''
+  }
 }
 
 export default SelectField
