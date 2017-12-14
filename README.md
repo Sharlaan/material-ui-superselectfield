@@ -69,6 +69,7 @@ This component requires 3 dependencies :
 | showAutocompleteThreshold | number | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield need to be disabled, just set this prop with a value higher than children length. |
 | autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteThreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
 | useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
+| dataTestAttributes | object | `{ container: '', textField: '' }` | Enables to pass data-test attributes to the container div, which opens the dropdown and the search input respectively. |
 ##### Note when setting value :
 if multiple is set, value must be at least an empty Array.  
 For single value mode, you can set value to null.  
