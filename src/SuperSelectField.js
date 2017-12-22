@@ -78,6 +78,11 @@ class SelectField extends Component {
     })
   }
 
+  getSelected = () => {
+    const {onSelect, name} = this.props;
+    onSelection(this.state.selectedItems, name);
+  }
+
   openMenu() {
     if (!this.state.isOpen) this.props.onMenuOpen()
     if (this.state.itemsLength || this.props.showAutocompleteThreshold === 'always') this.setState({ isOpen: true }, () => this.focusTextField())
@@ -146,7 +151,7 @@ class SelectField extends Component {
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
-      this.setState({ selectedItems: updatedValues })
+      this.setState({ selectedItems: updatedValues }, this.getSelected())
       this.clearTextField(() => this.focusTextField())
     }
     else {

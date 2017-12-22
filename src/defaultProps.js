@@ -48,6 +48,7 @@ export const selectFieldDefaultProps = {
   },
   value: null,
   onChange: () => {},
+  onSelect: () => {},
   onMenuOpen: () => {},
   onAutoCompleteTyping: () => {},
   children: []
