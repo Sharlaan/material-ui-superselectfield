@@ -80,7 +80,7 @@ class SelectField extends Component {
 
   getSelected = () => {
     const {onSelect, name} = this.props;
-    onSelection(this.state.selectedItems, name);
+    onSelect(this.state.selectedItems, name);
   }
 
   openMenu() {
