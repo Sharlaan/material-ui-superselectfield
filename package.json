@@ -50,9 +50,9 @@
     "react-infinite": "^0.12.1"
   },
   "peerDependencies": {
+    "material-ui": ">= 0.17 < 1",
     "react": "15.x || 16.x",
-    "react-dom": "15.x || 16.x",
-    "material-ui": ">= 0.17 < 1"
+    "react-dom": "15.x || 16.x"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.2.16",
