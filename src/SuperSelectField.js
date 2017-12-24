@@ -146,7 +146,10 @@ class SelectField extends Component {
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
-      this.setState({ selectedItems: updatedValues })
+      this.setState({ selectedItems: updatedValues }, () => {
+        // call onChange when a menu item is selected, this allows state to get updated outside of just closing the menu
+        this.props.onChange(this.state.selectedItems, this.props.name);
+      });
       this.clearTextField(() => this.focusTextField())
     }
     else {
