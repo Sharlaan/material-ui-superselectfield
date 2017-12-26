@@ -2966,7 +2966,7 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-jonnybuchanan@^5.0.1:
+eslint-config-jonnybuchanan@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/eslint-config-jonnybuchanan/-/eslint-config-jonnybuchanan-5.0.3.tgz#2a5d384111b0004a50ec0b41aa42a20b09acd209"
   dependencies:

@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "keywords": [
     "react",
@@ -47,6 +47,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "eslint-config-jonnybuchanan": "^5.0.3",
     "react-infinite": "^0.12.1"
   },
   "peerDependencies": {
@@ -61,7 +62,6 @@
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "3.19.0",
-    "eslint-config-jonnybuchanan": "^5.0.1",
     "material-ui": "^0.19.4",
     "nwb": "^0.20.0",
     "prop-types": "^15.6.0",
