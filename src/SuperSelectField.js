@@ -44,9 +44,7 @@ class SelectField extends Component {
   }
 
   showAutocomplete(threshold = 0, itemsLength = 0) {
-    if (typeof threshold === 'number') {
-      return itemsLength >= threshold
-    }
+    if (typeof threshold === 'number') return itemsLength >= threshold
     switch (threshold) {
       case 'always':
         return true
@@ -64,24 +62,22 @@ class SelectField extends Component {
 
   onFocus = () => this.setState({ isFocused: true })
 
-  onBlur = (event) => {
-    if (!this.state.isOpen) this.setState({ isFocused: false })
-  }
+  onBlur = () => !this.state.isOpen && this.setState({ isFocused: false })
 
   closeMenu = (reason) => {
     const { onChange, name } = this.props
     if (reason) this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
     this.setState({ isOpen: false, searchText: '' }, () => {
-      if (!reason) {
-        this.root.focus()
-      }
+      if (!reason) this.root.focus()
       onChange(this.state.selectedItems, name)
     })
   }
 
   openMenu() {
     if (!this.state.isOpen) this.props.onMenuOpen()
-    if (this.state.itemsLength || this.props.showAutocompleteThreshold === 'always') this.setState({ isOpen: true }, () => this.focusTextField())
+    if (this.state.itemsLength || this.props.showAutocompleteThreshold === 'always') {
+      this.setState({ isOpen: true }, () => this.focusTextField())
+    }
   }
 
   // FIXME: both focusTextField and focusMenuItem don't really focus the targeted element, user must hit another key to trigger the actual focus... need to find a solution for a true direct focus
@@ -147,7 +143,7 @@ class SelectField extends Component {
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
-      this.setState({ selectedItems: updatedValues })
+      this.setState({ selectedItems: updatedValues }, () => this.getSelected())
       this.clearTextField(() => this.focusTextField())
     }
     else {
@@ -155,6 +151,8 @@ class SelectField extends Component {
       this.setState({ selectedItems: updatedValue }, () => this.closeMenu())
     }
   }
+
+  getSelected = () => this.props.onSelect && this.props.onSelect(this.state.selectedItems, this.props.name);
 
   // TODO: add Shift+Tab
   /**

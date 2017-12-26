@@ -145,6 +145,7 @@ export const selectFieldTypes = {
   keepSearchOnSelect: bool,
   disabled: bool,
   onChange: func,
+  onSelect: func,
   onMenuOpen: func,
   onAutoCompleteTyping: func
 }
