@@ -27,7 +27,7 @@ const SelectionsPresenter = ({
 }) => {
   const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme
 
-  const isValidObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
+  const isValidObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value') && obj.value !== null
   // Condition for shrinking the floating Label
   const isShrunk = (Array.isArray(selectedValues) && !!selectedValues.length) ||
     (!Array.isArray(selectedValues) && isValidObject(selectedValues)) ||
