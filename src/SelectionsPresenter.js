@@ -4,12 +4,13 @@ import { selectionsPresenterTypes } from './types'
 import { selectionsPresenterDefaultProps } from './defaultProps'
 
 const styles = {
-  column: { display: 'flex', flexDirection: 'column' },
+  column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
   row: {
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 'auto'
   },
   selections: { flex: 1 },
   underline: { position: 'relative', marginTop: 4 }
