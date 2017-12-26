@@ -26,6 +26,7 @@ export const selectFieldTypes = {
   checkPosition: oneOf(['', 'left', 'right']),
   checkedIcon: node,
   unCheckedIcon: node,
+  dropDownIcon: node,
   hoverColor: string,
   // children can be either:
   // an html element with a required 'value' property, and optional label prop,
@@ -144,6 +145,7 @@ export const selectFieldTypes = {
   keepSearchOnSelect: bool,
   disabled: bool,
   onChange: func,
+  onSelect: func,
   onMenuOpen: func,
   onAutoCompleteTyping: func
 }

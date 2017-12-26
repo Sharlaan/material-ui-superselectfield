@@ -56,7 +56,8 @@ This component requires 3 dependencies :
 | keepSearchOnSelect | bool | false | Prevents the autocomplete field's value to be reset after each selection.|
 | disabled | bool | false | Include this property to disable superSelectField.|
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
-| onChange | function | () => {} | Triggers when selecting/unselecting an option from the Menu.<br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
+| onChange | function | () => {} | Triggers when closing the menu. Use this if you do not want to update your component state with each selection and only on menu close. <br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
+| onSelect | function | () => {} | Triggers when selecting an item in the menu. Use this to update your componenet state with each selection from the menu (while still open). <br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 | onMenuOpen | function | () => {} | Triggers when opening the Menu. |
 | onAutoCompleteTyping | function | () => {} | Exposes the word typed in AutoComplete. Useful for triggering onType API requests. |
 | children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
@@ -84,6 +85,7 @@ PropTypes should raise warnings if implementing otherwise.
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
+| dropDownIcon | SVGicon | see below | The SvgIcon to use for the drop down icon in the select. |
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
 | floatingLabelStyle | object | | Allows to change the styles of the floating label. |
 | floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
@@ -100,6 +102,7 @@ PropTypes should raise warnings if implementing otherwise.
 |:---- |:---- |
 | checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
+| dropDownIcon | `<DropDownArrow/>` |
 | autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | selectionsRenderer |  |
 <pre>(values, hintText) => {

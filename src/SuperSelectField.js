@@ -7,6 +7,7 @@ import InfiniteScroller from 'react-infinite'
 import ListItem from 'material-ui/List/ListItem'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import SelectionsPresenter from './SelectionsPresenter'
 import { getChildrenLength, areEqual } from './utils'
 import PropTypes from 'prop-types'
@@ -43,9 +44,7 @@ class SelectField extends Component {
   }
 
   showAutocomplete(threshold = 0, itemsLength = 0) {
-    if (typeof threshold === 'number') {
-      return itemsLength >= threshold
-    }
+    if (typeof threshold === 'number') return itemsLength >= threshold
     switch (threshold) {
       case 'always':
         return true
@@ -63,24 +62,22 @@ class SelectField extends Component {
 
   onFocus = () => this.setState({ isFocused: true })
 
-  onBlur = (event) => {
-    if (!this.state.isOpen) this.setState({ isFocused: false })
-  }
+  onBlur = () => !this.state.isOpen && this.setState({ isFocused: false })
 
   closeMenu = (reason) => {
     const { onChange, name } = this.props
     if (reason) this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
     this.setState({ isOpen: false, searchText: '' }, () => {
-      if (!reason) {
-        this.root.focus()
-      }
+      if (!reason) this.root.focus()
       onChange(this.state.selectedItems, name)
     })
   }
 
   openMenu() {
     if (!this.state.isOpen) this.props.onMenuOpen()
-    if (this.state.itemsLength || this.props.showAutocompleteThreshold === 'always') this.setState({ isOpen: true }, () => this.focusTextField())
+    if (this.state.itemsLength || this.props.showAutocompleteThreshold === 'always') {
+      this.setState({ isOpen: true }, () => this.focusTextField())
+    }
   }
 
   // FIXME: both focusTextField and focusMenuItem don't really focus the targeted element, user must hit another key to trigger the actual focus... need to find a solution for a true direct focus
@@ -146,7 +143,7 @@ class SelectField extends Component {
       const updatedValues = selectedItemExists
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
-      this.setState({ selectedItems: updatedValues })
+      this.setState({ selectedItems: updatedValues }, () => this.getSelected())
       this.clearTextField(() => this.focusTextField())
     }
     else {
@@ -154,6 +151,8 @@ class SelectField extends Component {
       this.setState({ selectedItems: updatedValue }, () => this.closeMenu())
     }
   }
+
+  getSelected = () => this.props.onSelect && this.props.onSelect(this.state.selectedItems, this.props.name);
 
   // TODO: add Shift+Tab
   /**
@@ -216,7 +215,7 @@ class SelectField extends Component {
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle,
-      checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
+      checkedIcon, unCheckedIcon, dropDownIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -345,6 +344,7 @@ class SelectField extends Component {
           floatingLabelFocusStyle={floatingLabelFocusStyle}
           underlineStyle={underlineStyle}
           underlineFocusStyle={underlineFocusStyle}
+          dropDownIcon={dropDownIcon || <DropDownArrow style={{ fill: this.context.muiTheme.textField.borderColor }} />}
         />
 
         <Popover
