@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SuperSelectField from 'material-ui-superselectfield'
 import FlatButton from 'material-ui/FlatButton/FlatButton'
 import Chip from 'material-ui/Chip/Chip'
+import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right'
 import countries from './assets/countries'
 import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes'
 import FontIcon from 'material-ui/FontIcon/FontIcon'
@@ -145,6 +146,7 @@ class CodeExample extends Component {
           elementHeight={58}
           selectionsRenderer={this.handleCustomDisplaySelections('state31')}
           style={{ width: 300, marginTop: 20, marginRight: 40 }}
+          dropDownIcon={<ChevronRight style={{transform: 'rotate(90deg)'}}/>}
         >
           {countriesNodeList}
         </SuperSelectField>

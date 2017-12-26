@@ -85,6 +85,7 @@ PropTypes should raise warnings if implementing otherwise.
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
+| dropDownIcon | SVGicon | see below | The SvgIcon to use for the drop down icon in the select. |
 | hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
 | floatingLabelStyle | object | | Allows to change the styles of the floating label. |
 | floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
@@ -101,6 +102,7 @@ PropTypes should raise warnings if implementing otherwise.
 |:---- |:---- |
 | checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
+| dropDownIcon | `<DropDownArrow/>` |
 | autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | selectionsRenderer |  |
 <pre>(values, hintText) => {

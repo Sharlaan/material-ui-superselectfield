@@ -7,6 +7,7 @@ import InfiniteScroller from 'react-infinite'
 import ListItem from 'material-ui/List/ListItem'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import SelectionsPresenter from './SelectionsPresenter'
 import { getChildrenLength, areEqual } from './utils'
 import PropTypes from 'prop-types'
@@ -214,7 +215,7 @@ class SelectField extends Component {
       style, menuStyle, elementHeight, innerDivStyle, selectedMenuItemStyle, menuGroupStyle, menuFooterStyle,
       floatingLabelStyle, floatingLabelFocusStyle, underlineStyle, underlineFocusStyle,
       autocompleteUnderlineStyle, autocompleteUnderlineFocusStyle, noMatchFound, noMatchFoundStyle,
-      checkedIcon, unCheckedIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
+      checkedIcon, unCheckedIcon, dropDownIcon, hoverColor, checkPosition, errorText, errorStyle, underlineErrorStyle
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -343,6 +344,7 @@ class SelectField extends Component {
           floatingLabelFocusStyle={floatingLabelFocusStyle}
           underlineStyle={underlineStyle}
           underlineFocusStyle={underlineFocusStyle}
+          dropDownIcon={dropDownIcon || <DropDownArrow style={{ fill: this.context.muiTheme.textField.borderColor }} />}
         />
 
         <Popover
