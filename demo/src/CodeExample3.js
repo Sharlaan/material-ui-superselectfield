@@ -5,7 +5,7 @@ import Chip from 'material-ui/Chip/Chip'
 import FontIcon from 'material-ui/FontIcon/FontIcon'
 import Avatar from 'material-ui/Avatar/Avatar'
 import { teal500, pink500, teal200, pink200, yellow500, yellow200, deepPurple500 } from 'material-ui/styles/colors'
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right'
+import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down'
 import countries from './assets/countries'
 import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes'
 import './assets/flag-icon.css'
@@ -176,7 +176,7 @@ class CodeExample extends Component {
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             style={{ width: 200, marginTop: 20 }}
             menuCloseButton={<FlatButton label='close' hoverColor={'lightSalmon'} />}
-            dropDownIcon={<ChevronRight style={{ transform: 'rotate(90deg)' }} />}
+            dropDownIcon={<ArrowDown />}
           >
             {dataSourceNodes}
           </SuperSelectField>

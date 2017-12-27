@@ -8,10 +8,11 @@ export var floatingLabelTypes = {
 };
 
 export var selectionsPresenterTypes = {
-  selectionsRenderer: func,
-  hintText: string,
-  errorText: string,
+  dropDownIcon: node,
   errorStyle: object,
+  errorText: string,
+  hintText: string,
+  selectionsRenderer: func,
   underlineErrorStyle: object
 };
 
@@ -26,7 +27,6 @@ export var selectFieldTypes = {
   checkPosition: oneOf(['', 'left', 'right']),
   checkedIcon: node,
   unCheckedIcon: node,
-  dropDownIcon: node,
   hoverColor: string,
   // children can be either:
   // an html element with a required 'value' property, and optional label prop,

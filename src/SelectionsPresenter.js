@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { cloneElement } from 'react'
 import FloatingLabel from './FloatingLabel'
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import { selectionsPresenterTypes } from './types'
 import { selectionsPresenterDefaultProps } from './defaultProps'
 
@@ -72,6 +73,16 @@ const SelectionsPresenter = ({
         ...underlineFocusStyle,
       }
 
+  const arrowDownIcon = cloneElement(
+    dropDownIcon || <DropDownArrow />,
+    {
+      style: {
+        // fill: this.context.muiTheme.textField.borderColor,
+        transform: `rotate(${isOpen ? 180 : 0}deg)`,
+      },
+    }
+  )
+
   return (
     <div style={styles.column}>
       <div style={styles.row}>
@@ -90,7 +101,7 @@ const SelectionsPresenter = ({
           )}
           {(!floatingLabel || isShrunk) && selectionsRenderer(selectedValues, hintText)}
         </div>
-        {dropDownIcon}
+        {arrowDownIcon}
       </div>
       <div style={styles.underline}>
         <hr style={baseHRstyle} />

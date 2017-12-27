@@ -2,14 +2,13 @@
  * Created by Raphaël Morineau on 28 Oct 2016.
  */
 import React, { Component } from 'react'
+import { object } from 'prop-types'
 import InfiniteScroller from 'react-infinite'
 import ListItem from 'material-ui/List/ListItem'
 import Popover from 'material-ui/Popover/Popover'
 import TextField from 'material-ui/TextField/TextField'
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
 import SelectionsPresenter from './SelectionsPresenter'
 import { getChildrenLength, areEqual } from './utils'
-import PropTypes from 'prop-types'
 import { selectFieldTypes } from './types'
 import { selectFieldDefaultProps } from './defaultProps'
 
@@ -363,7 +362,7 @@ class SelectField extends Component {
           floatingLabelFocusStyle={floatingLabelFocusStyle}
           underlineStyle={underlineStyle}
           underlineFocusStyle={underlineFocusStyle}
-          dropDownIcon={dropDownIcon || <DropDownArrow style={{ fill: this.context.muiTheme.textField.borderColor }} />}
+          dropDownIcon={dropDownIcon}
         />
 
         <Popover
@@ -423,7 +422,7 @@ class SelectField extends Component {
 }
 
 SelectField.contextTypes = {
-  muiTheme: PropTypes.object.isRequired,
+  muiTheme: object.isRequired,
 }
 SelectField.propTypes = selectFieldTypes
 SelectField.defaultProps = selectFieldDefaultProps

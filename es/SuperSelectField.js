@@ -12,14 +12,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * Created by Raphaël Morineau on 28 Oct 2016.
  */
 import React, { Component } from 'react';
+import { object } from 'prop-types';
 import InfiniteScroller from 'react-infinite';
 import ListItem from 'material-ui/List/ListItem';
 import Popover from 'material-ui/Popover/Popover';
 import TextField from 'material-ui/TextField/TextField';
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import SelectionsPresenter from './SelectionsPresenter';
 import { getChildrenLength, areEqual } from './utils';
-import PropTypes from 'prop-types';
 import { selectFieldTypes } from './types';
 import { selectFieldDefaultProps } from './defaultProps';
 
@@ -435,7 +434,7 @@ var SelectField = function (_Component) {
         floatingLabelFocusStyle: floatingLabelFocusStyle,
         underlineStyle: underlineStyle,
         underlineFocusStyle: underlineFocusStyle,
-        dropDownIcon: dropDownIcon || React.createElement(DropDownArrow, { style: { fill: this.context.muiTheme.textField.borderColor } })
+        dropDownIcon: dropDownIcon
       }),
       React.createElement(
         Popover,
@@ -501,7 +500,7 @@ var SelectField = function (_Component) {
 }(Component);
 
 SelectField.contextTypes = {
-  muiTheme: PropTypes.object.isRequired
+  muiTheme: object.isRequired
 };
 SelectField.propTypes = process.env.NODE_ENV !== "production" ? selectFieldTypes : {};
 SelectField.defaultProps = selectFieldDefaultProps;

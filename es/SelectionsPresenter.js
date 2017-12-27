@@ -1,7 +1,8 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-import React from 'react';
+import React, { cloneElement } from 'react';
 import FloatingLabel from './FloatingLabel';
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import { selectionsPresenterTypes } from './types';
 import { selectionsPresenterDefaultProps } from './defaultProps';
 
@@ -68,6 +69,13 @@ var SelectionsPresenter = function SelectionsPresenter(_ref) {
     transform: 'scaleX( ' + (isFocused || isOpen ? 1 : 0) + ' )'
   }, underlineFocusStyle);
 
+  var arrowDownIcon = cloneElement(dropDownIcon || React.createElement(DropDownArrow, null), {
+    style: {
+      // fill: this.context.muiTheme.textField.borderColor,
+      transform: 'rotate(' + (isOpen ? 180 : 0) + 'deg)'
+    }
+  });
+
   return React.createElement(
     'div',
     { style: styles.column },
@@ -91,7 +99,7 @@ var SelectionsPresenter = function SelectionsPresenter(_ref) {
         ),
         (!floatingLabel || isShrunk) && selectionsRenderer(selectedValues, hintText)
       ),
-      dropDownIcon
+      arrowDownIcon
     ),
     React.createElement(
       'div',
