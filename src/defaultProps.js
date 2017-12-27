@@ -3,7 +3,7 @@ import CheckedIcon from 'material-ui/svg-icons/navigation/check'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 
 export const floatingLabelDefaultProps = {
-  shrink: false
+  shrink: false,
 }
 
 export const selectionsPresenterDefaultProps = {
@@ -15,13 +15,10 @@ export const selectionsPresenterDefaultProps = {
     if (!values) return hintText
     const { value, label } = values
     if (Array.isArray(values)) {
-      return values.length
-        ? values.map(({ value, label }) => label || value).join(', ')
-        : hintText
-    }
-    else if (label || value) return label || value
+      return values.length ? values.map(({ value, label }) => label || value).join(', ') : hintText
+    } else if (label || value) return label || value
     else return hintText
-  }
+  },
 }
 
 export const selectFieldDefaultProps = {
@@ -51,5 +48,5 @@ export const selectFieldDefaultProps = {
   onSelect: () => {},
   onMenuOpen: () => {},
   onAutoCompleteTyping: () => {},
-  children: []
+  children: [],
 }

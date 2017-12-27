@@ -6,5 +6,5 @@ export default [
   'Europe',
   'Asia',
   'Oceania',
-  'Antarctica'
+  'Antarctica',
 ]

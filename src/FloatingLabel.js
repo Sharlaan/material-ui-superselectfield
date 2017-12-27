@@ -6,15 +6,18 @@ import { floatingLabelDefaultProps } from './defaultProps'
 class FloatingLabel extends Component {
   state = { flabelHeight: 0 }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({ flabelHeight: this.flabel.offsetHeight })
   }
 
-  render() {
+  render () {
     const {
-      children, shrink, isFocused, /* disabled, */
+      children,
+      shrink,
+      isFocused /* disabled, */,
       defaultColors: { floatingLabelColor, focusColor },
-      floatingLabelStyle, floatingLabelFocusStyle
+      floatingLabelStyle,
+      floatingLabelFocusStyle,
     } = this.props
     const defaultStyles = {
       position: 'static',
@@ -28,21 +31,20 @@ class FloatingLabel extends Component {
       cursor: 'pointer',
       userSelect: 'none',
       color: floatingLabelColor,
-      ...floatingLabelStyle
+      ...floatingLabelStyle,
     }
 
     const focusStyles = isFocused && shrink && { color: focusColor, ...floatingLabelFocusStyle }
 
-    const shrinkStyles = shrink &&
-      {
-        position: 'absolute',
-        transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
-        pointerEvents: 'none',
-        cursor: 'default'
-      }
+    const shrinkStyles = shrink && {
+      position: 'absolute',
+      transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
+      pointerEvents: 'none',
+      cursor: 'default',
+    }
 
     return (
-      <label ref={ref => (this.flabel = ref)} style={{ ...defaultStyles, ...shrinkStyles, ...focusStyles }}>
+      <label ref={(ref) => (this.flabel = ref)} style={{ ...defaultStyles, ...shrinkStyles, ...focusStyles }}>
         {children}
       </label>
     )

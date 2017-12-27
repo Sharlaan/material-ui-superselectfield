@@ -16,6 +16,7 @@ import InfiniteScroller from 'react-infinite';
 import ListItem from 'material-ui/List/ListItem';
 import Popover from 'material-ui/Popover/Popover';
 import TextField from 'material-ui/TextField/TextField';
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import SelectionsPresenter from './SelectionsPresenter';
 import { getChildrenLength, areEqual } from './utils';
 import PropTypes from 'prop-types';
@@ -298,6 +299,7 @@ var SelectField = function (_Component) {
         noMatchFoundStyle = _props.noMatchFoundStyle,
         checkedIcon = _props.checkedIcon,
         unCheckedIcon = _props.unCheckedIcon,
+        dropDownIcon = _props.dropDownIcon,
         hoverColor = _props.hoverColor,
         checkPosition = _props.checkPosition,
         errorText = _props.errorText,
@@ -312,7 +314,8 @@ var SelectField = function (_Component) {
 
 
     var mergedSelectedMenuItemStyle = _extends({
-      color: menuItem.selectedTextColor }, selectedMenuItemStyle);
+      color: menuItem.selectedTextColor
+    }, selectedMenuItemStyle);
     if (checkedIcon) checkedIcon.props.style.fill = mergedSelectedMenuItemStyle.color;
     var mergedHoverColor = hoverColor || menuItem.hoverColor;
 
@@ -431,7 +434,8 @@ var SelectField = function (_Component) {
         floatingLabelStyle: floatingLabelStyle,
         floatingLabelFocusStyle: floatingLabelFocusStyle,
         underlineStyle: underlineStyle,
-        underlineFocusStyle: underlineFocusStyle
+        underlineFocusStyle: underlineFocusStyle,
+        dropDownIcon: dropDownIcon || React.createElement(DropDownArrow, { style: { fill: this.context.muiTheme.textField.borderColor } })
       }),
       React.createElement(
         Popover,
@@ -474,8 +478,11 @@ var SelectField = function (_Component) {
               styles: { scrollableStyle: scrollableStyle }
             },
             menuItems
-          ) : React.createElement(ListItem, { disabled: true, primaryText: noMatchFound,
-            style: _extends({ cursor: 'default', padding: '10px 16px' }, noMatchFoundStyle) })
+          ) : React.createElement(ListItem, {
+            disabled: true,
+            primaryText: noMatchFound,
+            style: _extends({ cursor: 'default', padding: '10px 16px' }, noMatchFoundStyle)
+          })
         ),
         multiple && React.createElement(
           'footer',

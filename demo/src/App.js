@@ -11,9 +11,8 @@ import CodeExample4 from './CodeExample4'
 import CodeExample5 from './CodeExample5'
 import './App.css'
 
-export default () => (
+const App = () => (
   <div className='App'>
-
     <div className='App-header'>
       <img src={logo} className='App-logo' alt='logo' />
       <h2>SuperSelectField</h2>
@@ -32,6 +31,7 @@ export default () => (
         <Route component={Home} />
       </Switch>
     </section>
-
   </div>
 )
+
+export default App

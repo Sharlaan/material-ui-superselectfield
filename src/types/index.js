@@ -1,10 +1,8 @@
-import propTypes from 'prop-types'
+import { shape, arrayOf, func, oneOf, oneOfType, any, node, object, string, number, bool } from 'prop-types'
 import { checkFormat } from '../utils'
 
-const { shape, arrayOf, func, oneOf, oneOfType, any, node, object, string, number, bool } = propTypes
-
 export const floatingLabelTypes = {
-  shrink: bool
+  shrink: bool,
 }
 
 export const selectionsPresenterTypes = {
@@ -12,13 +10,13 @@ export const selectionsPresenterTypes = {
   hintText: string,
   errorText: string,
   errorStyle: object,
-  underlineErrorStyle: object
+  underlineErrorStyle: object,
 }
 
 export const selectFieldTypes = {
   anchorOrigin: shape({
     vertical: oneOf(['top', 'bottom']),
-    horizontal: oneOf(['left', 'right'])
+    horizontal: oneOf(['left', 'right']),
   }),
   style: object,
   menuStyle: object,
@@ -35,26 +33,23 @@ export const selectFieldTypes = {
   children: oneOfType([
     shape({
       value: any.isRequired,
-      label: string
+      label: string,
     }),
     (props, propName, componentName, location, propFullName) => {
       const pp = props[propName]
       if (pp.type === 'optgroup' && pp.props.children) {
         if (Array.isArray(pp.props.children)) {
-          for (let child of pp.props.children) {
+          for (const child of pp.props.children) {
             if (!child.props.value) {
               return new Error(`
               Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-              Validation failed.`
-              )
+              Validation failed.`)
             }
           }
-        }
-        else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
+        } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
           Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-          Validation failed.`
-          )
+          Validation failed.`)
         }
       }
     },
@@ -63,21 +58,18 @@ export const selectFieldTypes = {
         if (!props[propName].props.value) {
           return new Error(`
           Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-          Validation failed.`
-          )
+          Validation failed.`)
         }
-      }
-      else {
-        for (let child of props[propName].props.children) {
+      } else {
+        for (const child of props[propName].props.children) {
           if (!child.props.value) {
             return new Error(`
             Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-            Validation failed.`
-            )
+            Validation failed.`)
           }
         }
       }
-    })
+    }),
   ]),
   innerDivStyle: object,
   selectedMenuItemStyle: object,
@@ -93,14 +85,8 @@ export const selectFieldTypes = {
   hintTextAutocomplete: string,
   noMatchFound: string,
   noMatchFoundStyle: object,
-  showAutocompleteThreshold: oneOfType([
-    number,
-    oneOf(['always', 'never'])
-  ]),
-  elementHeight: oneOfType([
-    number,
-    arrayOf(number)
-  ]),
+  showAutocompleteThreshold: oneOfType([number, oneOf(['always', 'never'])]),
+  elementHeight: oneOfType([number, arrayOf(number)]),
   nb2show: number,
   /*  value: oneOfType([
     shape({
@@ -119,21 +105,16 @@ export const selectFieldTypes = {
       if (!Array.isArray(value)) {
         return new Error(`
           When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.
-          Validation failed.`
-        )
-      }
-      else if (index !== -1) {
+          Validation failed.`)
+      } else if (index !== -1) {
         return new Error(`
           'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property.
-          Validation failed.`
-        )
+          Validation failed.`)
       }
-    }
-    else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
+    } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
         'value' of '${componentName} ${props.name}' must be an object including a 'value' property.
-        Validation failed.`
-      )
+        Validation failed.`)
     }
   },
   autocompleteFilter: func,
@@ -147,5 +128,5 @@ export const selectFieldTypes = {
   onChange: func,
   onSelect: func,
   onMenuOpen: func,
-  onAutoCompleteTyping: func
+  onAutoCompleteTyping: func,
 }

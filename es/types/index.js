@@ -1,20 +1,7 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-import propTypes from 'prop-types';
+import { shape, arrayOf, func, oneOf, oneOfType, any, node, object, string, number, bool } from 'prop-types';
 import { checkFormat } from '../utils';
-
-var shape = propTypes.shape,
-    arrayOf = propTypes.arrayOf,
-    func = propTypes.func,
-    oneOf = propTypes.oneOf,
-    oneOfType = propTypes.oneOfType,
-    any = propTypes.any,
-    node = propTypes.node,
-    object = propTypes.object,
-    string = propTypes.string,
-    number = propTypes.number,
-    bool = propTypes.bool;
-
 
 export var floatingLabelTypes = {
   shrink: bool
@@ -39,6 +26,7 @@ export var selectFieldTypes = {
   checkPosition: oneOf(['', 'left', 'right']),
   checkedIcon: node,
   unCheckedIcon: node,
+  dropDownIcon: node,
   hoverColor: string,
   // children can be either:
   // an html element with a required 'value' property, and optional label prop,

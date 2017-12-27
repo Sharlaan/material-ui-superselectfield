@@ -10,26 +10,37 @@ const styles = {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    flex: 'auto'
+    flex: 'auto',
   },
   selections: { flex: 1 },
-  underline: { position: 'relative', marginTop: 4 }
+  underline: { position: 'relative', marginTop: 4 },
 }
 
 const SelectionsPresenter = ({
-  selectedValues, selectionsRenderer,
-  floatingLabel, hintText,
-  muiTheme, floatingLabelStyle, floatingLabelFocusStyle,
-  underlineStyle, underlineFocusStyle,
-  isFocused, isOpen, disabled,
-  errorText, errorStyle, underlineErrorStyle,
-  dropDownIcon
+  selectedValues,
+  selectionsRenderer,
+  floatingLabel,
+  hintText,
+  muiTheme,
+  floatingLabelStyle,
+  floatingLabelFocusStyle,
+  underlineStyle,
+  underlineFocusStyle,
+  isFocused,
+  isOpen,
+  disabled,
+  errorText,
+  errorStyle,
+  underlineErrorStyle,
+  dropDownIcon,
 }) => {
   const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme
 
-  const isValidObject = obj => Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
+  const isValidObject = (obj) =>
+    Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
   // Condition for shrinking the floating Label
-  const isShrunk = (Array.isArray(selectedValues) && !!selectedValues.length) ||
+  const isShrunk =
+    (Array.isArray(selectedValues) && !!selectedValues.length) ||
     (!Array.isArray(selectedValues) && isValidObject(selectedValues)) ||
     isOpen
 
@@ -46,22 +57,26 @@ const SelectionsPresenter = ({
     borderBottom: '1px solid',
     borderColor,
     ...underlineStyle,
-    ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {})
+    ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {}),
   }
 
-  const focusedHRstyle = disabled ? {} : (errorText ? underlineStyle : {
-    borderBottom: '2px solid',
-    borderColor: (isFocused || isOpen) ? focusColor : borderColor,
-    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
-    transform: `scaleX( ${(isFocused || isOpen) ? 1 : 0} )`,
-    ...underlineFocusStyle
-  })
+  const focusedHRstyle = disabled
+    ? {}
+    : errorText
+      ? underlineStyle
+      : {
+        borderBottom: '2px solid',
+        borderColor: isFocused || isOpen ? focusColor : borderColor,
+        transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+        transform: `scaleX( ${isFocused || isOpen ? 1 : 0} )`,
+        ...underlineFocusStyle,
+      }
 
   return (
     <div style={styles.column}>
       <div style={styles.row}>
         <div style={styles.selections}>
-          {floatingLabel &&
+          {floatingLabel && (
             <FloatingLabel
               shrink={isShrunk}
               isFocused={isFocused}
@@ -72,10 +87,8 @@ const SelectionsPresenter = ({
             >
               {floatingLabel}
             </FloatingLabel>
-          }
-          {(!floatingLabel || isShrunk) &&
-            selectionsRenderer(selectedValues, hintText)
-          }
+          )}
+          {(!floatingLabel || isShrunk) && selectionsRenderer(selectedValues, hintText)}
         </div>
         {dropDownIcon}
       </div>
@@ -84,7 +97,8 @@ const SelectionsPresenter = ({
         <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
       </div>
       {errorText && <div style={{ marginTop: 5, color: 'red', fontSize: 12, ...errorStyle }}>{errorText}</div>}
-    </div>)
+    </div>
+  )
 }
 
 SelectionsPresenter.propTypes = selectionsPresenterTypes

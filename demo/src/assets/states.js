@@ -48,7 +48,7 @@ const states = [
   { code: 'WA', name: 'Washington', capital: 'Olympia' },
   { code: 'WV', name: 'West Virginia', capital: 'Charleston' },
   { code: 'WI', name: 'Wisconsin', capital: 'Madison' },
-  { code: 'WY', name: 'Wyoming', capital: 'Cheyenne' }
+  { code: 'WY', name: 'Wyoming', capital: 'Cheyenne' },
 ]
 
 // The 3,144 counties and county equivalents of the United States of America
@@ -915,7 +915,7 @@ const counties = [
   { INCITS: '19135', county: 'Monroe County', state: 'Iowa' },
   { INCITS: '19137', county: 'Montgomery County', state: 'Iowa' },
   { INCITS: '19139', county: 'Muscatine County', state: 'Iowa' },
-  { INCITS: '19141', county: 'O\'Brien County', state: 'Iowa' },
+  { INCITS: '19141', county: "O'Brien County", state: 'Iowa' },
   { INCITS: '19143', county: 'Osceola County', state: 'Iowa' },
   { INCITS: '19145', county: 'Page County', state: 'Iowa' },
   { INCITS: '19147', county: 'Palo Alto County', state: 'Iowa' },
@@ -1264,9 +1264,9 @@ const counties = [
   { INCITS: '24027', county: 'Howard County', state: 'Maryland' },
   { INCITS: '24029', county: 'Kent County', state: 'Maryland' },
   { INCITS: '24031', county: 'Montgomery County', state: 'Maryland' },
-  { INCITS: '24033', county: 'Prince George\'s County', state: 'Maryland' },
-  { INCITS: '24035', county: 'Queen Anne\'s County', state: 'Maryland' },
-  { INCITS: '24037', county: 'St. Mary\'s County', state: 'Maryland' },
+  { INCITS: '24033', county: "Prince George's County", state: 'Maryland' },
+  { INCITS: '24035', county: "Queen Anne's County", state: 'Maryland' },
+  { INCITS: '24037', county: "St. Mary's County", state: 'Maryland' },
   { INCITS: '24039', county: 'Somerset County', state: 'Maryland' },
   { INCITS: '24041', county: 'Talbot County', state: 'Maryland' },
   { INCITS: '24043', county: 'Washington County', state: 'Maryland' },
@@ -3197,7 +3197,7 @@ const counties = [
   { INCITS: '56039', county: 'Teton County', state: 'Wyoming' },
   { INCITS: '56041', county: 'Uinta County', state: 'Wyoming' },
   { INCITS: '56043', county: 'Washakie County', state: 'Wyoming' },
-  { INCITS: '56045', county: 'Weston County', state: 'Wyoming' }
+  { INCITS: '56045', county: 'Weston County', state: 'Wyoming' },
 ]
 
 export default { states, counties }

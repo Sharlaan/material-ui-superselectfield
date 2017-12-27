@@ -12,15 +12,15 @@ const customTheme = getMuiTheme({
   palette: {
     primary1Color: lightBlue500,
     accent1Color: deepOrange400,
-    textColor: blueGrey700
+    textColor: blueGrey700,
   },
   checkbox: {
     checkedColor: deepOrange400,
-    boxColor: blueGrey500
+    boxColor: blueGrey500,
   },
   svgIcon: {
-    color: blueGrey500
-  }
+    color: blueGrey500,
+  },
 })
 
 render(

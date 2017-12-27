@@ -1,18 +1,18 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 import React from 'react';
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import FloatingLabel from './FloatingLabel';
 import { selectionsPresenterTypes } from './types';
 import { selectionsPresenterDefaultProps } from './defaultProps';
 
 var styles = {
-  column: { display: 'flex', flexDirection: 'column' },
+  column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
   row: {
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 'auto'
   },
   selections: { flex: 1 },
   underline: { position: 'relative', marginTop: 4 }
@@ -33,7 +33,8 @@ var SelectionsPresenter = function SelectionsPresenter(_ref) {
       disabled = _ref.disabled,
       errorText = _ref.errorText,
       errorStyle = _ref.errorStyle,
-      underlineErrorStyle = _ref.underlineErrorStyle;
+      underlineErrorStyle = _ref.underlineErrorStyle,
+      dropDownIcon = _ref.dropDownIcon;
   var _muiTheme$textField = muiTheme.textField,
       floatingLabelColor = _muiTheme$textField.floatingLabelColor,
       borderColor = _muiTheme$textField.borderColor,
@@ -90,7 +91,7 @@ var SelectionsPresenter = function SelectionsPresenter(_ref) {
         ),
         (!floatingLabel || isShrunk) && selectionsRenderer(selectedValues, hintText)
       ),
-      React.createElement(DropDownArrow, { style: { fill: borderColor } })
+      dropDownIcon
     ),
     React.createElement(
       'div',
