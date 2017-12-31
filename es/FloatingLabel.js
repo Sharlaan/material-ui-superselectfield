@@ -32,9 +32,7 @@ function _inherits (subClass, superClass) {
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: { value: subClass, enumerable: false, writable: true, configurable: true },
   })
-  if (superClass) {
-    Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : (subClass.__proto__ = superClass)
-  }
+  if (superClass) { Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : (subClass.__proto__ = superClass) }
 }
 
 import React, { Component } from 'react'

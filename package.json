@@ -39,11 +39,19 @@
     "build": "nwb build-react-component",
     "lint": "eslint src demo/src",
     "fix": "yarn lint --fix",
-    "fmt": "prettier-eslint \"{./*@(.js|.jsx),./!(node_modules|build|dist|Home)/**/*@(.js|.jsx)}\" --write",
+    "format": "prettier-eslint --write \"src/**/*@(.css|.js)\" \"demo/src/**/*@(.css|.js)\"",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:watch": "nwb test-react --server",
-    "test:coverage": "nwb test-react --coverage"
+    "test:coverage": "nwb test-react --coverage",
+    "precommit": "yarn fix && yarn clean && yarn build && git add es lib demo/dist && lint-staged",
+    "prepush": "yarn test:coverage"
+  },
+  "lint-staged": {
+      "*.{js,css}": [
+          "yarn format",
+          "git add"
+      ]
   },
   "dependencies": {
     "react-infinite": "^0.12.1"
@@ -62,6 +70,8 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "material-ui": "^0.19.4",
     "nwb": "^0.20.0",
     "prettier-eslint-cli": "^4.7.0",

@@ -43,9 +43,7 @@ function _inherits (subClass, superClass) {
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: { value: subClass, enumerable: false, writable: true, configurable: true },
   })
-  if (superClass) {
-    Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : (subClass.__proto__ = superClass)
-  }
+  if (superClass) { Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : (subClass.__proto__ = superClass) }
 }
 
 /**
@@ -379,8 +377,7 @@ const SelectField = (function (_Component) {
         })
         : selectedItems ? selectedItems.value === childValue : false
       const leftCheckbox = (multiple && checkPosition === 'left' && (isSelected ? checkedIcon : unCheckedIcon)) || null
-      const rightCheckbox =
-        (multiple && checkPosition === 'right' && (isSelected ? checkedIcon : unCheckedIcon)) || null
+      const rightCheckbox = (multiple && checkPosition === 'right' && (isSelected ? checkedIcon : unCheckedIcon)) || null
       if (multiple && checkPosition !== '') {
         if (checkedIcon) checkedIcon.props.style.marginTop = 0
         if (unCheckedIcon) unCheckedIcon.props.style.marginTop = 0
@@ -434,9 +431,7 @@ const SelectField = (function (_Component) {
             groupedItems = cpc.reduce(function (nodes, child, idx) {
               return menuItemBuilder(nodes, child, nextIndex + idx)
             }, [])
-          } else if ((typeof cpc === 'undefined' ? 'undefined' : _typeof(cpc)) === 'object') {
-            groupedItems = menuItemBuilder(nodes, cpc, nextIndex)
-          }
+          } else if ((typeof cpc === 'undefined' ? 'undefined' : _typeof(cpc)) === 'object') { groupedItems = menuItemBuilder(nodes, cpc, nextIndex) }
         }
         return groupedItems.length ? [].concat(nodes, [menuGroup], groupedItems) : nodes
       }, [])
@@ -517,7 +512,8 @@ const SelectField = (function (_Component) {
             hintText: hintTextAutocomplete,
             onChange: this.handleTextFieldAutocompletionFiltering,
             onKeyDown: this.handleTextFieldKeyDown,
-            style: _extends({}, autocompleteStyle, { marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }),
+            style: { marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 },
+            inputStyle: autocompleteStyle,
             underlineStyle: autocompleteUnderlineStyle,
             underlineFocusStyle: autocompleteUnderlineFocusStyle,
             autoFocus: true,
