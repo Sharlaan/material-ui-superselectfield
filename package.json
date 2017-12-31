@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "keywords": [
     "react",
@@ -48,10 +48,10 @@
     "prepush": "yarn test:coverage"
   },
   "lint-staged": {
-      "*.{js,css}": [
-          "yarn format",
-          "git add"
-      ]
+    "*.{js,css}": [
+      "yarn format",
+      "git add"
+    ]
   },
   "dependencies": {
     "react-infinite": "^0.12.1"
