@@ -33,7 +33,7 @@ const chipAvatarStyle = {
 }
 
 const displayState = (state) =>
-  (state && state.length) ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
+  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
 
 const dataSource = [
   { id: 0, name: 'Raphaël' },
@@ -166,6 +166,7 @@ class CodeExample extends Component {
             floatingLabelFocusStyle={{ color: pink500 }}
             underlineStyle={{ borderColor: teal200 }}
             underlineFocusStyle={{ borderColor: teal500 }}
+            autocompleteStyle={{ color: 'red', fontSize: 25 }}
             autocompleteUnderlineStyle={{ borderColor: yellow200 }}
             autocompleteUnderlineFocusStyle={{ borderColor: yellow500 }}
             hintText='Simple example'

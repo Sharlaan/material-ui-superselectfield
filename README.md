@@ -42,30 +42,30 @@ This component requires 3 dependencies :
 ## Properties
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
-| name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
+| anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
+| autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteThreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
+| canAutoPosition | bool | true | If present, this property allows the inner Popover component to position the menu in such way options are not hidden by the screen edges. |
+| checkPosition | string |  | Position of the checkmark in multiple mode. Accepted values: `'', left, right` |
+| children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
+| disabled | bool | false | Include this property to disable superSelectField.|
+| elementHeight | number, number[] | 36 | Height in pixels of each option element. If elements have different heights, you can provide them in an array. |
+| errorText | string or node | '' | Include this property to show an error warning. |
 | floatingLabel | string or node | | The content to use for the floating label element. |
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
 | hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
-| errorText | string or node | '' | Include this property to show an error warning. |
-| noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
-| anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
-| checkPosition | string |  | Position of the checkmark in multiple mode. Accepted values: `'', left, right` |
-| canAutoPosition | bool | true | If present, this property allows the inner Popover component to position the menu in such way options are not hidden by the screen edges. |
-| multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
-| openImmediately | bool | false | Makes the menu opened on page load.|
 | keepSearchOnSelect | bool | false | Prevents the autocomplete field's value to be reset after each selection.|
-| disabled | bool | false | Include this property to disable superSelectField.|
-| value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
-| onChange | function | () => {} | Triggers when closing the menu. Use this if you do not want to update your component state with each selection and only on menu close. <br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
-| onSelect | function | () => {} | Triggers when selecting an item in the menu. Use this to update your componenet state with each selection from the menu (while still open). <br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
-| onMenuOpen | function | () => {} | Triggers when opening the Menu. |
-| onAutoCompleteTyping | function | () => {} | Exposes the word typed in AutoComplete. Useful for triggering onType API requests. |
-| children | any | [] | Datasource is an array of any type of nodes, styled at your convenience.<br>/!\ REQUIRED: each node must expose a `value` property. This value property will be used by default for both option's value and label.<br>A `label` property can be provided to specify a different value than `value`. |
+| multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
+| name | string | | Required to differentiate between multiple instances of superSelectField in same page. |
 | nb2show | number | 5 | Number of options displayed from the menu. |
-| elementHeight | number, number[] | 36 | Height in pixels of each option element. If elements have different heights, you can provide them in an array. |
+| noMatchFound | string | 'No match found' | Placeholder text when the autocomplete filter fails. |
+| openImmediately | bool | false | Makes the menu opened on page load.|
+| onAutoCompleteTyping | function | () => {} | Exposes the word typed in AutoComplete. Useful for triggering onType API requests. |
+| onChange | function | () => {} | Triggers when closing the menu. Use this if you do not want to update your component state with each selection and only on menu close. <br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
+| onMenuOpen | function | () => {} | Triggers when opening the Menu. |
+| onSelect | function | () => {} | Triggers when selecting an item in the menu. Use this to update your componenet state with each selection from the menu (while still open). <br>signature: (selectedValues, name) with `selectedValues` array of selected values based on selected nodes' value property, and `name` the value of the superSelectField instance's name property |
 | showAutocompleteThreshold | number, 'always', 'never' | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield needs to be disabled, just set this prop with a value higher than children length.<br> However, if you need the autocomplete to show always, you may pass `'always'`. This will open the menu even if there are no items to display. Passing `'never'` will never show the autocomplete regadless of how many children are passed. |
-| autocompleteFilter | function | see below | Provide your own filtering parser. Default: case insensitive.<br>The search field will appear only if there are more than 10 children (see `showAutocompleteThreshold`).<br>By default, the parser will check for `label` props, 'value' otherwise. |
 | useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
+| value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 ##### Note when setting value :
 if multiple is set, value must be at least an empty Array.  
 For single value mode, you can set value to null.  
@@ -75,35 +75,36 @@ PropTypes should raise warnings if implementing otherwise.
 #### Styling properties
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
-| style | object | {} | Insert your own inlined styles, applied to the root component. |
-| menuStyle | object | {} | Styles applied to the comtainer which will receive your children components. |
-| menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
-| innerDivStyle | object | {} | Styles applied to the inner div of MenuItems hosting each of your children components. |
-| menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
-| menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
-| selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
-| selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
-| checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
-| unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
-| dropDownIcon | SVGicon | see below | The SvgIcon to use for the drop down icon in the select. |
-| hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
-| floatingLabelStyle | object | | Allows to change the styles of the floating label. |
-| floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
-| noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
-| errorStyle | object | {color: 'red'} | Allows to change the style of error message's container.<br> Will resolve only if errorText is defined. |
-| underlineErrorStyle | object | {borderColor: 'red'} | Allows to change the style of the underline in error state.<br> Will resolve only if errorText is defined. |
-| underlineStyle | object | | Allows to change the styles of the underline. |
-| underlineFocusStyle | object | | Allows to change the styles of the underline when focused. |
+| autocompleteStyle | object | | Allows to change the styles of the auto-complete field (inner input component).<br> Notice: margins left/right and width of the autocomplete root element are not customisable, (automatically calculated) |
 | autocompleteUnderlineStyle | object | | Allows to change the styles of the searchTextField's underline. |
 | autocompleteUnderlineFocusStyle | object | | Allows to change the styles of the searchTextField's underline when focused. |
+| checkedIcon | SVGicon | see below | The SvgIcon to use for the checked state. This is useful to create icon toggles. |
+| dropDownIcon | SVGicon | see below | The SvgIcon to use for the drop down icon in the select. |
+| errorStyle | object | {color: 'red'} | Allows to change the style of error message's container.<br> Will resolve only if errorText is defined. |
+| floatingLabelStyle | object | | Allows to change the styles of the floating label. |
+| floatingLabelFocusStyle | object | | Allows to change the styles of the floating label when focused. |
+| innerDivStyle | object | {} | Styles applied to the inner div of MenuItems hosting each of your children components. |
+| hoverColor | string | 'rgba(69, 90, 100, 0.1)' | Overrides the hover background color. |
+| menuStyle | object | {} | Styles applied to the comtainer which will receive your children components. |
+| menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
+| menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
+| menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
+| noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
+| selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
+| selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
+| style | object | {} | Insert your own inlined styles, applied to the root component. |
+| unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
+| underlineErrorStyle | object | {borderColor: 'red'} | Allows to change the style of the underline in error state.<br> Will resolve only if errorText is defined. |
+| underlineFocusStyle | object | | Allows to change the styles of the underline when focused. |
+| underlineStyle | object | | Allows to change the styles of the underline. |
 
 #### Default functions
 | Name | Default function |
 |:---- |:---- |
+| autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | dropDownIcon | `<DropDownArrow/>` |
-| autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | selectionsRenderer |  |
 <pre>(values, hintText) => {
    if (!values) return hintText

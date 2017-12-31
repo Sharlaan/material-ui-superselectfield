@@ -10,8 +10,7 @@ const containerStyle = {
   flex: 1,
 }
 
-const displayState = (state) =>
-  (state && state.value) ? (state.label || state.value) : 'empty state'
+const displayState = (state) => (state && state.value ? state.label || state.value : 'empty state')
 
 class CodeExample extends Component {
   state = {

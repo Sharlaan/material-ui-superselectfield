@@ -196,41 +196,42 @@ class SelectField extends Component {
 
   render () {
     const {
+      anchorOrigin,
+      autocompleteFilter,
+      autocompleteStyle,
+      autocompleteUnderlineFocusStyle,
+      autocompleteUnderlineStyle,
+      canAutoPosition,
+      checkPosition,
+      checkedIcon,
       children,
+      disabled,
+      dropDownIcon,
+      elementHeight,
+      errorStyle,
+      errorText,
       floatingLabel,
+      floatingLabelFocusStyle,
+      floatingLabelStyle,
       hintText,
       hintTextAutocomplete,
-      multiple,
-      disabled,
-      nb2show,
-      autocompleteFilter,
-      selectionsRenderer,
-      menuCloseButton,
-      anchorOrigin,
-      canAutoPosition,
-      style,
-      menuStyle,
-      elementHeight,
+      hoverColor,
       innerDivStyle,
-      selectedMenuItemStyle,
-      menuGroupStyle,
+      menuCloseButton,
       menuFooterStyle,
-      floatingLabelStyle,
-      floatingLabelFocusStyle,
-      underlineStyle,
-      underlineFocusStyle,
-      autocompleteUnderlineStyle,
-      autocompleteUnderlineFocusStyle,
+      menuGroupStyle,
+      menuStyle,
+      multiple,
+      nb2show,
       noMatchFound,
       noMatchFoundStyle,
-      checkedIcon,
+      selectedMenuItemStyle,
+      selectionsRenderer,
+      style,
       unCheckedIcon,
-      dropDownIcon,
-      hoverColor,
-      checkPosition,
-      errorText,
-      errorStyle,
       underlineErrorStyle,
+      underlineFocusStyle,
+      underlineStyle,
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -382,6 +383,7 @@ class SelectField extends Component {
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
               style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }}
+              inputStyle={autocompleteStyle}
               underlineStyle={autocompleteUnderlineStyle}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
               autoFocus
