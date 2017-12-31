@@ -31,7 +31,7 @@ const chipAvatarStyle = {
 }
 
 const displayState = (state) =>
-  (state && state.length) ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
+  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
 
 class CodeExample extends Component {
   state = {

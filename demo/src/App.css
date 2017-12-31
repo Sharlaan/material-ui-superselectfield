@@ -3,8 +3,12 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .App-logo {
@@ -20,11 +24,16 @@
   margin-bottom: 20px;
   color: white;
 }
-.App-header h2, .App-header h4 { margin: 7px 0 0; }
+.App-header h2,
+.App-header h4 {
+  margin: 7px 0 0;
+}
 
 .App-content {
   margin-left: 200px;
   font-size: large;
 }
 
-*:focus { outline: none; }
+*:focus {
+  outline: none;
+}

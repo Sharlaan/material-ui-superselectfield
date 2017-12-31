@@ -73,15 +73,12 @@ const SelectionsPresenter = ({
         ...underlineFocusStyle,
       }
 
-  const arrowDownIcon = cloneElement(
-    dropDownIcon || <DropDownArrow />,
-    {
-      style: {
-        // fill: this.context.muiTheme.textField.borderColor,
-        transform: `rotate(${isOpen ? 180 : 0}deg)`,
-      },
-    }
-  )
+  const arrowDownIcon = cloneElement(dropDownIcon || <DropDownArrow />, {
+    style: {
+      // fill: this.context.muiTheme.textField.borderColor,
+      transform: `rotate(${isOpen ? 180 : 0}deg)`,
+    },
+  })
 
   return (
     <div style={styles.column}>
