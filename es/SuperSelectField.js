@@ -279,7 +279,7 @@ const SelectField = (function (_Component) {
 
   SelectField.prototype.clearTextField = function clearTextField (callback) {
     this.props.keepSearchOnSelect
-      ? callback() // don't reset the autocomplete
+      ? typeof callback === 'function' && callback() // don't reset the autocomplete
       : this.setState({ searchText: '' }, callback)
   }
 

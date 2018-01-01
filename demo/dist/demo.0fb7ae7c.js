@@ -5125,6 +5125,7 @@ webpackJsonp(
                   {
                     name: 'state4',
                     multiple: !0,
+                    keepSearchOnSelect: !0,
                     checkPosition: 'left',
                     hintText: 'Complex example',
                     onChange: this.handleSelection,
@@ -16750,7 +16751,7 @@ webpackJsonp(
               this.state.showAutocomplete && this.searchTextField ? this.searchTextField.focus() : this.focusMenuItem()
             }),
             (e.prototype.clearTextField = function (t) {
-              this.props.keepSearchOnSelect ? t() : this.setState({ searchText: '' }, t)
+              this.props.keepSearchOnSelect ? typeof t === 'function' && t() : this.setState({ searchText: '' }, t)
             }),
             (e.prototype.render = function () {
               let t = this,
@@ -25209,16 +25210,16 @@ webpackJsonp(
                 }
                 const y = c
                 if (!y.props.value) {
-                  return new Error(
-                    "\n              Missing required property 'value' for '" +
+ return new Error(
+                  "\n              Missing required property 'value' for '" +
                         a +
                         "' supplied to '" +
                         n +
                         ' ' +
                         t.name +
                         "'.\n              Validation failed."
-                  )
-                }
+                ) 
+}
               }
             } else if (r(i.props.children) === 'object' && !i.props.children.props.value) {
               return new Error(
@@ -28390,4 +28391,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.f08ba1e0.js.map
+// # sourceMappingURL=demo.0fb7ae7c.js.map
