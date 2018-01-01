@@ -116,6 +116,7 @@ class CodeExample extends Component {
         <SuperSelectField
           name='state4'
           multiple
+          keepSearchOnSelect
           checkPosition='left'
           hintText='Complex example'
           onChange={this.handleSelection}
