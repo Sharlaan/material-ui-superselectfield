@@ -18,31 +18,35 @@ const styles = {
 }
 
 const SelectionsPresenter = ({
-  selectedValues,
-  selectionsRenderer,
+  disabled,
+  dropDownIcon,
+  errorStyle,
+  errorText,
   floatingLabel,
-  hintText,
-  muiTheme,
-  floatingLabelStyle,
   floatingLabelFocusStyle,
-  underlineStyle,
-  underlineFocusStyle,
+  floatingLabelStyle,
+  hintText,
   isFocused,
   isOpen,
-  disabled,
-  errorText,
-  errorStyle,
+  muiTheme,
+  selectedValues,
+  selectionsRenderer,
   underlineErrorStyle,
-  dropDownIcon,
+  underlineFocusStyle,
+  underlineStyle,
 }) => {
   const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme
 
   const isValidObject = (obj) =>
-    Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value')
+    obj &&
+    Object.prototype.toString.call(obj) === '[object Object]' &&
+    Object.keys(obj).includes('value') &&
+    obj.value !== null
+
   // Condition for shrinking the floating Label
   const isShrunk =
-    (Array.isArray(selectedValues) && !!selectedValues.length) ||
-    (!Array.isArray(selectedValues) && isValidObject(selectedValues)) ||
+    (Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
+    (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
     isOpen
 
   const baseHRstyle = {
