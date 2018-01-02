@@ -21866,33 +21866,39 @@ webpackJsonp(
           underline: { position: 'relative', marginTop: 4 },
         },
         d = function (t) {
-          let e = t.selectedValues,
-            n = t.selectionsRenderer,
-            i = t.floatingLabel,
-            s = t.hintText,
-            l = t.muiTheme,
-            d = t.floatingLabelStyle,
-            C = t.floatingLabelFocusStyle,
-            p = t.underlineStyle,
-            h = t.underlineFocusStyle,
-            f = t.isFocused,
-            I = t.isOpen,
-            m = t.disabled,
-            S = t.errorText,
-            T = t.errorStyle,
-            g = t.underlineErrorStyle,
-            N = t.dropDownIcon,
-            v = l.textField,
+          let e = t.disabled,
+            n = t.dropDownIcon,
+            i = t.errorStyle,
+            s = t.errorText,
+            l = t.floatingLabel,
+            d = t.floatingLabelFocusStyle,
+            C = t.floatingLabelStyle,
+            p = t.hintText,
+            h = t.isFocused,
+            f = t.isOpen,
+            I = t.muiTheme,
+            m = t.selectedValues,
+            S = t.selectionsRenderer,
+            T = t.underlineErrorStyle,
+            g = t.underlineFocusStyle,
+            N = t.underlineStyle,
+            v = I.textField,
             b = v.floatingLabelColor,
             k = v.borderColor,
             w = v.focusColor,
             x =
-              (Array.isArray(e) && !!e.length) ||
-              (!Array.isArray(e) &&
-                (function (t) {
-                  return Object.prototype.toString.call(t) === '[object Object]' && Object.keys(t).includes('value')
-                })(e)) ||
-              I,
+              (Array.isArray(m) && (!!m.length || h)) ||
+              (!Array.isArray(m) &&
+                ((function (t) {
+                  return (
+                    t &&
+                    Object.prototype.toString.call(t) === '[object Object]' &&
+                    Object.keys(t).includes('value') &&
+                    t.value !== null
+                  )
+                })(m) ||
+                  (m === null && h))) ||
+              f,
             M = c(
               {
                 position: 'absolute',
@@ -21907,24 +21913,24 @@ webpackJsonp(
                 borderBottom: '1px solid',
                 borderColor: k,
               },
-              p,
-              S ? c({ borderColor: 'red' }, g) : {}
+              N,
+              s ? c({ borderColor: 'red' }, T) : {}
             ),
-            A = m
+            A = e
               ? {}
-              : S
-                ? p
+              : s
+                ? N
                 : c(
                   {
                     borderBottom: '2px solid',
-                    borderColor: f || I ? w : k,
+                    borderColor: h || f ? w : k,
                     transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
-                    transform: 'scaleX( ' + (f || I ? 1 : 0) + ' )',
+                    transform: 'scaleX( ' + (h || f ? 1 : 0) + ' )',
                   },
-                  h
+                  g
                 ),
-            E = Object(o.cloneElement)(N || a.a.createElement(u.a, null), {
-              style: { transform: 'rotate(' + (I ? 180 : 0) + 'deg)' },
+            E = Object(o.cloneElement)(n || a.a.createElement(u.a, null), {
+              style: { transform: 'rotate(' + (f ? 180 : 0) + 'deg)' },
             })
           return a.a.createElement(
             'div',
@@ -21935,20 +21941,20 @@ webpackJsonp(
               a.a.createElement(
                 'div',
                 { style: y.selections },
-                i &&
+                l &&
                   a.a.createElement(
                     r.a,
                     {
                       shrink: x,
-                      isFocused: f,
-                      disabled: m,
+                      isFocused: h,
+                      disabled: e,
                       defaultColors: { floatingLabelColor: b, focusColor: w },
-                      floatingLabelStyle: d,
-                      floatingLabelFocusStyle: C,
+                      floatingLabelStyle: C,
+                      floatingLabelFocusStyle: d,
                     },
-                    i
+                    l
                   ),
-                (!i || x) && n(e, s)
+                (!l || x) && S(m, p)
               ),
               E
             ),
@@ -21958,7 +21964,7 @@ webpackJsonp(
               a.a.createElement('hr', { style: M }),
               a.a.createElement('hr', { style: c({}, M, A) })
             ),
-            S && a.a.createElement('div', { style: c({ marginTop: 5, color: 'red', fontSize: 12 }, T) }, S)
+            s && a.a.createElement('div', { style: c({ marginTop: 5, color: 'red', fontSize: 12 }, i) }, s)
           )
         }
       ;(d.propTypes = s.c), (d.defaultProps = l.c), (e.a = d)
@@ -28391,4 +28397,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.0fb7ae7c.js.map
+// # sourceMappingURL=demo.82739797.js.map
