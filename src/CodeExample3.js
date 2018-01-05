@@ -163,6 +163,7 @@ class CodeExample extends Component {
           onChange={this.handleSelection}
           onAutoCompleteTyping={this.handleAutoCompleteTyping}
           showSelectAll
+          maxSelection={3}
           value={state32}
           hoverColor='rgba(3, 169, 244, 0.15)'
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
