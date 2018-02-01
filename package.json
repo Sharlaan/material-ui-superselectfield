@@ -2,7 +2,7 @@
   "name": "moebel-material-ui-superselectfield",
   "version": "0.1.8",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
-  "private": false,
+  "private": true,
   "author": "Raphaël Morineau <raphael.morineau@gmail.com>",
   "license": "MIT",
   "repository": {
