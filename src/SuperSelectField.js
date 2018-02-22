@@ -374,7 +374,7 @@ class SelectField extends Component {
         ? selectedItems.filter(obj => !areEqual(obj.value, selectedItem.value))
         : selectedItems.concat(selectedItem)
       this.setState({ selectedItems: updatedValues })
-      this.clearTextField(() => this.focusTextField())
+      this.state.showAutocomplete && this.clearTextField(() => this.focusTextField())
     } else {
       const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
       this.setState({ selectedItems: updatedValue }, () => this.closeMenu())
