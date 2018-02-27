@@ -1,20 +1,20 @@
-import DropDownArrow from "material-ui/svg-icons/navigation/arrow-drop-down";
-import FloatingLabel from "./FloatingLabel";
-import PropTypes from "prop-types";
-import React from "react";
-import { objectShape } from "./utils";
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import FloatingLabel from './FloatingLabel';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { objectShape } from './utils';
 
 // noinspection JSDuplicatedDeclaration
 const styles = {
-  column: { display: "flex", flexDirection: "column" },
+  column: { display: 'flex', flexDirection: 'column' },
   row: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center"
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   selections: { flex: 1 },
-  underline: { position: "relative", marginTop: 4 }
+  underline: { position: 'relative', marginTop: 4 }
 };
 
 const SelectionsPresenter = ({
@@ -34,13 +34,10 @@ const SelectionsPresenter = ({
   errorStyle,
   underlineErrorStyle
 }) => {
-  const {
-    textField: { floatingLabelColor, borderColor, focusColor }
-  } = muiTheme;
+  const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme;
 
   const isValidObject = obj =>
-    Object.prototype.toString.call(obj) === "[object Object]" &&
-    Object.keys(obj).includes("value");
+    Object.prototype.toString.call(obj) === '[object Object]' && Object.keys(obj).includes('value');
   // Condition for shrinking the floating Label
   const isShrunk =
     (Array.isArray(selectedValues) && !!selectedValues.length) ||
@@ -48,19 +45,19 @@ const SelectionsPresenter = ({
     isOpen;
 
   const baseHRstyle = {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
-    width: "100%",
+    width: '100%',
     margin: 0,
-    boxSizing: "content-box",
-    borderTop: "none",
-    borderLeft: "none",
-    borderRight: "none",
-    borderBottom: "1px solid",
+    boxSizing: 'content-box',
+    borderTop: 'none',
+    borderLeft: 'none',
+    borderRight: 'none',
+    borderBottom: '1px solid',
     borderColor,
     ...underlineStyle,
-    ...(errorText ? { borderColor: "red", ...underlineErrorStyle } : {})
+    ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {})
   };
 
   const focusedHRstyle = disabled
@@ -68,9 +65,9 @@ const SelectionsPresenter = ({
     : errorText
       ? underlineStyle
       : {
-          borderBottom: "2px solid",
+          borderBottom: '2px solid',
           borderColor: isFocused || isOpen ? focusColor : borderColor,
-          transition: "450ms cubic-bezier(0.23, 1, 0.32, 1)", // transitions.easeOut(),
+          transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
           transform: `scaleX( ${isFocused || isOpen ? 1 : 0} )`,
           ...underlineFocusStyle
         };
@@ -91,8 +88,7 @@ const SelectionsPresenter = ({
               {floatingLabel}
             </FloatingLabel>
           )}
-          {(!floatingLabel || isShrunk) &&
-            selectionsRenderer(selectedValues, hintText)}
+          {(!floatingLabel || isShrunk) && selectionsRenderer(selectedValues, hintText)}
         </div>
         <DropDownArrow style={{ fill: borderColor }} />
       </div>
@@ -101,11 +97,7 @@ const SelectionsPresenter = ({
         <hr style={{ ...baseHRstyle, ...focusedHRstyle }} />
       </div>
       {errorText && (
-        <div
-          style={{ marginTop: 5, color: "red", fontSize: 12, ...errorStyle }}
-        >
-          {errorText}
-        </div>
+        <div style={{ marginTop: 5, color: 'red', fontSize: 12, ...errorStyle }}>{errorText}</div>
       )}
     </div>
   );
@@ -121,8 +113,8 @@ SelectionsPresenter.propTypes = {
 };
 
 SelectionsPresenter.defaultProps = {
-  hintText: "Click me",
-  errorText: "",
+  hintText: 'Click me',
+  errorText: '',
   errorStyle: {},
   underlineErrorStyle: {},
   value: null,
@@ -130,9 +122,7 @@ SelectionsPresenter.defaultProps = {
     if (!values) return hintText;
     const { value, label } = values;
     if (Array.isArray(values)) {
-      return values.length
-        ? values.map(({ value, label }) => label || value).join(", ")
-        : hintText;
+      return values.length ? values.map(({ value, label }) => label || value).join(', ') : hintText;
     } else if (label || value) return label || value;
     else return hintText;
   }

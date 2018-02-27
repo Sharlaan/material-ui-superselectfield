@@ -1,1 +1,1 @@
-export default from './SuperSelectField'
+export { default } from './SuperSelectField';
