@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  polyfill: false,
   type: 'react-component',
   npm: {
     esModules: true,
