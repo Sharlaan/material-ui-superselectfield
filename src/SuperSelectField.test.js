@@ -4,136 +4,155 @@
 // https://medium.freecodecamp.com/the-right-way-to-test-react-components-548a4736ab22#.hqprrvawg
 
 /* eslint-env jest */
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
 
-import { shallow, configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import SuperSelectField from './SuperSelectField'
+import SuperSelectField from './SuperSelectField';
 
-configure({ adapter: new Adapter() })
+configure({ adapter: new Adapter() });
 
-const muiTheme = getMuiTheme()
-const shallowWithContext = node => shallow(node, {context: {muiTheme}})
+const muiTheme = getMuiTheme();
+const shallowWithContext = node => shallow(node, { context: { muiTheme } });
 
 const testChildren = [
-  <div key='0' value='1' label='test'>Test Child</div>,
-  <div key='1' value='2'>Test Child</div>
-]
+  <div key="0" value="1" label="test">
+    Test Child
+  </div>,
+  <div key="1" value="2">
+    Test Child
+  </div>,
+];
 
 describe('Default states, styles, and behaviors', () => {
   it('renders without crashing', () => {
-    const root = document.createElement('div')
+    const root = document.createElement('div');
     render(
       <MuiThemeProvider>
         <SuperSelectField />
       </MuiThemeProvider>,
-      root
-    )
-  })
+      root,
+    );
+  });
 
   it('expects the menu to be closed by default', () => {
-    const wrapper = shallowWithContext(<SuperSelectField />)
-    const menu = wrapper.find('Popover')
-    expect(menu.props().open).toBe(false)
+    const wrapper = shallowWithContext(<SuperSelectField />);
+    const menu = wrapper.find('Popover');
+    expect(menu.props().open).toBe(false);
     // can also use wrapper.state('isOpen')
-  })
+  });
 
   it('expects the menu to open when clicked', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
-    wrapper.simulate('click')
-    expect(wrapper.find('Popover').props().open).toBe(true)
-  })
+    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>);
+    wrapper.simulate('click');
+    expect(wrapper.find('Popover').props().open).toBe(true);
+  });
 
   it('expects the menu to render children', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
-    wrapper.simulate('click', { event: {} })
-    const firstChild = wrapper.find('ListItem').first()
-    expect(firstChild.props().primaryText).toBe(testChildren[0])
-  })
+    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>);
+    wrapper.simulate('click', { event: {} });
+    const firstChild = wrapper.find('ListItem').first();
+    expect(firstChild.props().primaryText).toBe(testChildren[0]);
+  });
 
-  it('should display [hintText] when nothing selected')
+  it('should display [hintText] when nothing selected');
 
-  it('should pass the default selected item to the underlying MenuItem')
-})
+  it('should pass the default selected item to the underlying MenuItem');
+});
 
 describe('When selecting an option', () => {
   it('expects the menu to close', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
-    expect(wrapper.find('Popover').props().open).toBe(false)
+    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>);
+    expect(wrapper.find('Popover').props().open).toBe(false);
 
-    wrapper.simulate('click') // opens menu
-    expect(wrapper.find('Popover').props().open).toBe(true)
-    const children = wrapper.find('ListItem')
-    expect(children).toHaveLength(2)
-    wrapper.find('ListItem').first().simulate('click', { preventDefault: () => {} })
-    expect(wrapper.find('Popover').props().open).toBe(false)
-  })
+    wrapper.simulate('click'); // opens menu
+    expect(wrapper.find('Popover').props().open).toBe(true);
+    const children = wrapper.find('ListItem');
+    expect(children).toHaveLength(2);
+    wrapper
+      .find('ListItem')
+      .first()
+      .simulate('click', { preventDefault: () => {} });
+    expect(wrapper.find('Popover').props().open).toBe(false);
+  });
 
-  it('expects the menu to close when clicking outside')
+  it('expects the menu to close when clicking outside');
 
   it('expects the onChange handler to be called', () => {
-    const callback = jest.fn()
-    const wrapper = shallowWithContext(<SuperSelectField onChange={callback}>{testChildren}</SuperSelectField>)
-    wrapper.setState({ isOpen: true })
-    expect(callback).not.toHaveBeenCalled()
-    wrapper.find('ListItem').first().simulate('click', { target: {}, preventDefault: () => {} })
-    wrapper.first().simulate('keyDown', { key: 'Escape' })
-    expect(callback).toBeCalledWith({'label': 'test', 'value': '1'}, undefined)
-  })
+    const callback = jest.fn();
+    const wrapper = shallowWithContext(
+      <SuperSelectField onChange={callback}>{testChildren}</SuperSelectField>,
+    );
+    wrapper.setState({ isOpen: true });
+    expect(callback).not.toHaveBeenCalled();
+    wrapper
+      .find('ListItem')
+      .first()
+      .simulate('click', { target: {}, preventDefault: () => {} });
+    wrapper.first().simulate('keyDown', { key: 'Escape' });
+    expect(callback).toBeCalledWith({ label: 'test', value: '1' }, undefined);
+  });
 
   it('expects the onChange handler to not be called', () => {
-    const callback = jest.fn()
-    const onRequestClose = jest.fn()
-    const wrapper = shallowWithContext(<SuperSelectField onChange={callback} multiple value={[]} onRequestClose={onRequestClose}>{testChildren}</SuperSelectField>)
-    wrapper.setState({ isOpen: true })
-    expect(callback).not.toHaveBeenCalled()
-    wrapper.find('ListItem').first().simulate('click', { target: {}, preventDefault: () => {} })
-    wrapper.first().simulate('keyDown', { key: 'Escape' })
-    expect(callback).not.toHaveBeenCalled()
-  })
-})
+    const callback = jest.fn();
+    const onRequestClose = jest.fn();
+    const wrapper = shallowWithContext(
+      <SuperSelectField onChange={callback} multiple value={[]} onRequestClose={onRequestClose}>
+        {testChildren}
+      </SuperSelectField>,
+    );
+    wrapper.setState({ isOpen: true });
+    expect(callback).not.toHaveBeenCalled();
+    wrapper
+      .find('ListItem')
+      .first()
+      .simulate('click', { target: {}, preventDefault: () => {} });
+    wrapper.first().simulate('keyDown', { key: 'Escape' });
+    expect(callback).not.toHaveBeenCalled();
+  });
+});
 
 describe('Children composition', () => {
-  it('should throw if no `value` prop detected on custom tag')
+  it('should throw if no `value` prop detected on custom tag');
 
-  it('should detect custom html tag with `value` prop')
+  it('should detect custom html tag with `value` prop');
 
-  it('should detect `optgroup` tag')
+  it('should detect `optgroup` tag');
 
-  it('should detect `value` prop on custom tag under `optgroup` tag')
-})
+  it('should detect `value` prop on custom tag under `optgroup` tag');
+});
 
 describe('Autocomplete usage', () => {
-  it('should show if more than [showAutocompleteThreshold] items')
+  it('should show if more than [showAutocompleteThreshold] items');
 
-  it('should display the default [hintTextAutocomplete]')
+  it('should display the default [hintTextAutocomplete]');
 
-  it('should display the custom [hintTextAutocomplete]')
+  it('should display the custom [hintTextAutocomplete]');
 
-  it('use the default case insensitive filter properly')
+  it('use the default case insensitive filter properly');
 
-  it('executes custom filter function properly')
+  it('executes custom filter function properly');
 
-  it('should display `No match` when the filter returns null')
-})
+  it('should display `No match` when the filter returns null');
+});
 
 describe('Selections presenter', () => {
-  it('should display the default [hintText]')
+  it('should display the default [hintText]');
 
-  it('should display custom [hintText] properly')
+  it('should display custom [hintText] properly');
 
-  it('use the default selection renderer properly')
+  it('use the default selection renderer properly');
 
-  it('executes custom selection renderer function properly')
+  it('executes custom selection renderer function properly');
 
-  it('')
-})
+  it('');
+});
 
-describe('Focus and keystrokes handling', () => {})
+describe('Focus and keystrokes handling', () => {});
 
 /*
 describe('', () => {
