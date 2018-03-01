@@ -18104,7 +18104,13 @@ webpackJsonp(
       'use strict'
       let o = n('KSGD')
       n.n(o)
-      e.a = { shrink: o.bool }
+      e.a = {
+        defaultColors: Object(o.shape)({ floatingLabelColor: o.string, focusColor: o.string }),
+        floatingLabelFocusStyle: o.object,
+        floatingLabelStyle: o.object,
+        isFocused: o.bool,
+        shrink: o.bool,
+      }
     },
     To3L: function (t, e, n) {
       'use strict'
@@ -20313,13 +20319,13 @@ webpackJsonp(
             let t = this,
               e = this.props,
               n = e.children,
-              o = e.shrink,
-              r = e.isFocused,
-              i = e.defaultColors,
-              s = i.floatingLabelColor,
-              l = i.focusColor,
-              c = e.floatingLabelStyle,
-              y = e.floatingLabelFocusStyle,
+              o = e.defaultColors,
+              r = o.floatingLabelColor,
+              i = o.focusColor,
+              s = e.floatingLabelFocusStyle,
+              l = e.floatingLabelStyle,
+              c = e.isFocused,
+              y = e.shrink,
               d = u(
                 {
                   position: 'static',
@@ -20332,12 +20338,12 @@ webpackJsonp(
                   pointerEvents: 'auto',
                   cursor: 'pointer',
                   userSelect: 'none',
-                  color: s,
+                  color: r,
                 },
-                c
+                l
               ),
-              C = r && o && u({ color: l }, y),
-              p = o && {
+              C = c && y && u({ color: i }, s),
+              p = y && {
                 position: 'absolute',
                 transform: 'scale(0.75) translateY(-' + this.state.flabelHeight + 'px)',
                 pointerEvents: 'none',
@@ -24561,7 +24567,7 @@ webpackJsonp(
     },
     p6iT: function (t, e, n) {
       'use strict'
-      e.a = { shrink: !1 }
+      e.a = { isFocused: !1, shrink: !1 }
     },
     pFYg: function (t, e, n) {
       'use strict'
@@ -24768,7 +24774,6 @@ webpackJsonp(
       o.bool,
       Object(o.oneOfType)([o.number, Object(o.arrayOf)(o.number)]),
       Object(o.oneOfType)([o.string, o.node]),
-      o.object,
       o.string,
       o.string,
       o.string,
@@ -27873,4 +27878,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.27bdcd0d.js.map
+// # sourceMappingURL=demo.c4cea43b.js.map

@@ -61,7 +61,6 @@ export const selectFieldTypes = {
   disabled: bool,
   elementHeight: oneOfType([number, arrayOf(number)]),
   floatingLabel: oneOfType([string, node]),
-  floatingLabelFocusStyle: object,
   hintText: string,
   hintTextAutocomplete: string,
   hoverColor: string,
