@@ -19623,7 +19623,7 @@ webpackJsonp(
         p = n('hOtA'),
         h = (n.n(p),
           d()({
-            fontFamily: 'Raleway, sans-serif',
+            fontFamily: 'Open Sans, sans-serif',
             palette: { primary1Color: s.lightBlue500, accent1Color: s.deepOrange400, textColor: s.blueGrey700 },
             checkbox: { checkedColor: s.deepOrange400, boxColor: s.blueGrey500 },
             svgIcon: { color: s.blueGrey500 },
@@ -27878,4 +27878,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.c4cea43b.js.map
+// # sourceMappingURL=demo.7a0ff272.js.map
