@@ -20335,7 +20335,7 @@ webpackJsonp(
                   transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
                   transform: 'scale(1) translateY(0)',
                   transformOrigin: 'left top',
-                  pointerEvents: 'auto',
+                  pointerEvents: 'none',
                   cursor: 'pointer',
                   userSelect: 'none',
                   color: r,
@@ -27878,4 +27878,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.7a0ff272.js.map
+// # sourceMappingURL=demo.8d624da7.js.map
