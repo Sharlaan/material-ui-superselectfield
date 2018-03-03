@@ -8,7 +8,7 @@ import App from './App'
 import './index.css'
 
 const customTheme = getMuiTheme({
-  fontFamily: 'Raleway, sans-serif',
+  fontFamily: 'Open Sans, sans-serif',
   palette: {
     primary1Color: lightBlue500,
     accent1Color: deepOrange400,

@@ -74,13 +74,13 @@ const FloatingLabel = (function (_Component) {
 
     let _props = this.props,
       children = _props.children,
-      shrink = _props.shrink,
-      isFocused = _props.isFocused,
       _props$defaultColors = _props.defaultColors,
       floatingLabelColor = _props$defaultColors.floatingLabelColor,
       focusColor = _props$defaultColors.focusColor,
+      floatingLabelFocusStyle = _props.floatingLabelFocusStyle,
       floatingLabelStyle = _props.floatingLabelStyle,
-      floatingLabelFocusStyle = _props.floatingLabelFocusStyle
+      isFocused = _props.isFocused,
+      shrink = _props.shrink
 
     const defaultStyles = _extends(
       {
@@ -91,7 +91,7 @@ const FloatingLabel = (function (_Component) {
         transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
         transform: 'scale(1) translateY(0)',
         transformOrigin: 'left top',
-        pointerEvents: 'auto',
+        pointerEvents: 'none',
         cursor: 'pointer',
         userSelect: 'none',
         color: floatingLabelColor,
