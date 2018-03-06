@@ -28,6 +28,7 @@ export default {
   onMenuOpen: () => {},
   onSelect: () => {},
   openImmediately: false,
+  popoverClassName: '',
   showAutocompleteThreshold: 10,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   value: null,

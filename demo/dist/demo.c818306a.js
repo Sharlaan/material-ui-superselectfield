@@ -8113,7 +8113,7 @@ webpackJsonp(
             for (var a = arguments.length, r = Array(a), u = 0; u < a; u++) r[u] = arguments[u]
             return (
               (n = o = i(this, t.call.apply(t, [this].concat(r)))),
-              (o.state = { state12: { value: 'E', label: 'label E' }, floatingLabelState: null }),
+              (o.state = { state11: null, state12: { value: 'E', label: 'label E' }, floatingLabelState: null }),
               (o.handleSelection = function (t, e) {
                 let n
                 return o.setState((((n = {})[e] = t), n))
@@ -8155,7 +8155,6 @@ webpackJsonp(
                       r.a,
                       {
                         name: 'state11',
-                        multiple: !0,
                         hintText: 'Single value',
                         value: e,
                         onChange: this.handleSelection,
@@ -8169,7 +8168,6 @@ webpackJsonp(
                       r.a,
                       {
                         name: 'state12',
-                        multiple: !0,
                         hintText: 'With labels',
                         value: n,
                         onChange: this.handleSelection,
@@ -16209,24 +16207,22 @@ webpackJsonp(
     },
     'M+9e': function (t, e, n) {
       'use strict'
-      let o,
-        a,
-        r = n('GiK3'),
-        i = n.n(r),
-        u = n('KSGD'),
-        s = (n.n(u), n('KATD')),
+      let o = n('GiK3'),
+        a = n.n(o),
+        r = n('KSGD'),
+        i = (n.n(r), n('KATD')),
+        u = n.n(i),
+        s = n('jZ7G'),
         l = n.n(s),
-        c = n('jZ7G'),
+        c = n('gQPy'),
         y = n.n(c),
-        d = n('gQPy'),
+        d = n('h/Rp'),
         C = n.n(d),
-        p = n('h/Rp'),
-        h = n.n(p),
-        f = n('hgZZ'),
-        I = n('L/hj'),
-        m = n('NaSR'),
-        S = n('a/81'),
-        T =
+        p = n('hgZZ'),
+        h = n('L/hj'),
+        f = n('NaSR'),
+        I = n('a/81'),
+        m =
           typeof Symbol == 'function' && typeof Symbol.iterator == 'symbol'
             ? function (t) {
               return typeof t
@@ -16236,7 +16232,7 @@ webpackJsonp(
                 ? 'symbol'
                 : typeof t
             },
-        g =
+        S =
           Object.assign ||
           function (t) {
             for (let e = 1; e < arguments.length; e++) {
@@ -16245,33 +16241,132 @@ webpackJsonp(
             }
             return t
           }
-      let N = ((o = (function (t) {
+      let T = (function (t) {
         function e (n, o) {
           !(function (t, e) {
             if (!(t instanceof e)) throw new TypeError('Cannot call a class as a function')
           })(this, e)
-          let r = (function (t, e) {
+          let a = (function (t, e) {
             if (!t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
             return !e || (typeof e != 'object' && typeof e != 'function') ? t : e
           })(this, t.call(this, n, o))
-          a.call(r)
-          let i = n.children,
-            u = n.value,
-            s = n.multiple,
-            l = n.showAutocompleteThreshold,
-            c = Object(I.c)(i),
-            y = s ? (u ? (Array.isArray(u) ? u : [u]) : []) : u
+          ;(a.onFocus = function () {
+            return a.setState({ isFocused: !0 })
+          }),
+          (a.onBlur = function () {
+            return !a.state.isOpen && a.setState({ isFocused: !1 })
+          }),
+          (a.closeMenu = function (t) {
+            var e = a.props,
+              n = e.onChange,
+              o = e.name
+            t && a.setState({ isFocused: !1 }),
+            a.setState({ isOpen: !1, searchText: '' }, function () {
+              t || a.root.focus(), n(a.state.selectedItems, o)
+            })
+          }),
+          (a.handleClick = function (t) {
+            return !a.props.disabled && a.openMenu()
+          }),
+          (a.handleKeyDown = function (t) {
+            return !a.props.disabled && /ArrowDown|Enter/.test(t.key) && a.openMenu()
+          }),
+          (a.handleTextFieldAutocompletionFiltering = function (t, e) {
+            a.props.onAutoCompleteTyping(e),
+            a.setState({ searchText: e }, function () {
+              return a.focusTextField()
+            })
+          }),
+          (a.handleTextFieldKeyDown = function (t) {
+            switch (t.key) {
+              case 'ArrowDown':
+                a.focusMenuItem()
+                break
+              case 'Escape':
+                a.clearTextField(), a.closeMenu()
+            }
+          }),
+          (a.handleMenuSelection = function (t) {
+            return function (e) {
+              e.preventDefault()
+              var n = a.state.selectedItems
+              if (a.props.multiple) {
+                var o = n.some(function (e) {
+                  return Object(h.a)(e.value, t.value)
+                })
+                  ? n.filter(function (e) {
+                    return !Object(h.a)(e.value, t.value)
+                  })
+                  : n.concat(t)
+                a.setState({ selectedItems: o }, function () {
+                  return a.getSelected()
+                }),
+                a.clearTextField(function () {
+                  return a.focusTextField()
+                })
+              } else {
+                var r = Object(h.a)(n, t) ? null : t
+                a.setState({ selectedItems: r }, function () {
+                  return a.closeMenu()
+                })
+              }
+            }
+          }),
+          (a.getSelected = function () {
+            return a.props.onSelect && a.props.onSelect(a.state.selectedItems, a.props.name)
+          }),
+          (a.handleMenuKeyDown = function (t) {
+            var e = t.key,
+              n = t.target.tabIndex,
+              o = a.menuItems.filter(function (t) {
+                return !!t
+              }),
+              r = o[0].props.tabIndex,
+              i = o[o.length - 1].props.tabIndex,
+              u = o.findIndex(function (t) {
+                return t.props.tabIndex === n
+              })
+            switch (e) {
+              case 'ArrowUp':
+                if (+n === r) a.state.showAutocomplete ? a.focusTextField() : a.focusMenuItem(i)
+                else {
+                  var s = o.slice(0, u).slice(-1)[0].props.tabIndex
+                  a.focusMenuItem(s)
+                }
+                break
+              case 'ArrowDown':
+                if (+n === i) a.state.showAutocomplete ? a.focusTextField() : a.focusMenuItem()
+                else {
+                  var l = o.slice(u + 1)[0].props.tabIndex
+                  a.focusMenuItem(l)
+                }
+                break
+              case 'PageUp':
+                a.focusMenuItem()
+                break
+              case 'PageDown':
+                a.focusMenuItem(i)
+                break
+              case 'Escape':
+                a.closeMenu()
+            }
+          })
+          let r = n.children,
+            i = n.value,
+            u = n.multiple,
+            s = n.showAutocompleteThreshold,
+            l = Object(h.c)(r)
           return (
-            (r.state = {
+            (a.state = {
               isOpen: !1,
               isFocused: !1,
-              itemsLength: c,
-              showAutocomplete: r.showAutocomplete(l, c),
-              selectedItems: y,
+              itemsLength: l,
+              showAutocomplete: a.showAutocomplete(s, l),
+              selectedItems: i || (u ? [] : null),
               searchText: '',
             }),
-            (r.menuItems = []),
-            r
+            (a.menuItems = []),
+            a
           )
         }
         return (
@@ -16285,10 +16380,10 @@ webpackJsonp(
           })(e, t),
           (e.prototype.componentWillReceiveProps = function (t) {
             if (
-              (Object(I.a)(t.value, this.state.selectedItems) || this.setState({ selectedItems: t.value }),
-                !Object(I.a)(t.children, this.props.children))
+              (Object(h.a)(t.value, this.state.selectedItems) || this.setState({ selectedItems: t.value }),
+                !Object(h.a)(t.children, this.props.children))
             ) {
-              let e = Object(I.c)(t.children)
+              let e = Object(h.c)(t.children)
               this.setState({
                 itemsLength: e,
                 showAutocomplete: this.showAutocomplete(this.props.showAutocompleteThreshold, e),
@@ -16335,15 +16430,15 @@ webpackJsonp(
               e = this.props,
               n = e.anchorOrigin,
               o = e.autocompleteFilter,
-              a = e.autocompleteStyle,
-              r = e.autocompleteUnderlineFocusStyle,
-              u = e.autocompleteUnderlineStyle,
-              s = e.canAutoPosition,
-              c = e.checkPosition,
-              d = e.checkedIcon,
-              p = e.children,
-              m = e.disabled,
-              S = e.dropDownIcon,
+              r = e.autocompleteStyle,
+              i = e.autocompleteUnderlineFocusStyle,
+              s = e.autocompleteUnderlineStyle,
+              c = e.canAutoPosition,
+              d = e.checkPosition,
+              f = e.checkedIcon,
+              I = e.children,
+              T = e.disabled,
+              g = e.dropDownIcon,
               N = e.elementHeight,
               v = e.errorStyle,
               b = e.errorText,
@@ -16362,143 +16457,145 @@ webpackJsonp(
               B = e.nb2show,
               W = e.noMatchFound,
               R = e.noMatchFoundStyle,
-              K = e.selectedMenuItemStyle,
-              j = e.selectionsRenderer,
-              G = e.style,
-              H = e.unCheckedIcon,
-              z = e.underlineErrorStyle,
-              V = e.underlineFocusStyle,
-              U = e.underlineStyle,
-              q = this.context.muiTheme,
-              J = q.baseTheme.palette,
-              Y = q.menuItem,
-              Z = g({ color: Y.selectedTextColor }, K)
-            d && (d.props.style.fill = Z.color)
-            let Q = E || Y.hoverColor,
-              X = function (e, n, a) {
-                let r = t.state.selectedItems,
+              K = e.popoverClassName,
+              j = e.selectedMenuItemStyle,
+              G = e.selectionsRenderer,
+              H = e.style,
+              z = e.unCheckedIcon,
+              V = e.underlineErrorStyle,
+              U = e.underlineFocusStyle,
+              q = e.underlineStyle,
+              J = this.context.muiTheme,
+              Y = J.baseTheme.palette,
+              Z = J.menuItem,
+              Q = S({ color: Z.selectedTextColor }, j)
+            f && (f.props.style.fill = Q.color)
+            let X = E || Z.hoverColor,
+              $ = function (e, n, r) {
+                let i = t.state.selectedItems,
                   u = n.props,
                   s = u.value,
-                  l = u.label
-                if (!o(t.state.searchText, l || s)) return e
-                let C = Array.isArray(r)
-                    ? r.some(function (t) {
-                      return Object(I.a)(t.value, s)
+                  c = u.label
+                if (!o(t.state.searchText, c || s)) return e
+                let y = Array.isArray(i)
+                    ? i.some(function (t) {
+                      return Object(h.a)(t.value, s)
                     })
-                    : !!r && r.value === s,
-                  p = (L && c === 'left' && (C ? d : H)) || null,
-                  h = (L && c === 'right' && (C ? d : H)) || null
+                    : !!i && i.value === s,
+                  C = (L && d === 'left' && (y ? f : z)) || null,
+                  p = (L && d === 'right' && (y ? f : z)) || null
                 return (
-                  L && c !== '' && (d && (d.props.style.marginTop = 0), H && (H.props.style.marginTop = 0)),
+                  L && d !== '' && (f && (f.props.style.marginTop = 0), z && (z.props.style.marginTop = 0)),
                   [].concat(e, [
-                    i.a.createElement(y.a, {
-                      key: ++a,
-                      tabIndex: a,
+                    a.a.createElement(l.a, {
+                      key: ++r,
+                      tabIndex: r,
                       ref: function (e) {
-                        return (t.menuItems[++a] = e)
+                        return (t.menuItems[++r] = e)
                       },
-                      onClick: t.handleMenuSelection({ value: s, label: l }),
+                      onClick: t.handleMenuSelection({ value: s, label: c }),
                       disableFocusRipple: !0,
-                      leftIcon: p,
-                      rightIcon: h,
+                      leftIcon: C,
+                      rightIcon: p,
                       primaryText: n,
-                      hoverColor: Q,
-                      innerDivStyle: g(
+                      hoverColor: X,
+                      innerDivStyle: S(
                         {
                           paddingTop: 10,
                           paddingBottom: 10,
-                          paddingLeft: L && c === 'left' ? 56 : 16,
-                          paddingRight: L && c === 'right' ? 56 : 16,
+                          paddingLeft: L && d === 'left' ? 56 : 16,
+                          paddingRight: L && d === 'right' ? 56 : 16,
                         },
                         O
                       ),
-                      style: C ? Z : {},
+                      style: y ? Q : {},
                     }),
                   ])
                 )
               },
-              $ = Array.isArray(p) ? p : [p],
-              tt =
-                !m &&
-                $.length &&
+              tt = Array.isArray(I) ? I : [I],
+              et =
+                !T &&
+                tt.length &&
                 this.state.isOpen &&
-                $.reduce(function (t, e, n) {
-                  if (e.type !== 'optgroup') return X(t, e, n)
+                tt.reduce(function (t, e, n) {
+                  if (e.type !== 'optgroup') return $(t, e, n)
                   let o = t.length ? +t[t.length - 1].key + 1 : 0,
-                    a = i.a.createElement(y.a, {
+                    r = a.a.createElement(l.a, {
                       disabled: !0,
                       key: o,
                       primaryText: e.props.label,
-                      style: g({ cursor: 'default', paddingTop: 10, paddingBottom: 10 }, F),
+                      style: S({ cursor: 'default', paddingTop: 10, paddingBottom: 10 }, F),
                     }),
-                    r = [],
+                    i = [],
                     u = e.props.children
                   return (
                     u &&
                       (Array.isArray(u) && u.length
-                        ? (r = u.reduce(function (t, e, n) {
-                          return X(t, e, o + n)
+                        ? (i = u.reduce(function (t, e, n) {
+                          return $(t, e, o + n)
                         }, []))
-                        : (void 0 === u ? 'undefined' : T(u)) === 'object' && (r = X(t, u, o))),
-                    r.length ? [].concat(t, [a], r) : t
+                        : (void 0 === u ? 'undefined' : m(u)) === 'object' && (i = $(t, u, o))),
+                    i.length ? [].concat(t, [r], i) : t
                   )
                 }, []),
-              et = this.state.showAutocomplete ? 53 : 0,
-              nt = P ? 36 : 0,
-              ot =
+              nt = this.state.showAutocomplete ? 53 : 0,
+              ot = P ? 36 : 0,
+              at =
                 (Array.isArray(N)
                   ? N.reduce(function (t, e) {
                     return t + e
                   }, 6)
-                  : N * (B < tt.length ? B : tt.length) + 6) || 0,
-              at = et + (ot || 36) + nt,
-              rt = { overflowY: B >= tt.length ? 'hidden' : 'scroll' },
-              it = this.root ? this.root.clientWidth : null
-            return i.a.createElement(
+                  : N * (B < et.length ? B : et.length) + 6) || 0,
+              rt = nt + (at || 36) + ot,
+              it = { overflowY: B >= et.length ? 'hidden' : 'scroll' },
+              ut = this.root ? this.root.clientWidth : null
+            return a.a.createElement(
               'div',
               {
                 ref: function (e) {
                   return (t.root = e)
                 },
-                tabIndex: m ? '-1' : '0',
+                tabIndex: T ? '-1' : '0',
                 onFocus: this.onFocus,
                 onBlur: this.onBlur,
                 onKeyDown: this.handleKeyDown,
                 onClick: this.handleClick,
                 title: this.state.itemsLength ? '' : 'Nothing to show',
-                style: g({ cursor: m ? 'not-allowed' : 'pointer', color: m ? J.disabledColor : J.textColor }, G),
+                style: S({ cursor: T ? 'not-allowed' : 'pointer', color: T ? Y.disabledColor : Y.textColor }, H),
               },
-              i.a.createElement(f.a, {
+              a.a.createElement(p.a, {
                 isFocused: this.state.isFocused,
                 isOpen: this.state.isOpen,
-                disabled: m,
+                disabled: T,
                 hintText: M,
                 errorText: b,
                 errorStyle: v,
-                underlineErrorStyle: z,
+                underlineErrorStyle: V,
                 muiTheme: this.context.muiTheme,
                 selectedValues: this.state.selectedItems,
-                selectionsRenderer: j,
+                selectionsRenderer: G,
                 floatingLabel: k,
                 floatingLabelStyle: x,
                 floatingLabelFocusStyle: w,
-                underlineStyle: U,
-                underlineFocusStyle: V,
-                dropDownIcon: S,
+                underlineStyle: q,
+                underlineFocusStyle: U,
+                dropDownIcon: g,
               }),
-              i.a.createElement(
-                C.a,
+              a.a.createElement(
+                y.a,
                 {
                   open: this.state.isOpen,
                   anchorEl: this.root,
-                  canAutoPosition: s,
+                  canAutoPosition: c,
+                  className: K,
                   anchorOrigin: n,
                   useLayerForClickAway: !1,
                   onRequestClose: this.closeMenu,
-                  style: { height: at },
+                  style: { height: rt },
                 },
                 this.state.showAutocomplete &&
-                  i.a.createElement(h.a, {
+                  a.a.createElement(C.a, {
                     ref: function (e) {
                       return (t.searchTextField = e)
                     },
@@ -16506,151 +16603,46 @@ webpackJsonp(
                     hintText: A,
                     onChange: this.handleTextFieldAutocompletionFiltering,
                     onKeyDown: this.handleTextFieldKeyDown,
-                    style: { marginLeft: 16, marginBottom: 5, width: it - 32 },
-                    inputStyle: a,
-                    underlineStyle: u,
-                    underlineFocusStyle: r,
+                    style: { marginLeft: 16, marginBottom: 5, width: ut - 32 },
+                    inputStyle: r,
+                    underlineStyle: s,
+                    underlineFocusStyle: i,
                     autoFocus: !0,
                   }),
-                i.a.createElement(
+                a.a.createElement(
                   'div',
                   {
                     ref: function (e) {
                       return (t.menu = e)
                     },
                     onKeyDown: this.handleMenuKeyDown,
-                    style: g({ width: it }, D),
+                    style: S({ width: ut }, D),
                   },
-                  tt.length
-                    ? i.a.createElement(
-                      l.a,
-                      { elementHeight: N, containerHeight: ot, styles: { scrollableStyle: rt } },
-                      tt
+                  et.length
+                    ? a.a.createElement(
+                      u.a,
+                      { elementHeight: N, containerHeight: at, styles: { scrollableStyle: it } },
+                      et
                     )
-                    : i.a.createElement(y.a, {
+                    : a.a.createElement(l.a, {
                       disabled: !0,
                       primaryText: W,
-                      style: g({ cursor: 'default', padding: '10px 16px' }, R),
+                      style: S({ cursor: 'default', padding: '10px 16px' }, R),
                     })
                 ),
                 L &&
-                  i.a.createElement(
+                  a.a.createElement(
                     'footer',
                     { style: { display: 'flex', alignItems: 'center', justifyContent: 'flex-end' } },
-                    i.a.createElement('div', { onClick: this.closeMenu, style: _ }, P)
+                    a.a.createElement('div', { onClick: this.closeMenu, style: _ }, P)
                   )
               )
             )
           }),
           e
         )
-      })(r.Component)),
-        (a = function () {
-          var t = this
-        ;(this.onFocus = function () {
-            return t.setState({ isFocused: !0 })
-          }),
-          (this.onBlur = function () {
-            return !t.state.isOpen && t.setState({ isFocused: !1 })
-          }),
-          (this.closeMenu = function (e) {
-            let n = t.props,
-              o = n.onChange,
-              a = n.name
-            e && t.setState({ isFocused: !1 }),
-            t.setState({ isOpen: !1, searchText: '' }, function () {
-              e || t.root.focus(), o(t.state.selectedItems, a)
-            })
-          }),
-          (this.handleClick = function (e) {
-            return !t.props.disabled && t.openMenu()
-          }),
-          (this.handleKeyDown = function (e) {
-            return !t.props.disabled && /ArrowDown|Enter/.test(e.key) && t.openMenu()
-          }),
-          (this.handleTextFieldAutocompletionFiltering = function (e, n) {
-            t.props.onAutoCompleteTyping(n),
-            t.setState({ searchText: n }, function () {
-              return t.focusTextField()
-            })
-          }),
-          (this.handleTextFieldKeyDown = function (e) {
-            switch (e.key) {
-              case 'ArrowDown':
-                t.focusMenuItem()
-                break
-              case 'Escape':
-                t.clearTextField(), t.closeMenu()
-            }
-          }),
-          (this.handleMenuSelection = function (e) {
-            return function (n) {
-              n.preventDefault()
-              let o = t.state.selectedItems
-              if (t.props.multiple) {
-                let a = o.some(function (t) {
-                  return Object(I.a)(t.value, e.value)
-                })
-                  ? o.filter(function (t) {
-                    return !Object(I.a)(t.value, e.value)
-                  })
-                  : o.concat(e)
-                t.setState({ selectedItems: a }, function () {
-                  return t.getSelected()
-                }),
-                t.clearTextField(function () {
-                  return t.focusTextField()
-                })
-              } else {
-                let r = Object(I.a)(o, e) ? null : e
-                t.setState({ selectedItems: r }, function () {
-                  return t.closeMenu()
-                })
-              }
-            }
-          }),
-          (this.getSelected = function () {
-            return t.props.onSelect && t.props.onSelect(t.state.selectedItems, t.props.name)
-          }),
-          (this.handleMenuKeyDown = function (e) {
-            let n = e.key,
-              o = e.target.tabIndex,
-              a = t.menuItems.filter(function (t) {
-                return !!t
-              }),
-              r = a[0].props.tabIndex,
-              i = a[a.length - 1].props.tabIndex,
-              u = a.findIndex(function (t) {
-                return t.props.tabIndex === o
-              })
-            switch (n) {
-              case 'ArrowUp':
-                if (+o === r) t.state.showAutocomplete ? t.focusTextField() : t.focusMenuItem(i)
-                else {
-                  let s = a.slice(0, u).slice(-1)[0].props.tabIndex
-                  t.focusMenuItem(s)
-                }
-                break
-              case 'ArrowDown':
-                if (+o === i) t.state.showAutocomplete ? t.focusTextField() : t.focusMenuItem()
-                else {
-                  let l = a.slice(u + 1)[0].props.tabIndex
-                  t.focusMenuItem(l)
-                }
-                break
-              case 'PageUp':
-                t.focusMenuItem()
-                break
-              case 'PageDown':
-                t.focusMenuItem(i)
-                break
-              case 'Escape':
-                t.closeMenu()
-            }
-          })
-        }),
-        o)
-      ;(N.contextTypes = { muiTheme: u.object.isRequired }), (N.propTypes = m.b), (N.defaultProps = S.b), (e.a = N)
+      })(o.Component)
+      ;(T.contextTypes = { muiTheme: r.object.isRequired }), (T.propTypes = f.b), (T.defaultProps = I.b), (e.a = T)
     },
     M6a0: function (t, e) {},
     MQn0: function (t, e, n) {
@@ -18425,6 +18417,7 @@ webpackJsonp(
         onMenuOpen: function () {},
         onSelect: function () {},
         openImmediately: !1,
+        popoverClassName: '',
         showAutocompleteThreshold: 10,
         unCheckedIcon: a.a.createElement(s.a, { style: { top: 'calc(50% - 12px)' } }),
         value: null,
@@ -24699,6 +24692,7 @@ webpackJsonp(
       o.func,
       o.func,
       o.bool,
+      o.string,
       o.object,
       o.func,
       Object(o.oneOfType)([o.number, Object(o.oneOf)(['always', 'never'])]),
@@ -27689,4 +27683,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.fea97a10.js.map
+// # sourceMappingURL=demo.c818306a.js.map

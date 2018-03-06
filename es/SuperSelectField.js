@@ -23,8 +23,6 @@ const _extends =
     return target
   }
 
-let _class, _temp, _initialiseProps
-
 function _classCallCheck (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError('Cannot call a class as a function')
@@ -62,7 +60,7 @@ import { getChildrenLength, areEqual } from './utils'
 import { selectFieldTypes } from './types'
 import { selectFieldDefaultProps } from './defaultProps'
 
-const SelectField = ((_temp = _class = (function (_Component) {
+const SelectField = (function (_Component) {
   _inherits(SelectField, _Component)
 
   function SelectField (props, context) {
@@ -70,7 +68,139 @@ const SelectField = ((_temp = _class = (function (_Component) {
 
     const _this = _possibleConstructorReturn(this, _Component.call(this, props, context))
 
-    _initialiseProps.call(_this)
+    _this.onFocus = function () {
+      return _this.setState({ isFocused: true })
+    }
+
+    _this.onBlur = function () {
+      return !_this.state.isOpen && _this.setState({ isFocused: false })
+    }
+
+    _this.closeMenu = function (reason) {
+      let _this$props = _this.props,
+        onChange = _this$props.onChange,
+        name = _this$props.name
+
+      if (reason) _this.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
+      _this.setState({ isOpen: false, searchText: '' }, function () {
+        if (!reason) _this.root.focus()
+        onChange(_this.state.selectedItems, name)
+      })
+    }
+
+    _this.handleClick = function (event) {
+      return !_this.props.disabled && _this.openMenu()
+    }
+
+    _this.handleKeyDown = function (event) {
+      return !_this.props.disabled && /ArrowDown|Enter/.test(event.key) && _this.openMenu()
+    }
+
+    _this.handleTextFieldAutocompletionFiltering = function (event, searchText) {
+      _this.props.onAutoCompleteTyping(searchText)
+      _this.setState({ searchText: searchText }, function () {
+        return _this.focusTextField()
+      })
+    }
+
+    _this.handleTextFieldKeyDown = function (_ref) {
+      const key = _ref.key
+
+      switch (key) {
+        case 'ArrowDown':
+          _this.focusMenuItem()
+          break
+
+        case 'Escape':
+          _this.clearTextField()
+          _this.closeMenu()
+          break
+
+        default:
+          break
+      }
+    }
+
+    _this.handleMenuSelection = function (selectedItem) {
+      return function (event) {
+        event.preventDefault()
+        const selectedItems = _this.state.selectedItems
+
+        if (_this.props.multiple) {
+          const selectedItemExists = selectedItems.some(function (obj) {
+            return areEqual(obj.value, selectedItem.value)
+          })
+          const updatedValues = selectedItemExists
+            ? selectedItems.filter(function (obj) {
+              return !areEqual(obj.value, selectedItem.value)
+            })
+            : selectedItems.concat(selectedItem)
+          _this.setState({ selectedItems: updatedValues }, function () {
+            return _this.getSelected()
+          })
+          _this.clearTextField(function () {
+            return _this.focusTextField()
+          })
+        } else {
+          const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
+          _this.setState({ selectedItems: updatedValue }, function () {
+            return _this.closeMenu()
+          })
+        }
+      }
+    }
+
+    _this.getSelected = function () {
+      return _this.props.onSelect && _this.props.onSelect(_this.state.selectedItems, _this.props.name)
+    }
+
+    _this.handleMenuKeyDown = function (_ref2) {
+      let key = _ref2.key,
+        tabIndex = _ref2.target.tabIndex
+
+      const cleanMenuItems = _this.menuItems.filter(function (item) {
+        return !!item
+      })
+      const firstTabIndex = cleanMenuItems[0].props.tabIndex
+      const lastTabIndex = cleanMenuItems[cleanMenuItems.length - 1].props.tabIndex
+      const currentElementIndex = cleanMenuItems.findIndex(function (item) {
+        return item.props.tabIndex === tabIndex
+      })
+      switch (key) {
+        case 'ArrowUp':
+          if (+tabIndex === firstTabIndex) {
+            _this.state.showAutocomplete ? _this.focusTextField() : _this.focusMenuItem(lastTabIndex)
+          } else {
+            const previousTabIndex = cleanMenuItems.slice(0, currentElementIndex).slice(-1)[0].props.tabIndex
+            _this.focusMenuItem(previousTabIndex)
+          }
+          break
+
+        case 'ArrowDown':
+          if (+tabIndex === lastTabIndex) {
+            _this.state.showAutocomplete ? _this.focusTextField() : _this.focusMenuItem()
+          } else {
+            const nextTabIndex = cleanMenuItems.slice(currentElementIndex + 1)[0].props.tabIndex
+            _this.focusMenuItem(nextTabIndex)
+          }
+          break
+
+        case 'PageUp':
+          _this.focusMenuItem()
+          break
+
+        case 'PageDown':
+          _this.focusMenuItem(lastTabIndex)
+          break
+
+        case 'Escape':
+          _this.closeMenu()
+          break
+
+        default:
+          break
+      }
+    }
 
     let children = props.children,
       value = props.value,
@@ -78,14 +208,12 @@ const SelectField = ((_temp = _class = (function (_Component) {
       showAutocompleteThreshold = props.showAutocompleteThreshold
 
     const itemsLength = getChildrenLength(children)
-    // This is a hack for devs not setting value type properly depending on multiple mode
-    const selectedItems = multiple ? (value ? (Array.isArray(value) ? value : [value]) : []) : value
     _this.state = {
       isOpen: false,
       isFocused: false,
       itemsLength: itemsLength,
       showAutocomplete: _this.showAutocomplete(showAutocompleteThreshold, itemsLength),
-      selectedItems: selectedItems, // : value || (multiple ? [] : null),
+      selectedItems: value || (multiple ? [] : null),
       searchText: '',
     }
     _this.menuItems = []
@@ -206,6 +334,7 @@ const SelectField = ((_temp = _class = (function (_Component) {
       nb2show = _props.nb2show,
       noMatchFound = _props.noMatchFound,
       noMatchFoundStyle = _props.noMatchFoundStyle,
+      popoverClassName = _props.popoverClassName,
       selectedMenuItemStyle = _props.selectedMenuItemStyle,
       selectionsRenderer = _props.selectionsRenderer,
       style = _props.style,
@@ -258,8 +387,8 @@ const SelectField = ((_temp = _class = (function (_Component) {
         React.createElement(ListItem, {
           key: ++index,
           tabIndex: index,
-          ref: function ref (_ref) {
-            return (_this3.menuItems[++index] = _ref)
+          ref: function ref (_ref3) {
+            return (_this3.menuItems[++index] = _ref3)
           },
           onClick: _this3.handleMenuSelection({ value: childValue, label: label }),
           disableFocusRipple: true,
@@ -329,8 +458,8 @@ const SelectField = ((_temp = _class = (function (_Component) {
     return React.createElement(
       'div',
       {
-        ref: function ref (_ref4) {
-          return (_this3.root = _ref4)
+        ref: function ref (_ref6) {
+          return (_this3.root = _ref6)
         },
         tabIndex: disabled ? '-1' : '0',
         onFocus: this.onFocus,
@@ -370,6 +499,7 @@ const SelectField = ((_temp = _class = (function (_Component) {
           open: this.state.isOpen,
           anchorEl: this.root,
           canAutoPosition: canAutoPosition,
+          className: popoverClassName,
           anchorOrigin: anchorOrigin,
           useLayerForClickAway: false,
           onRequestClose: this.closeMenu,
@@ -377,8 +507,8 @@ const SelectField = ((_temp = _class = (function (_Component) {
         },
         this.state.showAutocomplete &&
           React.createElement(TextField, {
-            ref: function ref (_ref2) {
-              return (_this3.searchTextField = _ref2)
+            ref: function ref (_ref4) {
+              return (_this3.searchTextField = _ref4)
             },
             value: this.state.searchText,
             hintText: hintTextAutocomplete,
@@ -393,8 +523,8 @@ const SelectField = ((_temp = _class = (function (_Component) {
         React.createElement(
           'div',
           {
-            ref: function ref (_ref3) {
-              return (_this3.menu = _ref3)
+            ref: function ref (_ref5) {
+              return (_this3.menu = _ref5)
             },
             onKeyDown: this.handleMenuKeyDown,
             style: _extends({ width: menuWidth }, menuStyle),
@@ -426,145 +556,7 @@ const SelectField = ((_temp = _class = (function (_Component) {
   }
 
   return SelectField
-})(Component)),
-  (_initialiseProps = function _initialiseProps () {
-    const _this4 = this
-
-    this.onFocus = function () {
-      return _this4.setState({ isFocused: true })
-    }
-
-    this.onBlur = function () {
-      return !_this4.state.isOpen && _this4.setState({ isFocused: false })
-    }
-
-    this.closeMenu = function (reason) {
-      let _props2 = _this4.props,
-        onChange = _props2.onChange,
-        name = _props2.name
-
-      if (reason) _this4.setState({ isFocused: false }) // if reason === 'clickaway' or 'offscreen'
-      _this4.setState({ isOpen: false, searchText: '' }, function () {
-        if (!reason) _this4.root.focus()
-        onChange(_this4.state.selectedItems, name)
-      })
-    }
-
-    this.handleClick = function (event) {
-      return !_this4.props.disabled && _this4.openMenu()
-    }
-
-    this.handleKeyDown = function (event) {
-      return !_this4.props.disabled && /ArrowDown|Enter/.test(event.key) && _this4.openMenu()
-    }
-
-    this.handleTextFieldAutocompletionFiltering = function (event, searchText) {
-      _this4.props.onAutoCompleteTyping(searchText)
-      _this4.setState({ searchText: searchText }, function () {
-        return _this4.focusTextField()
-      })
-    }
-
-    this.handleTextFieldKeyDown = function (_ref5) {
-      const key = _ref5.key
-
-      switch (key) {
-        case 'ArrowDown':
-          _this4.focusMenuItem()
-          break
-
-        case 'Escape':
-          _this4.clearTextField()
-          _this4.closeMenu()
-          break
-
-        default:
-          break
-      }
-    }
-
-    this.handleMenuSelection = function (selectedItem) {
-      return function (event) {
-        event.preventDefault()
-        const selectedItems = _this4.state.selectedItems
-
-        if (_this4.props.multiple) {
-          const selectedItemExists = selectedItems.some(function (obj) {
-            return areEqual(obj.value, selectedItem.value)
-          })
-          const updatedValues = selectedItemExists
-            ? selectedItems.filter(function (obj) {
-              return !areEqual(obj.value, selectedItem.value)
-            })
-            : selectedItems.concat(selectedItem)
-          _this4.setState({ selectedItems: updatedValues }, function () {
-            return _this4.getSelected()
-          })
-          _this4.clearTextField(function () {
-            return _this4.focusTextField()
-          })
-        } else {
-          const updatedValue = areEqual(selectedItems, selectedItem) ? null : selectedItem
-          _this4.setState({ selectedItems: updatedValue }, function () {
-            return _this4.closeMenu()
-          })
-        }
-      }
-    }
-
-    this.getSelected = function () {
-      return _this4.props.onSelect && _this4.props.onSelect(_this4.state.selectedItems, _this4.props.name)
-    }
-
-    this.handleMenuKeyDown = function (_ref6) {
-      let key = _ref6.key,
-        tabIndex = _ref6.target.tabIndex
-
-      const cleanMenuItems = _this4.menuItems.filter(function (item) {
-        return !!item
-      })
-      const firstTabIndex = cleanMenuItems[0].props.tabIndex
-      const lastTabIndex = cleanMenuItems[cleanMenuItems.length - 1].props.tabIndex
-      const currentElementIndex = cleanMenuItems.findIndex(function (item) {
-        return item.props.tabIndex === tabIndex
-      })
-      switch (key) {
-        case 'ArrowUp':
-          if (+tabIndex === firstTabIndex) {
-            _this4.state.showAutocomplete ? _this4.focusTextField() : _this4.focusMenuItem(lastTabIndex)
-          } else {
-            const previousTabIndex = cleanMenuItems.slice(0, currentElementIndex).slice(-1)[0].props.tabIndex
-            _this4.focusMenuItem(previousTabIndex)
-          }
-          break
-
-        case 'ArrowDown':
-          if (+tabIndex === lastTabIndex) {
-            _this4.state.showAutocomplete ? _this4.focusTextField() : _this4.focusMenuItem()
-          } else {
-            const nextTabIndex = cleanMenuItems.slice(currentElementIndex + 1)[0].props.tabIndex
-            _this4.focusMenuItem(nextTabIndex)
-          }
-          break
-
-        case 'PageUp':
-          _this4.focusMenuItem()
-          break
-
-        case 'PageDown':
-          _this4.focusMenuItem(lastTabIndex)
-          break
-
-        case 'Escape':
-          _this4.closeMenu()
-          break
-
-        default:
-          break
-      }
-    }
-  }),
-  _temp)
+})(Component)
 
 SelectField.contextTypes = {
   muiTheme: object.isRequired,
