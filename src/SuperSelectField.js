@@ -225,6 +225,7 @@ class SelectField extends Component {
       nb2show,
       noMatchFound,
       noMatchFoundStyle,
+      popoverClassName,
       selectedMenuItemStyle,
       selectionsRenderer,
       style,
@@ -370,6 +371,7 @@ class SelectField extends Component {
           open={this.state.isOpen}
           anchorEl={this.root}
           canAutoPosition={canAutoPosition}
+          className={popoverClassName}
           anchorOrigin={anchorOrigin}
           useLayerForClickAway={false}
           onRequestClose={this.closeMenu}

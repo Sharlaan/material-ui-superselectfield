@@ -9,6 +9,7 @@
 [deepscan-url]: https://deepscan.io/dashboard/#view=project&pid=509&bid=790
 
 ## Table of Contents
+
 - [Preview](#preview)
 - [Installation](#installation)
 - [Properties](#properties)
@@ -19,27 +20,29 @@
 - [TodoList](#todolist)
 
 ## Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
-![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
-![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/caseInsensitive.png)
-![](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/chips.png)
 
+![dataSource](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
+![caseInsensitive](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/caseInsensitive.png)
+![chips](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/chips.png)
 
 ## Installation
+
 This component requires 3 dependencies :
+
 - react
 - react-dom
-- material-ui  
+- material-ui
 
 ... so make sure they are installed in your project, or install them as well ;)
 
-#### ES5 version
+### ES5 version
+
 `npm i material-ui-superselectfield`
 
 #### ES6+ version
 
-
-
 ## Properties
+
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | anchorOrigin | object | `{ vertical: 'top', horizontal: 'left' }` | Anchor position of the menu, accepted values: `top, bottom / left, right` |
@@ -66,13 +69,16 @@ This component requires 3 dependencies :
 | showAutocompleteThreshold | number, 'always', 'never' | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield needs to be disabled, just set this prop with a value higher than children length.<br> However, if you need the autocomplete to show always, you may pass `'always'`. This will open the menu even if there are no items to display. Passing `'never'` will never show the autocomplete regadless of how many children are passed. |
 | useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
-##### Note when setting value :
+
+### Note when setting value
+
 if multiple is set, value must be at least an empty Array.  
 For single value mode, you can set value to null.  
 When using objects, make sure they expose a non-null value property.  
 PropTypes should raise warnings if implementing otherwise.
 
 #### Styling properties
+
 | Name             | Type          | Default    | Description |
 |:----             |:----          |:----       |:---- |
 | autocompleteStyle | object | | Allows to change the styles of the auto-complete field (inner input component).<br> Notice: margins left/right and width of the autocomplete root element are not customisable, (automatically calculated) |
@@ -89,6 +95,7 @@ PropTypes should raise warnings if implementing otherwise.
 | menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
 | menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
 | menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
+| popoverClassName | string | '' | Sets the `className` property of the Popover component. |
 | noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
@@ -99,6 +106,7 @@ PropTypes should raise warnings if implementing otherwise.
 | underlineStyle | object | | Allows to change the styles of the underline. |
 
 #### Default functions
+
 | Name | Default function |
 |:---- |:---- |
 | autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
@@ -118,32 +126,33 @@ PropTypes should raise warnings if implementing otherwise.
    else return hintText
 }</pre>
 
-
 ## Usage
+
 Check the `CodeExampleX.js` provided in the repository.
 
 ## Building
 
-You can build the project with :   
-```
+You can build the project with :
+
+```sh
 git clone https://github.com/Sharlaan/material-ui-superselectfield.git
 npm i && npm start
-```   
+```
+
 It should open a new page on your default browser @ localhost:3000
 
-
 ## Tests
+
 `npm test`
 
-
 ## Contributing
+
 In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
 
-
 ## Known bugs
+
 - keyboard-focus handling combined with optgroups and autocompleted results
 - dynamic heights calculation
-
 
 ## TodoList
 
