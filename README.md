@@ -28,7 +28,7 @@
 This component requires 3 dependencies :
 - react
 - react-dom
-- material-ui  
+- material-ui
 
 ... so make sure they are installed in your project, or install them as well ;)
 
@@ -67,9 +67,9 @@ This component requires 3 dependencies :
 | useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
 ##### Note when setting value :
-if multiple is set, value must be at least an empty Array.  
-For single value mode, you can set value to null.  
-When using objects, make sure they expose a non-null value property.  
+if multiple is set, value must be at least an empty Array.
+For single value mode, you can set value to null.
+When using objects, make sure they expose a non-null value property.
 PropTypes should raise warnings if implementing otherwise.
 
 #### Styling properties
@@ -90,6 +90,7 @@ PropTypes should raise warnings if implementing otherwise.
 | menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
 | menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
 | noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
+| popoverClassName | string | '' | Sets the `className` property of the Popover component. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
@@ -124,11 +125,11 @@ Check the `CodeExampleX.js` provided in the repository.
 
 ## Building
 
-You can build the project with :   
+You can build the project with :
 ```
 git clone https://github.com/Sharlaan/material-ui-superselectfield.git
 npm i && npm start
-```   
+```
 It should open a new page on your default browser @ localhost:3000
 
 
