@@ -10,7 +10,7 @@ class CodeExample extends Component {
     selectedStates: [],
     stateNodes: [],
     selectedCounties: [],
-    countyNodes: []
+    countyNodes: [],
   }
 
   componentDidMount = () => {
@@ -19,30 +19,36 @@ class CodeExample extends Component {
     // Ideally should be externalized in a HoC,
     // with stateNodes && countyNodes in props
     window.setTimeout(() => {
-      const stateNodes = data.states.map(({ code, name, capital }) =>
-        <div key={code} value={name}>{name}</div>
-      )
+      const stateNodes = data.states.map(({ code, name, capital }) => (
+        <div key={code} value={name}>
+          {name}
+        </div>
+      ))
       this.setState({ stateNodes, isFetchingStates: false })
-      console.log('States updated')
+      console.log('States updated') // eslint-disable-line no-console
     }, 5000) // simulates a 5secs fetch delay
   }
 
   handleStateSelection = (selectedStates, name) => {
-    console.debug('selectedStates', selectedStates)
+    console.debug('selectedStates', selectedStates) // eslint-disable-line no-console
     this.setState({ selectedStates, isFetchingCounties: true }, () => {
-      const countyNodes = data.counties
-        .reduce((nodes, { INCITS, county, state }) => {
-          if (!selectedStates.find(({ value }) => value === state)) return nodes
-          return [...nodes, <div key={INCITS} value={county}>{county}</div>]
-        }, [])
+      const countyNodes = data.counties.reduce((nodes, { INCITS, county, state }) => {
+        if (!selectedStates.find(({ value }) => value === state)) return nodes
+        return [
+          ...nodes,
+          <div key={INCITS} value={county}>
+            {county}
+          </div>,
+        ]
+      }, [])
       // must also check if previous selections are still consistent with new selectedStates
       const selectedCounties = this.state.selectedCounties.filter(({ value }) =>
-        countyNodes.find(node => node.props.value === value)
+        countyNodes.find((node) => node.props.value === value)
       )
 
       window.setTimeout(() => {
         this.setState({ countyNodes, selectedCounties, isFetchingCounties: false })
-        console.log('Counties updated')
+        console.log('Counties updated') // eslint-disable-line no-console
       }, 3000) // simulates a 3secs fetch delay
     })
   }
@@ -55,18 +61,22 @@ class CodeExample extends Component {
     switch (name) {
       case 'states':
         if (isFetchingStates) {
-          return <div>
-            <CircularProgress size={20} style={{ marginRight: 10 }} />
-            {hintText}
-          </div>
+          return (
+            <div>
+              <CircularProgress size={20} style={{ marginRight: 10 }} />
+              {hintText}
+            </div>
+          )
         }
         break
       case 'counties':
         if (isFetchingCounties) {
-          return <div>
-            <CircularProgress size={20} style={{ marginRight: 10 }} />
-            {hintText}
-          </div>
+          return (
+            <div>
+              <CircularProgress size={20} style={{ marginRight: 10 }} />
+              {hintText}
+            </div>
+          )
         }
         break
       default:
@@ -75,22 +85,18 @@ class CodeExample extends Component {
     if (!values) return hintText
     const { value, label } = values
     if (Array.isArray(values)) {
-      return values.length
-        ? values.map(({ value, label }) => label || value).join(', ')
-        : hintText
-    }
-    else if (label || value) return label || value
+      return values.length ? values.map(({ value, label }) => label || value).join(', ') : hintText
+    } else if (label || value) return label || value
     else return hintText
   }
 
-  render() {
+  render () {
     const { selectedStates, stateNodes, selectedCounties, countyNodes } = this.state
 
-    console.debug('countyNodes', countyNodes)
+    console.debug('countyNodes', countyNodes) // eslint-disable-line no-console
 
     return (
       <section style={{ margin: 40 }}>
-
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <SuperSelectField
             name='states'
@@ -118,7 +124,6 @@ class CodeExample extends Component {
             {countyNodes}
           </SuperSelectField>
         </div>
-
       </section>
     )
   }
