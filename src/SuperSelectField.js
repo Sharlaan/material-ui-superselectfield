@@ -225,6 +225,7 @@ class SelectField extends Component {
       nb2show,
       noMatchFound,
       noMatchFoundStyle,
+      popoverClassName,
       selectedMenuItemStyle,
       selectionsRenderer,
       style,
@@ -374,6 +375,7 @@ class SelectField extends Component {
           useLayerForClickAway={false}
           onRequestClose={this.closeMenu}
           style={{ height: popoverHeight }}
+          className={popoverClassName}
         >
           {this.state.showAutocomplete && (
             <TextField

@@ -80,6 +80,7 @@ export const selectFieldTypes = {
   onMenuOpen: func,
   onSelect: func,
   openImmediately: bool,
+  popoverClassName: string,
   selectedMenuItemStyle: object,
   selectionsRenderer: func,
   showAutocompleteThreshold: oneOfType([number, oneOf(['always', 'never'])]),
