@@ -84,17 +84,17 @@ const FloatingLabel = (function (_Component) {
 
     const defaultStyles = _extends(
       {
+        color: floatingLabelColor,
+        cursor: 'pointer',
+        lineHeight: '22px',
+        pointerEvents: 'none',
         position: 'static',
         top: 0,
-        lineHeight: '22px',
-        zIndex: 1, // Needed to display label above Chrome's autocomplete field background
-        transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
         transform: 'scale(1) translateY(0)',
         transformOrigin: 'left top',
-        pointerEvents: 'none',
-        cursor: 'pointer',
+        transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
         userSelect: 'none',
-        color: floatingLabelColor,
+        zIndex: 1,
       },
       floatingLabelStyle
     )
@@ -102,10 +102,10 @@ const FloatingLabel = (function (_Component) {
     const focusStyles = isFocused && shrink && _extends({ color: focusColor }, floatingLabelFocusStyle)
 
     const shrinkStyles = shrink && {
+      cursor: 'default',
+      pointerEvents: 'none',
       position: 'absolute',
       transform: 'scale(0.75) translateY(-' + this.state.flabelHeight + 'px)',
-      pointerEvents: 'none',
-      cursor: 'default',
     }
 
     return React.createElement(

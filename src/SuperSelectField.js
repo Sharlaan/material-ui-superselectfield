@@ -272,11 +272,7 @@ class SelectField extends Component {
           key={++index}
           tabIndex={index}
           ref={(ref) => (this.menuItems[++index] = ref)}
-          onClick={this.handleMenuSelection({ value: childValue, label })}
           disableFocusRipple
-          leftIcon={leftCheckbox}
-          rightIcon={rightCheckbox}
-          primaryText={child}
           hoverColor={mergedHoverColor}
           innerDivStyle={{
             paddingTop: 10,
@@ -285,6 +281,10 @@ class SelectField extends Component {
             paddingRight: multiple && checkPosition === 'right' ? 56 : 16,
             ...innerDivStyle,
           }}
+          leftIcon={leftCheckbox}
+          onClick={this.handleMenuSelection({ value: childValue, label })}
+          primaryText={child}
+          rightIcon={rightCheckbox}
           style={isSelected ? mergedSelectedMenuItemStyle : {}}
         />,
       ]
@@ -337,58 +337,59 @@ class SelectField extends Component {
       <div
         ref={(ref) => (this.root = ref)}
         tabIndex={disabled ? '-1' : '0'}
-        onFocus={this.onFocus}
         onBlur={this.onBlur}
-        onKeyDown={this.handleKeyDown}
         onClick={this.handleClick}
-        title={!this.state.itemsLength ? 'Nothing to show' : ''}
+        onFocus={this.onFocus}
+        onKeyDown={this.handleKeyDown}
         style={{
           cursor: disabled ? 'not-allowed' : 'pointer',
           color: disabled ? palette.disabledColor : palette.textColor,
+          outline: 'none',
           ...style,
         }}
+        title={!this.state.itemsLength ? 'Nothing to show' : ''}
       >
         <SelectionsPresenter
+          disabled={disabled}
+          dropDownIcon={dropDownIcon}
+          errorStyle={errorStyle}
+          errorText={errorText}
+          floatingLabel={floatingLabel}
+          floatingLabelFocusStyle={floatingLabelFocusStyle}
+          floatingLabelStyle={floatingLabelStyle}
+          hintText={hintText}
           isFocused={this.state.isFocused}
           isOpen={this.state.isOpen}
-          disabled={disabled}
-          hintText={hintText}
-          errorText={errorText}
-          errorStyle={errorStyle}
-          underlineErrorStyle={underlineErrorStyle}
           muiTheme={this.context.muiTheme}
           selectedValues={this.state.selectedItems}
           selectionsRenderer={selectionsRenderer}
-          floatingLabel={floatingLabel}
-          floatingLabelStyle={floatingLabelStyle}
-          floatingLabelFocusStyle={floatingLabelFocusStyle}
-          underlineStyle={underlineStyle}
+          underlineErrorStyle={underlineErrorStyle}
           underlineFocusStyle={underlineFocusStyle}
-          dropDownIcon={dropDownIcon}
+          underlineStyle={underlineStyle}
         />
 
         <Popover
-          open={this.state.isOpen}
           anchorEl={this.root}
+          anchorOrigin={anchorOrigin}
           canAutoPosition={canAutoPosition}
           className={popoverClassName}
-          anchorOrigin={anchorOrigin}
-          useLayerForClickAway={false}
           onRequestClose={this.closeMenu}
+          open={this.state.isOpen}
           style={{ height: popoverHeight }}
+          useLayerForClickAway={false}
         >
           {this.state.showAutocomplete && (
             <TextField
               ref={(ref) => (this.searchTextField = ref)}
-              value={this.state.searchText}
+              autoFocus
               hintText={hintTextAutocomplete}
+              inputStyle={autocompleteStyle}
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
               style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }}
-              inputStyle={autocompleteStyle}
-              underlineStyle={autocompleteUnderlineStyle}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
-              autoFocus
+              underlineStyle={autocompleteUnderlineStyle}
+              value={this.state.searchText}
             />
           )}
           <div
@@ -398,8 +399,8 @@ class SelectField extends Component {
           >
             {menuItems.length ? (
               <InfiniteScroller
-                elementHeight={elementHeight}
                 containerHeight={containerHeight}
+                elementHeight={elementHeight}
                 styles={{ scrollableStyle }}
               >
                 {menuItems}

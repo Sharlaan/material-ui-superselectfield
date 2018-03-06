@@ -7,11 +7,11 @@ import { selectionsPresenterDefaultProps } from './defaultProps'
 const styles = {
   column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
   row: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'flex-end',
     alignItems: 'center',
+    display: 'flex',
     flex: 'auto',
+    justifyContent: 'flex-end',
+    position: 'relative',
   },
   selections: { flex: 1 },
   underline: { position: 'relative', marginTop: 4 },
@@ -35,7 +35,7 @@ const SelectionsPresenter = ({
   underlineFocusStyle,
   underlineStyle,
 }) => {
-  const { textField: { floatingLabelColor, borderColor, focusColor } } = muiTheme
+  const { textField: { borderColor, floatingLabelColor, focusColor } } = muiTheme
 
   const isValidObject = (obj) =>
     obj &&
@@ -50,17 +50,17 @@ const SelectionsPresenter = ({
     isOpen
 
   const baseHRstyle = {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    margin: 0,
-    boxSizing: 'content-box',
-    borderTop: 'none',
-    borderLeft: 'none',
-    borderRight: 'none',
     borderBottom: '1px solid',
     borderColor,
+    borderLeft: 'none',
+    borderRight: 'none',
+    borderTop: 'none',
+    bottom: 0,
+    boxSizing: 'content-box',
+    left: 0,
+    margin: 0,
+    position: 'absolute',
+    width: '100%',
     ...underlineStyle,
     ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {}),
   }
@@ -72,8 +72,8 @@ const SelectionsPresenter = ({
       : {
         borderBottom: '2px solid',
         borderColor: isFocused || isOpen ? focusColor : borderColor,
-        transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
         transform: `scaleX( ${isFocused || isOpen ? 1 : 0} )`,
+        transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
         ...underlineFocusStyle,
       }
 
@@ -90,12 +90,12 @@ const SelectionsPresenter = ({
         <div style={styles.selections}>
           {floatingLabel && (
             <FloatingLabel
-              shrink={isShrunk}
-              isFocused={isFocused}
-              disabled={disabled}
               defaultColors={{ floatingLabelColor, focusColor }}
-              floatingLabelStyle={floatingLabelStyle}
+              disabled={disabled}
               floatingLabelFocusStyle={floatingLabelFocusStyle}
+              floatingLabelStyle={floatingLabelStyle}
+              isFocused={isFocused}
+              shrink={isShrunk}
             >
               {floatingLabel}
             </FloatingLabel>

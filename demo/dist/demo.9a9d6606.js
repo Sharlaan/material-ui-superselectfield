@@ -16493,11 +16493,7 @@ webpackJsonp(
                       ref: function (e) {
                         return (t.menuItems[++r] = e)
                       },
-                      onClick: t.handleMenuSelection({ value: s, label: c }),
                       disableFocusRipple: !0,
-                      leftIcon: C,
-                      rightIcon: p,
-                      primaryText: n,
                       hoverColor: X,
                       innerDivStyle: S(
                         {
@@ -16508,6 +16504,10 @@ webpackJsonp(
                         },
                         O
                       ),
+                      leftIcon: C,
+                      onClick: t.handleMenuSelection({ value: s, label: c }),
+                      primaryText: n,
+                      rightIcon: p,
                       style: y ? Q : {},
                     }),
                   ])
@@ -16557,57 +16557,60 @@ webpackJsonp(
                   return (t.root = e)
                 },
                 tabIndex: T ? '-1' : '0',
-                onFocus: this.onFocus,
                 onBlur: this.onBlur,
-                onKeyDown: this.handleKeyDown,
                 onClick: this.handleClick,
+                onFocus: this.onFocus,
+                onKeyDown: this.handleKeyDown,
+                style: S(
+                  { cursor: T ? 'not-allowed' : 'pointer', color: T ? Y.disabledColor : Y.textColor, outline: 'none' },
+                  H
+                ),
                 title: this.state.itemsLength ? '' : 'Nothing to show',
-                style: S({ cursor: T ? 'not-allowed' : 'pointer', color: T ? Y.disabledColor : Y.textColor }, H),
               },
               a.a.createElement(p.a, {
+                disabled: T,
+                dropDownIcon: g,
+                errorStyle: v,
+                errorText: b,
+                floatingLabel: k,
+                floatingLabelFocusStyle: w,
+                floatingLabelStyle: x,
+                hintText: M,
                 isFocused: this.state.isFocused,
                 isOpen: this.state.isOpen,
-                disabled: T,
-                hintText: M,
-                errorText: b,
-                errorStyle: v,
-                underlineErrorStyle: V,
                 muiTheme: this.context.muiTheme,
                 selectedValues: this.state.selectedItems,
                 selectionsRenderer: G,
-                floatingLabel: k,
-                floatingLabelStyle: x,
-                floatingLabelFocusStyle: w,
-                underlineStyle: q,
+                underlineErrorStyle: V,
                 underlineFocusStyle: U,
-                dropDownIcon: g,
+                underlineStyle: q,
               }),
               a.a.createElement(
                 y.a,
                 {
-                  open: this.state.isOpen,
                   anchorEl: this.root,
+                  anchorOrigin: n,
                   canAutoPosition: c,
                   className: K,
-                  anchorOrigin: n,
-                  useLayerForClickAway: !1,
                   onRequestClose: this.closeMenu,
+                  open: this.state.isOpen,
                   style: { height: rt },
+                  useLayerForClickAway: !1,
                 },
                 this.state.showAutocomplete &&
                   a.a.createElement(C.a, {
                     ref: function (e) {
                       return (t.searchTextField = e)
                     },
-                    value: this.state.searchText,
+                    autoFocus: !0,
                     hintText: A,
+                    inputStyle: r,
                     onChange: this.handleTextFieldAutocompletionFiltering,
                     onKeyDown: this.handleTextFieldKeyDown,
                     style: { marginLeft: 16, marginBottom: 5, width: ut - 32 },
-                    inputStyle: r,
-                    underlineStyle: s,
                     underlineFocusStyle: i,
-                    autoFocus: !0,
+                    underlineStyle: s,
+                    value: this.state.searchText,
                   }),
                 a.a.createElement(
                   'div',
@@ -16621,7 +16624,7 @@ webpackJsonp(
                   et.length
                     ? a.a.createElement(
                       u.a,
-                      { elementHeight: N, containerHeight: at, styles: { scrollableStyle: it } },
+                      { containerHeight: at, elementHeight: N, styles: { scrollableStyle: it } },
                       et
                     )
                     : a.a.createElement(l.a, {
@@ -20222,26 +20225,26 @@ webpackJsonp(
               y = e.shrink,
               d = u(
                 {
+                  color: r,
+                  cursor: 'pointer',
+                  lineHeight: '22px',
+                  pointerEvents: 'none',
                   position: 'static',
                   top: 0,
-                  lineHeight: '22px',
-                  zIndex: 1,
-                  transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
                   transform: 'scale(1) translateY(0)',
                   transformOrigin: 'left top',
-                  pointerEvents: 'none',
-                  cursor: 'pointer',
+                  transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
                   userSelect: 'none',
-                  color: r,
+                  zIndex: 1,
                 },
                 l
               ),
               C = c && y && u({ color: i }, s),
               p = y && {
+                cursor: 'default',
+                pointerEvents: 'none',
                 position: 'absolute',
                 transform: 'scale(0.75) translateY(-' + this.state.flabelHeight + 'px)',
-                pointerEvents: 'none',
-                cursor: 'default',
               }
             return a.a.createElement(
               'label',
@@ -21428,11 +21431,11 @@ webpackJsonp(
         y = {
           column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
           row: {
-            position: 'relative',
-            display: 'flex',
-            justifyContent: 'flex-end',
             alignItems: 'center',
+            display: 'flex',
             flex: 'auto',
+            justifyContent: 'flex-end',
+            position: 'relative',
           },
           selections: { flex: 1 },
           underline: { position: 'relative', marginTop: 4 },
@@ -21456,8 +21459,8 @@ webpackJsonp(
             N = t.underlineFocusStyle,
             v = t.underlineStyle,
             b = m.textField,
-            k = b.floatingLabelColor,
-            w = b.borderColor,
+            k = b.borderColor,
+            w = b.floatingLabelColor,
             x = b.focusColor,
             M =
               (Array.isArray(S) && (!!S.length || f)) ||
@@ -21470,17 +21473,17 @@ webpackJsonp(
               I,
             A = c(
               {
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                width: '100%',
-                margin: 0,
-                boxSizing: 'content-box',
-                borderTop: 'none',
+                borderBottom: '1px solid',
+                borderColor: k,
                 borderLeft: 'none',
                 borderRight: 'none',
-                borderBottom: '1px solid',
-                borderColor: w,
+                borderTop: 'none',
+                bottom: 0,
+                boxSizing: 'content-box',
+                left: 0,
+                margin: 0,
+                position: 'absolute',
+                width: '100%',
               },
               v,
               l ? c({ borderColor: 'red' }, g) : {}
@@ -21492,9 +21495,9 @@ webpackJsonp(
                 : c(
                   {
                     borderBottom: '2px solid',
-                    borderColor: f || I ? x : w,
-                    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
+                    borderColor: f || I ? x : k,
                     transform: 'scaleX( ' + (f || I ? 1 : 0) + ' )',
+                    transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
                   },
                   N
                 ),
@@ -21514,12 +21517,12 @@ webpackJsonp(
                   a.a.createElement(
                     r.a,
                     {
-                      shrink: M,
-                      isFocused: f,
+                      defaultColors: { floatingLabelColor: w, focusColor: x },
                       disabled: n,
-                      defaultColors: { floatingLabelColor: k, focusColor: x },
-                      floatingLabelStyle: p,
                       floatingLabelFocusStyle: C,
+                      floatingLabelStyle: p,
+                      isFocused: f,
+                      shrink: M,
                     },
                     d
                   ),
@@ -27683,4 +27686,4 @@ webpackJsonp(
   },
   [0]
 )
-// # sourceMappingURL=demo.c818306a.js.map
+// # sourceMappingURL=demo.9a9d6606.js.map

@@ -21,11 +21,11 @@ import { selectionsPresenterDefaultProps } from './defaultProps'
 const styles = {
   column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
   row: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'flex-end',
     alignItems: 'center',
+    display: 'flex',
     flex: 'auto',
+    justifyContent: 'flex-end',
+    position: 'relative',
   },
   selections: { flex: 1 },
   underline: { position: 'relative', marginTop: 4 },
@@ -49,8 +49,8 @@ const SelectionsPresenter = function SelectionsPresenter (_ref) {
     underlineFocusStyle = _ref.underlineFocusStyle,
     underlineStyle = _ref.underlineStyle
   let _muiTheme$textField = muiTheme.textField,
-    floatingLabelColor = _muiTheme$textField.floatingLabelColor,
     borderColor = _muiTheme$textField.borderColor,
+    floatingLabelColor = _muiTheme$textField.floatingLabelColor,
     focusColor = _muiTheme$textField.focusColor
 
   const isValidObject = function isValidObject (obj) {
@@ -70,17 +70,17 @@ const SelectionsPresenter = function SelectionsPresenter (_ref) {
 
   const baseHRstyle = _extends(
     {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      width: '100%',
-      margin: 0,
-      boxSizing: 'content-box',
-      borderTop: 'none',
-      borderLeft: 'none',
-      borderRight: 'none',
       borderBottom: '1px solid',
       borderColor: borderColor,
+      borderLeft: 'none',
+      borderRight: 'none',
+      borderTop: 'none',
+      bottom: 0,
+      boxSizing: 'content-box',
+      left: 0,
+      margin: 0,
+      position: 'absolute',
+      width: '100%',
     },
     underlineStyle,
     errorText ? _extends({ borderColor: 'red' }, underlineErrorStyle) : {}
@@ -94,8 +94,8 @@ const SelectionsPresenter = function SelectionsPresenter (_ref) {
         {
           borderBottom: '2px solid',
           borderColor: isFocused || isOpen ? focusColor : borderColor,
-          transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
           transform: 'scaleX( ' + (isFocused || isOpen ? 1 : 0) + ' )',
+          transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)',
         },
         underlineFocusStyle
       )
@@ -120,12 +120,12 @@ const SelectionsPresenter = function SelectionsPresenter (_ref) {
           React.createElement(
             FloatingLabel,
             {
-              shrink: isShrunk,
-              isFocused: isFocused,
-              disabled: disabled,
               defaultColors: { floatingLabelColor: floatingLabelColor, focusColor: focusColor },
-              floatingLabelStyle: floatingLabelStyle,
+              disabled: disabled,
               floatingLabelFocusStyle: floatingLabelFocusStyle,
+              floatingLabelStyle: floatingLabelStyle,
+              isFocused: isFocused,
+              shrink: isShrunk,
             },
             floatingLabel
           ),

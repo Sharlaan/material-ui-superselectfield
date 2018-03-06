@@ -390,11 +390,7 @@ const SelectField = (function (_Component) {
           ref: function ref (_ref3) {
             return (_this3.menuItems[++index] = _ref3)
           },
-          onClick: _this3.handleMenuSelection({ value: childValue, label: label }),
           disableFocusRipple: true,
-          leftIcon: leftCheckbox,
-          rightIcon: rightCheckbox,
-          primaryText: child,
           hoverColor: mergedHoverColor,
           innerDivStyle: _extends(
             {
@@ -405,6 +401,10 @@ const SelectField = (function (_Component) {
             },
             innerDivStyle
           ),
+          leftIcon: leftCheckbox,
+          onClick: _this3.handleMenuSelection({ value: childValue, label: label }),
+          primaryText: child,
+          rightIcon: rightCheckbox,
           style: isSelected ? mergedSelectedMenuItemStyle : {},
         }),
       ])
@@ -462,63 +462,64 @@ const SelectField = (function (_Component) {
           return (_this3.root = _ref6)
         },
         tabIndex: disabled ? '-1' : '0',
-        onFocus: this.onFocus,
         onBlur: this.onBlur,
-        onKeyDown: this.handleKeyDown,
         onClick: this.handleClick,
-        title: !this.state.itemsLength ? 'Nothing to show' : '',
+        onFocus: this.onFocus,
+        onKeyDown: this.handleKeyDown,
         style: _extends(
           {
             cursor: disabled ? 'not-allowed' : 'pointer',
             color: disabled ? palette.disabledColor : palette.textColor,
+            outline: 'none',
           },
           style
         ),
+        title: !this.state.itemsLength ? 'Nothing to show' : '',
       },
       React.createElement(SelectionsPresenter, {
+        disabled: disabled,
+        dropDownIcon: dropDownIcon,
+        errorStyle: errorStyle,
+        errorText: errorText,
+        floatingLabel: floatingLabel,
+        floatingLabelFocusStyle: floatingLabelFocusStyle,
+        floatingLabelStyle: floatingLabelStyle,
+        hintText: hintText,
         isFocused: this.state.isFocused,
         isOpen: this.state.isOpen,
-        disabled: disabled,
-        hintText: hintText,
-        errorText: errorText,
-        errorStyle: errorStyle,
-        underlineErrorStyle: underlineErrorStyle,
         muiTheme: this.context.muiTheme,
         selectedValues: this.state.selectedItems,
         selectionsRenderer: selectionsRenderer,
-        floatingLabel: floatingLabel,
-        floatingLabelStyle: floatingLabelStyle,
-        floatingLabelFocusStyle: floatingLabelFocusStyle,
-        underlineStyle: underlineStyle,
+        underlineErrorStyle: underlineErrorStyle,
         underlineFocusStyle: underlineFocusStyle,
-        dropDownIcon: dropDownIcon,
+        underlineStyle: underlineStyle,
       }),
       React.createElement(
         Popover,
         {
-          open: this.state.isOpen,
           anchorEl: this.root,
+          anchorOrigin: anchorOrigin,
           canAutoPosition: canAutoPosition,
           className: popoverClassName,
-          anchorOrigin: anchorOrigin,
-          useLayerForClickAway: false,
           onRequestClose: this.closeMenu,
+          open: this.state.isOpen,
           style: { height: popoverHeight },
+          useLayerForClickAway: false,
         },
         this.state.showAutocomplete &&
           React.createElement(TextField, {
             ref: function ref (_ref4) {
               return (_this3.searchTextField = _ref4)
             },
-            value: this.state.searchText,
+            autoFocus: true,
             hintText: hintTextAutocomplete,
+            inputStyle: autocompleteStyle,
             onChange: this.handleTextFieldAutocompletionFiltering,
             onKeyDown: this.handleTextFieldKeyDown,
             style: { marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 },
-            inputStyle: autocompleteStyle,
-            underlineStyle: autocompleteUnderlineStyle,
             underlineFocusStyle: autocompleteUnderlineFocusStyle,
-            autoFocus: true,
+            underlineStyle: autocompleteUnderlineStyle,
+            value: this.state.searchText,
           }),
         React.createElement(
           'div',
@@ -533,8 +534,8 @@ const SelectField = (function (_Component) {
             ? React.createElement(
               InfiniteScroller,
               {
-                elementHeight: elementHeight,
                 containerHeight: containerHeight,
+                elementHeight: elementHeight,
                 styles: { scrollableStyle: scrollableStyle },
               },
               menuItems
