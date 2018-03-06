@@ -8,19 +8,19 @@ import App from './App'
 import './index.css'
 
 const customTheme = getMuiTheme({
-  fontFamily: 'Raleway, sans-serif',
+  fontFamily: 'Open Sans, sans-serif',
   palette: {
     primary1Color: lightBlue500,
     accent1Color: deepOrange400,
-    textColor: blueGrey700
+    textColor: blueGrey700,
   },
   checkbox: {
     checkedColor: deepOrange400,
-    boxColor: blueGrey500
+    boxColor: blueGrey500,
   },
   svgIcon: {
-    color: blueGrey500
-  }
+    color: blueGrey500,
+  },
 })
 
 render(
