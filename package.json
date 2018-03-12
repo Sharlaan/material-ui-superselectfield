@@ -44,7 +44,7 @@
     "test": "nwb test-react",
     "test:watch": "nwb test-react --server",
     "test:coverage": "nwb test-react --coverage",
-    "precommit": "yarn fix && yarn clean && yarn build && git add es lib demo/dist && lint-staged",
+    "precommit": "yarn fix && lint-staged",
     "prepush": "yarn test:coverage"
   },
   "lint-staged": {

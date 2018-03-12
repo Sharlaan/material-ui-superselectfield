@@ -95,8 +95,8 @@ PropTypes should raise warnings if implementing otherwise.
 | menuGroupStyle | object | {} | Styles applied to the MenuItems hosting your \<optgroup/>. |
 | menuFooterStyle | object | {} | Styles applied to the Menu's footer. |
 | menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
-| popoverClassName | string | '' | Sets the `className` property of the Popover component. |
 | noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
+| popoverClassName | string | '' | Sets the `className` property of the Popover component. |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
