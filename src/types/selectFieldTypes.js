@@ -1,7 +1,7 @@
 import { shape, arrayOf, func, oneOf, oneOfType, any, node, object, string, number, bool } from 'prop-types'
 import { checkFormat } from '../utils'
 
-export const selectFieldTypes = {
+export default {
   anchorOrigin: shape({
     vertical: oneOf(['top', 'bottom']),
     horizontal: oneOf(['left', 'right']),
