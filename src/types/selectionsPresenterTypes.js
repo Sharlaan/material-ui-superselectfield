@@ -1,6 +1,6 @@
 import { func, node, object, string } from 'prop-types'
 
-export const selectionsPresenterTypes = {
+export default {
   dropDownIcon: node,
   errorStyle: object,
   errorText: string,
