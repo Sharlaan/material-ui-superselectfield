@@ -41,4 +41,7 @@ export function getChildrenLength (children) {
   return 0
 }
 
-export const checkFormat = (value) => value.findIndex((v) => typeof v !== 'object' || !('value' in v))
+// In multiple mode, this function checks for values missing the required 'value' prop
+export function checkFormat (value) {
+  return value.findIndex((v) => typeof v !== 'object' || !('value' in v))
+}
