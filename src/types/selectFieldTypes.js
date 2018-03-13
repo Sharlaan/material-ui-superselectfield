@@ -29,14 +29,12 @@ export default {
           for (const child of pp.props.children) {
             if (!child.props.value) {
               return new Error(`
-              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-              Validation failed.`)
+              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
             }
           }
         } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-          Validation failed.`)
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
         }
       }
     },
@@ -44,15 +42,13 @@ export default {
       if (props[propName].type !== 'optgroup') {
         if (!props[propName].props.value) {
           return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-          Validation failed.`)
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
         }
       } else {
         for (const child of props[propName].props.children) {
           if (!child.props.value) {
             return new Error(`
-            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.
-            Validation failed.`)
+            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
           }
         }
       }
@@ -88,33 +84,22 @@ export default {
   unCheckedIcon: node,
   underlineFocusStyle: object,
   underlineStyle: object,
-  /*  value: oneOfType([
-    shape({
-      value: any.isRequired,
-      label: string
-    },
-    arrayOf(shape({
-      value: any.isRequired,
-      label: string
-    })
-  ]), */
   value: (props, propName, componentName, location, propFullName) => {
     const { multiple, value } = props
     if (multiple) {
-      const index = checkFormat(value)
       if (!Array.isArray(value)) {
         return new Error(`
-          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.
-          Validation failed.`)
-      } else if (index !== -1) {
-        return new Error(`
-          'value[${index}]' of '${componentName} ${props.name}' must be an object including a 'value' property.
-          Validation failed.`)
+          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.`)
+      } else {
+        const index = checkFormat(value)
+        if (index !== -1) {
+          return new Error(`
+            'value[${index}]' of '${componentName} ${props.name}' must include a 'value' property.`)
+        }
       }
     } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
-        'value' of '${componentName} ${props.name}' must be an object including a 'value' property.
-        Validation failed.`)
+        'value' of '${componentName} ${props.name}' must include a 'value' property.`)
     }
   },
 }
