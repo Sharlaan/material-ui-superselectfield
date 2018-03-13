@@ -3,7 +3,7 @@
   "version": "1.8.7",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "keywords": [
-    "react",
+    "react-component",
     "material-ui",
     "autocomplete",
     "select",
@@ -35,17 +35,17 @@
     "umd"
   ],
   "scripts": {
-    "clean": "nwb clean-module && nwb clean-demo",
     "build": "nwb build-react-component",
-    "lint": "eslint src demo/src",
+    "clean": "nwb clean-module && nwb clean-demo",
     "fix": "yarn lint --fix",
     "format": "prettier-eslint --write \"src/**/*@(.css|.js)\" \"demo/src/**/*@(.css|.js)\"",
+    "lint": "eslint src demo/src",
+    "precommit": "yarn fix && lint-staged",
+    "prepush": "yarn test:coverage",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
-    "test:watch": "nwb test-react --server",
     "test:coverage": "nwb test-react --coverage",
-    "precommit": "yarn fix && lint-staged",
-    "prepush": "yarn test:coverage"
+    "test:watch": "nwb test-react --server"
   },
   "lint-staged": {
     "*.{js,css}": [
