@@ -58,7 +58,7 @@ export default {
   elementHeight: oneOfType([number, arrayOf(number)]),
   floatingLabel: oneOfType([string, node]),
   hintText: string,
-  hintTextAutocomplete: string,
+  hintTextAutocomplete: oneOfType([string, node]),
   hoverColor: string,
   innerDivStyle: object,
   keepSearchOnSelect: bool,
