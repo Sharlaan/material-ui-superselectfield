@@ -55,7 +55,7 @@ This component requires 3 dependencies :
 | errorText | string or node | '' | Include this property to show an error warning. |
 | floatingLabel | string or node | | The content to use for the floating label element. |
 | hintText | string | 'Click me' | Placeholder text for the main selections display. |
-| hintTextAutocomplete | string | 'Type something' | Placeholder text for the autocomplete. |
+| hintTextAutocomplete | string or node | 'Type something' | Placeholder text for the autocomplete. |
 | keepSearchOnSelect | bool | false | Prevents the autocomplete field's value to be reset after each selection.|
 | multiple | bool | false | Include this property to turn superSelectField into a multi-selection dropdown. Checkboxes will appear.|
 | name | string | | Required to differentiate between multiple instances of superSelectField in same page. |

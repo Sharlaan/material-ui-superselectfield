@@ -135,6 +135,12 @@ class CodeExample extends Component {
       </span>
     )
 
+    const customHintTextAutocomplete = (
+      <span>
+        Some<span style={{ color: 'blue', fontSize: 20, margin: '0 10px' }}>hint Text</span>test
+      </span>
+    )
+
     return (
       <section style={containerStyle}>
         <fieldset style={{ marginBottom: 40 }}>
@@ -164,6 +170,7 @@ class CodeExample extends Component {
             floatingLabel={CustomFloatingLabel}
             floatingLabelStyle={{ color: pink200 }}
             floatingLabelFocusStyle={{ color: pink500 }}
+            hintTextAutocomplete={customHintTextAutocomplete}
             underlineStyle={{ borderColor: teal200 }}
             underlineFocusStyle={{ borderColor: teal500 }}
             autocompleteStyle={{ color: 'red', fontSize: 25 }}

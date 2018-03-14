@@ -323,7 +323,7 @@ class SelectField extends Component {
       : elementHeight
     */
     const autoCompleteHeight = this.state.isAutocompleteShown ? 53 : 0
-    const footerHeight = menuCloseButton ? 36 : 0
+    const footerHeight = multiple && menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
     const optionsContainerHeight =
       (Array.isArray(elementHeight)
