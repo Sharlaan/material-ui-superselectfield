@@ -21,7 +21,7 @@ class SelectField extends Component {
       isOpen: false,
       isFocused: false,
       itemsLength,
-      showAutocomplete: this.showAutocomplete(showAutocompleteThreshold, itemsLength),
+      isAutocompleteShown: this.showAutocomplete(showAutocompleteThreshold, itemsLength),
       selectedItems: value || (multiple ? [] : null),
       searchText: '',
     }
@@ -36,7 +36,7 @@ class SelectField extends Component {
       const itemsLength = getChildrenLength(nextProps.children)
       this.setState({
         itemsLength,
-        showAutocomplete: this.showAutocomplete(this.props.showAutocompleteThreshold, itemsLength),
+        isAutocompleteShown: this.showAutocomplete(this.props.showAutocompleteThreshold, itemsLength),
       })
     }
   }
@@ -87,7 +87,7 @@ class SelectField extends Component {
   }
 
   focusTextField () {
-    this.state.showAutocomplete && this.searchTextField ? this.searchTextField.focus() : this.focusMenuItem()
+    this.state.isAutocompleteShown && this.searchTextField ? this.searchTextField.focus() : this.focusMenuItem()
   }
 
   clearTextField (callback) {
@@ -161,7 +161,7 @@ class SelectField extends Component {
     switch (key) {
       case 'ArrowUp':
         if (+tabIndex === firstTabIndex) {
-          this.state.showAutocomplete ? this.focusTextField() : this.focusMenuItem(lastTabIndex)
+          this.state.isAutocompleteShown ? this.focusTextField() : this.focusMenuItem(lastTabIndex)
         } else {
           const previousTabIndex = cleanMenuItems.slice(0, currentElementIndex).slice(-1)[0].props.tabIndex
           this.focusMenuItem(previousTabIndex)
@@ -170,7 +170,7 @@ class SelectField extends Component {
 
       case 'ArrowDown':
         if (+tabIndex === lastTabIndex) {
-          this.state.showAutocomplete ? this.focusTextField() : this.focusMenuItem()
+          this.state.isAutocompleteShown ? this.focusTextField() : this.focusMenuItem()
         } else {
           const nextTabIndex = cleanMenuItems.slice(currentElementIndex + 1)[0].props.tabIndex
           this.focusMenuItem(nextTabIndex)
@@ -322,15 +322,17 @@ class SelectField extends Component {
       ? this.menuItems.map(item => findDOMNode(item).clientHeight) // can't resolve since items not rendered yet, need componentDiDMount
       : elementHeight
     */
-    const autoCompleteHeight = this.state.showAutocomplete ? 53 : 0
+    const autoCompleteHeight = this.state.isAutocompleteShown ? 53 : 0
     const footerHeight = menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
-    const containerHeight =
+    const optionsContainerHeight =
       (Array.isArray(elementHeight)
-        ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 6)
-        : elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length) + 6) || 0
-    const popoverHeight = autoCompleteHeight + (containerHeight || noMatchFoundHeight) + footerHeight
+        ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 0)
+        : elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)) || 0
+    const popoverHeight = autoCompleteHeight + (optionsContainerHeight || noMatchFoundHeight) + footerHeight + 6
+
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
+
     const menuWidth = this.root ? this.root.clientWidth : null
 
     return (
@@ -378,7 +380,7 @@ class SelectField extends Component {
           style={{ height: popoverHeight }}
           useLayerForClickAway={false}
         >
-          {this.state.showAutocomplete && (
+          {this.state.isAutocompleteShown && (
             <TextField
               ref={(ref) => (this.searchTextField = ref)}
               autoFocus
@@ -399,7 +401,7 @@ class SelectField extends Component {
           >
             {menuItems.length ? (
               <InfiniteScroller
-                containerHeight={containerHeight}
+                containerHeight={optionsContainerHeight}
                 elementHeight={elementHeight}
                 styles={{ scrollableStyle }}
               >
