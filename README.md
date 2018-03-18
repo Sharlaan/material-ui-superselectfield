@@ -97,6 +97,8 @@ PropTypes should raise warnings if implementing otherwise.
 | menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
 | noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
 | popoverClassName | string | '' | Sets the `className` property of the Popover component. |
+| resetButton | node | see below | Node used to deselect all options |
+| selectAllButton | node | see below | Node used to select all options |
 | selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
@@ -111,9 +113,11 @@ PropTypes should raise warnings if implementing otherwise.
 |:---- |:---- |
 | autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
-| unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | dropDownIcon | `<DropDownArrow/>` |
-| selectionsRenderer |  |
+| resetButton | `<FlatButton label='reset' hoverColor='rgba(69, 90, 100, 0.1)' fullWidth />` |
+| selectAllButton | `<FlatButton label='select all' hoverColor='rgba(69, 90, 100, 0.1)' fullWidth labelStyle={{ whiteSpace: 'nowrap' }} />` |
+| unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
+| selectionsRenderer |
 <pre>(values, hintText) => {
    if (!values) return hintText
    const { value, label } = values
@@ -152,9 +156,10 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 ## Known bugs
 
 - keyboard-focus handling combined with optgroups and autocompleted results
-- dynamic heights calculation
 
 ## TodoList
+
+- [x] implement select all and reset, for multiple mode
 
 - [x] implement onClose handler for multiple mode, to allow registering selected values in oneshot instead of exposing values at each selection (ie one single server request)
 
@@ -168,23 +173,25 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 - [x] add proptypes checking for value and children
 
 - [x] support of \<optgroup />
+- [ ] implement selectable \<optgroup /> to select all inner children
 
 - [x] check rendering performance with 200 MenuItems (integrate react-infinite)
 
-- [ ] implement the container for errors (absolutely positioned below the focusedLine)
+- [x] implement the container for errors (absolutely positioned below the focusedLine)
 
   Expose more props :
   - [x] noMatchFound message
-  - [ ] floatingLabelText
+  - [x] floatingLabelText
   - [x] canAutoPosition
   - [x] checkPosition
   - [x] anchorOrigin
-  - [ ] popoverStyle
+  - [x] popoverStyle
   - [x] hoverColor
   - [x] disabled
   - [ ] required
-  - [ ] errorMessage
-  - [ ] errorStyle
+  - [x] errorMessage
+  - [x] errorStyle
+  - [ ] classeNames for sub-components
 
 - [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
 - [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold
@@ -193,3 +200,4 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 - [x] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
 
 - [ ] add an example with GooglePlaces
+- [ ] add an example with ReduxForm

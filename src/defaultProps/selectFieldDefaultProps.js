@@ -1,4 +1,5 @@
 import React from 'react'
+import FlatButton from 'material-ui/FlatButton/FlatButton'
 import CheckedIcon from 'material-ui/svg-icons/navigation/check'
 import UnCheckedIcon from 'material-ui/svg-icons/toggle/check-box-outline-blank'
 
@@ -29,6 +30,15 @@ export default {
   onSelect: () => {},
   openImmediately: false,
   popoverClassName: '',
+  resetButton: <FlatButton label='reset' hoverColor='rgba(69, 90, 100, 0.1)' fullWidth />,
+  selectAllButton: (
+    <FlatButton
+      label='select all'
+      hoverColor='rgba(69, 90, 100, 0.1)'
+      labelStyle={{ whiteSpace: 'nowrap' }}
+      fullWidth
+    />
+  ),
   showAutocompleteThreshold: 10,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   value: null,
