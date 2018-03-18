@@ -15,15 +15,17 @@
 - [Properties](#properties)
 - [Usage examples](#usage)
 - [Building](#building)
+- [Linking in another local project](#linking-in-another-local-project)
 - [Tests](#tests)
 - [Contributing](#contributing)
+- [Known bugs](#known-bugs)
 - [TodoList](#todolist)
 
 ## Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
 
-![dataSource](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
-![caseInsensitive](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/caseInsensitive.png)
-![chips](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/chips.png)
+![dataSource](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/demo/src/assets/dataSource.png)
+![caseInsensitive](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/demo/src/assets/caseInsensitive.png)
+![chips](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/demo/src/assets/chips.png)
 
 ## Installation
 
@@ -33,13 +35,17 @@ This component requires 3 dependencies :
 - react-dom
 - material-ui
 
-... so make sure they are installed in your project, or install them as well ;)
+... so make sure they are installed in your project.
+
+`yarn add material-ui-superselectfield`
 
 ### ES5 version
 
-`npm i material-ui-superselectfield`
+`import SelectField from 'material-ui-superselectfield'`
 
 #### ES6+ version
+
+`import SelectField from 'material-ui-superselectfield/es'`
 
 ## Properties
 
@@ -140,14 +146,30 @@ You can build the project with :
 
 ```sh
 git clone https://github.com/Sharlaan/material-ui-superselectfield.git
-npm i && npm start
+yarn && yarn start
 ```
 
 It should open a new page on your default browser @ localhost:3000
 
+## Linking in another local project
+
+To test changes on a local build of SSF :
+
+```sh
+yarn build && yarn link
+```
+
+... then navigate into your local project directory, and type :
+
+```sh
+yarn link material-ui-superselectfield
+```
+
+/!\ Warning : if you reinstall dependencies in your project, this will break the link, you will have to re-link SSF.
+
 ## Tests
 
-`npm test`
+`yarn test`
 
 ## Contributing
 
@@ -192,6 +214,7 @@ In lieu of a formal style guide, take care to maintain the existing coding style
   - [x] errorMessage
   - [x] errorStyle
   - [ ] classeNames for sub-components
+  - [ ] maxSelection
 
 - [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
 - [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold

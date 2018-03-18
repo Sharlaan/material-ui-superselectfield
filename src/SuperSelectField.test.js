@@ -1,7 +1,13 @@
-// Jest API: https://facebook.github.io/jest/docs/expect.html#content
-// Enzyme API: http://airbnb.io/enzyme/docs/api/shallow.html
-// How to test a React Component basing on a "Contract":
-// https://medium.freecodecamp.com/the-right-way-to-test-react-components-548a4736ab22#.hqprrvawg
+/**
+ * Jest API
+ * @see https://facebook.github.io/jest/docs/expect.html#content
+ * 
+ * Enzyme API
+ * @see http://airbnb.io/enzyme/docs/api/shallow.html
+ * 
+ * How to test a React Component basing on a "Contract":
+ * @see https://medium.freecodecamp.com/the-right-way-to-test-react-components-548a4736ab22#.hqprrvawg
+ */
 
 /* eslint-env jest */
 import React from 'react'
