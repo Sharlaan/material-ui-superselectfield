@@ -360,7 +360,7 @@ class SelectField extends Component {
           floatingLabelFocusStyle={floatingLabelFocusStyle}
           floatingLabelStyle={floatingLabelStyle}
           hintText={hintText}
-          isFocused={this.state.isFocused & !disabled}
+          isFocused={this.state.isFocused && !disabled}
           isOpen={this.state.isOpen}
           muiTheme={this.context.muiTheme}
           selectedValues={this.state.selectedItems}
