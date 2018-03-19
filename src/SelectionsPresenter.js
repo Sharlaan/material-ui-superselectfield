@@ -45,9 +45,10 @@ const SelectionsPresenter = ({
 
   // Condition for shrinking the floating Label
   const isShrunk =
-    (Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
-    (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
-    isOpen
+    !disabled &&
+    ((Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
+      (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
+      isOpen)
 
   const baseHRstyle = {
     borderBottom: '1px solid',
