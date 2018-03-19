@@ -104,4 +104,5 @@ export default {
         'value' of '${componentName} ${props.name}' must include a 'value' property.`)
     }
   },
+  withResetSelectAllButtons: bool,
 }

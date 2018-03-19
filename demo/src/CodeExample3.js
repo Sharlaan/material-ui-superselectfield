@@ -167,6 +167,7 @@ class CodeExample extends Component {
           <SuperSelectField
             name='state32'
             multiple
+            withResetSelectAllButtons
             floatingLabel={CustomFloatingLabel}
             floatingLabelStyle={{ color: pink200 }}
             floatingLabelFocusStyle={{ color: pink500 }}

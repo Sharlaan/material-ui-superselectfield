@@ -258,6 +258,7 @@ class SelectField extends Component {
       underlineErrorStyle,
       underlineFocusStyle,
       underlineStyle,
+      withResetSelectAllButtons,
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -343,7 +344,7 @@ class SelectField extends Component {
       }, [])
 
     const autoCompleteHeight = this.state.isAutocompleteShown ? 53 : 0
-    const headerHeight = multiple ? 36 : 0
+    const headerHeight = multiple && withResetSelectAllButtons ? 36 : 0
     const footerHeight = multiple && menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
     const optionsContainerHeight =
@@ -416,16 +417,17 @@ class SelectField extends Component {
               value={this.state.searchText}
             />
           )}
-          {multiple && (
-            <header style={{ display: 'flex', alignItems: 'center' }}>
-              <div onClick={this.selectAll} style={{ flex: '50%' }}>
-                {selectAllButton}
-              </div>
-              <div onClick={this.reset} style={{ flex: '50%' }}>
-                {resetButton}
-              </div>
-            </header>
-          )}
+          {multiple &&
+            withResetSelectAllButtons && (
+              <header style={{ display: 'flex', alignItems: 'center' }}>
+                <div onClick={this.selectAll} style={{ flex: '50%' }}>
+                  {selectAllButton}
+                </div>
+                <div onClick={this.reset} style={{ flex: '50%' }}>
+                  {resetButton}
+                </div>
+              </header>
+            )}
           <div
             ref={(ref) => (this.menu = ref)}
             onKeyDown={this.handleMenuKeyDown}

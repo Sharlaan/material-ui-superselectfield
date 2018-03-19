@@ -75,6 +75,7 @@ This component requires 3 dependencies :
 | showAutocompleteThreshold | number, 'always', 'never' | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield needs to be disabled, just set this prop with a value higher than children length.<br> However, if you need the autocomplete to show always, you may pass `'always'`. This will open the menu even if there are no items to display. Passing `'never'` will never show the autocomplete regadless of how many children are passed. |
 | useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
+| withResetSelectAllButtons | bool | false | Paired with 'multiple', shows an header containing the 'RESET' and 'SELECT ALL' buttons. |
 
 ### Note when setting value
 

@@ -42,4 +42,5 @@ export default {
   showAutocompleteThreshold: 10,
   unCheckedIcon: <UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />,
   value: null,
+  withResetSelectAllButtons: false,
 }
