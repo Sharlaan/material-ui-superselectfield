@@ -166,7 +166,11 @@ class SelectField extends Component {
   getSelected = () => this.props.onSelect && this.props.onSelect(this.state.selectedItems, this.props.name)
 
   // group must be of type 'optgroup'
-  selectAllInGroup = (group) => group.props.children.map(({ props: { value, label } }) => ({ value, label }))
+  selectAllInGroup = (group) => {
+    const { children } = group.props
+    const fixedChildren = Array.isArray(children) ? children : [children]
+    return fixedChildren.map(({ props: { value, label } }) => ({ value, label }))
+  }
 
   // TODO: add Shift+Tab
   /**
