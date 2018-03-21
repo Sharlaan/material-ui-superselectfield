@@ -47,7 +47,7 @@ class CodeExample extends Component {
             onChange={this.handleSelection}
             value={state21}
             style={{ minWidth: 150, marginRight: 40 }}
-            elementHeight={[36, 68, 36]}
+            elementHeight={[36, 52, 36]}
           >
             <div value='A'>Option A</div>
             <div value='B'>Option B super longue</div>
@@ -63,7 +63,7 @@ class CodeExample extends Component {
             onChange={this.handleSelection}
             value={state22}
             style={{ minWidth: 150, marginRight: 40 }}
-            elementHeight={[36, 68, 36]}
+            elementHeight={[36, 52, 36]}
             menuCloseButton={<FlatButton label='close' hoverColor='lightSalmon' />}
           >
             <div value='D'>Option D</div>

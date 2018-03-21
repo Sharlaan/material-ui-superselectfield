@@ -30,6 +30,7 @@ export default {
   onSelect: () => {},
   openImmediately: false,
   popoverClassName: '',
+  popoverWidth: 180,
   resetButton: <FlatButton label='reset' hoverColor='rgba(69, 90, 100, 0.1)' fullWidth />,
   selectAllButton: (
     <FlatButton

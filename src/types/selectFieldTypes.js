@@ -77,6 +77,7 @@ export default {
   onSelect: func,
   openImmediately: bool,
   popoverClassName: string,
+  popoverWidth: number,
   resetButton: node,
   selectAllButton: node,
   selectedMenuItemStyle: object,

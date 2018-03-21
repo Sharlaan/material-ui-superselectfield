@@ -104,9 +104,10 @@ PropTypes should raise warnings if implementing otherwise.
 | menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
 | noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
 | popoverClassName | string | '' | Sets the `className` property of the Popover component. |
-| resetButton | node | see below | Node used to deselect all options |
-| selectAllButton | node | see below | Node used to select all options |
-| selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
+| popoverWidth | number | 180 | Sets the width of the Menu.<br>The menu is the container for 4 main sub-components: the autocomplete textfield, the header for reset/selectAll buttons, the options container, and the footer.<br>The menu width will always set its width to the highest value between popoverWidth prop(in px) or the root component width. The default value 180px were chosen so that the header's inner buttons don't overflow. |
+| resetButton | node | see below | Node used to deselect all options.<br>/!\ Requires `withResetSelectAllButtons`. |
+| selectAllButton | node | see below | Node used to select all options.<br>/!\ Requires `withResetSelectAllButtons`. |
+| selectedMenuItemStyle | object |  | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |

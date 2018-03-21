@@ -249,6 +249,7 @@ class SelectField extends Component {
       noMatchFound,
       noMatchFoundStyle,
       popoverClassName,
+      popoverWidth,
       resetButton,
       selectAllButton,
       selectedMenuItemStyle,
@@ -356,7 +357,8 @@ class SelectField extends Component {
 
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
 
-    const menuWidth = this.root ? this.root.clientWidth : null
+    const baseWidth = this.root ? this.root.clientWidth : null
+    const menuWidth = Math.max(baseWidth, popoverWidth)
 
     return (
       <div
@@ -400,7 +402,7 @@ class SelectField extends Component {
           className={popoverClassName}
           onRequestClose={this.closeMenu}
           open={this.state.isOpen}
-          style={{ height: popoverHeight }}
+          style={{ height: popoverHeight, width: menuWidth }}
           useLayerForClickAway={false}
         >
           {this.state.isAutocompleteShown && (
@@ -411,12 +413,13 @@ class SelectField extends Component {
               inputStyle={autocompleteStyle}
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
-              style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }}
+              style={{ margin: '0 16px 5px', width: 'calc(100% - 32px)' }}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
               underlineStyle={autocompleteUnderlineStyle}
               value={this.state.searchText}
             />
           )}
+
           {multiple &&
             withResetSelectAllButtons && (
               <header style={{ display: 'flex', alignItems: 'center' }}>
@@ -428,11 +431,8 @@ class SelectField extends Component {
                 </div>
               </header>
             )}
-          <div
-            ref={(ref) => (this.menu = ref)}
-            onKeyDown={this.handleMenuKeyDown}
-            style={{ width: menuWidth, ...menuStyle }}
-          >
+
+          <div ref={(ref) => (this.menu = ref)} onKeyDown={this.handleMenuKeyDown} style={menuStyle}>
             {menuItems.length ? (
               <InfiniteScroller
                 containerHeight={optionsContainerHeight}
@@ -449,6 +449,7 @@ class SelectField extends Component {
               />
             )}
           </div>
+
           {multiple && (
             <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
               <div onClick={this.closeMenu} style={menuFooterStyle}>
