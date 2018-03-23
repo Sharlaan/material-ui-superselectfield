@@ -167,6 +167,7 @@ class CodeExample extends Component {
           <SuperSelectField
             name='state32'
             multiple
+            withResetSelectAllButtons
             floatingLabel={CustomFloatingLabel}
             floatingLabelStyle={{ color: pink200 }}
             floatingLabelFocusStyle={{ color: pink500 }}
@@ -183,7 +184,7 @@ class CodeExample extends Component {
             hoverColor='rgba(3, 169, 244, 0.15)'
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             style={{ width: 200, marginTop: 20 }}
-            menuCloseButton={<FlatButton label='close' hoverColor={'lightSalmon'} />}
+            menuCloseButton={<FlatButton label='close' hoverColor='lightSalmon' />}
             dropDownIcon={<ArrowDown />}
           >
             {dataSourceNodes}

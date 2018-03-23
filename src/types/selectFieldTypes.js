@@ -11,8 +11,8 @@ export default {
   autocompleteUnderlineFocusStyle: object,
   autocompleteUnderlineStyle: object,
   canAutoPosition: bool,
-  checkPosition: oneOf(['', 'left', 'right']),
   checkedIcon: node,
+  checkPosition: oneOf(['', 'left', 'right']),
   // children can be either:
   // an html element with a required 'value' property, and optional label prop,
   // an optgroup with valid children (same as bove case),
@@ -77,6 +77,9 @@ export default {
   onSelect: func,
   openImmediately: bool,
   popoverClassName: string,
+  popoverWidth: number,
+  resetButton: node,
+  selectAllButton: node,
   selectedMenuItemStyle: object,
   selectionsRenderer: func,
   showAutocompleteThreshold: oneOfType([number, oneOf(['always', 'never'])]),
@@ -102,4 +105,5 @@ export default {
         'value' of '${componentName} ${props.name}' must include a 'value' property.`)
     }
   },
+  withResetSelectAllButtons: bool,
 }

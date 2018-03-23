@@ -20,6 +20,7 @@ class SelectField extends Component {
     this.state = {
       isOpen: false,
       isFocused: false,
+      initialValue: value || (multiple ? [] : null),
       itemsLength,
       isAutocompleteShown: this.showAutocomplete(showAutocompleteThreshold, itemsLength),
       selectedItems: value || (multiple ? [] : null),
@@ -129,6 +130,21 @@ class SelectField extends Component {
   }
 
   /**
+   * Menu Header methods
+   */
+  selectAll = () => {
+    const { children } = this.props
+    const fixedChildren = Array.isArray(children) ? children : [children]
+    const selectedItems = fixedChildren.reduce((nodes, child) => {
+      const { type, props: { value, label } } = child
+      return nodes.concat(type !== 'optgroup' ? { value, label } : this.selectAllInGroup(child))
+    }, [])
+    this.setState({ selectedItems }, () => this.getSelected())
+  }
+
+  reset = () => this.setState({ selectedItems: this.state.initialValue }, () => this.getSelected())
+
+  /**
    * Menu methods
    */
   handleMenuSelection = (selectedItem) => (event) => {
@@ -148,6 +164,13 @@ class SelectField extends Component {
   }
 
   getSelected = () => this.props.onSelect && this.props.onSelect(this.state.selectedItems, this.props.name)
+
+  // group must be of type 'optgroup'
+  selectAllInGroup = (group) => {
+    const { children } = group.props
+    const fixedChildren = Array.isArray(children) ? children : [children]
+    return fixedChildren.map(({ props: { value, label } }) => ({ value, label }))
+  }
 
   // TODO: add Shift+Tab
   /**
@@ -226,6 +249,9 @@ class SelectField extends Component {
       noMatchFound,
       noMatchFoundStyle,
       popoverClassName,
+      popoverWidth,
+      resetButton,
+      selectAllButton,
       selectedMenuItemStyle,
       selectionsRenderer,
       style,
@@ -233,6 +259,7 @@ class SelectField extends Component {
       underlineErrorStyle,
       underlineFocusStyle,
       underlineStyle,
+      withResetSelectAllButtons,
     } = this.props
 
     // Default style depending on Material-UI context (muiTheme)
@@ -317,23 +344,21 @@ class SelectField extends Component {
         return groupedItems.length ? [...nodes, menuGroup, ...groupedItems] : nodes
       }, [])
 
-    /*
-    const menuItemsHeights = this.state.isOpen
-      ? this.menuItems.map(item => findDOMNode(item).clientHeight) // can't resolve since items not rendered yet, need componentDiDMount
-      : elementHeight
-    */
     const autoCompleteHeight = this.state.isAutocompleteShown ? 53 : 0
+    const headerHeight = multiple && withResetSelectAllButtons ? 36 : 0
     const footerHeight = multiple && menuCloseButton ? 36 : 0
     const noMatchFoundHeight = 36
     const optionsContainerHeight =
       (Array.isArray(elementHeight)
         ? elementHeight.reduce((totalHeight, height) => totalHeight + height, 0)
         : elementHeight * (nb2show < menuItems.length ? nb2show : menuItems.length)) || 0
-    const popoverHeight = autoCompleteHeight + (optionsContainerHeight || noMatchFoundHeight) + footerHeight + 6
+    const popoverHeight =
+      autoCompleteHeight + headerHeight + (optionsContainerHeight || noMatchFoundHeight) + footerHeight + 6
 
     const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' }
 
-    const menuWidth = this.root ? this.root.clientWidth : null
+    const baseWidth = this.root ? this.root.clientWidth : null
+    const menuWidth = Math.max(baseWidth, popoverWidth)
 
     return (
       <div
@@ -377,7 +402,7 @@ class SelectField extends Component {
           className={popoverClassName}
           onRequestClose={this.closeMenu}
           open={this.state.isOpen}
-          style={{ height: popoverHeight }}
+          style={{ height: popoverHeight, width: menuWidth }}
           useLayerForClickAway={false}
         >
           {this.state.isAutocompleteShown && (
@@ -388,17 +413,26 @@ class SelectField extends Component {
               inputStyle={autocompleteStyle}
               onChange={this.handleTextFieldAutocompletionFiltering}
               onKeyDown={this.handleTextFieldKeyDown}
-              style={{ marginLeft: 16, marginBottom: 5, width: menuWidth - 16 * 2 }}
+              style={{ margin: '0 16px 5px', width: 'calc(100% - 32px)' }}
               underlineFocusStyle={autocompleteUnderlineFocusStyle}
               underlineStyle={autocompleteUnderlineStyle}
               value={this.state.searchText}
             />
           )}
-          <div
-            ref={(ref) => (this.menu = ref)}
-            onKeyDown={this.handleMenuKeyDown}
-            style={{ width: menuWidth, ...menuStyle }}
-          >
+
+          {multiple &&
+            withResetSelectAllButtons && (
+              <header style={{ display: 'flex', alignItems: 'center' }}>
+                <div onClick={this.selectAll} style={{ flex: '50%' }}>
+                  {selectAllButton}
+                </div>
+                <div onClick={this.reset} style={{ flex: '50%' }}>
+                  {resetButton}
+                </div>
+              </header>
+            )}
+
+          <div ref={(ref) => (this.menu = ref)} onKeyDown={this.handleMenuKeyDown} style={menuStyle}>
             {menuItems.length ? (
               <InfiniteScroller
                 containerHeight={optionsContainerHeight}
@@ -415,6 +449,7 @@ class SelectField extends Component {
               />
             )}
           </div>
+
           {multiple && (
             <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
               <div onClick={this.closeMenu} style={menuFooterStyle}>

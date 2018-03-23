@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { floatingLabelTypes } from './types'
 import { floatingLabelDefaultProps } from './defaultProps'
 
-// TODO: implement style lock when disabled = true
 class FloatingLabel extends Component {
   state = { flabelHeight: 0 }
 

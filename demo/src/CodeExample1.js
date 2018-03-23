@@ -79,7 +79,12 @@ class CodeExample extends Component {
             <div value='C'>Option C</div>
           </SuperSelectField>
 
-          <SuperSelectField disabled hintText='Disabled' style={{ minWidth: 150, margin: 10 }} />
+          <SuperSelectField
+            disabled
+            floatingLabel='Disabled'
+            hintText='Disabled'
+            style={{ minWidth: 150, margin: 10 }}
+          />
         </div>
 
         <h3 style={{ marginTop: 200 }}>Edges cases</h3>

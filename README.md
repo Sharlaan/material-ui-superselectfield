@@ -15,15 +15,17 @@
 - [Properties](#properties)
 - [Usage examples](#usage)
 - [Building](#building)
+- [Linking in another local project](#linking-in-another-local-project)
 - [Tests](#tests)
 - [Contributing](#contributing)
+- [Known bugs](#known-bugs)
 - [TodoList](#todolist)
 
 ## Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
 
-![dataSource](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/dataSource.png)
-![caseInsensitive](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/caseInsensitive.png)
-![chips](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/src/assets/chips.png)
+![dataSource](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/demo/src/assets/dataSource.png)
+![caseInsensitive](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/demo/src/assets/caseInsensitive.png)
+![chips](https://github.com/Sharlaan/material-ui-superselectfield/blob/master/demo/src/assets/chips.png)
 
 ## Installation
 
@@ -33,13 +35,17 @@ This component requires 3 dependencies :
 - react-dom
 - material-ui
 
-... so make sure they are installed in your project, or install them as well ;)
+... so make sure they are installed in your project.
+
+`yarn add material-ui-superselectfield`
 
 ### ES5 version
 
-`npm i material-ui-superselectfield`
+`import SelectField from 'material-ui-superselectfield'`
 
 #### ES6+ version
+
+`import SelectField from 'material-ui-superselectfield/es'`
 
 ## Properties
 
@@ -69,6 +75,7 @@ This component requires 3 dependencies :
 | showAutocompleteThreshold | number, 'always', 'never' | 10 | Maximum number of options from which to display the autocomplete search field.<br> For example, if autoComplete textfield needs to be disabled, just set this prop with a value higher than children length.<br> However, if you need the autocomplete to show always, you may pass `'always'`. This will open the menu even if there are no items to display. Passing `'never'` will never show the autocomplete regadless of how many children are passed. |
 | useLayerForClickAway | bool | false | If true, the popover dropdown will render on top of an invisible layer, which will prevent clicks to the underlying elements, and trigger an `onRequestClose('clickAway')` call. |
 | value | null, object, object[] | null | Selected value(s).<br>/!\ REQUIRED: each object must expose a 'value' property. |
+| withResetSelectAllButtons | bool | false | Paired with 'multiple', shows an header containing the 'RESET' and 'SELECT ALL' buttons. |
 
 ### Note when setting value
 
@@ -97,7 +104,10 @@ PropTypes should raise warnings if implementing otherwise.
 | menuCloseButton | node |  | A button for an explicit closing of the menu. Useful on mobiles. |
 | noMatchFoundStyle | object | {} | Allows to change the style of the noMatchFound list item. |
 | popoverClassName | string | '' | Sets the `className` property of the Popover component. |
-| selectedMenuItemStyle | object | {color: muiTheme.menuItem.selectedTextColor} | Styles to be applied to the selected MenuItem. |
+| popoverWidth | number | 180 | Sets the width of the Menu.<br>The menu is the container for 4 main sub-components: the autocomplete textfield, the header for reset/selectAll buttons, the options container, and the footer.<br>The menu width will always set its width to the highest value between popoverWidth prop(in px) or the root component width. The default value 180px were chosen so that the header's inner buttons don't overflow. |
+| resetButton | node | see below | Node used to deselect all options.<br>/!\ Requires `withResetSelectAllButtons`. |
+| selectAllButton | node | see below | Node used to select all options.<br>/!\ Requires `withResetSelectAllButtons`. |
+| selectedMenuItemStyle | object |  | Styles to be applied to the selected MenuItem. |
 | selectionsRenderer | function | see below | Provide your own renderer for selected options. Defaults to concatenating children's values text. Check CodeExample4 for a more advanced renderer example. |
 | style | object | {} | Insert your own inlined styles, applied to the root component. |
 | unCheckedIcon | SVGicon | see below | The SvgIcon to use for the unchecked state. This is useful to create icon toggles. |
@@ -111,9 +121,11 @@ PropTypes should raise warnings if implementing otherwise.
 |:---- |:---- |
 | autocompleteFilter | ```(searchText, text) => !text || text.toLowerCase().includes(searchText.toLowerCase())``` |
 | checkedIcon | `<CheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
-| unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
 | dropDownIcon | `<DropDownArrow/>` |
-| selectionsRenderer |  |
+| resetButton | `<FlatButton label='reset' hoverColor='rgba(69, 90, 100, 0.1)' fullWidth />` |
+| selectAllButton | `<FlatButton label='select all' hoverColor='rgba(69, 90, 100, 0.1)' fullWidth labelStyle={{ whiteSpace: 'nowrap' }} />` |
+| unCheckedIcon | `<UnCheckedIcon style={{ top: 'calc(50% - 12px)' }} />` |
+| selectionsRenderer |
 <pre>(values, hintText) => {
    if (!values) return hintText
    const { value, label } = values
@@ -136,14 +148,30 @@ You can build the project with :
 
 ```sh
 git clone https://github.com/Sharlaan/material-ui-superselectfield.git
-npm i && npm start
+yarn && yarn start
 ```
 
 It should open a new page on your default browser @ localhost:3000
 
+## Linking in another local project
+
+To test changes on a local build of SSF :
+
+```sh
+yarn build && yarn link
+```
+
+... then navigate into your local project directory, and type :
+
+```sh
+yarn link material-ui-superselectfield
+```
+
+/!\ Warning : if you reinstall dependencies in your project, this will break the link, you will have to re-link SSF.
+
 ## Tests
 
-`npm test`
+`yarn test`
 
 ## Contributing
 
@@ -152,9 +180,10 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 ## Known bugs
 
 - keyboard-focus handling combined with optgroups and autocompleted results
-- dynamic heights calculation
 
 ## TodoList
+
+- [x] implement select all and reset, for multiple mode
 
 - [x] implement onClose handler for multiple mode, to allow registering selected values in oneshot instead of exposing values at each selection (ie one single server request)
 
@@ -168,23 +197,26 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 - [x] add proptypes checking for value and children
 
 - [x] support of \<optgroup />
+- [ ] implement selectable \<optgroup /> to select all inner children
 
 - [x] check rendering performance with 200 MenuItems (integrate react-infinite)
 
-- [ ] implement the container for errors (absolutely positioned below the focusedLine)
+- [x] implement the container for errors (absolutely positioned below the focusedLine)
 
   Expose more props :
   - [x] noMatchFound message
-  - [ ] floatingLabelText
+  - [x] floatingLabelText
   - [x] canAutoPosition
   - [x] checkPosition
   - [x] anchorOrigin
-  - [ ] popoverStyle
+  - [x] popoverStyle
   - [x] hoverColor
   - [x] disabled
   - [ ] required
-  - [ ] errorMessage
-  - [ ] errorStyle
+  - [x] errorMessage
+  - [x] errorStyle
+  - [ ] classeNames for sub-components
+  - [ ] maxSelection
 
 - [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
 - [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold
@@ -193,3 +225,4 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 - [x] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
 
 - [ ] add an example with GooglePlaces
+- [ ] add an example with ReduxForm
