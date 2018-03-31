@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import SuperSelectField from 'material-ui-superselectfield'
+import React, { Component } from 'react';
+import SuperSelectField from 'material-ui-superselectfield';
 
 const containerStyle = {
   padding: 40,
@@ -8,22 +8,22 @@ const containerStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   flex: 1,
-}
+};
 
-const displayState = (state) => (state && state.value ? state.label || state.value : 'empty state')
+const displayState = (state) => (state && state.value ? state.label || state.value : 'empty state');
 
 class CodeExample extends Component {
   state = {
     state11: null,
     state12: { value: 'E', label: 'label E' },
     floatingLabelState: null,
-  }
+  };
 
-  handleSelection = (values, name) => this.setState({ [name]: values })
+  handleSelection = (values, name) => this.setState({ [name]: values });
 
   render () {
-    const { state11, state12, floatingLabelState } = this.state
-    console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState) // eslint-disable-line no-console
+    const { state11, state12, floatingLabelState } = this.state;
+    console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState); // eslint-disable-line no-console
 
     return (
       <section style={containerStyle}>
@@ -158,8 +158,8 @@ class CodeExample extends Component {
           </SuperSelectField>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default CodeExample
+export default CodeExample;

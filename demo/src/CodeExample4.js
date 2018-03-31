@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import SuperSelectField from 'material-ui-superselectfield'
-import Chip from 'material-ui/Chip/Chip'
-import continents from './assets/continents'
-import countries from './assets/countries'
-import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes'
-import FontIcon from 'material-ui/FontIcon/FontIcon'
-import Avatar from 'material-ui/Avatar/Avatar'
-import './assets/flag-icon.css'
+import React, { Component } from 'react';
+import SuperSelectField from 'material-ui-superselectfield';
+import Chip from 'material-ui/Chip/Chip';
+import continents from './assets/continents';
+import countries from './assets/countries';
+import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes';
+import FontIcon from 'material-ui/FontIcon/FontIcon';
+import Avatar from 'material-ui/Avatar/Avatar';
+import './assets/flag-icon.css';
 
 const containerStyle = {
   padding: 40,
@@ -15,23 +15,23 @@ const containerStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   flex: 1,
-}
+};
 const menuItemStyle = {
   whiteSpace: 'normal',
   display: 'flex',
   justifyContent: 'space-between',
   lineHeight: 'normal',
-}
+};
 const chipAvatarStyle = {
   width: '100%',
   height: '100%',
   margin: 0,
   borderRadius: '50%',
   backgroundSize: 'cover',
-}
+};
 
 const displayState = (state) =>
-  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
+  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state';
 
 class CodeExample extends Component {
   state = {
@@ -49,9 +49,9 @@ class CodeExample extends Component {
         },
       },
     ],
-  }
+  };
 
-  handleSelection = (values, name) => this.setState({ [name]: values })
+  handleSelection = (values, name) => this.setState({ [name]: values });
 
   handleCustomDisplaySelections = (name) => (values) =>
     values.length ? (
@@ -61,7 +61,8 @@ class CodeExample extends Component {
             <Avatar
               icon={
                 <FontIcon
-                  className={`flag-icon flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
+                  className={`flag-icon 
+                    flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
                   style={chipAvatarStyle}
                 />
               }
@@ -72,15 +73,15 @@ class CodeExample extends Component {
       </div>
     ) : (
       <div style={{ minHeight: 42, lineHeight: '42px' }}>Select some values</div>
-    ) // advice: use one of <option>s' default height as min-height
+    ); // advice: use one of <option>s' default height as min-height
 
   onRequestDelete = (key, name) => (event) => {
-    this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
-  }
+    this.setState({ [name]: this.state[name].filter((v, i) => i !== key) });
+  };
 
   render () {
-    const { state4 } = this.state
-    console.debug('state4', state4) // eslint-disable-line no-console
+    const { state4 } = this.state;
+    console.debug('state4', state4); // eslint-disable-line no-console
 
     const countriesNodeList = continents.map((continent, continentIndex) => (
       <optgroup key={continentIndex} label={continent}>
@@ -88,9 +89,9 @@ class CodeExample extends Component {
           .sort((a, b) => b.Continent - a.Continent)
           .filter((c) => continents[c.Continent] === continent)
           .map((country, index) => {
-            const countryCode = country['Alpha-2 code'].toLowerCase()
-            const countryLabel = country['English short name']
-            if (!flagIconCSSCountryCodes.includes(countryCode)) return null
+            const countryCode = country['Alpha-2 code'].toLowerCase();
+            const countryLabel = country['English short name'];
+            if (!flagIconCSSCountryCodes.includes(countryCode)) return null;
 
             return (
               <div key={index} value={country} label={countryLabel} style={menuItemStyle}>
@@ -101,10 +102,10 @@ class CodeExample extends Component {
                 </div>
                 <FontIcon className={`flag-icon flag-icon-${countryCode}`} />
               </div>
-            )
+            );
           })}
       </optgroup>
-    ))
+    ));
 
     return (
       <section style={containerStyle}>
@@ -117,6 +118,7 @@ class CodeExample extends Component {
           name='state4'
           multiple
           keepSearchOnSelect
+          withResetSelectAllButtons
           checkPosition='left'
           hintText='Complex example'
           onChange={this.handleSelection}
@@ -128,8 +130,8 @@ class CodeExample extends Component {
           {countriesNodeList}
         </SuperSelectField>
       </section>
-    )
+    );
   }
 }
 
-export default CodeExample
+export default CodeExample;

@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import SuperSelectField from 'material-ui-superselectfield'
-import FlatButton from 'material-ui/FlatButton/FlatButton'
-import Chip from 'material-ui/Chip/Chip'
-import FontIcon from 'material-ui/FontIcon/FontIcon'
-import Avatar from 'material-ui/Avatar/Avatar'
-import { teal500, pink500, teal200, pink200, yellow500, yellow200, deepPurple500 } from 'material-ui/styles/colors'
-import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down'
-import countries from './assets/countries'
-import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes'
-import './assets/flag-icon.css'
+import React, { Component } from 'react';
+import SuperSelectField from 'material-ui-superselectfield';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+import Chip from 'material-ui/Chip/Chip';
+import FontIcon from 'material-ui/FontIcon/FontIcon';
+import Avatar from 'material-ui/Avatar/Avatar';
+import { teal500, pink500, teal200, pink200, yellow500, yellow200, deepPurple500 } from 'material-ui/styles/colors';
+import ArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import countries from './assets/countries';
+import flagIconCSSCountryCodes from './assets/flagIconCSSCountryCodes';
+import './assets/flag-icon.css';
 
 const containerStyle = {
   padding: 40,
@@ -17,23 +17,23 @@ const containerStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   flex: 1,
-}
+};
 const menuItemStyle = {
   whiteSpace: 'normal',
   display: 'flex',
   justifyContent: 'space-between',
   lineHeight: 'normal',
-}
+};
 const chipAvatarStyle = {
   width: '100%',
   height: '100%',
   margin: 0,
   borderRadius: '50%',
   backgroundSize: 'cover',
-}
+};
 
 const displayState = (state) =>
-  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
+  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state';
 
 const dataSource = [
   { id: 0, name: 'Raphaël' },
@@ -51,7 +51,7 @@ const dataSource = [
   { id: 12, name: 'Nathalie' },
   { id: 13, name: 'Marie' },
   { id: 14, name: 'Renée' },
-]
+];
 
 class CodeExample extends Component {
   state = {
@@ -70,9 +70,9 @@ class CodeExample extends Component {
       },
     ],
     state32: [],
-  }
+  };
 
-  handleSelection = (values, name) => this.setState({ [name]: values })
+  handleSelection = (values, name) => this.setState({ [name]: values });
 
   handleCustomDisplaySelections = (name) => (values) =>
     values.length ? (
@@ -93,22 +93,22 @@ class CodeExample extends Component {
       </div>
     ) : (
       <div style={{ minHeight: 42, lineHeight: '42px' }}>Select some values</div>
-    ) // advice: use one of <option>s' default height as min-height
+    ); // advice: use one of <option>s' default height as min-height
 
   onRequestDelete = (key, name) => (event) => {
-    this.setState({ [name]: this.state[name].filter((v, i) => i !== key) })
-  }
+    this.setState({ [name]: this.state[name].filter((v, i) => i !== key) });
+  };
 
-  handleAutoCompleteTyping = (searchText) => console.debug('You typed in AutoComplete :', searchText) // eslint-disable-line no-console
+  handleAutoCompleteTyping = (searchText) => console.debug('You typed in AutoComplete :', searchText); // eslint-disable-line no-console
 
   render () {
-    const { state31, state32 } = this.state
-    console.debug('state31', state31, '\nstate32', state32) // eslint-disable-line no-console
+    const { state31, state32 } = this.state;
+    console.debug('state31', state31, '\nstate32', state32); // eslint-disable-line no-console
 
     const countriesNodeList = countries.map((country, index) => {
-      const countryCode = country['Alpha-2 code'].toLowerCase()
-      const countryLabel = country['English short name']
-      if (!flagIconCSSCountryCodes.includes(countryCode)) return null
+      const countryCode = country['Alpha-2 code'].toLowerCase();
+      const countryLabel = country['English short name'];
+      if (!flagIconCSSCountryCodes.includes(countryCode)) return null;
 
       return (
         <div key={index} value={country} label={countryLabel} style={menuItemStyle}>
@@ -119,27 +119,27 @@ class CodeExample extends Component {
           </div>
           <FontIcon className={`flag-icon flag-icon-${countryCode}`} />
         </div>
-      )
-    })
+      );
+    });
 
     const dataSourceNodes = dataSource.map(({ id, name }) => (
       <div key={id} value={id} label={name}>
         {name}
       </div>
-    ))
+    ));
 
     const CustomFloatingLabel = (
       <span>
         Custom floatingLabel<br />
         <span style={{ color: deepPurple500, fontWeight: 'bold', fontStyle: 'italic' }}>state32</span>
       </span>
-    )
+    );
 
     const customHintTextAutocomplete = (
       <span>
         Some<span style={{ color: 'blue', fontSize: 20, margin: '0 10px' }}>hint Text</span>test
       </span>
-    )
+    );
 
     return (
       <section style={containerStyle}>
@@ -191,8 +191,8 @@ class CodeExample extends Component {
           </SuperSelectField>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default CodeExample
+export default CodeExample;

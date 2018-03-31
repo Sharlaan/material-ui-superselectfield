@@ -7,4 +7,4 @@ export default [
   'Asia',
   'Oceania',
   'Antarctica',
-]
+];

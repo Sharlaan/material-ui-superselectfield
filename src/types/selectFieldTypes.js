@@ -1,5 +1,5 @@
-import { shape, arrayOf, func, oneOf, oneOfType, any, node, object, string, number, bool } from 'prop-types'
-import { checkFormat } from '../utils'
+import { shape, arrayOf, func, oneOf, oneOfType, any, node, object, string, number, bool } from 'prop-types';
+import { checkFormat } from '../utils';
 
 export default {
   anchorOrigin: shape({
@@ -23,18 +23,18 @@ export default {
       label: string,
     }),
     (props, propName, componentName, location, propFullName) => {
-      const pp = props[propName]
+      const pp = props[propName];
       if (pp.type === 'optgroup' && pp.props.children) {
         if (Array.isArray(pp.props.children)) {
           for (const child of pp.props.children) {
             if (!child.props.value) {
               return new Error(`
-              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
+              Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`);
             }
           }
         } else if (typeof pp.props.children === 'object' && !pp.props.children.props.value) {
           return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`);
         }
       }
     },
@@ -42,13 +42,13 @@ export default {
       if (props[propName].type !== 'optgroup') {
         if (!props[propName].props.value) {
           return new Error(`
-          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
+          Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`);
         }
       } else {
         for (const child of props[propName].props.children) {
           if (!child.props.value) {
             return new Error(`
-            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`)
+            Missing required property 'value' for '${propFullName}' supplied to '${componentName} ${props.name}'.`);
           }
         }
       }
@@ -88,22 +88,22 @@ export default {
   underlineFocusStyle: object,
   underlineStyle: object,
   value: (props, propName, componentName, location, propFullName) => {
-    const { multiple, value } = props
+    const { multiple, value } = props;
     if (multiple) {
       if (!Array.isArray(value)) {
         return new Error(`
-          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.`)
+          When using 'multiple' mode, 'value' of '${componentName} ${props.name}' must be an array.`);
       } else {
-        const index = checkFormat(value)
+        const index = checkFormat(value);
         if (index !== -1) {
           return new Error(`
-            'value[${index}]' of '${componentName} ${props.name}' must include a 'value' property.`)
+            'value[${index}]' of '${componentName} ${props.name}' must include a 'value' property.`);
         }
       }
     } else if (value !== null && (typeof value !== 'object' || !('value' in value))) {
       return new Error(`
-        'value' of '${componentName} ${props.name}' must include a 'value' property.`)
+        'value' of '${componentName} ${props.name}' must include a 'value' property.`);
     }
   },
   withResetSelectAllButtons: bool,
-}
+};

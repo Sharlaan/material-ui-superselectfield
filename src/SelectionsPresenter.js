@@ -1,8 +1,8 @@
-import React, { cloneElement } from 'react'
-import FloatingLabel from './FloatingLabel'
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down'
-import { selectionsPresenterTypes } from './types'
-import { selectionsPresenterDefaultProps } from './defaultProps'
+import React, { cloneElement } from 'react';
+import FloatingLabel from './FloatingLabel';
+import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import { selectionsPresenterTypes } from './types';
+import { selectionsPresenterDefaultProps } from './defaultProps';
 
 const styles = {
   column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
@@ -15,7 +15,7 @@ const styles = {
   },
   selections: { flex: 1 },
   underline: { position: 'relative', marginTop: 4 },
-}
+};
 
 const SelectionsPresenter = ({
   disabled,
@@ -35,20 +35,20 @@ const SelectionsPresenter = ({
   underlineFocusStyle,
   underlineStyle,
 }) => {
-  const { textField: { borderColor, floatingLabelColor, focusColor } } = muiTheme
+  const { textField: { borderColor, floatingLabelColor, focusColor } } = muiTheme;
 
   const isValidObject = (obj) =>
     obj &&
     Object.prototype.toString.call(obj) === '[object Object]' &&
     Object.keys(obj).includes('value') &&
-    obj.value !== null
+    obj.value !== null;
 
   // Condition for shrinking the floating Label
   const isShrunk =
     !disabled &&
     ((Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
       (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
-      isOpen)
+      isOpen);
 
   const baseHRstyle = {
     borderBottom: '1px solid',
@@ -64,7 +64,7 @@ const SelectionsPresenter = ({
     width: '100%',
     ...underlineStyle,
     ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {}),
-  }
+  };
 
   const focusedHRstyle = disabled
     ? {}
@@ -76,14 +76,14 @@ const SelectionsPresenter = ({
         transform: `scaleX( ${isFocused || isOpen ? 1 : 0} )`,
         transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
         ...underlineFocusStyle,
-      }
+      };
 
   const arrowDownIcon = cloneElement(dropDownIcon || <DropDownArrow />, {
     style: {
       // fill: this.context.muiTheme.textField.borderColor,
       transform: `rotate(${isOpen ? 180 : 0}deg)`,
     },
-  })
+  });
 
   return (
     <div style={styles.column}>
@@ -111,10 +111,10 @@ const SelectionsPresenter = ({
       </div>
       {errorText && <div style={{ marginTop: 5, color: 'red', fontSize: 12, ...errorStyle }}>{errorText}</div>}
     </div>
-  )
-}
+  );
+};
 
-SelectionsPresenter.propTypes = selectionsPresenterTypes
-SelectionsPresenter.defaultProps = selectionsPresenterDefaultProps
+SelectionsPresenter.propTypes = selectionsPresenterTypes;
+SelectionsPresenter.defaultProps = selectionsPresenterDefaultProps;
 
-export default SelectionsPresenter
+export default SelectionsPresenter;

@@ -49,7 +49,7 @@ const states = [
   { code: 'WV', name: 'West Virginia', capital: 'Charleston' },
   { code: 'WI', name: 'Wisconsin', capital: 'Madison' },
   { code: 'WY', name: 'Wyoming', capital: 'Cheyenne' },
-]
+];
 
 // The 3,144 counties and county equivalents of the United States of America
 // INCITS County or equivalent State or district 2013 Pop Core Based Statistical Area Combined Statistical Area
@@ -3198,6 +3198,6 @@ const counties = [
   { INCITS: '56041', county: 'Uinta County', state: 'Wyoming' },
   { INCITS: '56043', county: 'Washakie County', state: 'Wyoming' },
   { INCITS: '56045', county: 'Weston County', state: 'Wyoming' },
-]
+];
 
-export default { states, counties }
+export default { states, counties };

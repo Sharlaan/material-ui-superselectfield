@@ -1,11 +1,11 @@
-import React from 'react'
-import { render } from 'react-dom'
-import Router from 'react-router-dom/BrowserRouter'
-import { blueGrey500, blueGrey700, lightBlue500, deepOrange400 } from 'material-ui/styles/colors'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import App from './App'
-import './index.css'
+import React from 'react';
+import { render } from 'react-dom';
+import Router from 'react-router-dom/BrowserRouter';
+import { blueGrey500, blueGrey700, lightBlue500, deepOrange400 } from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import App from './App';
+import './index.css';
 
 const customTheme = getMuiTheme({
   fontFamily: 'Open Sans, sans-serif',
@@ -21,7 +21,7 @@ const customTheme = getMuiTheme({
   svgIcon: {
     color: blueGrey500,
   },
-})
+});
 
 render(
   <MuiThemeProvider muiTheme={customTheme}>
@@ -30,4 +30,4 @@ render(
     </Router>
   </MuiThemeProvider>,
   document.getElementById('demo')
-)
+);

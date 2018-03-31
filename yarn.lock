@@ -3121,9 +3121,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-sharlaan@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/eslint-config-sharlaan/-/eslint-config-sharlaan-2.2.4.tgz#b4d75c7ed7dae3f76fe670c2bbf4206582e8f883"
+eslint-config-sharlaan@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-sharlaan/-/eslint-config-sharlaan-2.3.1.tgz#e06630785e8b656c5859e60a9dda3aad852557a3"
   dependencies:
     babel-eslint latest
     eslint latest
@@ -3134,6 +3134,7 @@ eslint-config-sharlaan@^2.2.4:
     eslint-plugin-promise latest
     eslint-plugin-react latest
     eslint-plugin-standard latest
+    eslint-plugin-vue "^4.4.0"
     prettier latest
     prettier-eslint-cli latest
 
@@ -3199,6 +3200,12 @@ eslint-plugin-react@latest:
 eslint-plugin-standard@latest:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-3.0.1.tgz#34d0c915b45edc6f010393c7eef3823b08565cf2"
+
+eslint-plugin-vue@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-4.4.0.tgz#bfc3a71f76bd0e139313e4425a807257ae42f768"
+  dependencies:
+    vue-eslint-parser "^2.0.3"
 
 eslint-scope@^3.7.1, eslint-scope@~3.7.1:
   version "3.7.1"
@@ -5428,9 +5435,9 @@ libqp@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/libqp/-/libqp-1.1.0.tgz#f5e6e06ad74b794fb5b5b66988bf728ef1dedbe8"
 
-lint-staged@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-7.0.0.tgz#57926c63201e7bd38ca0576d74391efa699b4a9d"
+lint-staged@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-7.0.1.tgz#064321d79c2ab55808602f84f4ff94f52d872fd5"
   dependencies:
     app-root-path "^2.0.1"
     chalk "^2.3.1"
@@ -5451,7 +5458,7 @@ lint-staged@^7.0.0:
     path-is-inside "^1.0.2"
     pify "^3.0.0"
     please-upgrade-node "^3.0.1"
-    staged-git-files "1.1.0"
+    staged-git-files "1.1.1"
     stringify-object "^3.2.2"
 
 listr-silent-renderer@^1.1.1:
@@ -7496,9 +7503,9 @@ react-deep-force-update@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.1.1.tgz#bcd31478027b64b3339f108921ab520b4313dc2c"
 
-react-dom@^16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
+react-dom@^16.3.0:
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.0.tgz#b318e52184188ecb5c3e81117420cca40618643e"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -7590,9 +7597,9 @@ react-transition-group@^1.2.1:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react@^16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
+react@^16.3.0:
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.0.tgz#fc5a01c68f91e9b38e92cf83f7b795ebdca8ddff"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -8561,9 +8568,9 @@ stackframe@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-0.3.1.tgz#33aa84f1177a5548c8935533cbfeb3420975f5a4"
 
-staged-git-files@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/staged-git-files/-/staged-git-files-1.1.0.tgz#1a9bb131c1885601023c7aaddd3d54c22142c526"
+staged-git-files@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/staged-git-files/-/staged-git-files-1.1.1.tgz#37c2218ef0d6d26178b1310719309a16a59f8f7b"
 
 static-extend@^0.1.1:
   version "0.1.2"
@@ -9280,6 +9287,17 @@ vm-browserify@0.0.4, vm-browserify@~0.0.1:
 void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
+
+vue-eslint-parser@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
+  dependencies:
+    debug "^3.1.0"
+    eslint-scope "^3.7.1"
+    eslint-visitor-keys "^1.0.0"
+    espree "^3.5.2"
+    esquery "^1.0.0"
+    lodash "^4.17.4"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

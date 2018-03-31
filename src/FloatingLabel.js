@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { floatingLabelTypes } from './types'
-import { floatingLabelDefaultProps } from './defaultProps'
+import React, { Component } from 'react';
+import { floatingLabelTypes } from './types';
+import { floatingLabelDefaultProps } from './defaultProps';
 
 class FloatingLabel extends Component {
-  state = { flabelHeight: 0 }
+  state = { flabelHeight: 0 };
 
   componentDidMount () {
-    this.setState({ flabelHeight: this.flabel.offsetHeight })
+    this.setState({ flabelHeight: this.flabel.offsetHeight });
   }
 
   render () {
@@ -18,7 +18,7 @@ class FloatingLabel extends Component {
       floatingLabelStyle,
       isFocused,
       shrink,
-    } = this.props
+    } = this.props;
 
     const defaultStyles = {
       color: floatingLabelColor,
@@ -33,26 +33,26 @@ class FloatingLabel extends Component {
       userSelect: 'none',
       zIndex: 1, // Needed to display label above Chrome's autocomplete field background
       ...floatingLabelStyle,
-    }
+    };
 
-    const focusStyles = isFocused && shrink && { color: focusColor, ...floatingLabelFocusStyle }
+    const focusStyles = isFocused && shrink && { color: focusColor, ...floatingLabelFocusStyle };
 
     const shrinkStyles = shrink && {
       cursor: 'default',
       pointerEvents: 'none',
       position: 'absolute',
       transform: `scale(0.75) translateY(-${this.state.flabelHeight}px)`,
-    }
+    };
 
     return (
       <label ref={(ref) => (this.flabel = ref)} style={{ ...defaultStyles, ...shrinkStyles, ...focusStyles }}>
         {children}
       </label>
-    )
+    );
   }
 }
 
-FloatingLabel.propTypes = floatingLabelTypes
-FloatingLabel.defaultProps = floatingLabelDefaultProps
+FloatingLabel.propTypes = floatingLabelTypes;
+FloatingLabel.defaultProps = floatingLabelDefaultProps;
 
-export default FloatingLabel
+export default FloatingLabel;
