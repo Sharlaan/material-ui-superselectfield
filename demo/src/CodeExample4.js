@@ -61,7 +61,8 @@ class CodeExample extends Component {
             <Avatar
               icon={
                 <FontIcon
-                  className={`flag-icon flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
+                  className={`flag-icon 
+                    flag-icon-${country['Alpha-2 code'].toLowerCase()}`}
                   style={chipAvatarStyle}
                 />
               }
@@ -117,6 +118,7 @@ class CodeExample extends Component {
           name='state4'
           multiple
           keepSearchOnSelect
+          withResetSelectAllButtons
           checkPosition='left'
           hintText='Complex example'
           onChange={this.handleSelection}

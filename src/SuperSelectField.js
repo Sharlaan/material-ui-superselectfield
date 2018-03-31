@@ -133,11 +133,17 @@ class SelectField extends Component {
    * Menu Header methods
    */
   selectAll = () => {
-    const { children } = this.props;
+    const { children, autocompleteFilter } = this.props;
     const fixedChildren = Array.isArray(children) ? children : [children];
     const selectedItems = fixedChildren.reduce((nodes, child) => {
       const { type, props: { value, label } } = child;
-      return nodes.concat(type !== 'optgroup' ? { value, label } : this.selectAllInGroup(child));
+      const passesFilter = (label, value) => autocompleteFilter(this.state.searchText, label || value);
+      if (type !== 'optgroup' && passesFilter(label, value)) {
+        return nodes.concat({ value, label });
+      } else if (type === 'optgroup') {
+        const groupedItems = this.selectAllInGroup(child);
+        return groupedItems.length ? nodes.concat(groupedItems) : nodes;
+      } else return nodes;
     }, []);
     this.setState({ selectedItems }, () => this.getSelected());
   };
@@ -168,8 +174,11 @@ class SelectField extends Component {
   // group must be of type 'optgroup'
   selectAllInGroup = (group) => {
     const { children } = group.props;
+    const passesFilter = (label, value) => this.props.autocompleteFilter(this.state.searchText, label || value);
     const fixedChildren = Array.isArray(children) ? children : [children];
-    return fixedChildren.map(({ props: { value, label } }) => ({ value, label }));
+    return fixedChildren.reduce((nodes, { props: { value, label } }) => {
+      return passesFilter(label, value) ? nodes.concat({ value, label }) : nodes;
+    }, []);
   };
 
   // TODO: add Shift+Tab
@@ -269,7 +278,9 @@ class SelectField extends Component {
       color: menuItem.selectedTextColor,
       ...selectedMenuItemStyle,
     };
-    if (checkedIcon) checkedIcon.props.style.fill = mergedSelectedMenuItemStyle.color;
+    if (checkedIcon) {
+      checkedIcon.props.style.fill = mergedSelectedMenuItemStyle.color;
+    }
     const mergedHoverColor = hoverColor || menuItem.hoverColor;
 
     /**
@@ -282,7 +293,9 @@ class SelectField extends Component {
     const menuItemBuilder = (nodes, child, index) => {
       const { selectedItems } = this.state;
       const { value: childValue, label } = child.props;
-      if (!autocompleteFilter(this.state.searchText, label || childValue)) return nodes;
+      if (!autocompleteFilter(this.state.searchText, label || childValue)) {
+        return nodes;
+      }
       const isSelected = Array.isArray(selectedItems)
         ? selectedItems.some((obj) => areEqual(obj.value, childValue))
         : selectedItems ? selectedItems.value === childValue : false;
@@ -324,14 +337,21 @@ class SelectField extends Component {
       fixedChildren.length &&
       this.state.isOpen &&
       fixedChildren.reduce((nodes, child, index) => {
-        if (child.type !== 'optgroup') return menuItemBuilder(nodes, child, index);
+        if (child.type !== 'optgroup') {
+          return menuItemBuilder(nodes, child, index);
+        }
         const nextIndex = nodes.length ? +nodes[nodes.length - 1].key + 1 : 0;
         const menuGroup = (
           <ListItem
             disabled
             key={nextIndex}
             primaryText={child.props.label}
-            style={{ cursor: 'default', paddingTop: 10, paddingBottom: 10, ...menuGroupStyle }}
+            style={{
+              cursor: 'default',
+              paddingTop: 10,
+              paddingBottom: 10,
+              ...menuGroupStyle,
+            }}
           />
         );
         let groupedItems = [];
@@ -339,7 +359,9 @@ class SelectField extends Component {
         if (cpc) {
           if (Array.isArray(cpc) && cpc.length) {
             groupedItems = cpc.reduce((nodes, child, idx) => menuItemBuilder(nodes, child, nextIndex + idx), []);
-          } else if (typeof cpc === 'object') groupedItems = menuItemBuilder(nodes, cpc, nextIndex);
+          } else if (typeof cpc === 'object') {
+            groupedItems = menuItemBuilder(nodes, cpc, nextIndex);
+          }
         }
         return groupedItems.length ? [...nodes, menuGroup, ...groupedItems] : nodes;
       }, []);
@@ -355,7 +377,9 @@ class SelectField extends Component {
     const popoverHeight =
       autoCompleteHeight + headerHeight + (optionsContainerHeight || noMatchFoundHeight) + footerHeight + 6;
 
-    const scrollableStyle = { overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll' };
+    const scrollableStyle = {
+      overflowY: nb2show >= menuItems.length ? 'hidden' : 'scroll',
+    };
 
     const baseWidth = this.root ? this.root.clientWidth : null;
     const menuWidth = Math.max(baseWidth, popoverWidth);
@@ -445,13 +469,23 @@ class SelectField extends Component {
               <ListItem
                 disabled
                 primaryText={noMatchFound}
-                style={{ cursor: 'default', padding: '10px 16px', ...noMatchFoundStyle }}
+                style={{
+                  cursor: 'default',
+                  padding: '10px 16px',
+                  ...noMatchFoundStyle,
+                }}
               />
             )}
           </div>
 
           {multiple && (
-            <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+            <footer
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+              }}
+            >
               <div onClick={this.closeMenu} style={menuFooterStyle}>
                 {menuCloseButton}
               </div>
