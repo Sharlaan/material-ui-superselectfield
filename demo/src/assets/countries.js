@@ -2240,4 +2240,4 @@ export default [
     Capital: 'Harare',
     Continent: 3,
   },
-]
+];

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import CircularProgress from 'material-ui/CircularProgress/CircularProgress'
-import SuperSelectField from 'material-ui-superselectfield'
-import data from './assets/states'
+import React, { Component } from 'react';
+import CircularProgress from 'material-ui/CircularProgress/CircularProgress';
+import SuperSelectField from 'material-ui-superselectfield';
+import data from './assets/states';
 
 class CodeExample extends Component {
   state = {
@@ -11,10 +11,10 @@ class CodeExample extends Component {
     stateNodes: [],
     selectedCounties: [],
     countyNodes: [],
-  }
+  };
 
   componentDidMount = () => {
-    this.setState({ isFetchingStates: true })
+    this.setState({ isFetchingStates: true });
 
     // Ideally should be externalized in a HoC,
     // with stateNodes && countyNodes in props
@@ -23,40 +23,40 @@ class CodeExample extends Component {
         <div key={code} value={name}>
           {name}
         </div>
-      ))
-      this.setState({ stateNodes, isFetchingStates: false })
-      console.log('States updated') // eslint-disable-line no-console
-    }, 5000) // simulates a 5secs fetch delay
-  }
+      ));
+      this.setState({ stateNodes, isFetchingStates: false });
+      console.log('States updated'); // eslint-disable-line no-console
+    }, 5000); // simulates a 5secs fetch delay
+  };
 
   handleStateSelection = (selectedStates, name) => {
-    console.debug('selectedStates', selectedStates) // eslint-disable-line no-console
+    console.debug('selectedStates', selectedStates); // eslint-disable-line no-console
     this.setState({ selectedStates, isFetchingCounties: true }, () => {
       const countyNodes = data.counties.reduce((nodes, { INCITS, county, state }) => {
-        if (!selectedStates.find(({ value }) => value === state)) return nodes
+        if (!selectedStates.find(({ value }) => value === state)) return nodes;
         return [
           ...nodes,
           <div key={INCITS} value={county}>
             {county}
           </div>,
-        ]
-      }, [])
+        ];
+      }, []);
       // must also check if previous selections are still consistent with new selectedStates
       const selectedCounties = this.state.selectedCounties.filter(({ value }) =>
         countyNodes.find((node) => node.props.value === value)
-      )
+      );
 
       window.setTimeout(() => {
-        this.setState({ countyNodes, selectedCounties, isFetchingCounties: false })
-        console.log('Counties updated') // eslint-disable-line no-console
-      }, 3000) // simulates a 3secs fetch delay
-    })
-  }
+        this.setState({ countyNodes, selectedCounties, isFetchingCounties: false });
+        console.log('Counties updated'); // eslint-disable-line no-console
+      }, 3000); // simulates a 3secs fetch delay
+    });
+  };
 
-  handleCountySelection = (selectedCounties, name) => this.setState({ selectedCounties })
+  handleCountySelection = (selectedCounties, name) => this.setState({ selectedCounties });
 
   selectionsRenderer = (values, hintText, name) => {
-    const { isFetchingStates, isFetchingCounties } = this.state
+    const { isFetchingStates, isFetchingCounties } = this.state;
 
     switch (name) {
       case 'states':
@@ -66,9 +66,9 @@ class CodeExample extends Component {
               <CircularProgress size={20} style={{ marginRight: 10 }} />
               {hintText}
             </div>
-          )
+          );
         }
-        break
+        break;
       case 'counties':
         if (isFetchingCounties) {
           return (
@@ -76,24 +76,24 @@ class CodeExample extends Component {
               <CircularProgress size={20} style={{ marginRight: 10 }} />
               {hintText}
             </div>
-          )
+          );
         }
-        break
+        break;
       default:
     }
 
-    if (!values) return hintText
-    const { value, label } = values
+    if (!values) return hintText;
+    const { value, label } = values;
     if (Array.isArray(values)) {
-      return values.length ? values.map(({ value, label }) => label || value).join(', ') : hintText
-    } else if (label || value) return label || value
-    else return hintText
-  }
+      return values.length ? values.map(({ value, label }) => label || value).join(', ') : hintText;
+    } else if (label || value) return label || value;
+    else return hintText;
+  };
 
   render () {
-    const { selectedStates, stateNodes, selectedCounties, countyNodes } = this.state
+    const { selectedStates, stateNodes, selectedCounties, countyNodes } = this.state;
 
-    console.debug('countyNodes', countyNodes) // eslint-disable-line no-console
+    console.debug('countyNodes', countyNodes); // eslint-disable-line no-console
 
     return (
       <section style={{ margin: 40 }}>
@@ -125,8 +125,8 @@ class CodeExample extends Component {
           </SuperSelectField>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default CodeExample
+export default CodeExample;

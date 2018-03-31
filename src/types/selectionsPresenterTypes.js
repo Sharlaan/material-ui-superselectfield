@@ -1,4 +1,4 @@
-import { func, node, object, string } from 'prop-types'
+import { func, node, object, string } from 'prop-types';
 
 export default {
   dropDownIcon: node,
@@ -7,4 +7,4 @@ export default {
   hintText: string,
   selectionsRenderer: func,
   underlineErrorStyle: object,
-}
+};

@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import FlatButton from 'material-ui/FlatButton/FlatButton'
-import SuperSelectField from 'material-ui-superselectfield'
+import React, { Component } from 'react';
+import FlatButton from 'material-ui/FlatButton/FlatButton';
+import SuperSelectField from 'material-ui-superselectfield';
 
 const containerStyle = {
   padding: 40,
@@ -9,10 +9,10 @@ const containerStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   flex: 1,
-}
+};
 
 const displayState = (state) =>
-  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state'
+  state && state.length ? [...state].map(({ value, label }) => label || value).join(', ') : 'empty state';
 
 class CodeExample extends Component {
   state = {
@@ -20,13 +20,13 @@ class CodeExample extends Component {
     state22: [{ value: 'F' }],
     state23: [{ value: 'G' }],
     state24: [],
-  }
+  };
 
-  handleSelection = (values, name) => this.setState({ [name]: values })
+  handleSelection = (values, name) => this.setState({ [name]: values });
 
   render () {
-    const { state21, state22, state23, state24 } = this.state
-    console.debug('state21', state21, '\nstate22', state22, '\nstate23', state23, '\nstate24', state24) // eslint-disable-line no-console
+    const { state21, state22, state23, state24 } = this.state;
+    console.debug('state21', state21, '\nstate22', state22, '\nstate23', state23, '\nstate24', state24); // eslint-disable-line no-console
 
     return (
       <section style={containerStyle}>
@@ -104,8 +104,8 @@ class CodeExample extends Component {
           </SuperSelectField>
         </div>
       </section>
-    )
+    );
   }
 }
 
-export default CodeExample
+export default CodeExample;
