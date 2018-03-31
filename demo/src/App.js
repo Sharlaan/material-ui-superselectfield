@@ -1,23 +1,19 @@
-import React from 'react'
-import { Switch } from 'react-router'
-import Route from 'react-router-dom/Route'
-import logo from './assets/logo.svg'
-import Nav from './Nav'
-import Home from './Home'
-import CodeExample1 from './CodeExample1'
-import CodeExample2 from './CodeExample2'
-import CodeExample3 from './CodeExample3'
-import CodeExample4 from './CodeExample4'
-import CodeExample5 from './CodeExample5'
-import './App.css'
+import React, { Fragment } from 'react';
+import { Switch } from 'react-router';
+import Route from 'react-router-dom/Route';
+import Header from './Header';
+import Nav from './Nav';
+import Home from './Home';
+import CodeExample1 from './CodeExample1';
+import CodeExample2 from './CodeExample2';
+import CodeExample3 from './CodeExample3';
+import CodeExample4 from './CodeExample4';
+import CodeExample5 from './CodeExample5';
+import './App.css';
 
 const App = () => (
-  <div className='App'>
-    <div className='App-header'>
-      <img src={logo} className='App-logo' alt='logo' />
-      <h2>SuperSelectField</h2>
-      <h4>a Material-UI based dropdown component</h4>
-    </div>
+  <Fragment>
+    <Header />
 
     <Nav />
 
@@ -31,7 +27,7 @@ const App = () => (
         <Route component={Home} />
       </Switch>
     </section>
-  </div>
-)
+  </Fragment>
+);
 
-export default App
+export default App;
