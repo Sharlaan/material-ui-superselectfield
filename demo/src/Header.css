@@ -1,9 +1,8 @@
 .App-header {
+  grid-area: header;
   text-align: center;
-  margin-left: 200px;
   background-color: #222;
   padding: 20px 0;
-  margin-bottom: 20px;
   color: white;
 }
 

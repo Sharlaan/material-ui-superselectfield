@@ -45,10 +45,9 @@ const SelectionsPresenter = ({
 
   // Condition for shrinking the floating Label
   const isShrunk =
-    !disabled &&
-    ((Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
-      (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
-      isOpen);
+    (Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
+    (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
+    isOpen;
 
   const baseHRstyle = {
     borderBottom: '1px solid',
@@ -66,17 +65,15 @@ const SelectionsPresenter = ({
     ...(errorText ? { borderColor: 'red', ...underlineErrorStyle } : {}),
   };
 
-  const focusedHRstyle = disabled
-    ? {}
-    : errorText
-      ? underlineStyle
-      : {
-        borderBottom: '2px solid',
-        borderColor: isFocused || isOpen ? focusColor : borderColor,
-        transform: `scaleX( ${isFocused || isOpen ? 1 : 0} )`,
-        transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
-        ...underlineFocusStyle,
-      };
+  const focusedHRstyle = errorText
+    ? underlineStyle
+    : {
+      borderBottom: '2px solid',
+      borderColor: (isFocused && !disabled) || isOpen ? focusColor : borderColor,
+      transform: `scaleX( ${(isFocused && !disabled) || isOpen ? 1 : 0} )`,
+      transition: '450ms cubic-bezier(0.23, 1, 0.32, 1)', // transitions.easeOut(),
+      ...underlineFocusStyle,
+    };
 
   const arrowDownIcon = cloneElement(dropDownIcon || <DropDownArrow />, {
     style: {

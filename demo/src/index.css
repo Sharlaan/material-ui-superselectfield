@@ -4,5 +4,21 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 18px;
   font-weight: 300;
+  letter-spacing: 0.025em;
   user-select: none;
+}
+
+html,
+body,
+#demo {
+  min-height: 100vh;
+}
+
+#demo {
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: min-content auto;
+  grid-template-areas:
+    'drawer header'
+    'drawer content';
 }

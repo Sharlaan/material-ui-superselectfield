@@ -13,7 +13,7 @@ class FloatingLabel extends Component {
     const {
       children,
       defaultColors: { floatingLabelColor, focusColor },
-      /* disabled, */
+      disabled,
       floatingLabelFocusStyle,
       floatingLabelStyle,
       isFocused,
@@ -35,7 +35,7 @@ class FloatingLabel extends Component {
       ...floatingLabelStyle,
     };
 
-    const focusStyles = isFocused && shrink && { color: focusColor, ...floatingLabelFocusStyle };
+    const focusStyles = isFocused && !disabled && shrink && { color: focusColor, ...floatingLabelFocusStyle };
 
     const shrinkStyles = shrink && {
       cursor: 'default',

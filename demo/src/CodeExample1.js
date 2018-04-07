@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SuperSelectField from 'material-ui-superselectfield';
+import Toggle from 'material-ui/Toggle';
 
 const containerStyle = {
   padding: 40,
@@ -7,7 +8,7 @@ const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  flex: 1,
+  height: 'calc(100% - 40px)',
 };
 
 const displayState = (state) => (state && state.value ? state.label || state.value : 'empty state');
@@ -21,8 +22,10 @@ class CodeExample extends Component {
 
   handleSelection = (values, name) => this.setState({ [name]: values });
 
+  handleDisable = (event, isDisabled) => this.setState({ isDisabled });
+
   render () {
-    const { state11, state12, floatingLabelState } = this.state;
+    const { state11, state12, floatingLabelState, isDisabled } = this.state;
     console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState); // eslint-disable-line no-console
 
     return (
@@ -34,7 +37,13 @@ class CodeExample extends Component {
           <div>State floatingLabel: {displayState(floatingLabelState)}</div>
         </fieldset>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
           <SuperSelectField
             name='state11'
             hintText='Single value'
@@ -66,7 +75,14 @@ class CodeExample extends Component {
           </SuperSelectField>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: 40 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            marginTop: 40,
+          }}
+        >
           <SuperSelectField
             name='floatingLabelState'
             floatingLabel='Floating label'
@@ -79,16 +95,28 @@ class CodeExample extends Component {
             <div value='C'>Option C</div>
           </SuperSelectField>
 
-          <SuperSelectField
-            disabled
-            floatingLabel='Disabled'
-            hintText='Disabled'
-            style={{ minWidth: 150, margin: 10 }}
-          />
+          <article>
+            <SuperSelectField
+              name='Disabled select'
+              disabled={isDisabled}
+              floatingLabel={`${isDisabled ? 'Disabled' : 'Active'} select`}
+              value={{ value: 'Preserved value' }}
+              style={{ minWidth: 150, margin: 10 }}
+            />
+            <Toggle label='Disable' toggled={isDisabled} onToggle={this.handleDisable} style={{ margin: 10 }} />
+          </article>
         </div>
 
-        <h3 style={{ marginTop: 200 }}>Edges cases</h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        <div style={{ flex: 1 }} />
+
+        <h3>Edges cases</h3>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
           <SuperSelectField name='case 1' hintText='No child' style={{ margin: 10 }} />
 
           <SuperSelectField name='case 2' hintText='Single child' style={{ margin: 10 }}>

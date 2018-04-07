@@ -19,7 +19,7 @@ const navigationRoutes = [
 ];
 
 const Nav = () => (
-  <Drawer open width={200}>
+  <Drawer open width={200} className='drawer'>
     <h3 className='title'>
       <Link to='/' className='base verticallyCenter'>
         Demos
