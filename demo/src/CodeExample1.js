@@ -99,9 +99,8 @@ class CodeExample extends Component {
             <SuperSelectField
               name='Disabled select'
               disabled={isDisabled}
-              floatingLabel='Disabled select'
-              hintText='Disabled'
-              value={{ value: 'disabledValue' }}
+              floatingLabel={`${isDisabled ? 'Disabled' : 'Active'} select`}
+              value={{ value: 'Preserved value' }}
               style={{ minWidth: 150, margin: 10 }}
             />
             <Toggle label='Disable' toggled={isDisabled} onToggle={this.handleDisable} style={{ margin: 10 }} />
