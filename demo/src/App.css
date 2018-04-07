@@ -1,4 +1,5 @@
 .App-content {
-  margin-left: 200px;
+  grid-area: content;
   font-size: large;
+  height: calc(100vh - 200px - 20px - 40px); /* 200px = header height, 20px = header margin bottom */
 }

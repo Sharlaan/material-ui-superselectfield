@@ -1,3 +1,7 @@
+.drawer {
+  grid-area: drawer;
+}
+
 .title {
   text-align: center;
   height: 68px;
