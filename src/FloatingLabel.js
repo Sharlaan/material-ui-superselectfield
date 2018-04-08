@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+
 import { floatingLabelTypes } from './types';
 import { floatingLabelDefaultProps } from './defaultProps';
 
-class FloatingLabel extends Component {
+export default class FloatingLabel extends Component {
   state = { flabelHeight: 0 };
+
+  static propTypes = floatingLabelTypes;
+  static defaultProps = floatingLabelDefaultProps;
 
   componentDidMount () {
     this.setState({ flabelHeight: this.flabel.offsetHeight });
@@ -51,8 +55,3 @@ class FloatingLabel extends Component {
     );
   }
 }
-
-FloatingLabel.propTypes = floatingLabelTypes;
-FloatingLabel.defaultProps = floatingLabelDefaultProps;
-
-export default FloatingLabel;
