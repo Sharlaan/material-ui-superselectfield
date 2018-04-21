@@ -219,8 +219,9 @@ describe('Selections presenter', () => {
     const wrapper = shallowWithContext(
       <SuperSelectField showAutocompleteThreshold='always'>{testChildren}</SuperSelectField>
     )
-    const selectionsPresenter = wrapper.find('SelectionsPresenter')
-    expect(selectionsPresenter.dive().find('NavigationArrowDropDown').length).toEqual(1)
+    const SelectionsPresenter = wrapper.find('SelectionsPresenter').dive()
+    const ArrowDownIcon = SelectionsPresenter.find('ArrowDownIcon').dive()
+    expect(ArrowDownIcon.find('NavigationArrowDropDown').length).toBe(1)
   })
   it('should display the custom [DropDownIcon]', () => {
     const wrapper = shallowWithContext(
@@ -228,9 +229,12 @@ describe('Selections presenter', () => {
         {testChildren}
       </SuperSelectField>
     )
-    const selectionsPresenter = wrapper.find('SelectionsPresenter')
-    expect(selectionsPresenter.dive().find('#customDropDown').length).toEqual(1)
+    const SelectionsPresenter = wrapper.find('SelectionsPresenter').dive()
+    const ArrowDownIcon = SelectionsPresenter.find('ArrowDownIcon').dive()
+    expect(ArrowDownIcon.find('#customDropDown').length).toBe(1)
   })
+
+  it('should rotate the arrow icon on click')
 
   it('use the default selection renderer properly')
 
