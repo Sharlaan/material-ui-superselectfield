@@ -40,7 +40,9 @@ export default function SelectionsPresenter ({
   underlineFocusStyle,
   underlineStyle,
 }) {
-  const { textField: { borderColor, floatingLabelColor, focusColor } } = muiTheme;
+  const {
+    textField: { borderColor, floatingLabelColor, focusColor },
+  } = muiTheme;
 
   const isValidObject = (obj) =>
     obj &&
@@ -48,8 +50,9 @@ export default function SelectionsPresenter ({
     Object.keys(obj).includes('value') &&
     obj.value !== null;
 
-  // Condition for shrinking the floating Label
+  // Conditions for shrinking the floating Label
   const isShrunk =
+    (hintText && hintText.length) ||
     (Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
     (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
     isOpen;

@@ -1,7 +1,7 @@
 export default {
   errorStyle: {},
   errorText: '',
-  hintText: 'Click me',
+  hintText: '',
   selectionsRenderer: (values, hintText) => {
     if (!values) return hintText;
     const { value, label } = values;

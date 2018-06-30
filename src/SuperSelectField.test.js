@@ -31,18 +31,18 @@ const mountWithContext = node => mount(node, {
 })
 */
 const testChildren = [
-  <div key='0' value='1'>
+  <div key="0" value="1">
     Test Child
   </div>,
-  <div key='1' value='2'>
+  <div key="1" value="2">
     Test Child
-  </div>,
+  </div>
 ]
 
 const testChild = [
-  <div key='0' value='1'>
+  <div key="0" value="1">
     Test Child
-  </div>,
+  </div>
 ]
 
 describe('Default states, styles, and behaviors', () => {
@@ -64,26 +64,34 @@ describe('Default states, styles, and behaviors', () => {
   })
 
   it('expects the menu to open when clicked', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
+    const wrapper = shallowWithContext(
+      <SuperSelectField>{testChildren}</SuperSelectField>
+    )
     wrapper.simulate('click')
     expect(wrapper.find('Popover').props().open).toBe(true)
   })
 
   it('expects the menu to open when clicked even with one child', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChild}</SuperSelectField>)
+    const wrapper = shallowWithContext(
+      <SuperSelectField>{testChild}</SuperSelectField>
+    )
     wrapper.simulate('click')
     expect(wrapper.find('Popover').props().open).toBe(true)
   })
 
   it('expects the menu to render children', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChildren}</SuperSelectField>)
+    const wrapper = shallowWithContext(
+      <SuperSelectField>{testChildren}</SuperSelectField>
+    )
     wrapper.simulate('click') // opens menu
     const firstChild = wrapper.find('ListItem').first()
     expect(firstChild.props().primaryText).toBe(testChildren[0])
   })
 
   it('expects the menu to render even with one child', () => {
-    const wrapper = shallowWithContext(<SuperSelectField>{testChild}</SuperSelectField>)
+    const wrapper = shallowWithContext(
+      <SuperSelectField>{testChild}</SuperSelectField>
+    )
     wrapper.simulate('click') // opens menu
     const firstChild = wrapper.find('ListItem').first()
     expect(firstChild.props().primaryText).toBe(testChild[0])
@@ -130,7 +138,9 @@ describe('Children composition', () => {
 describe('Autocomplete usage', () => {
   it('should show if [showAutocompleteThreshold] is less than children', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold={1}>{testChildren}</SuperSelectField>
+      <SuperSelectField showAutocompleteThreshold={1}>
+        {testChildren}
+      </SuperSelectField>
     )
     wrapper.simulate('click')
     const firstChild = wrapper.find('TextField')
@@ -138,7 +148,9 @@ describe('Autocomplete usage', () => {
   })
   it('should NOT show if [showAutocompleteThreshold] is greater than children', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold={4}>{testChildren}</SuperSelectField>
+      <SuperSelectField showAutocompleteThreshold={4}>
+        {testChildren}
+      </SuperSelectField>
     )
     wrapper.simulate('click')
     const firstChild = wrapper.find('TextField')
@@ -146,27 +158,37 @@ describe('Autocomplete usage', () => {
   })
   it('should show regardless of children with [showAutocompleteThreshold="always"]', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always'>{testChildren}</SuperSelectField>
+      <SuperSelectField showAutocompleteThreshold="always">
+        {testChildren}
+      </SuperSelectField>
     )
     wrapper.simulate('click')
     const firstChild = wrapper.find('TextField')
     expect(firstChild.exists()).toBe(true)
   })
   it('should open Menu and Autocomplete even if no children with [showAutocompleteThreshold="always"]', () => {
-    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold='always'>{[]}</SuperSelectField>)
+    const wrapper = shallowWithContext(
+      <SuperSelectField showAutocompleteThreshold="always">
+        {[]}
+      </SuperSelectField>
+    )
     wrapper.simulate('click')
     const firstChild = wrapper.find('Popover')
     expect(firstChild.props().open).toBe(true)
   })
   it('should NOT open Menu if no children and [showAutocompleteThreshold={0}]', () => {
-    const wrapper = shallowWithContext(<SuperSelectField showAutocompleteThreshold={0}>{[]}</SuperSelectField>)
+    const wrapper = shallowWithContext(
+      <SuperSelectField showAutocompleteThreshold={0}>{[]}</SuperSelectField>
+    )
     wrapper.simulate('click')
     const firstChild = wrapper.find('Popover')
     expect(firstChild.props().open).toBe(false)
   })
   it('should NOT show if [showAutocompleteThreshold="never"] regardless of children', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='never'>{testChildren}</SuperSelectField>
+      <SuperSelectField showAutocompleteThreshold="never">
+        {testChildren}
+      </SuperSelectField>
     )
     wrapper.simulate('click')
     const firstChild = wrapper.find('TextField')
@@ -174,7 +196,9 @@ describe('Autocomplete usage', () => {
   })
   it('should display the default [hintTextAutocomplete]', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always'>{testChildren}</SuperSelectField>
+      <SuperSelectField showAutocompleteThreshold="always">
+        {testChildren}
+      </SuperSelectField>
     )
     wrapper.simulate('click')
     const firstChild = wrapper.find('TextField')
@@ -182,7 +206,10 @@ describe('Autocomplete usage', () => {
   })
   it('should display the custom [hintTextAutocomplete]', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always' hintTextAutocomplete='Custom'>
+      <SuperSelectField
+        showAutocompleteThreshold="always"
+        hintTextAutocomplete="Custom"
+      >
         {testChildren}
       </SuperSelectField>
     )
@@ -199,25 +226,27 @@ describe('Autocomplete usage', () => {
 })
 
 describe('Selections presenter', () => {
-  it('should display the default [hintText]', () => {
-    const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always'>{testChildren}</SuperSelectField>
-    )
-    const selectionsPresenter = wrapper.find('SelectionsPresenter')
-    expect(selectionsPresenter.props().hintText).toMatch('Click me')
-  })
   it('should display custom [hintText] properly', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always' hintText='Hello There..'>
+      <SuperSelectField hintText="Hello There..">
         {testChildren}
       </SuperSelectField>
     )
     const selectionsPresenter = wrapper.find('SelectionsPresenter')
     expect(selectionsPresenter.props().hintText).toMatch('Hello There..')
   })
+  it('should always display the [hintText] when both placeholder and label are defined', () => {
+    const wrapper = shallowWithContext(
+      <SuperSelectField hintText="Placeholder ..." floatingLabel="Fixed Label">
+        {testChildren}
+      </SuperSelectField>
+    )
+    const selectionsPresenter = wrapper.find('SelectionsPresenter')
+    expect(selectionsPresenter.props().hintText).toMatch('Placeholder ...')
+  })
   it('should display the default [DropDownIcon]', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always'>{testChildren}</SuperSelectField>
+      <SuperSelectField>{testChildren}</SuperSelectField>
     )
     const SelectionsPresenter = wrapper.find('SelectionsPresenter').dive()
     const ArrowDownIcon = SelectionsPresenter.find('ArrowDownIcon').dive()
@@ -225,7 +254,7 @@ describe('Selections presenter', () => {
   })
   it('should display the custom [DropDownIcon]', () => {
     const wrapper = shallowWithContext(
-      <SuperSelectField showAutocompleteThreshold='always' dropDownIcon={<span id='customDropDown'>></span>}>
+      <SuperSelectField dropDownIcon={<span id="customDropDown">></span>}>
         {testChildren}
       </SuperSelectField>
     )

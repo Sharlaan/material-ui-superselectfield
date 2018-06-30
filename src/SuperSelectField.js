@@ -38,7 +38,8 @@ export default class SelectField extends Component {
 
   static defaultProps = selectFieldDefaultProps;
 
-  componentWillReceiveProps (nextProps) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (!areEqual(nextProps.value, this.state.selectedItems)) {
       this.setState({ selectedItems: nextProps.value });
     }
@@ -147,7 +148,10 @@ export default class SelectField extends Component {
     const { children, autocompleteFilter } = this.props;
     const fixedChildren = Array.isArray(children) ? children : [children];
     const selectedItems = fixedChildren.reduce((nodes, child) => {
-      const { type, props: { value, label } } = child;
+      const {
+        type,
+        props: { value, label },
+      } = child;
       const passesFilter = (label, value) => autocompleteFilter(this.state.searchText, label || value);
       if (type !== 'optgroup' && passesFilter(label, value)) {
         return nodes.concat({ value, label });
@@ -283,7 +287,10 @@ export default class SelectField extends Component {
     } = this.props;
 
     // Default style depending on Material-UI context (muiTheme)
-    const { baseTheme: { palette }, menuItem } = this.context.muiTheme;
+    const {
+      baseTheme: { palette },
+      menuItem,
+    } = this.context.muiTheme;
 
     const mergedSelectedMenuItemStyle = {
       color: menuItem.selectedTextColor,
@@ -309,7 +316,9 @@ export default class SelectField extends Component {
       }
       const isSelected = Array.isArray(selectedItems)
         ? selectedItems.some((obj) => areEqual(obj.value, childValue))
-        : selectedItems ? selectedItems.value === childValue : false;
+        : selectedItems
+          ? selectedItems.value === childValue
+          : false;
       const leftCheckbox = (multiple && checkPosition === 'left' && (isSelected ? checkedIcon : unCheckedIcon)) || null;
       const rightCheckbox =
         (multiple && checkPosition === 'right' && (isSelected ? checkedIcon : unCheckedIcon)) || null;
@@ -457,15 +466,15 @@ export default class SelectField extends Component {
 
           {multiple &&
             withResetSelectAllButtons && (
-              <header style={{ display: 'flex', alignItems: 'center' }}>
-                <div onClick={this.selectAll} style={{ flex: '50%' }}>
-                  {selectAllButton}
-                </div>
-                <div onClick={this.reset} style={{ flex: '50%' }}>
-                  {resetButton}
-                </div>
-              </header>
-            )}
+            <header style={{ display: 'flex', alignItems: 'center' }}>
+              <div onClick={this.selectAll} style={{ flex: '50%' }}>
+                {selectAllButton}
+              </div>
+              <div onClick={this.reset} style={{ flex: '50%' }}>
+                {resetButton}
+              </div>
+            </header>
+          )}
 
           <div ref={(ref) => (this.menu = ref)} onKeyDown={this.handleMenuKeyDown} style={menuStyle}>
             {menuItems.length ? (
