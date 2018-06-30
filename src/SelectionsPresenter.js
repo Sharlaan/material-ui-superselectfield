@@ -52,7 +52,7 @@ export default function SelectionsPresenter ({
 
   // Conditions for shrinking the floating Label
   const isShrunk =
-    (hintText && hintText.length) ||
+    !!(hintText && hintText.length) ||
     (Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
     (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
     isOpen;
