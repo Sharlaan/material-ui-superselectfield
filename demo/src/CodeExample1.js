@@ -24,9 +24,13 @@ class CodeExample extends Component {
 
   handleDisable = (event, isDisabled) => this.setState({ isDisabled });
 
+  handlePlaceholder = (event, withPlaceholder) => this.setState({ withPlaceholder });
+
   render () {
-    const { state11, state12, floatingLabelState, isDisabled } = this.state;
-    console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState); // eslint-disable-line no-console
+    const { state11, state12, floatingLabelState, isDisabled, withPlaceholder } = this.state;
+
+    // eslint-disable-next-line no-console
+    console.debug('state11', state11, '\nstate12', state12, '\nfloatingLabelState', floatingLabelState);
 
     return (
       <section style={containerStyle}>
@@ -83,17 +87,26 @@ class CodeExample extends Component {
             marginTop: 40,
           }}
         >
-          <SuperSelectField
-            name='floatingLabelState'
-            floatingLabel='Floating label'
-            value={floatingLabelState}
-            onChange={this.handleSelection}
-            style={{ minWidth: 150, margin: 10 }}
-          >
-            <div value='A'>Option A</div>
-            <div value='B'>Option B</div>
-            <div value='C'>Option C</div>
-          </SuperSelectField>
+          <article style={{ marginRight: 20 }}>
+            <SuperSelectField
+              name='floatingLabelState'
+              floatingLabel='Floating label'
+              hintText={`${withPlaceholder ? 'Some hint text' : ''}`}
+              value={floatingLabelState}
+              onChange={this.handleSelection}
+              style={{ minWidth: 150, margin: 10 }}
+            >
+              <div value='A'>Option A</div>
+              <div value='B'>Option B</div>
+              <div value='C'>Option C</div>
+            </SuperSelectField>
+            <Toggle
+              label='with Hint Text'
+              toggled={withPlaceholder}
+              onToggle={this.handlePlaceholder}
+              style={{ margin: 10 }}
+            />
+          </article>
 
           <article>
             <SuperSelectField

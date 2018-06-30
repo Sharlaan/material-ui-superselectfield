@@ -7,12 +7,13 @@ import InfiniteScroller from 'react-infinite';
 import ListItem from 'material-ui/List/ListItem';
 import Popover from 'material-ui/Popover/Popover';
 import TextField from 'material-ui/TextField/TextField';
+
 import SelectionsPresenter from './SelectionsPresenter';
 import { getChildrenLength, areEqual } from './utils';
 import { selectFieldTypes } from './types';
 import { selectFieldDefaultProps } from './defaultProps';
 
-class SelectField extends Component {
+export default class SelectField extends Component {
   constructor (props, context) {
     super(props, context);
     const { children, value, multiple, showAutocompleteThreshold } = props;
@@ -29,7 +30,16 @@ class SelectField extends Component {
     this.menuItems = [];
   }
 
-  componentWillReceiveProps (nextProps) {
+  static contextTypes = {
+    muiTheme: object.isRequired,
+  };
+
+  static propTypes = selectFieldTypes;
+
+  static defaultProps = selectFieldDefaultProps;
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps (nextProps) {
     if (!areEqual(nextProps.value, this.state.selectedItems)) {
       this.setState({ selectedItems: nextProps.value });
     }
@@ -58,6 +68,8 @@ class SelectField extends Component {
     // https://github.com/callemall/material-ui/blob/master/src/DropDownMenu/DropDownMenu.js#L237
     if (this.props.openImmediately) this.openMenu();
   }
+
+  componentDidUpdate (prevProps, prevState) {}
 
   onFocus = () => this.setState({ isFocused: true });
 
@@ -136,7 +148,10 @@ class SelectField extends Component {
     const { children, autocompleteFilter } = this.props;
     const fixedChildren = Array.isArray(children) ? children : [children];
     const selectedItems = fixedChildren.reduce((nodes, child) => {
-      const { type, props: { value, label } } = child;
+      const {
+        type,
+        props: { value, label },
+      } = child;
       const passesFilter = (label, value) => autocompleteFilter(this.state.searchText, label || value);
       if (type !== 'optgroup' && passesFilter(label, value)) {
         return nodes.concat({ value, label });
@@ -148,7 +163,7 @@ class SelectField extends Component {
     this.setState({ selectedItems }, () => this.getSelected());
   };
 
-  reset = () => this.setState({ selectedItems: this.state.initialValue }, () => this.getSelected());
+  reset = () => this.setState((prevState) => ({ selectedItems: prevState.initialValue }), () => this.getSelected());
 
   /**
    * Menu methods
@@ -272,7 +287,10 @@ class SelectField extends Component {
     } = this.props;
 
     // Default style depending on Material-UI context (muiTheme)
-    const { baseTheme: { palette }, menuItem } = this.context.muiTheme;
+    const {
+      baseTheme: { palette },
+      menuItem,
+    } = this.context.muiTheme;
 
     const mergedSelectedMenuItemStyle = {
       color: menuItem.selectedTextColor,
@@ -298,7 +316,9 @@ class SelectField extends Component {
       }
       const isSelected = Array.isArray(selectedItems)
         ? selectedItems.some((obj) => areEqual(obj.value, childValue))
-        : selectedItems ? selectedItems.value === childValue : false;
+        : selectedItems
+          ? selectedItems.value === childValue
+          : false;
       const leftCheckbox = (multiple && checkPosition === 'left' && (isSelected ? checkedIcon : unCheckedIcon)) || null;
       const rightCheckbox =
         (multiple && checkPosition === 'right' && (isSelected ? checkedIcon : unCheckedIcon)) || null;
@@ -446,15 +466,15 @@ class SelectField extends Component {
 
           {multiple &&
             withResetSelectAllButtons && (
-              <header style={{ display: 'flex', alignItems: 'center' }}>
-                <div onClick={this.selectAll} style={{ flex: '50%' }}>
-                  {selectAllButton}
-                </div>
-                <div onClick={this.reset} style={{ flex: '50%' }}>
-                  {resetButton}
-                </div>
-              </header>
-            )}
+            <header style={{ display: 'flex', alignItems: 'center' }}>
+              <div onClick={this.selectAll} style={{ flex: '50%' }}>
+                {selectAllButton}
+              </div>
+              <div onClick={this.reset} style={{ flex: '50%' }}>
+                {resetButton}
+              </div>
+            </header>
+          )}
 
           <div ref={(ref) => (this.menu = ref)} onKeyDown={this.handleMenuKeyDown} style={menuStyle}>
             {menuItems.length ? (
@@ -496,11 +516,3 @@ class SelectField extends Component {
     );
   }
 }
-
-SelectField.contextTypes = {
-  muiTheme: object.isRequired,
-};
-SelectField.propTypes = selectFieldTypes;
-SelectField.defaultProps = selectFieldDefaultProps;
-
-export default SelectField;

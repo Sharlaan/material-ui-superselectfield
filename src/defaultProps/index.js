@@ -1,3 +1,3 @@
-export { default as floatingLabelDefaultProps } from './floatingLabelDefaultProps';
-export { default as selectFieldDefaultProps } from './selectFieldDefaultProps';
-export { default as selectionsPresenterDefaultProps } from './selectionsPresenterDefaultProps';
+export { default as floatingLabelDefaultProps } from './floatingLabel.defaultProps';
+export { default as selectFieldDefaultProps } from './selectField.defaultProps';
+export { default as selectionsPresenterDefaultProps } from './selectionsPresenter.defaultProps';
