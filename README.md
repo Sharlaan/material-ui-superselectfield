@@ -1,25 +1,35 @@
-# material-ui-superSelectField [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![javascript style guide][standard-image]][standard-url] [![DeepScan Grade](https://deepscan.io/api/projects/509/branches/790/badge/grade.svg)][deepscan-url]
+# material-ui-superSelectField
 
-[npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg
+[![npm][npm-image]][npm-url] [![javascript style guide][standard-image]][standard-url] [![downloads][downloads-image]][downloads-url]  
+[![DeepScan Grade][deepscan-image]][deepscan-url]
+[![Known Vulnerabilities][snyk-image]][snyk-url]
+[![Codecov][codecov-image]][codecov-url]
+
+[npm-image]: https://img.shields.io/npm/v/material-ui-superselectfield.svg?style=for-the-badge
 [npm-url]: https://npmjs.org/package/material-ui-superselectfield
-[downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg
-[downloads-url]: https://npmjs.org/package/material-ui-superselectfield
-[standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
+[standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=for-the-badge
 [standard-url]: https://standardjs.com
+[downloads-image]: https://img.shields.io/npm/dm/material-ui-superselectfield.svg?style=for-the-badge
+[downloads-url]: https://npmjs.org/package/material-ui-superselectfield
+[codecov-image]: https://codecov.io/gh/Sharlaan/material-ui-superselectfield/branch/master/graph/badge.svg?style=for-the-badge
+[codecov-url]: https://codecov.io/gh/Sharlaan/material-ui-superselectfield
+[deepscan-image]: https://deepscan.io/api/projects/509/branches/790/badge/grade.svg
 [deepscan-url]: https://deepscan.io/dashboard/#view=project&pid=509&bid=790
+[snyk-image]: https://snyk.io/test/github/Sharlaan/material-ui-superselectfield/badge.svg?style=for-the-badge
+[snyk-url]: https://snyk.io/test/github/Sharlaan/material-ui-superselectfield
 
 ## Table of Contents
 
-* [Preview](#preview)
-* [Installation](#installation)
-* [Properties](#properties)
-* [Usage examples](#usage)
-* [Building](#building)
-* [Linking in another local project](#linking-in-another-local-project)
-* [Tests](#tests)
-* [Contributing](#contributing)
-* [Known bugs](#known-bugs)
-* [TodoList](#todolist)
+- [Preview](#preview)
+- [Installation](#installation)
+- [Properties](#properties)
+- [Usage examples](#usage)
+- [Building](#building)
+- [Linking in another local project](#linking-in-another-local-project)
+- [Tests](#tests)
+- [Contributing](#contributing)
+- [Known bugs](#known-bugs)
+- [TodoList](#todolist)
 
 ## Preview ([Live demo](https://sharlaan.github.io/material-ui-superselectfield))
 
@@ -29,11 +39,11 @@
 
 ## Installation
 
-This component requires 3 dependencies :
+This component requires 3 peer dependencies :
 
-* react
-* react-dom
-* material-ui
+- react
+- react-dom
+- material-ui
 
 ... so make sure they are installed in your project.
 
@@ -180,51 +190,51 @@ In lieu of a formal style guide, take care to maintain the existing coding style
 
 ## Known bugs
 
-* keyboard-focus handling combined with optgroups and autocompleted results
+- keyboard-focus handling combined with optgroups and autocompleted results
 
 ## TodoList
 
-* [x] implement select all and reset, for multiple mode
+- [x] implement select all and reset, for multiple mode
 
-* [x] implement onClose handler for multiple mode, to allow registering selected values in oneshot instead of exposing values at each selection (ie one single server request)
+- [x] implement onClose handler for multiple mode, to allow registering selected values in oneshot instead of exposing values at each selection (ie one single server request)
 
-* [ ] set autoWidth to false automatically if width prop has a value
+- [ ] set autoWidth to false automatically if width prop has a value
 
-* [ ] add a css rule for this.root :focus { outline: 'none' }, and :hover { darken }
+- [ ] add a css rule for this.root :focus { outline: 'none' }, and :hover { darken }
 
-* [ ] add tests for focus states/styles when tabbing between multiple superSelectFields
-* [ ] add tests for keystrokes
+- [ ] add tests for focus states/styles when tabbing between multiple superSelectFields
+- [ ] add tests for keystrokes
 
-* [x] add proptypes checking for value and children
+- [x] add proptypes checking for value and children
 
-* [x] support of \<optgroup />
-* [ ] implement selectable \<optgroup /> to select all inner children
+- [x] support of \<optgroup />
+- [ ] implement selectable \<optgroup /> to select all inner children
 
-* [x] check rendering performance with 200 MenuItems (integrate react-infinite)
+- [x] check rendering performance with 200 MenuItems (integrate react-infinite)
 
-* [x] implement the container for errors (absolutely positioned below the focusedLine)
+- [x] implement the container for errors (absolutely positioned below the focusedLine)
 
   Expose more props :
 
-  * [x] noMatchFound message
-  * [x] floatingLabelText
-  * [x] canAutoPosition
-  * [x] checkPosition
-  * [x] anchorOrigin
-  * [x] popoverStyle
-  * [x] hoverColor
-  * [x] disabled
-  * [ ] required
-  * [x] errorMessage
-  * [x] errorStyle
-  * [ ] classeNames for sub-components
-  * [ ] maxSelection
+  - [x] noMatchFound message
+  - [x] floatingLabelText
+  - [x] canAutoPosition
+  - [x] checkPosition
+  - [x] anchorOrigin
+  - [x] popoverStyle
+  - [x] hoverColor
+  - [x] disabled
+  - [ ] required
+  - [x] errorMessage
+  - [x] errorStyle
+  - [ ] classeNames for sub-components
+  - [ ] maxSelection
 
-* [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
-* [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold
+- [x] add props.disableAutoComplete (default: false), or a nbItems2showAutocomplete (default: null, meaning never show the searchTextField)
+- [x] make Autocomplete appears only if current numberOfMenuItems > props.autocompleteTreshold
 
-* [x] implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
-* [x] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
+- [x] implement a checkboxRenderer for MenuItem (or expose 2 properties CheckIconFalse & CheckIconTrue)
+- [x] make a PR reimplementing MenuItem.insetChildren replaced with checkPosition={'left'(default) or 'right'}
 
-* [ ] add an example with GooglePlaces
-* [ ] add an example with ReduxForm
+- [ ] add an example with GooglePlaces
+- [ ] add an example with ReduxForm
