@@ -8,14 +8,13 @@ cache:
 
 before_install:
   - npm -g install yarn@^1.7.0
-  - yarn add codecov.io coveralls
+  - yarn add --dev codecov.io
 
 script:
   - yarn test
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - yarn build
 
 deploy:

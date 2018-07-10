@@ -1,6 +1,6 @@
 {
   "name": "material-ui-superselectfield",
-  "version": "1.9.5",
+  "version": "1.9.6",
   "description": "original Material-UI's SelectField component enhanced with autocompletion, multiselection, custom renderers, and infinite loading.",
   "keywords": [
     "react-component",
@@ -70,8 +70,8 @@
     "material-ui": "^0.20.1",
     "nwb": "^0.22.0",
     "prop-types": "^15.6.2",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react": "~16.2.0",
+    "react-dom": "~16.2.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1"
   }
