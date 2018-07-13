@@ -1,10 +1,9 @@
 import React, { cloneElement } from 'react';
-import DropDownArrow from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
 import FloatingLabel from './FloatingLabel';
 import UnderLine from './UnderLine';
-import { selectionsPresenterTypes } from './types';
-import { selectionsPresenterDefaultProps } from './defaultProps';
+import { arrowDownIconTypes, selectionsPresenterTypes } from './types';
+import { arrowDownIconDefaultProps, selectionsPresenterDefaultProps } from './defaultProps';
 
 const styles = {
   column: { display: 'flex', flexDirection: 'column', flex: 'auto' },
@@ -18,6 +17,21 @@ const styles = {
   },
   selections: { flex: 1 },
 };
+
+const rotatingIconStyle = (isOpen) => ({
+  // fill: this.context.muiTheme.textField.borderColor,
+  transform: `rotate(${isOpen ? 180 : 0}deg)`,
+});
+
+const ArrowDownIcon = ({ style, customIcon }) => cloneElement(customIcon, { style });
+ArrowDownIcon.propTypes = arrowDownIconTypes;
+ArrowDownIcon.defaultProps = arrowDownIconDefaultProps;
+
+const isValidObject = (obj) =>
+  obj &&
+  Object.prototype.toString.call(obj) === '[object Object]' &&
+  Object.keys(obj).includes('value') &&
+  obj.value !== null;
 
 SelectionsPresenter.propTypes = selectionsPresenterTypes;
 SelectionsPresenter.defaultProps = selectionsPresenterDefaultProps;
@@ -44,26 +58,12 @@ export default function SelectionsPresenter ({
     textField: { borderColor, floatingLabelColor, focusColor },
   } = muiTheme;
 
-  const isValidObject = (obj) =>
-    obj &&
-    Object.prototype.toString.call(obj) === '[object Object]' &&
-    Object.keys(obj).includes('value') &&
-    obj.value !== null;
-
   // Conditions for shrinking the floating Label
   const isShrunk =
     !!(hintText && hintText.length) ||
     (Array.isArray(selectedValues) && (!!selectedValues.length || isFocused)) ||
     (!Array.isArray(selectedValues) && (isValidObject(selectedValues) || (selectedValues === null && isFocused))) ||
     isOpen;
-
-  const ArrowDownIcon = () =>
-    cloneElement(dropDownIcon || <DropDownArrow />, {
-      style: {
-        // fill: this.context.muiTheme.textField.borderColor,
-        transform: `rotate(${isOpen ? 180 : 0}deg)`,
-      },
-    });
 
   const Error = () => <div style={{ ...styles.error, ...errorStyle }}>{errorText}</div>;
 
@@ -85,7 +85,7 @@ export default function SelectionsPresenter ({
           )}
           {(!floatingLabel || isShrunk) && selectionsRenderer(selectedValues, hintText)}
         </div>
-        <ArrowDownIcon />
+        <ArrowDownIcon customIcon={dropDownIcon} style={rotatingIconStyle(isOpen)} />
       </div>
 
       <UnderLine
