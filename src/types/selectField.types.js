@@ -70,7 +70,7 @@ export default {
   multiple: bool,
   name: string,
   nb2show: number,
-  noMatchFound: string,
+  noMatchFound: node,
   noMatchFoundStyle: object,
   onAutoCompleteTyping: func,
   onChange: func,
