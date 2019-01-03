@@ -263,6 +263,7 @@ export default class SelectField extends Component {
       hintText,
       hintTextAutocomplete,
       hoverColor,
+      infiniteLoadBeginEdgeOffset,
       innerDivStyle,
       menuCloseButton,
       menuFooterStyle,
@@ -274,6 +275,7 @@ export default class SelectField extends Component {
       noMatchFoundStyle,
       popoverClassName,
       popoverWidth,
+      onInfiniteLoad,
       resetButton,
       selectAllButton,
       selectedMenuItemStyle,
@@ -482,6 +484,8 @@ export default class SelectField extends Component {
                 containerHeight={optionsContainerHeight}
                 elementHeight={elementHeight}
                 styles={{ scrollableStyle }}
+                onInfiniteLoad={onInfiniteLoad}
+                infiniteLoadBeginEdgeOffset={infiniteLoadBeginEdgeOffset}
               >
                 {menuItems}
               </InfiniteScroller>
