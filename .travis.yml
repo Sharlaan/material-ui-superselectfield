@@ -3,7 +3,7 @@
 
 language: node_js
 
-node_js: lts
+node_js: lts/*
 
 cache: yarn
 
@@ -17,6 +17,7 @@ script:
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+  - yarn clean
   - yarn build
 
 deploy:
