@@ -1,23 +1,34 @@
-language: node_js
-node_js:
-  - 8.10.0
+# Sources :
+# https://tailordev.fr/blog/2018/03/15/automated-npm-releases-with-travis-ci/
 
-cache:
-  directories:
-  - node_modules
+language: node_js
+
+node_js: lts/*
+
+cache: yarn
 
 before_install:
-  - npm -g install yarn@^1.7.0
   - yarn add --dev codecov.io
+
+install: yarn
 
 script:
   - yarn test
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+  - yarn clean
   - yarn build
 
 deploy:
+  # Github Releases: deploys the tagged version
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    skip_cleanup: true
+    on:
+      tags: true
+
+  # Github pages: deploys the demos site
   - provider: pages
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
@@ -26,6 +37,7 @@ deploy:
       branch: master
       condition: $TRAVIS_PULL_REQUEST = false
 
+  # Deploys to https://www.npmjs.com/package/material-ui-superselectfield
   - provider: npm
     skip_cleanup: true
     email: $NPM_EMAIL
