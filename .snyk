@@ -5,4 +5,4 @@ ignore: {}
 patch:
   SNYK-JS-LODASH-450202:
     - react-infinite > enzyme-adapter-react-16 > lodash:
-        patched: '2019-07-07T06:02:53.146Z'
+        patched: '2019-10-17T07:09:46.009Z'
