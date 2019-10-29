@@ -43,7 +43,9 @@
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -58,7 +60,8 @@
     ]
   },
   "dependencies": {
-    "react-infinite": "^0.13.0"
+    "react-infinite": "^0.13.0",
+    "snyk": "^1.192.3"
   },
   "peerDependencies": {
     "material-ui": ">= 0.17 < 1",
@@ -78,5 +81,6 @@
     "react-dom": "< 16.3",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1"
-  }
+  },
+  "snyk": true
 }
