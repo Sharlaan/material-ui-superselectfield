@@ -6,3 +6,17 @@ patch:
   SNYK-JS-LODASH-450202:
     - react-infinite > enzyme-adapter-react-16 > lodash:
         patched: '2019-10-17T07:09:46.009Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-10-29T19:39:02.354Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-29T19:39:02.354Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-10-29T19:39:02.354Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-10-29T19:39:02.354Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2019-10-29T19:39:02.354Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-29T19:39:02.354Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-29T19:39:02.354Z'

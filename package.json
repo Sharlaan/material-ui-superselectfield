@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "react-infinite": "^0.13.0",
-    "snyk": "^1.235.1"
+    "snyk": "^1.239.5"
   },
   "peerDependencies": {
     "material-ui": ">= 0.17 < 1",
