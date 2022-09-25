@@ -44,8 +44,8 @@
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "snyk-protect": "snyk-protect",
+    "prepublish": "yarn run snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "react-infinite": "^0.13.0",
-    "snyk": "^1.239.5"
+    "@snyk/protect": "latest"
   },
   "peerDependencies": {
     "material-ui": ">= 0.17 < 1",
